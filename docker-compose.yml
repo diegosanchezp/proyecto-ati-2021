@@ -1,0 +1,22 @@
+version: '3.9'
+services:
+    mongodb_contenedor:
+        container_name: mongodb
+        image: mongo
+        environment:
+        - MONGO_INITDB_DATABASE=flask
+        - MONGO_INITDB_ROOT_USERNAME=admin
+        - MONGO_INITDB_ROOT_PASSWORD=1234
+        volumes:
+        - /var/lib/docker/volumes/mongodb/_data
+        ports:
+        - "5000:5000"
+    flask:
+        build: ./
+        container_name: flask
+        restart: always
+        environment:
+        - APP_NAME=MyFlaskApp
+        depends_on: mongo
+        ports:
+        - "4000:4000"
