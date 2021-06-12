@@ -4,10 +4,6 @@ services:
         container_name: mongodb
         image: mongo
         restart: always
-        environment:
-        - MONGO_INITDB_DATABASE=flask
-        - MONGO_INITDB_ROOT_USERNAME=admin
-        - MONGO_INITDB_ROOT_PASSWORD=1234
         volumes:
         - ./data:/data/db
         ports:

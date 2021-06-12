@@ -6,7 +6,7 @@ app = flask.Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    client = MongoClient('localhost',4000)
+    client = MongoClient('mongodb',27017)
     try:
         client.admin.command('ismaster')
         return 'Database working\n'
