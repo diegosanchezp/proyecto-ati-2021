@@ -7,11 +7,11 @@ app = flask.Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    con = MongoClient('localhost',5000)
-    if con:
+    con = MongoClient('localhost',4000)
+    if con.test_database:
         return 'Database is working!\n'
     else: 
         return 'Database is not working\n'
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port= 4000, debug=True)     # open for everyone
+    app.run(host='0.0.0.0', port=5000, debug=True)     # open for everyone
