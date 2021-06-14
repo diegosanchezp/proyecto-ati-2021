@@ -4,9 +4,12 @@ on:
     branches:
       - master
       - feature-*
+      - develop
   pull_request:
     branches:
+      - master
       - feature-*
+      - develop
 jobs:
   tests:
     runs-on: ubuntu-latest
