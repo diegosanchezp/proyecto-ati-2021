@@ -5,9 +5,10 @@ on:
       - master
       - feature-*
       - develop
+      - hotfix-*
+      - release-*
   pull_request:
     branches:
-      - master
       - feature-*
       - develop
 jobs:
