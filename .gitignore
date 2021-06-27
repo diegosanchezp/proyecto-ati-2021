@@ -1,6 +1,30 @@
 # MongoDB container database
 data
 
+# Build files in static directory
+app/static/css
+app/static/js
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Snowpack dependency directory (https://snowpack.dev/)
+web_modules/
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env
+.env.test
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
