@@ -7,17 +7,18 @@ services:
         volumes:
         - ./data:/data/db
         ports:
-        - "4000:27017"
+        - "27017:27017"
     flask:
         build: ./
         image: webapp:1
         container_name: flask
         restart: always
         environment:
-        - APP_NAME=/app/src/app
-        depends_on: 
+        - APP_NAME=./run.py
+        - FLASK_ENV=development
+        depends_on:
         - mongodb_contenedor
         ports:
         - "5000:5000"
         volumes:
-        - ./src:/app/src
+        - .:/app
