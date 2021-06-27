@@ -8,4 +8,4 @@ RUN apk add --no-cache \
     && npm install && npm run build && \
     pip3 install -r requirements.txt --no-deps
 # run the software contained in your image
-CMD ["python3","-m","flask", "run"]
+ENTRYPOINT ["/app/docker-entrypoint.sh"]
