@@ -1,0 +1,21 @@
+{
+  "name": "proyecto-ati-2021",
+  "version": "1.0.0",
+  "description": "Proyecto ATI",
+  "scripts": {
+    "build": "sass --load-path=node_modules --style expanded --source-map --embed-sources app/static_src/:app/static/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/diegosanchezp/proyecto-ati-2021.git"
+  },
+  "author": "Diego Sánchez",
+  "bugs": {
+    "url": "https://github.com/diegosanchezp/proyecto-ati-2021/issues"
+  },
+  "homepage": "https://github.com/diegosanchezp/proyecto-ati-2021#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "sass": "^1.35.1"
+  }
+}
