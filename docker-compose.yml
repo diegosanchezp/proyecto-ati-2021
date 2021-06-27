@@ -9,6 +9,8 @@ services:
         ports:
         - "27017:27017"
     flask:
+        stdin_open: true
+        tty: true
         build: ./
         image: webapp:1
         container_name: flask
@@ -21,4 +23,5 @@ services:
         ports:
         - "5000:5000"
         volumes:
-        - .:/app
+            - ./app:/app/app
+            - ./package.json:/app/package.json
