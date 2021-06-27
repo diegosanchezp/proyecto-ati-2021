@@ -29,7 +29,3 @@ def create_app():
     app.register_blueprint(mural_blueprint, url_prefix="/mural")
     app.register_blueprint(chat_blueprint, url_prefix="/chat")
     return app
-
-if __name__ == '__main__':
-    app = create_app()
-    app.run(host='0.0.0.0', port=5000, debug=True)     # open for everyone
