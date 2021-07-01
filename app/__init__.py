@@ -1,9 +1,6 @@
 import flask
+from flask_user import UserManager
 from flask_mongoengine import MongoEngine
-
-# Blueprints
-from app.mural.vistas import mural_blueprint
-from app.chat.chat import chat_blueprint
 
 # Instanciar extensiones de flask
 db = MongoEngine()
@@ -24,6 +21,14 @@ def create_app():
         MongoClient.admin.command('ismaster')
     except Exception:
         raise Exception('=== No se puede conectar a base de datos, terminando programa ===')
+
+    # Setup Flask-User and specify the User data-model
+    from app.models.user import User
+    user_manager = UserManager(app, db, User)
+
+    # Blueprints
+    from app.mural.vistas import mural_blueprint
+    from app.chat.chat import chat_blueprint
 
     # Registar blueprints
     app.register_blueprint(mural_blueprint, url_prefix="/mural")
