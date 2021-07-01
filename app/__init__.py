@@ -1,6 +1,7 @@
 import flask
 from flask_user import UserManager
 from flask_mongoengine import MongoEngine
+from app.utils import register_blueprints
 
 # Instanciar extensiones de flask
 db = MongoEngine()
@@ -26,11 +27,6 @@ def create_app():
     from app.models.user import User
     user_manager = UserManager(app, db, User)
 
-    # Blueprints
-    from app.mural.vistas import mural_blueprint
-    from app.chat.chat import chat_blueprint
-
-    # Registar blueprints
-    app.register_blueprint(mural_blueprint, url_prefix="/mural")
-    app.register_blueprint(chat_blueprint, url_prefix="/chat")
+    # Registar todos los blueprints
+    register_blueprints(app)
     return app
