@@ -2,28 +2,26 @@ version: '3.8'
 services:
     mongodb_contenedor:
         container_name: mongodb
-        image: mongo
+        image: mongo:4.0.25
         restart: always
         volumes:
-         - ./data:/data/db
-        environment:
-         - MONGO_INITDB_DATABASE:flaskdb
+        - ./data:/data/db
         ports:
-         - "4000:27017"
-         - "4001:28017"
+        - "4000:27017"
+        - "4001:28017"
     flask:
         build: ./
-        image: flask:1
+        image: webapp:1
         container_name: flask
         restart: always
         environment:
-         - APP_NAME:/app/src/app
+        - APP_NAME=/app/src/app
          - APP_PORT:5000
          - MONGODB_HOSTNAME:mongodb
          - MONGODB_DATABASE:flaskdb
         depends_on: 
-         - mongodb_contenedor
+        - mongodb_contenedor
         ports:
-         - "5000:5000"
+        - "5000:5000"
         volumes:
-         - ./src:/app/src
+        - ./src:/app/src
