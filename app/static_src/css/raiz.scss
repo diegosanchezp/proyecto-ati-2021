@@ -1,0 +1,11 @@
+/* Con esto importamos todo bootstrap
+PorHacer: customizar que cosas vamos a requerir
+https://getbootstrap.com/docs/5.0/customize/sass/
+ */
+
+@import "bootstrap/scss/bootstrap";
+
+$color: black;
+.test{
+  color: $color;
+}
