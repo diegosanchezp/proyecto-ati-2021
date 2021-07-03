@@ -1,12 +1,26 @@
 # Proyecto ATI Semestre 1-2021
 
+## Requerimientos antes de levantar los contenedores
+En la carpeta raiz existe una archivo `.env.example` haga una copia del mismo, renombre la copia a `.env` y asignele un valor a la variable `SECRET_KEY`
+
+Si tiene un distribucion`GNU/Linux` puede hacer la copia y el renombre con el siguiente comando
+
+```sh
+cp .env.example .env
+```
 ## Trabajando con docker
 
-Ejecute los siguientes comandos para construir y levantar los contenedores de docker
+Ejecute los siguientes comandos para construir y levantar los contenedores de docker, estos son pasos obligatorios
+
 ```sh
-docker compose --build -d
+docker compose up --build -d
 ```
 
+Compilar codigo fuente sass
+
+```sh
+docker exec flask npm run build
+```
 ## Dependencias de node (npm)
 
 Si se hace un cambio a los archivos de código fuente ubicados en `static_src` hay que recompilarlos, para hacer esto constantemente ejecute los siguientes comandos dependiendo de que tipo de archivo
