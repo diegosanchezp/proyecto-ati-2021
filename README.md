@@ -98,6 +98,11 @@ proyecto-ati-2021
 ├── run.py
 ```
 
+## Arquitectura para archivos CSS
+Se utiliza el patron de arquitectura `7-1`. Para saber más del mismo, visite
+
+https://sass-guidelin.es/es/#arquitectura
+
 ## Reglas de desarrollo
 
 ### En donde va la lógica de las vistas ?
