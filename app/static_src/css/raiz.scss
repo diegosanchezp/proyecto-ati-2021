@@ -1,11 +1,15 @@
-/* Con esto importamos todo bootstrap
-PorHacer: customizar que cosas vamos a requerir
-https://getbootstrap.com/docs/5.0/customize/sass/
- */
+/******
+* Archivo principal CSS, sigue las reglas de la arquitectura 7-1
+* https://sass-guidelin.es/es/#arquitectura
+*******/
 
-@import "bootstrap/scss/bootstrap";
+@import "base/base";
 
-$color: black;
-.test{
-  color: $color;
-}
+/* Importar components aqui */
+@import "components/sidebar";
+
+/* Paginas o vistas */
+@import "pages/login";
+@import "pages/registro";
+@import "pages/chat";
+@import "pages/mural";
