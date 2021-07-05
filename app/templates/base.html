@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  
+  <head>
+    {# Meta tags #}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {# ==== Archivos CSS y JS ==== #}
+
+    {# Archivos requeridos por Bootstrap #}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/raiz.css') }}"> {# Archivos CSS de bootstrap modificado #}
+    
+    {# Javascript de bootstrap #}
+    <script defer src="{{ url_for('static', filename='node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+ 
+  </head>
+ 
+  <body>
+    <p>Exte texto proviende del base.html</p>
+    {% block body %}
+    {% endblock body %}
+  </body>
+
+</html>
