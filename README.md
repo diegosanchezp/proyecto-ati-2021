@@ -34,6 +34,7 @@ docker exec flask npm run dev-css
 ## Logs de contenedores de flask y mongo
 
 - Ver los logs de ambos contenedores
+
 ```sh
 docker-compose logs --follow
 ```
@@ -129,3 +130,16 @@ Si puede cambiar los nombres de los archivos en la carpeta `app/template/` y `ap
 No cambie
 - Los nombres de las carpetas principales que se muestran en la arquitectura, ya que se utilizan para la importación de módulos de python
 - El nombre de los archivos `vistas.py`
+
+### Como utilizo iconos de bootstrap
+Para poner un icono de bootstrap en su html
+
+1) Identifique primero el nombre icono que quiere utilizar, esto lo puede hacer rápidamente con el buscador de
+https://icons.getbootstrap.com/
+
+2) Añada una etiqueta img con el source y el nombre_icono
+```html
+<img src="{{ url_for('static', filename='node_modules/bootstrap-icons/icons/<nombre_icono>.svg') }}"
+```
+
+Como puede observar todos los iconos son archivos que se ubican en la carpeta node_modules/bootstrap-icons/icons y estos estan en formato svg, si el nombre del archivo difiere del que encontró en la página, inspeccione el contenido de la carpeta
