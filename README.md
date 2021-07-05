@@ -1,13 +1,14 @@
 # Proyecto ATI Semestre 1-2021
 
 ## Requerimientos antes de levantar los contenedores
-En la carpeta raiz existe una archivo `.env.example` haga una copia del mismo, renombre la copia a `.env` y asignele un valor a la variable `SECRET_KEY`
+En la carpeta raiz existe una archivo `.env.example` haga una copia del mismo, renombre la copia a `.env` abra este archivo con su editor de texto y asignele un valor a la variable `SECRET_KEY`
 
 Si tiene un distribucion`GNU/Linux` puede hacer la copia y el renombre con el siguiente comando
 
 ```sh
 cp .env.example .env
 ```
+
 ## Trabajando con docker
 
 Ejecute los siguientes comandos para construir y levantar los contenedores de docker, estos son pasos obligatorios
