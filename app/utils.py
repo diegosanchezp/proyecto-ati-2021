@@ -15,4 +15,4 @@ def register_blueprints(app):
     app.register_blueprint(mural_blueprint, url_prefix="/mural")
     app.register_blueprint(chat_blueprint, url_prefix="/chat")
     app.register_blueprint(notificaciones_blueprint, url_prefix="/notificaciones")
-    app.register_blueprint(usuario_blueprint, url_prefix="/usuario")
+    app.register_blueprint(usuario_blueprint, url_prefix="/")
