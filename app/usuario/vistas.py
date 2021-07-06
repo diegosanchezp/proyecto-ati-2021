@@ -7,3 +7,10 @@ def index():
     Login, vista principal
     """
     return render_template("usuario/login.html")
+
+@usuario_blueprint.route("/registro")
+def registro():
+    """
+    Pagina de Registro
+    """
+    return render_template("usuario/registro.html")
