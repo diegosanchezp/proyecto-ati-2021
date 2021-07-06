@@ -13,8 +13,12 @@
     <script defer src="{{ url_for('static', filename='node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
   </head>
   <body>
-    <p>Exte texto proviende del base.html</p>
-    {% block body %}
-    {% endblock body %}
+    <main class="d-flex flex-row gap-3">
+    {% include "components/sidebar.html" %}
+    <section>
+      {% block body %}
+      {% endblock body %}
+    </section>
+    </main>
   </body>
 </html>
