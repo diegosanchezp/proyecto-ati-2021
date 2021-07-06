@@ -13,12 +13,7 @@
     <script defer src="{{ url_for('static', filename='node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
   </head>
   <body>
-    <main class="d-flex flex-row gap-3">
-    {% include "components/sidebar.html" %}
-    <section>
-      {% block body %}
-      {% endblock body %}
-    </section>
-    </main>
+    {% block base_body %}
+    {% endblock base_body %}
   </body>
 </html>
