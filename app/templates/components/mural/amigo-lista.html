@@ -1,0 +1,19 @@
+{#
+Lista de amigos
+#}
+<article class="friend-card d-flex flex-row gap-2 my-2 p-2 border rounded">
+  <figure class="position-relative">
+    <img class="amigo-lista-profile-icon" src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/person-circle.svg") }}" alt="icono de perfil">
+    {# Icono de status online #}
+    <span class="person-status-circle bg-success">
+      <span class="visually-hidden">unread messages</span>
+    </span>
+  </figure>
+  <section class="d-flex flex-column">
+    <p>Aaron Morillo</p>
+    <div class="d-flex flex-row gap-2">
+      <button type="button" class="btn btn-dark">Chatear</button>
+      <button type="button" class="btn btn-dark">Ver perfil</button>
+    </div>
+  </section>
+</article>

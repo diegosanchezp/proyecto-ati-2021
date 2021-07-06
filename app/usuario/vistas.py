@@ -4,6 +4,13 @@ usuario_blueprint = Blueprint('usuario_blueprint', __name__, template_folder='te
 @usuario_blueprint.route("/")
 def index():
     """
-    Vista principal del usuario
+    Login, vista principal
     """
-    return render_template("usuario/usuario.html")
+    return render_template("usuario/login.html")
+
+@usuario_blueprint.route("/registro")
+def registro():
+    """
+    Pagina de Registro
+    """
+    return render_template("usuario/registro.html")
