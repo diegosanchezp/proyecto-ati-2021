@@ -3,10 +3,12 @@
 * https://sass-guidelin.es/es/#arquitectura
 *******/
 
+@import "utils";
 @import "base/base";
 
 /* Importar components aqui */
 @import "components/sidebar";
+@import "components/amigo-lista";
 
 /* Paginas o vistas */
 @import "pages/login";

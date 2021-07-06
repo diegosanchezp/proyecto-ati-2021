@@ -1,1 +1,21 @@
+#sidebar-profile {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+}
 
+#sidebar-friend-list {
+  padding: 0;
+  margin: 0;
+}
+
+#sidebar-profile-icon {
+  width: 80px;
+}
+
+#sidebar-friend-list {
+  list-style: none;
+}
+
+.sidebar-icon-size {
+  width: 1.5rem;
+}
