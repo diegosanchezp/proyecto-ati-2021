@@ -14,3 +14,19 @@ def registro():
     Pagina de Registro
     """
     return render_template("usuario/registro.html")
+
+@usuario_blueprint.route("/recuperar")
+def recuperar_password():
+    """
+    Vista de recuperación de contraseña
+    """
+
+    return render_template("usuario/recuperar_password.html")
+
+@usuario_blueprint.route("/recuperar-token")
+def recuperar_token():
+    """
+    Vista de recuperación de contraseña
+    """
+
+    return render_template("usuario/recuperar_pass_token_enviado.html")
