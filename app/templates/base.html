@@ -11,9 +11,14 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/raiz.css') }}"> {# Archivos CSS de bootstrap modificado #}
     {# Javascript de bootstrap #}
     <script defer src="{{ url_for('static', filename='node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    {% block extrahead %}
+    {% endblock extrahead %}
   </head>
   <body>
     {% block base_body %}
     {% endblock base_body %}
+
+    {% block extrascripts %}
+    {% endblock extrascripts %}
   </body>
 </html>
