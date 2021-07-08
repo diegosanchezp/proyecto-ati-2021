@@ -1,93 +1,91 @@
 {% extends "mural_base.html" %}
 {% block body %}
-    <div class="page-content page-container" id="page-content">
-        <div class="">
-            <div class="d-flex">
-                <div class="col-md-12 p-0">
-                    <div class="card card-bordered">
-                        <div class="card-header">
-                            <h4 class="card-title">Chat con <strong>Daniel</strong></h4> <a class="btn btn-xs btn-secondary" href="#" data-abc="true">ATI App</a>
-                        </div>
-                        <div class="ps-container ps-theme-default ps-active-y" id="chat-content" style="overflow-y: scroll !important; height:400px !important;">
-                            <div class="media media-chat"> <img class="avatar" src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="...">
-                                <div class="media-body">
-                                    <h6>Daniel</h6>
-                                    <p>Hi</p>
-                                    <p>How are you ...???</p>
-                                    <p>What are you doing tomorrow?<br> Can we come up a bar?</p>
-                                    <p class="meta"><time datetime="2018">23:58</time></p>
-                                </div>
-                            </div>
-                            <div class="media media-meta-day">Today</div>
-                            <div class="media media-chat media-chat-reverse">
-                                <img class="avatar avatar-xs" src="https://img.icons8.com/doodle/48/000000/iceberg.png"/>
-                                <div class="media-body">
-                                    <h6 class="float-right">Yo</h6>
-                                    <p>Hiii, I'm good.</p>
-                                    <p>How are you doing?</p>
-                                    <p>Long time no see! Tomorrow office. will be free on sunday.</p>
-                                    <p class="meta"><time datetime="2018">00:06</time></p>
-                                </div>
-                            </div>
-                            <div class="media media-chat"> <img class="avatar" src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="...">
-                                <div class="media-body">
-                                    <h6>Daniel</h6>
-                                    <p>Okay</p>
-                                    <p>We will go on sunday? </p>
-                                    <p class="meta"><time datetime="2018">00:07</time></p>
-                                </div>
-                            </div>
-                            <div class="media media-chat media-chat-reverse">
-                                <img class="avatar avatar-xs" src="https://img.icons8.com/doodle/48/000000/iceberg.png"/>
-                                <div class="media-body">
-                                    <h6 class="float-right">Yo</h6>
-                                    <p>That's awesome!</p>
-                                    <p>I will meet you Sandon Square sharp at 10 AM</p>
-                                    <p>Is that okay?</p>
-                                    <p class="meta"><time datetime="2018">00:09</time></p>
-                                </div>
-                            </div>
-                            <div class="media media-chat"> <img class="avatar" src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="...">
-                                <div class="media-body">
-                                    <h6>Daniel</h6>
-                                    <p>Okay i will meet you on Sandon Square </p>
-                                    <p class="meta"><time datetime="2018">00:10</time></p>
-                                </div>
-                            </div>
-                            <div class="media media-chat media-chat-reverse">
-                                <img class="avatar avatar-xs" src="https://img.icons8.com/doodle/48/000000/iceberg.png"/>
-                                <div class="media-body">
-                                    <h6 class="float-right">Yo</h6>
-                                    <p>Do you have pictures of Matley Marriage?</p>
-                                    <p class="meta"><time datetime="2018">00:10</time></p>
-                                </div>
-                            </div>
-                            <div class="media media-chat"> <img class="avatar" src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="...">
-                                <div class="media-body">
-                                    <h6>Daniel</h6>
-                                    <p>Sorry I don't have. i changed my phone.</p>
-                                    <p class="meta"><time datetime="2018">00:12</time></p>
-                                </div>
-                            </div>
-                            <div class="media media-chat media-chat-reverse">
-                                <img class="avatar avatar-xs" src="https://img.icons8.com/doodle/48/000000/iceberg.png"/>
-                                <div class="media-body">
-                                    <h6 class="float-right">Yo</h6>
-                                    <p>Okay then see you on sunday!!</p>
-                                    <p class="meta"><time datetime="2018">00:12</time></p>
-                                </div>
-                            </div>
-                            <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;">
-                                <div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div>
-                            </div>
-                            <div class="ps-scrollbar-y-rail" style="top: 0px; height: 0px; right: 2px;">
-                                <div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 2px;"></div>
-                            </div>
-                        </div>
-                        <div class="publisher bt-1 border-light rounded border"> <img class="avatar avatar-xs" src="https://img.icons8.com/doodle/48/000000/iceberg.png"/> <input class="publisher-input" type="text" placeholder="Escribe algo..."> <span class="publisher-btn file-group"> <i class="fa fa-paperclip file-browser"></i> <input type="file"> </span> <a class="publisher-btn text-info" href="#" data-abc="true"><i class="fa fa-paper-plane"></i></a> </div>
-                    </div>
-                </div>
-            </div>
+<div class="container">
+    <div class="border p-2 bd-highlight">
+        <div class="card-header flex-row">
+            <h4 class="card-title">Chat con Daniel</h4>
         </div>
+        <div class="text-center">Today</div>
+
+        <ul id="lista-mensajes" class="d-flex flex-column">
+            <li>   
+                <article class="d-flex flex-row gap-2 my-2 p-2 border rounded">
+                    <figure class="position-relative">
+                        <img class="amigo-lista-profile-icon" src="/static/node_modules/bootstrap-icons/icons/person-circle.svg" alt="icono de perfil">
+                    
+                    </figure>
+                    <section class="d-flex flex-column">
+                        <p>Daniel</p>
+                        <div class="d-flex flex-column gap-2">
+                            <p>Hola!</p>
+                            <p class="meta"><time datetime="2018">00:07</time></p>
+                        </div>
+                        </section>
+                </article>
+            </li>
+            <li>   
+                <article class="d-flex flex-row-reverse gap-2 my-2 p-2 border rounded">
+                    <figure class="position-relative">
+                        <img class="amigo-lista-profile-icon" src="/static/node_modules/bootstrap-icons/icons/person-circle.svg" alt="icono de perfil">
+                    
+                    </figure>
+                    <section class="d-flex flex-column">
+                        <p class="text-end">Yo</p>
+                        <div class="d-flex flex-column gap-2">
+                            <p>Hola!</p>
+                            <p class="meta"><time datetime="2018">00:08</time></p>
+                        </div>
+                        </section>
+                </article>
+            </li>
+            <li>   
+                <article class="d-flex flex-row gap-2 my-2 p-2 border rounded">
+                    <figure class="position-relative">
+                        <img class="amigo-lista-profile-icon" src="/static/node_modules/bootstrap-icons/icons/person-circle.svg" alt="icono de perfil">
+                    
+                    </figure>
+                    <section class="d-flex flex-column">
+                        <p>Daniel</p>
+                        <div class="d-flex flex-column gap-2">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit velit pellentesque risus tincidunt tincidunt. Morbi nec purus id velit auctor sagittis. Phasellus ac gravida felis, a ullamcorper lacus. Etiam fringilla feugiat est, a convallis tellus viverra sit amet. Maecenas pharetra molestie leo. </p>
+                            <p class="meta"><time datetime="2018">00:10</time></p>
+                        </div>
+                        </section>
+                </article>
+            </li>
+            <li>   
+                <article class="d-flex flex-row-reverse gap-2 my-2 p-2 border rounded">
+                    <figure class="position-relative">
+                        <img class="amigo-lista-profile-icon" src="/static/node_modules/bootstrap-icons/icons/person-circle.svg" alt="icono de perfil">
+                    
+                    </figure>
+                    <section class="d-flex flex-column">
+                        <p class="text-end">Yo</p>
+                        <div class="d-flex flex-column gap-2">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit velit pellentesque risus tincidunt tincidunt. Morbi nec purus id velit auctor sagittis. Phasellus ac gravida felis, a ullamcorper lacus. Etiam fringilla feugiat est, a convallis tellus viverra sit amet. Maecenas pharetra molestie leo. </p>
+                            <p class="meta"><time datetime="2018">00:13</time></p>
+                        </div>
+                        </section>
+                </article>
+            </li>
+        </ul>
+        <div class="d-flex flex-row p-2 bd-highlight position-fixed bottom-0 w-75 bg-light"> 
+            <img class="m-1 amigo-lista-profile-icon" src="/static/node_modules/bootstrap-icons/icons/person-circle.svg" alt="icono de perfil">
+            <input class="m-1 flex-grow-1 message-input" type="text" placeholder="Escribe algo..."> 
+            <span class="m-1 publisher-btn file-group">   
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-paperclip" viewBox="0 0 16 16">
+                    <path d="M4.5 3a2.5 2.5 0 0 1 5 0v9a1.5 1.5 0 0 1-3 0V5a.5.5 0 0 1 1 0v7a.5.5 0 0 0 1 0V3a1.5 1.5 0 1 0-3 0v9a2.5 2.5 0 0 0 5 0V5a.5.5 0 0 1 1 0v7a3.5 3.5 0 1 1-7 0V3z"/>
+                </svg>
+                <input id="file-input" type="file"> 
+            </span> 
+            <a class="m-1" href="#" data-abc="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+                    <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+                  </svg>
+            </a> 
+        </div>
+       
     </div>
+</div>
 {% endblock body %}
