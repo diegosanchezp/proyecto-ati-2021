@@ -1,0 +1,14 @@
+main > section{
+    width: 100%;
+}
+#lista-mensajes{
+    list-style: none;
+}
+.message-input{
+    border: none;
+    outline: none !important;
+    background-color: transparent;
+}
+#file-input{
+    display: none;
+}
