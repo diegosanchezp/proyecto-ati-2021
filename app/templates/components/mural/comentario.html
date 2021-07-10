@@ -1,0 +1,32 @@
+<div class="d-flex flex-column comment-section">
+
+    <div class="bg-greysito p-2">
+
+        {# Info perfil #}
+        <div class="d-flex flex-row user-info">
+            <img id="publicacion-profile-icon"
+            class="publicacion-profile-icon border border-2 rounded-circle"
+            src="{{ url_for('static', filename='node_modules/bootstrap-icons/icons/person.svg')}}" 
+            alt="icono de perfil">
+
+            <div class="d-flex flex-column justify-content-start ml-2">
+                <span class="d-block font-weight-bold name">Cesar Salazar</span>
+                <span class="text-black-50">18/06/2021, 8:58pm </span>
+            </div>
+        </div>
+
+        {# Texto comentario #}
+        <div class="mt-2">
+        <p class="comment-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+            ea commodo consequat.
+        </p>
+        </div>
+
+        <button type="button" class="btn btn-dark">Comentar</button>
+
+    </div>
+</div>
+
+

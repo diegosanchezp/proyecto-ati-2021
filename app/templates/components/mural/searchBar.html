@@ -1,0 +1,23 @@
+<form action="" >
+  <div class="input-group">
+
+    <div class="form-group">
+      <select class="form-select" aria-label="Default select example">
+        <option value="amigo" selected>Amigo</option>
+        <option value="desconocido">Desconocido</option>
+      </select>
+    </div>
+
+    <input type="text" 
+           class="form-control" 
+           aria-label="Search input with dropdown button" 
+           placeholder="Busca personas, ingresa un nombre"/>
+
+    <div class="input-group-append">
+      <button class="btn btn-light" type="button">
+        <img src="{{ url_for('static', filename='node_modules/bootstrap-icons/icons/search.svg') }}" />
+      </button>
+    </div>
+
+  </div>
+</form>

@@ -1,0 +1,62 @@
+<div class="container border rounded pt-2 pb-2">
+
+    {# Name and picture #}
+    <div class="d-flex flex-row">
+        <img id="publicacion-profile-icon"
+            class="publicacion-profile-icon border border-2 rounded-circle"
+            src="{{ url_for('static', filename='node_modules/bootstrap-icons/icons/person.svg')}}" 
+            alt="icono de perfil">
+
+        <span class="d-block font-weight-bold name publicacion-profile-name">Aaron Morillo</span>
+    </div>
+
+    {# Date published #}
+    <div class="row mt-3">
+        <span class="text-black-50"> Publicado 18/06/2021 a las 1:12pm</span>
+    </div>
+
+    {# Content text #}
+    <div class="row">
+        <p>
+            On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized
+            by the charas of pleasure of the moment, so blinded by desire, they cannot....
+        </p>
+    </div>
+
+    {# Multimedia #}
+    <div class="row mt-3">
+        
+        <div class="col d-flex justify-content-center">
+            <img id="publicacion-image-icon"
+            class="w-50"
+            src="{{ url_for('static', filename='node_modules/bootstrap-icons/icons/image.svg')}}" 
+            alt="icono de imagen">
+        </div>
+        
+
+        <div class="col d-flex justify-content-center border border-2 rounded">
+            <img id="publicacion-image-icon"
+            class="w-50"
+            src="{{ url_for('static', filename='node_modules/bootstrap-icons/icons/play-circle-fill.svg')}}" 
+            alt="icono de imagen">
+        </div>
+    </div>
+
+    {# Comments number #}
+    <div class="row mt-3">
+
+        <a href="#" class="link-dark"><p>10 Comentarios</p></a>
+
+    </div>
+
+    {# Detalles publicacion #}
+    {% if detalleButton%}
+    <div class="row d-flex justify-content-center mt-3">
+
+        <a href="/mural/publicacion/detalle" class="btn btn-info w-25 d-flex justify-content-center ">
+            Ver publicacion
+        </a>
+        
+    </div>
+    {% endif %}
+</div>
