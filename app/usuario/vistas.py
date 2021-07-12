@@ -31,7 +31,7 @@ def recuperar_token():
 
     return render_template("usuario/recuperar_pass_token_enviado.html")
 
-@usuario_blueprint.route("/editar_password")
+@usuario_blueprint.route("/editar-password")
 def editar_password():
     """
     Vista de editar password
