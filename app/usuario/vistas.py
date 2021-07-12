@@ -30,3 +30,10 @@ def recuperar_token():
     """
 
     return render_template("usuario/recuperar_pass_token_enviado.html")
+
+@usuario_blueprint.route("/mis-amigos")
+def mis_amigos():
+    """
+    Mis amigos
+    """
+    return render_template("usuario/mis_amigos.html")
