@@ -3,7 +3,7 @@
 
   <main class="d-flex flex-column align-items-center justify-content-center mx-3">
     <h1 class="text-center my-2">Cambiar informacion de <br>Perfil</h1>
-    <section id="main-register-actions" class="border rounded-1 p-4">
+    <section id="main-edit-fields" class="border rounded-1 p-4">
       <form class="container" action="/mural">
         <div class="row">
           <div class="col mb-3">
@@ -57,15 +57,15 @@
         <div class="row">
           <div class="col mb-3">
             <label for="descripcionInput" class="form-label">Descripcion</label>
-            <input type="text" class="form-control pb-5" id="descripcionInput" aria-describedby="descripcionHelp">
+            <textarea type="text" class="form-control pb-5" id="descripcionInput" aria-describedby="descripcionHelp"></textarea>
           </div>
         </div>
         <div class="row pb-3">
           <div class="col d-flex justify-content-center">
-            <button type="submit" class="btn bg-dark text-white px-4">Cancelar</button>
+            <button type="submit" class="btn bg-danger text-white px-4">Cancelar</button>
           </div>
           <div class="col d-flex justify-content-center">
-            <button type="submit" class="btn bg-dark text-white px-4">Guardar Cambios</button>
+            <button type="submit" class="btn bg-primary text-white px-4">Guardar Cambios</button>
           </div>
         </div>
       </form>
