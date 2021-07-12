@@ -31,6 +31,14 @@ def recuperar_token():
 
     return render_template("usuario/recuperar_pass_token_enviado.html")
 
+@usuario_blueprint.route("/editar-privacidad")
+def editar_privacidad():
+    """
+    Vista de editar privacidad
+    """
+
+    return render_template("usuario/editar_privacidad.html")
+
 @usuario_blueprint.route("/editar-perfil")
 def editar_perfil():
     """
