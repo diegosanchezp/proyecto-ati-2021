@@ -31,6 +31,14 @@ def recuperar_token():
 
     return render_template("usuario/recuperar_pass_token_enviado.html")
 
+@usuario_blueprint.route("/configuracion")
+def configuracion():
+    """
+    Vista de configuracion
+    """
+
+    return render_template("usuario/configuracion.html")
+
 @usuario_blueprint.route("/mis-amigos")
 def mis_amigos():
     """
