@@ -39,4 +39,9 @@ def configuracion():
 
     return render_template("usuario/configuracion.html")
 
-
+@usuario_blueprint.route("/mis-amigos")
+def mis_amigos():
+    """
+    Mis amigos
+    """
+    return render_template("usuario/mis_amigos.html")
