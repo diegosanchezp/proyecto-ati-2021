@@ -1,0 +1,7 @@
+.friend-list {
+  list-style-type: none;
+  width: 100%;
+  & > li {
+    @extend .mt-2;
+  }
+}
