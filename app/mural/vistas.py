@@ -11,10 +11,3 @@ def index():
 @mural_blueprint.route("/publicaciones")
 def publicaciones():
     return "Hola Publicaciones"
-
-@mural_blueprint.route("/create_publication")
-def create_publication():
-    """
-    Vista para crear publicaciones
-    """
-    return render_template("mural/create_publication.html")
