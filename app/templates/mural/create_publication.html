@@ -1,0 +1,28 @@
+{% extends "mural_base.html" %}
+{% block body %}
+  <div class="w-100 d-flex justify-content-center m-1">
+    <div class="d-flex flex-column">
+        <div class="d-flex flex-row m-3">
+            <h3 class="header text-center">Crea tu publicacion</h3>
+        </div>
+        
+        <div class="d-flex flex-row m-3">
+            <textarea name="" id="" class="w-100"></textarea>
+        </div>
+        <div class="d-flex flex-column m-3">
+            <section class="d-flex flex-row m-2">
+                <button class="btn btn-primary m-2">Añadir Imagenes y Videos</button>
+                <select name="" id="" class="form-select m-2">
+                    <option value="">Tipo de publicacion</option>
+                    <option value="">Publica</option>
+                    <option value="">Privada</option>
+                </select>
+            </section>
+            <section class="d-flex flex-row m-2">
+                <button class="btn btn-primary m-2">Publicar</button>
+                <button class="btn btn-secondary m-2">Cancelar</button>
+            </section>
+        </div>
+    </div>
+  </div>
+{% endblock body %}
