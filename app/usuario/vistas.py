@@ -75,3 +75,10 @@ def mis_amigos():
     Mis amigos
     """
     return render_template("usuario/mis_amigos.html")
+
+@usuario_blueprint.route("/mi-perfil")
+def mi_perfil():
+    """
+    Mi perfil
+    """
+    return render_template("usuario/mi_perfil.html")

@@ -31,11 +31,11 @@ Contexto requerido
   </section>
   <section id="sidebar-call-to-actions" class="d-flex flex-row gap-2">
     <button type="button" class="btn btn-secondary px-2">Cerrar Sesión</button>
-    <a class="btn btn-primary" href="{# {{ url_for("usuario_blueprint.editar_perfil") }} #}">Ver mi perfil</a>
+    <a class="btn btn-primary" href="{{ url_for("usuario_blueprint.mi_perfil") }}">Ver mi perfil</a>
   </section>
 
   <section id="sidebar-friend-list-container">
-    <p class="my-2">Amigos</p>
+    <p class="my-2 text-center">Amigos</p>
     <ul id="sidebar-friend-list" class="d-flex flex-column">
       <li>
         {% include "components/mural/amigo-lista.html" %}
