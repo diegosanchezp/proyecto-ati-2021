@@ -1,27 +1,27 @@
 version: '3.8'
 services:
-    mongodb_contenedor:
-        container_name: mongodb
-        image: mongo:4.0.25
-        restart: always
-        volumes:
-        - ./data:/data/db
-        ports:
-        - "27017:27017"
-    flask:
-        stdin_open: true
-        tty: true
-        build: ./
-        image: webapp:1
-        container_name: flask
-        restart: always
-        environment:
-        - APP_NAME=./run.py
-        - FLASK_ENV=development
-        depends_on:
-        - mongodb_contenedor
-        ports:
-        - "5000:5000"
-        volumes:
-            - ./app:/app/app
-            - ./package.json:/app/package.json
+  mongodb_contenedor:
+    container_name: mongodb
+    image: mongo:4.0.25
+    restart: always
+    volumes:
+      - ./data:/data/db
+    ports:
+      - '27017:27017'
+  flask:
+    stdin_open: true
+    tty: true
+    build: ./
+    image: webapp:1
+    container_name: flask
+    restart: always
+    environment:
+      - APP_NAME=./run.py
+      - FLASK_ENV=development
+    depends_on:
+      - mongodb_contenedor
+    ports:
+      - '5000:5000'
+    volumes:
+      - ./app:/app/app
+      - ./package.json:/app/package.json

@@ -1,10 +1,12 @@
 {% extends "base.html" %}
+
 {% block base_body %}
   <main class="d-flex flex-row gap-3">
     {% include "components/sidebar.html" %}
     <section class="w-100">
       {% block body %}
       {% endblock body %}
-    </section>
+    </div>
+    
   </main>
 {% endblock base_body %}
