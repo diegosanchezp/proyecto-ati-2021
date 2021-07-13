@@ -16,7 +16,7 @@ Contexto requerido
   </header>
 
   <section id="sidebar-profile">
-    <a href="{# {{ url_for("") }} #}" class="position-relative">
+    <a href="{{ url_for('notificaciones_blueprint.index')}}" class="position-relative">
       <img src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/bell.svg")}}" class="sidebar-icon-size" alt="icono notificaciones">
       <span class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-danger">
         <span>2</span>

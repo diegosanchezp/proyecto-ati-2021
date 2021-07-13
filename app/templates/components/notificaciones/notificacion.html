@@ -1,0 +1,32 @@
+<div class="row mt-2 ms-1 me-1 border border-2 rounded">
+
+    <div class="d-flex flex-row pt-2 pb-2">
+
+        <img id="notificacion-profile-icon"
+            class="notificacion-profile-icon border border-2 rounded-circle align-self-center"
+            src="{{ url_for('static', filename='node_modules/bootstrap-icons/icons/person.svg')}}" 
+            alt="icono de perfil">
+
+        <span class="d-block font-weight-bold name publicacion-profile-name ms-1">{{content}}</span>
+
+        {% if conectado %}
+        <a href="{{ url_for('usuario_blueprint.ver_perfil')}}" 
+           class="btn btn-dark ms-auto align-self-center"
+           role="button">Ver Perfil</a>
+        {% endif %}
+
+        {% if publicacion %}
+        <a href="{{ url_for('mural_blueprint.publicaciones')}}" 
+           class="btn btn-dark ms-auto align-self-center"
+           role="button">Ver publicacion</a>
+        {% endif %}
+
+        {% if chat %}
+        <a href="{{ url_for('chat_blueprint.index')}}" 
+           class="btn btn-dark ms-auto align-self-center"
+           role="button">Ver chat</a>
+        {% endif %}
+
+    </div>
+
+</div>
