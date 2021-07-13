@@ -6,10 +6,11 @@ Contexto requerido
   - lista_amigos: QuerySet<User>
 #}
 
-<nav class="px-3 border-end border-dark h-100" id="main-sidenav">
+{# Version no collapsado #}
+<nav class="px-3 border-end border-dark h-100 collapse show" id="main-sidenav">
   <header id="sidebar-header" class="d-flex flex-row justify-content-between mt-2 mb-4">
     <h1 class="m-0">ATI_SOCIAL</h1>
-    <button type="button" class="reset-button">
+    <button type="button" class="reset-button" data-bs-toggle="collapse" data-bs-target="#main-sidenav">
       <img src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/x-lg.svg")}}" alt="icono colapsar sidebar">
     </button>
   </header>
@@ -47,4 +48,11 @@ Contexto requerido
   <div class="d-flex justify-content-center my-4">
     <button type="button" class="btn btn-primary">Ver todos mis amigos</button>
   </div>
+</nav>
+
+{# Version collapsed #}
+<nav class="flex-column" id="sidebar-collapsed">
+  <button type="button" class="reset-button" data-bs-toggle="collapse" data-bs-target="#main-sidenav">
+    <img id="expand-sidebar-icon" src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/list.svg")}}" alt="icono expandir sidebar">
+  </button>
 </nav>

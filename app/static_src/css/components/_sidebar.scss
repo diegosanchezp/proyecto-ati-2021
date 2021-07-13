@@ -19,3 +19,25 @@
 .sidebar-icon-size {
   width: 1.5rem;
 }
+
+/* Hide collapsed sidebar when sidebar is visible */
+#main-sidenav[class~="show"] ~ #sidebar-collapsed {
+  display: none;
+}
+
+/* Show collapsed sidebar when sidebar is not visible */
+:not(#main-sidenav[class~="show"]) ~ #sidebar-collapsed {
+  display: flex;
+}
+
+#sidebar-collapsed {
+  width: 5rem;
+}
+
+#sidebar-collapsed {
+  border-right: 1px solid black;
+}
+
+#expand-sidebar-icon {
+  width: 2.5em;
+}
