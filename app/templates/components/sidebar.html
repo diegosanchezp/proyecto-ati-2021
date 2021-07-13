@@ -14,7 +14,6 @@ Contexto requerido
       <img src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/x-lg.svg")}}" alt="icono colapsar sidebar">
     </button>
   </header>
-
   <section id="sidebar-profile">
     <a href="{# {{ url_for("") }} #}" class="position-relative">
       <img src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/bell.svg")}}" class="sidebar-icon-size" alt="icono notificaciones">
@@ -22,7 +21,6 @@ Contexto requerido
         <span>2</span>
       </span>
     </a>
-
     <div id="sidebar-profile-info" class="d-flex flex-column justify-content-center align-items-center">
       <img id="sidebar-profile-icon" src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/person-circle.svg")}}" alt="icono de perfil">
       <p class="text-center">Diego Sánchez</p>
@@ -31,7 +29,6 @@ Contexto requerido
       <img src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/gear.svg")}}" class="sidebar-icon-size" alt="icono configuracion">
     </a>
   </section>
-
   <section id="sidebar-call-to-actions" class="d-flex flex-row gap-2">
     <button type="button" class="btn btn-secondary px-2">Cerrar Sesión</button>
     <a class="btn btn-primary" href="{{ url_for("usuario_blueprint.mi_perfil") }}">Ver mi perfil</a>
@@ -47,9 +44,7 @@ Contexto requerido
         {% include "components/mural/amigo-lista.html" %}
       </li>
     </ul>
-    
   </section>
-
   <div class="d-flex justify-content-center my-4">
     <a class="btn btn-primary" href="{{ url_for("usuario_blueprint.mis_amigos") }}">Ver todos mis amigos</a>
   </div>
