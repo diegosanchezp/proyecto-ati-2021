@@ -1,4 +1,22 @@
 {% extends "mural_base.html" %}
+
 {% block body %}
-  <p>Hola Mural</p>
+
+<div class="container mt-1 ps-3 pe-5">
+    <div class="row pt-1 pb-1 border">
+      {% include "components/mural/searchBar.html" %}
+    </div>
+
+    <div class="row">
+        {# AGREGAR TITULO DINAMICAMENTE #}
+        <h1 class="d-flex justify-content-center"> Publicaciones de Personas </h1>
+        {% include 'components/mural/publicacion.html' %}
+        {% include 'components/mural/publicacion.html' %}
+    </div>
+
+    <div class="row mt-1">
+      {% include 'components/pagination.html' %}
+    </div>
+</div>
+
 {% endblock body %}
