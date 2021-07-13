@@ -3,7 +3,7 @@ data
 
 # Build files in static directory
 app/static/css
-app/static/js
+# app/static/js
 
 # Dependency directories
 node_modules/
