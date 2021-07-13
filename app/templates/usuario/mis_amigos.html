@@ -1,0 +1,18 @@
+{% extends "mural_base.html" %}
+{% block body %}
+<div class="d-flex flex-column justify-content-center align-items-center">
+    <img id="sidebar-profile-icon" src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/person-circle.svg")}}" alt="icono de perfil">
+    <p class="mt-2"><b>Diego Sánchez</b></p>
+    <div class="badge bg-primary">Amigos 3</div>
+    <h2 class="m-4">Amigos de Diego Sánchez</h2>
+    {# Friend list #}
+    <ul class="friend-list">
+      <li>
+        {% include "components/badge-amigo.html" %}
+      </li>
+      <li>
+        {% include "components/badge-amigo.html" %}
+      </li>
+    </ul>
+</div>
+{% endblock body %}

@@ -1,0 +1,75 @@
+{% extends "mural_base.html" %}
+{% block body %}
+
+<main class="d-flex flex-column justify-content-start gap-5 mt-4">
+  <div class="d-flex flex-row border rounded-2 px-3 pt-3 justify-content-between mx-4">
+    <div class="d-flex">
+      <p>¿Notificar amigos conectados por correo?</p>
+    </div>
+    <div class="d-flex">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex flex-row border rounded-2 px-3 pt-3 justify-content-between mx-4">
+    <div class="d-flex">
+      <p>¿Notificar comentarios por correo?</p>
+    </div>
+    <div class="d-flex">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex flex-row border rounded-2 px-3 pt-3 justify-content-between mx-4">
+    <div class="d-flex">
+      <p>¿Notificar mensajes de chat por correo?</p>
+    </div>
+    <div class="d-flex">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex flex-row border rounded-2 px-3 py-2 justify-content-between mx-4 ">
+    <div class="d-flex pt-3">
+      <p>Color del perfil</p>
+    </div>
+    <div class="d-flex">
+      <input type="color" class="btn form-control-color d-flex" id="exampleColorInput" value="#563d7c" title="Choose your color" >
+    </div>
+  </div>
+
+  <div class="d-flex flex-row border rounded-2 px-3 py-2 justify-content-between mx-4">
+    <div class="d-flex pt-3">
+      <p>Color del muro</p>
+    </div>
+    <div class="d-flex">
+      <input type="color" class="btn form-control-color d-flex" id="exampleColorInput" value="#563d7c" title="Choose your color" >
+    </div>
+  </div>
+
+  <hr class="mx-4"/>
+
+  <div class="d-flex">
+    <p>Configuracion avanzada</p>
+  </div>
+
+  <div class="row pb-3 mb-5">
+    <div class="col d-flex justify-content-center">
+      <a class="btn bg-dark text-white px-4" href="{{ url_for("usuario_blueprint.editar_perfil") }}">Editar Perfil</a>
+    </div>
+    <div class="col d-flex justify-content-center">
+      <a class="btn bg-dark text-white px-4" href="{{ url_for("usuario_blueprint.editar_password") }}">Editar Contraseña</a>
+    </div>
+    <div class="col d-flex justify-content-center">
+      <a class="btn bg-dark text-white px-4" href="{{ url_for("usuario_blueprint.editar_privacidad") }}">Editar Privacidad</a>
+    </div>
+  </div>
+
+</main>
+{% endblock body %}
