@@ -31,7 +31,7 @@ def recuperar_token():
 
     return render_template("usuario/recuperar_pass_token_enviado.html")
 
-@usuario_blueprint.route("/ver_perfil")
+@usuario_blueprint.route("/ver-perfil")
 def ver_perfil():
     """
     Vista de ver perfil
