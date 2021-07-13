@@ -4,14 +4,14 @@
   <main class="d-flex flex-column align-items-center justify-content-center mx-3">
     <h1 class="text-center my-2">Cambiar informacion de <br>Perfil</h1>
     <section id="main-edit-fields" class="border rounded-1 p-4">
-      <form class="container" action="/mural">
+      <form class="container">
         <div class="row">
           <div class="col mb-3">
-            <label for="nombreInput" class="form-label">Nombre</label>
+            <label for="nombreInput" class="form-label">Nombre y apellido</label>
             <input type="text" class="form-control" id="nombreInput" aria-describedby="emailHelp">
           </div>
           <div class="col mb-3">
-            <label for="exampleInputEmail1" class="form-label">Email</label>
+            <label for="exampleInputEmail1" class="form-label">Correo electronico</label>
             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
           </div>
         </div>
@@ -60,12 +60,12 @@
             <textarea type="text" class="form-control pb-5" id="descripcionInput" aria-describedby="descripcionHelp"></textarea>
           </div>
         </div>
-        <div class="row pb-3">
-          <div class="col d-flex justify-content-center">
-            <button type="submit" class="btn bg-danger text-white px-4">Cancelar</button>
-          </div>
+        <div class="row pb-3 gap-3">
           <div class="col d-flex justify-content-center">
             <button type="submit" class="btn bg-primary text-white px-4">Guardar Cambios</button>
+          </div>
+          <div class="col d-flex justify-content-center">
+            <button type="submit" class="btn bg-danger text-white px-4">Cancelar</button>
           </div>
         </div>
       </form>
@@ -78,7 +78,7 @@
         <img class="img-fluid rounded" src="https://sm.ign.com/t/ign_es/game/a/among-us/among-us_crsm.200.jpg">
       </div>
       <div class="d-flex justify-content-center">
-        <input class="form-control w-50" type="file" id="formFileInput">
+        <input class="form-control w-100" type="file" id="formFileInput">
       </div>
     </section>
   </main>
