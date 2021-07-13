@@ -1,0 +1,14 @@
+{% extends "mural_base.html" %}
+
+{% block body %}
+<div class="container mt-1 ps-3 pe-5">
+  <div class="row pt-1 pb-1 border">
+    {% include "components/mural/searchBar.html" %}
+  </div>
+  <div>
+    <h2 class="text-center mt-4">Encuentra personas</h2>
+    {% include "components/badge-resulado.html" %}
+  </div>
+</div>
+
+{% endblock body %}

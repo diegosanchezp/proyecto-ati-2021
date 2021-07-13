@@ -18,3 +18,10 @@ def create_publication():
     Vista para crear publicaciones
     """
     return render_template("mural/create_publication.html")
+
+@mural_blueprint.route("/resultados-busqueda")
+def resultados_busqueda():
+    """
+    Resultados busqueda
+    """
+    return render_template("mural/resultados_busqueda.html")
