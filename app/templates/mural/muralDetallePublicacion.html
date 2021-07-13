@@ -19,14 +19,21 @@
 
     {# Comentarios de la publicacion #}
     <div class="row mt-3">
+      {% with respuesta_id="respuesta_1" %}
         {% include "components/mural/comentario.html"%}
-
+      {% endwith %}
+        
         {# Comentario respuesta, recordar agregar las clases al mostrar #}
         <div class="mt-2 mb-2 ps-5">
+          {% with respuesta_id="respuesta_2" %}
             {% include "components/mural/comentario.html"%}
+          {% endwith %}
         </div>
 
-        {% include "components/mural/comentario.html"%}
+        {% with respuesta_id="respuesta_3" %}
+          {% include "components/mural/comentario.html"%}
+        {% endwith %}
+
     </div>
 
     {# Boton para ver mas comentarios #}

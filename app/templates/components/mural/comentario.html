@@ -6,7 +6,7 @@
         <div class="d-flex flex-row user-info">
             <img id="publicacion-profile-icon"
             class="publicacion-profile-icon border border-2 rounded-circle"
-            src="{{ url_for('static', filename='node_modules/bootstrap-icons/icons/person.svg')}}" 
+            src="{{ url_for('static', filename='node_modules/bootstrap-icons/icons/person-circle.svg')}}" 
             alt="icono de perfil">
 
             <div class="d-flex flex-column justify-content-start ml-2">
@@ -24,9 +24,13 @@
         </p>
         </div>
 
-        <button type="button" class="btn btn-dark">Comentar</button>
-
+        <button type="button" class="btn btn-dark" data-bs-toggle="collapse" data-bs-target="#{{ respuesta_id }}">Responder</button>
+        
     </div>
 </div>
 
 
+{# Esto es una respuesta al comentario el id tiene que ser unico #}
+<div class="collapse" id="{{ respuesta_id }}">
+  {% include "components/mural/comentarioResponder.html" %}
+</div>
