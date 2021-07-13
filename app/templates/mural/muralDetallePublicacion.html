@@ -1,0 +1,38 @@
+{% extends "mural_base.html" %}
+
+{% block body %}
+
+<div class="container mt-1 ps-3 pe-5">
+    {# Publicacion Detallada #}
+    <div class="row pt-1 pb-1">
+        {% include "components/mural/publicacion.html"%}
+    </div>
+
+    <div class="row">
+        <p class="fw-bolder fs-5"> Realiza un Comentario </p>
+    </div>
+
+    {# Escribir comentario  #}
+    <div class="row">
+        {% include "components/mural/comentarioEscribir.html"%}
+    </div>
+
+    {# Comentarios de la publicacion #}
+    <div class="row mt-3">
+        {% include "components/mural/comentario.html"%}
+
+        {# Comentario respuesta, recordar agregar las clases al mostrar #}
+        <div class="mt-2 mb-2 ps-5">
+            {% include "components/mural/comentario.html"%}
+        </div>
+
+        {% include "components/mural/comentario.html"%}
+    </div>
+
+    {# Boton para ver mas comentarios #}
+    <div class="row mt-3">
+        <button type="button" class="btn btn-dark">Ver mas comentarios</button>
+    </div>
+</div>
+
+{% endblock body %}

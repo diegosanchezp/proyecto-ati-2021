@@ -6,8 +6,8 @@ def index():
     """
     Vista principal del mural
     """
-    return render_template("mural/mural.html")
+    return render_template("mural/mural.html", detalleButton=True)
 
-@mural_blueprint.route("/publicaciones")
+@mural_blueprint.route("/publicacion/detalle")
 def publicaciones():
-    return "Hola Publicaciones"
+    return render_template("mural/muralDetallePublicacion.html", detalleButton=False)

@@ -7,12 +7,14 @@ Contexto requerido
 #}
 
 <nav class="px-3 border-end border-dark h-100" id="main-sidenav">
+
   <header id="sidebar-header" class="d-flex flex-row justify-content-between mt-2 mb-4">
     <h1 class="m-0">ATI_SOCIAL</h1>
     <button type="button" class="reset-button">
       <img src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/x-lg.svg")}}" alt="icono colapsar sidebar">
     </button>
   </header>
+
   <section id="sidebar-profile">
     <a href="#" class="position-relative">
       <img src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/bell.svg")}}" class="sidebar-icon-size" alt="icono notificaciones">
@@ -20,14 +22,17 @@ Contexto requerido
         <span>2</span>
       </span>
     </a>
+
     <div id="sidebar-profile-info" class="d-flex flex-column justify-content-center align-items-center">
       <img id="sidebar-profile-icon" src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/person-circle.svg")}}" alt="icono de perfil">
       <p class="text-center">Diego Sánchez</p>
     </div>
+
     <a href="#">
       <img src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/gear.svg")}}" class="sidebar-icon-size" alt="icono configuracion">
     </a>
   </section>
+
   <section id="sidebar-call-to-actions" class="d-flex flex-row gap-2">
     <button type="button" class="btn btn-secondary px-2">Cerrar Sesión</button>
     <button type="button" class="btn btn-primary">Ver mi perfil</button>
@@ -35,6 +40,7 @@ Contexto requerido
 
   <section id="sidebar-friend-list-container">
     <p class="my-2">Amigos</p>
+
     <ul id="sidebar-friend-list" class="d-flex flex-column">
       <li>
         {% include "components/mural/amigo-lista.html" %}
@@ -43,7 +49,9 @@ Contexto requerido
         {% include "components/mural/amigo-lista.html" %}
       </li>
     </ul>
+    
   </section>
+
   <div class="d-flex justify-content-center my-4">
     <button type="button" class="btn btn-primary">Ver todos mis amigos</button>
   </div>
