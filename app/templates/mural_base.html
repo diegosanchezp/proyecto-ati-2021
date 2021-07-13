@@ -2,13 +2,8 @@
 
 {% block base_body %}
   <main class="d-flex flex-row gap-3">
-
-    <div class="col-3">
-      {% include "components/sidebar.html" %}
-    </div>
-    
-
-    <div class="col-9">
+    {% include "components/sidebar.html" %}
+    <section class="w-100">
       {% block body %}
       {% endblock body %}
     </div>

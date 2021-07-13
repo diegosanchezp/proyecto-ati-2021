@@ -11,9 +11,13 @@
 @import 'components/amigo-lista';
 @import 'components/publicacion';
 @import 'components/comentario';
+@import "components/mensaje-enviado";
+@import "components/mensaje-recibido";
 
 /* Paginas o vistas */
 @import 'pages/login';
 @import 'pages/registro';
 @import 'pages/chat';
 @import 'pages/mural';
+@import "pages/profile";
+@import "pages/mis-amigos";

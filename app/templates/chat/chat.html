@@ -1,4 +1,85 @@
 {% extends "mural_base.html" %}
 {% block body %}
-  <p>Hola chat</p>
+<div class="container">
+    <div class="border p-2 bd-highlight">
+        <div class="card-header flex-row">
+            <h4 class="card-title">Chat con Daniel</h4>
+        </div>
+        <div class="text-center">Today</div>
+
+        <ul id="lista-mensajes" class="d-flex flex-column">
+            <li>   
+                <article class="d-flex flex-row gap-2 my-2 p-2 border rounded">
+                    <figure class="position-relative">
+                        <img class="amigo-lista-profile-icon" src="/static/node_modules/bootstrap-icons/icons/person-circle.svg" alt="icono de perfil">
+                    
+                    </figure>
+                    <section class="d-flex flex-column">
+                        <p>Daniel</p>
+                        <div class="d-flex flex-column gap-2">
+                            <p>Hola!</p>
+                            <p class="meta"><time datetime="2018">00:07</time></p>
+                        </div>
+                        </section>
+                </article>
+            </li>
+            <li>   
+                <article class="d-flex flex-row-reverse gap-2 my-2 p-2 border rounded">
+                    <figure class="position-relative">
+                        <img class="amigo-lista-profile-icon" src="/static/node_modules/bootstrap-icons/icons/person-circle.svg" alt="icono de perfil">
+                    
+                    </figure>
+                    <section class="d-flex flex-column">
+                        <p class="text-end">Yo</p>
+                        <div class="d-flex flex-column gap-2">
+                            <p>Hola!</p>
+                            <p class="meta"><time datetime="2018">00:08</time></p>
+                        </div>
+                        </section>
+                </article>
+            </li>
+            <li>   
+                <article class="d-flex flex-row gap-2 my-2 p-2 border rounded">
+                    <figure class="position-relative">
+                        <img class="amigo-lista-profile-icon" src="/static/node_modules/bootstrap-icons/icons/person-circle.svg" alt="icono de perfil">
+                    
+                    </figure>
+                    <section class="d-flex flex-column">
+                        <p>Daniel</p>
+                        <div class="d-flex flex-column gap-2">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit velit pellentesque risus tincidunt tincidunt. Morbi nec purus id velit auctor sagittis. Phasellus ac gravida felis, a ullamcorper lacus. Etiam fringilla feugiat est, a convallis tellus viverra sit amet. Maecenas pharetra molestie leo. </p>
+                            <p class="meta"><time datetime="2018">00:10</time></p>
+                        </div>
+                        </section>
+                </article>
+            </li>
+            <li>   
+                <article class="d-flex flex-row-reverse gap-2 my-2 p-2 border rounded">
+                    <figure class="position-relative">
+                        <img class="amigo-lista-profile-icon" src="/static/node_modules/bootstrap-icons/icons/person-circle.svg" alt="icono de perfil">
+                    
+                    </figure>
+                    <section class="d-flex flex-column">
+                        <p class="text-end">Yo</p>
+                        <div class="d-flex flex-column gap-2">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit velit pellentesque risus tincidunt tincidunt. Morbi nec purus id velit auctor sagittis. Phasellus ac gravida felis, a ullamcorper lacus. Etiam fringilla feugiat est, a convallis tellus viverra sit amet. Maecenas pharetra molestie leo. </p>
+                            <p class="meta"><time datetime="2018">00:13</time></p>
+                        </div>
+                        </section>
+                </article>
+            </li>
+        </ul>
+        <div class="d-flex flex-row p-2 bd-highlight position-fixed bottom-0 w-75 bg-light"> 
+            <img class="m-1 amigo-lista-profile-icon" src="/static/node_modules/bootstrap-icons/icons/person-circle.svg" alt="icono de perfil">
+            <input class="m-1 flex-grow-1 message-input" type="text" placeholder="Escribe algo..."> 
+            <a class="m-1" href="#" data-abc="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+                    <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+                  </svg>
+            </a> 
+        </div>
+       
+    </div>
+</div>
 {% endblock body %}
