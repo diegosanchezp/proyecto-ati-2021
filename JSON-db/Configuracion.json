@@ -1,0 +1,11 @@
+{
+    "id": -1,
+    "publicacion_privacidad": true,
+    "notificaciones_correo": {
+        "comentario": "",
+        "mensaje_chat": ""
+    },
+    "id_persona": -1,
+    "color_perfil": "",
+    "color_muro": ""
+}

@@ -1,0 +1,16 @@
+{
+    "id" : -1,
+    "Texto" : "",
+    "Fecha" : {
+        "dia": -1,
+        "mes": -1,
+        "año": -1
+    },
+    "Hora": {
+        "seg": -1,
+        "min": -1,
+        "hor": -1
+    },
+    "emisor_id": -1,
+    "receptor_id": -1
+}

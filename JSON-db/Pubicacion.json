@@ -1,0 +1,18 @@
+{
+    "publicacion_id": -1,
+    "contenido": "",
+    "videos": [{
+        "nombre": "",
+        "ubicacion": ""
+    }],
+    "audio": [{
+        "nombre": "",
+        "ubicacion": ""
+    }],
+    "fotos": [{
+        "nombre": "",
+        "ubicacion": ""
+    }],
+    "enlaces": [""],
+    "id_Persona": -1
+}

@@ -1,0 +1,8 @@
+{
+    "id_notificacion" : -1,
+    "estado": "",
+    "tipo": "",
+    "descripcion": "",
+    "emisor_id": -1,
+    "receptor_id": -1
+}

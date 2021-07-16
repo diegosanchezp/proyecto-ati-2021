@@ -1,0 +1,21 @@
+{
+    "id": -1,
+    "nombre" : "",
+    "foto" : {},
+    "email" : "",
+    "ci" : -1,
+    "f_nacimiento" : {
+        "dia": -1,
+        "mes": -1,
+        "año": -1
+    },
+    "genero" : "",
+    "descripcion" : "",
+    "colorFav" : "",
+    "libroFav" : "",
+    "musicaFav" : "",
+    "videojuegoFav" : [""],
+    "lenguajes" : [""],
+    "id_amigos": [-1],
+    "id_Config": -1
+}
