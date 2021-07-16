@@ -10,6 +10,10 @@ app/static/node_modules
 node_modules/
 jspm_packages/
 
+# Flask translations
+messages.pot
+*.mo
+
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
 

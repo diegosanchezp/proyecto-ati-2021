@@ -2,9 +2,11 @@ import flask
 from flask_user import UserManager
 from flask_mongoengine import MongoEngine
 from app.utils import register_blueprints
+from flask_babel import Babel
 
 # Instanciar extensiones de flask
 db = MongoEngine()
+babel = Babel()
 def create_app():
     """ Flask application factory """
 
@@ -26,6 +28,16 @@ def create_app():
     # Setup Flask-User and specify the User data-model
     from app.models.user import User
     user_manager = UserManager(app, db, User)
+
+    # Initialize Flask-Babel
+    babel.init_app(app)
+
+    # Use the browser's language preferences to select an available translation
+    @babel.localeselector
+    def get_locale():
+        from flask import request
+        translations = [str(translation) for translation in babel.list_translations()]
+        return request.accept_languages.best_match(translations)
 
     # Registar todos los blueprints
     register_blueprints(app)
