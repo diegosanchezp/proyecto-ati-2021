@@ -14,7 +14,7 @@ cp .env.example .env
 Ejecute los siguientes comandos para construir y levantar los contenedores de docker, estos son pasos obligatorios
 
 ```sh
-docker compose up --build -d
+docker-compose up --build -d
 ```
 
 Compilar codigo fuente sass
