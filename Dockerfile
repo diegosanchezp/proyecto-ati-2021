@@ -6,8 +6,6 @@ ENV PACKAGES="gcc musl-dev python3-dev libffi-dev openssl-dev cargo"
 RUN apk add --no-cache $PACKAGES npm && \
     pip3 install -r requirements.txt --no-deps && \
     npm install && \
-    # Make a symlink so static folder can pic-up npm dependencies
-    ln -s ../../node_modules/ app/static/ && \
     apk del --purge $PACKAGES
 # run the software contained in your image
 CMD ["python3","run.py"]
