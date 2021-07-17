@@ -2,22 +2,22 @@
 
 {% block base_body %}
 
-  <main class="d-flex flex-column align-items-center justify-content-center">
+  <main class="d-flex flex-column align-items-center justify-content-center mx-4">
     <h1 class="text-center my-2">Registrate en el sistema</h1>
     <section id="main-register-actions" class="border rounded-1 p-4">
       <form class="container" action="/mural">
         <div class="row">
-          <div class="col mb-3">
+          <div class="col col-md-12 mb-3">
             <label for="nombreInput" class="form-label">Nombre *</label>
             <input type="text" class="form-control" id="nombreInput" aria-describedby="emailHelp">
           </div>
-          <div class="col mb-3">
+          <div class="col col-md-12 mb-3">
             <label for="cedulaInput" class="form-label">Número cedula de identidad *</label>
             <input type="number" class="form-control" id="cedulaInput" aria-describedby="cedulaHelp">
           </div>
         </div>
         <div class="row">
-          <div class="col mb-3">
+          <div class="col col-md-auto mb-3">
             <label for="exampleInputEmail1" class="form-label">Email *</label>
             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
           </div>
@@ -27,7 +27,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col mb-3">
+          <div class="col col-md-auto mb-3">
             <label for="gender" class="form-label">Género *</label>
             <select id="gender" class="form-select" aria-label="gender">
               <option value="g">Masculino</option>

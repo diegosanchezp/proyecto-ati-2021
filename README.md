@@ -14,14 +14,10 @@ cp .env.example .env
 Ejecute los siguientes comandos para construir y levantar los contenedores de docker, estos son pasos obligatorios
 
 ```sh
-docker-compose up --build -d
+chmod +x build.sh
+./build.sh
 ```
 
-Compilar codigo fuente sass
-
-```sh
-docker exec flask npm run build
-```
 ## Dependencias de node (npm)
 
 Si se hace un cambio a los archivos de código fuente ubicados en `static_src` hay que recompilarlos, para hacer esto constantemente ejecute los siguientes comandos dependiendo de que tipo de archivo
@@ -143,3 +139,58 @@ https://icons.getbootstrap.com/
 ```
 
 Como puede observar todos los iconos son archivos que se ubican en la carpeta node_modules/bootstrap-icons/icons y estos estan en formato svg, si el nombre del archivo difiere del que encontró en la página, inspeccione el contenido de la carpeta
+
+## Traduciones ( i18n )
+
+Las traducciones se realizan con [Flask-Babel](https://flask-babel.tkte.ch), el procedimiento es el siguiente
+1) Marco un string como traducible en archivos *.py o *.html
+2) Genero las traducciones para los strings marcados con el comando `pybabel`
+
+### Realizar traducciones en archivos *.py
+
+Importe y llame una de las siguientes funciones que marcan un string como traducible, dependiendo del caso, puede importar una o varias, no es necesario importarlas todas todas.
+
+```py
+from flask_babel import gettext, ngettext, _
+```
+
+Para mas información consulte la documentación de babel
+
+https://flask-babel.tkte.ch/#using-translations
+
+### Realizar traducciones en archivos *.html o templates
+
+Las funciones que se importaron anteriormente también son accesibles desde los templates de `jinja2` sin importarlas ya que están en el contexto global de flask.
+
+Por ejemplo para marcar un string traducible en html
+```html
+<!-- app/templates/components/sidebar.html -->
+
+<!-- Marcamos el string "Ver todos mis amigos" como traducible -->
+<a class="btn btn-primary" href="{{ url_for("usuario_blueprint.mis_amigos") }}">{{ _("Ver todos mis amigos") }}</a>
+```
+
+### Segundo paso: Generar las traducciones
+
+Las traducciones se hacen en archivos de extensión *.po y se guardan en `app/translations`, actualmente se esta considerando un solo idioma para traducir, el inglés `en`.
+
+1) Generar traducciones
+```bash
+# Extraer strings que se marcaron a un archivo donde se pondrán las traducciones
+pybabel extract -F babel.cfg -k lazy_gettext,_l -o messages.pot .
+# Actualizar traducciones con los nuevos strings marcados
+pybabel update -i messages.pot -d app/translations
+```
+
+2) Abra el archivo `app/translations/en/LC_MESSAGES/messages.po` encuentre el string que quiere traducir y rellene el `msgstr ""`
+```bash
+# Compilar traducciones para que sean utilizables por babel
+pybabel compile -d app/translations
+```
+
+**Importante** después de que compile las traducciones, tiene que reiniciar el contenedor de docker de flask o el servidor, si no hace esto, no vera las traducciones en la página web
+
+```bash
+# Reiniciar contenedor de flask
+docker restart flask
+```

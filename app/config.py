@@ -26,6 +26,9 @@ class Config:
     USER_EMAIL_SENDER_EMAIL = "noresponder@ati.com"
     USER_EMAIL_SENDER_NAME = "ATI"
 
+    # Configuracion FlaskBabel
+    BABEL_DEFAULT_LOCALE = "es_VE"
+
 class TestingConfig(Config):
     """
     Configuracion para pruebas unitarias
