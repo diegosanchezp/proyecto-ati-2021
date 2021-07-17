@@ -14,14 +14,10 @@ cp .env.example .env
 Ejecute los siguientes comandos para construir y levantar los contenedores de docker, estos son pasos obligatorios
 
 ```sh
-docker compose up --build -d
+chmod +x build.sh
+./build.sh
 ```
 
-Compilar codigo fuente sass
-
-```sh
-docker exec flask npm run build
-```
 ## Dependencias de node (npm)
 
 Si se hace un cambio a los archivos de código fuente ubicados en `static_src` hay que recompilarlos, para hacer esto constantemente ejecute los siguientes comandos dependiendo de que tipo de archivo
