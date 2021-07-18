@@ -7,23 +7,24 @@ from flask_babel import Babel
 # Instanciar extensiones de flask
 db = MongoEngine()
 babel = Babel()
-def create_app():
+def create_app(config_class="Config"):
     """ Flask application factory """
 
     # Instanciar aplicacion de flask
     app = flask.Flask(__name__)
     # Cargar configuracion
-    app.config.from_object("app.config.Config")
+    app.config.from_object(f"app.config.{config_class}")
 
     # Setup Flask-MongoEngine
     db.init_app(app)
 
     # Verificar si la conexion a base de datos esta funcionando
-    try:
-        MongoClient = db.get_connection()
-        MongoClient.admin.command('ismaster')
-    except Exception:
-        raise Exception('=== No se puede conectar a base de datos, terminando programa ===')
+    if not app.testing:
+        try:
+            MongoClient = db.get_connection()
+            MongoClient.admin.command('ismaster')
+        except Exception:
+            raise Exception('=== No se puede conectar a base de datos, terminando programa ===')
 
     # Setup Flask-User and specify the User data-model
     from app.models.user import User
