@@ -1,11 +1,13 @@
 import unittest
 from app import create_app
+from dotenv import load_dotenv
 
 class TestApp(unittest.TestCase):
     def setUp(self):
         """
         Fixtures
         """
+        load_dotenv()
         self.app = create_app(config_class="TestingConfig")
 
     def test_app_is_created(self):
