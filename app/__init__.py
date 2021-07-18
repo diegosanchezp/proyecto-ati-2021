@@ -19,11 +19,12 @@ def create_app(config_class="Config"):
     db.init_app(app)
 
     # Verificar si la conexion a base de datos esta funcionando
-    try:
-        MongoClient = db.get_connection()
-        MongoClient.admin.command('ismaster')
-    except Exception:
-        raise Exception('=== No se puede conectar a base de datos, terminando programa ===')
+    if not app.testing:
+        try:
+            MongoClient = db.get_connection()
+            MongoClient.admin.command('ismaster')
+        except Exception:
+            raise Exception('=== No se puede conectar a base de datos, terminando programa ===')
 
     # Setup Flask-User and specify the User data-model
     from app.models.user import User
