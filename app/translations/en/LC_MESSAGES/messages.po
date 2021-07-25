@@ -167,16 +167,3 @@ msgstr "Chat"
 #: app/templates/usuario/ver_perfil.html:23
 msgid "Eliminar Amistad"
 msgstr "Delete friendship"
-
-#~ msgid "Cerrar Sesión"
-#~ msgstr "Close session"
-
-#~ msgid "Ver mi perfil"
-#~ msgstr "See profile"
-
-#~ msgid "Amigos"
-#~ msgstr "Friends"
-
-#~ msgid "Ver todos mis amigos"
-#~ msgstr "See all friends"
-
