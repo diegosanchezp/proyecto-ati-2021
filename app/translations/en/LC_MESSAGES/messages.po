@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-07-16 16:20-0400\n"
+"POT-Creation-Date: 2021-07-22 01:26+0000\n"
 "PO-Revision-Date: 2021-07-16 14:19-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -18,13 +18,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
+#: app/templates/chat/chat.html:6
+msgid "Chat con"
+msgstr "Chat with"
+
+#: app/templates/chat/chat.html:8
+msgid "Hoy"
+msgstr "Today"
+
 #: app/templates/components/sidebar.html:36
 msgid "Cerrar Sesión"
 msgstr "Close session"
 
 #: app/templates/components/sidebar.html:37
 msgid "Ver mi perfil"
-msgstr "See profile"
+msgstr "See my profile"
 
 #: app/templates/components/sidebar.html:41
 msgid "Amigos"
@@ -32,5 +40,130 @@ msgstr "Friends"
 
 #: app/templates/components/sidebar.html:54
 msgid "Ver todos mis amigos"
-msgstr "See all friends"
+msgstr "See all my friends"
 
+#: app/templates/mural/create_publication.html:6
+msgid "Crea tu publicacion"
+msgstr "Create your publication"
+
+#: app/templates/mural/create_publication.html:20
+#: app/templates/mural/create_publication.html:27
+msgid "Añadir Imagenes y Videos"
+msgstr "Add images and videos"
+
+#: app/templates/mural/create_publication.html:36
+msgid "Cerrar"
+msgstr "Close"
+
+#: app/templates/mural/create_publication.html:37
+msgid "Aceptar"
+msgstr "Accept"
+
+#: app/templates/mural/create_publication.html:44
+msgid "Tipo de publicacion"
+msgstr "Type of publication"
+
+#: app/templates/mural/create_publication.html:45
+msgid "Publica"
+msgstr "Public"
+
+#: app/templates/mural/create_publication.html:46
+msgid "Privada"
+msgstr "Private"
+
+#: app/templates/mural/create_publication.html:50
+msgid "Publicar"
+msgstr "Publish"
+
+#: app/templates/mural/create_publication.html:51
+msgid "Cancelar"
+msgstr "Cancel"
+
+#: app/templates/usuario/mi_perfil.html:15
+#: app/templates/usuario/ver_perfil.html:21
+#, fuzzy
+msgid "Amigos:"
+msgstr "Friends"
+
+#: app/templates/usuario/mi_perfil.html:22
+#: app/templates/usuario/ver_perfil.html:30
+msgid "Email"
+msgstr "Email"
+
+#: app/templates/usuario/mi_perfil.html:26
+#: app/templates/usuario/ver_perfil.html:34
+msgid "CI"
+msgstr "ID"
+
+#: app/templates/usuario/mi_perfil.html:30
+#: app/templates/usuario/ver_perfil.html:38
+msgid "Fecha de nacimiento"
+msgstr "Date of birth"
+
+#: app/templates/usuario/mi_perfil.html:34
+#: app/templates/usuario/ver_perfil.html:42
+msgid "Género"
+msgstr "Genre"
+
+#: app/templates/usuario/mi_perfil.html:38
+#: app/templates/usuario/ver_perfil.html:46
+msgid "Descripción personal"
+msgstr "Personal description"
+
+#: app/templates/usuario/mi_perfil.html:42
+#: app/templates/usuario/ver_perfil.html:50
+msgid "Color favorito"
+msgstr "Favorite color"
+
+#: app/templates/usuario/mi_perfil.html:46
+#: app/templates/usuario/ver_perfil.html:54
+msgid "Videojuegos favoritos"
+msgstr "Favorite videogames"
+
+#: app/templates/usuario/mi_perfil.html:50
+#: app/templates/usuario/ver_perfil.html:58
+msgid "Lenguajes de programación que conoce"
+msgstr "Known programming languages"
+
+#: app/templates/usuario/mi_perfil.html:59
+#: app/templates/usuario/ver_perfil.html:67
+msgid "Ver publicaciones"
+msgstr "See publications"
+
+#: app/templates/usuario/mi_perfil.html:60
+#: app/templates/usuario/ver_perfil.html:68
+msgid "Ocultar publicaciones"
+msgstr "Hide publications"
+
+#: app/templates/usuario/mi_perfil.html:81
+#: app/templates/usuario/ver_perfil.html:89
+msgid "Publicado"
+msgstr "Published"
+
+#: app/templates/usuario/mi_perfil.html:81
+#: app/templates/usuario/ver_perfil.html:89
+msgid "a las"
+msgstr "at"
+
+#: app/templates/usuario/mi_perfil.html:114
+#: app/templates/usuario/ver_perfil.html:122
+msgid "Comentarios"
+msgstr "Comentaries"
+
+#: app/templates/usuario/mi_perfil.html:123
+#: app/templates/usuario/ver_perfil.html:131
+msgid "Ver publicacion"
+msgstr "See publication"
+
+#: app/templates/usuario/ver_perfil.html:20
+#, fuzzy
+msgid "Amigo"
+msgstr "Friends"
+
+#: app/templates/usuario/ver_perfil.html:22
+msgid "Chatear"
+msgstr "Chat"
+
+#: app/templates/usuario/ver_perfil.html:23
+msgid "Eliminar Amistad"
+msgstr "Delete friendship"
