@@ -7,7 +7,7 @@ class Config:
     """
     Clase de principal configuracion de flask
     """
-    SECRET_KEY = "123"
+    SECRET_KEY = os.environ["SECRET_KEY"]
     # Configuracion de mongodb
     MONGODB_SETTINGS = {
         "db": "ati",
