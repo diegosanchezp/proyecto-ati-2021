@@ -5,20 +5,20 @@
 <div class="container mt-1 ps-3 pe-5">
     {# Publicacion Detallada #}
     <div class="row pt-1 pb-1">
-        {% include "components/mural/publicacion.html"%}
+        {% include "components/mural/publicacion.html" %}
     </div>
 
     <div class="row">
-        <p class="fw-bolder fs-5"> Realiza un Comentario </p>
+        <p class="fw-bolder fs-5"> {{_("Realiza un Comentario")}} </p>
     </div>
 
     {# Escribir comentario  #}
-    <div class="row">
-        {% include "components/mural/comentarioEscribir.html"%}
+    <div class="row mb-3">
+        {% include "components/mural/comentarioEscribir.html" %}
     </div>
 
     {# Comentarios de la publicacion #}
-    <div class="row mt-3">
+    <div class="row">
       {% with respuesta_id="respuesta_1" %}
         {% include "components/mural/comentario.html"%}
       {% endwith %}
@@ -33,12 +33,12 @@
         {% with respuesta_id="respuesta_3" %}
           {% include "components/mural/comentario.html"%}
         {% endwith %}
-
+ 
     </div>
 
     {# Boton para ver mas comentarios #}
     <div class="row mt-3">
-        <button type="button" class="btn btn-dark">Ver mas comentarios</button>
+        <button type="button" class="btn btn-dark">{{_("Ver mas comentarios")}}</button>
     </div>
 </div>
 

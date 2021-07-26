@@ -13,8 +13,8 @@ Lista de amigos
   <section class="d-flex flex-column">
     <p>Aaron Morillo</p>
     <div class="d-flex flex-row gap-2">
-      <a href="{{ url_for('chat_blueprint.index') }}"><button type="button" class="btn btn-dark">Chatear</button></a>
-      <a class="btn btn-dark" href="{{ url_for("usuario_blueprint.ver_perfil") }}">Ver perfil</a>
+      <a href="{{ url_for('chat_blueprint.index') }}"><button type="button" class="btn btn-dark">{{_("Chatear")}}</button></a>
+      <a class="btn btn-dark" href="{{ url_for("usuario_blueprint.ver_perfil") }}">{{_("Ver perfil")}}</a>
     </div>
   </section>
   
