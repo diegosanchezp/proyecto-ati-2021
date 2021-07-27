@@ -16,6 +16,9 @@ class AbstractModel(db.Document):
     descripcion = db.StringField()
     emisor = db.ReferenceField("User")
     receptor = db.ReferenceField("User")
+    def __str__(self):
+        return f"estado={self.estado}"
+
     def transition(self, event) -> None:
         """
         Set the next state, given an event
