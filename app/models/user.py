@@ -1,10 +1,10 @@
 """
 Modelos relacionados con usuarios
 """
-
+from flask_babel import lazy_gettext as _l
 from flask_user import UserMixin
 from app import db
-
+from app.constants import MAX_IMAGE_SIZE
 
 
 class UserNotificationsConfig(db.EmbeddedDocument):
@@ -30,6 +30,11 @@ class UserConfig(db.Document):
     publicaciones_privadas = db.BooleanField(default=False)
     notificaciones = db.EmbeddedDocumentField("UserNotificationsConfig")
 
+USUARIO_GENEROS = (
+    ("M", _l("Masculino")),
+    ("F", _l("Femenino")),
+)
+
 class User(db.Document, UserMixin):
     """
     Modelo usuario
@@ -41,11 +46,11 @@ class User(db.Document, UserMixin):
 
     # Fields pedido en los requerimientos
     nombre = db.StringField()
-    foto = db.ImageField(size=(1024, 768, True))
+    foto = db.ImageField(size=MAX_IMAGE_SIZE) # foto se guarda en la db
     email = db.EmailField()
     ci = db.IntField(unique=True)
     fecha_nacimiento = db.DateTimeField()
-    genero = db.StringField()
+    genero = db.StringField(choices=USUARIO_GENEROS)
     descripcion = db.StringField()
     color = db.StringField()
     libro = db.StringField()
@@ -53,6 +58,7 @@ class User(db.Document, UserMixin):
     video_juegos = db.ListField()
     lenguajes_programacion = db.ListField()
     config = db.ReferenceField("UserConfig")
+    amigos = db.ListField(db.ReferenceField("self"))
 
     def __init__(self, *args, **kwargs):
         """
