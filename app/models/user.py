@@ -59,6 +59,9 @@ class User(db.Document, UserMixin):
     lenguajes_programacion = db.ListField()
     config = db.ReferenceField("UserConfig")
     amigos = db.ListField(db.ReferenceField("self"))
+    meta = {
+        "cascade": True,
+    }
 
     def __init__(self, *args, **kwargs):
         """
@@ -74,6 +77,10 @@ class User(db.Document, UserMixin):
         # Create default configuration
         if self.config is None:
             self.config = UserConfig(notificaciones=UserNotificationsConfig())
+
+    def save(self, *args, **kwargs):
+        self.config.save()
+        return super().save(*args, **kwargs)
 
     def __str__(self):
         return f"username={self.username} nombre={self.nombre} ci={self.ci}"
