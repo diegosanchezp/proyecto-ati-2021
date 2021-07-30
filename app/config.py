@@ -25,7 +25,8 @@ class Config:
     USER_ENABLE_EMAIL = True      # Enable email authentication
     USER_EMAIL_SENDER_EMAIL = "noresponder@ati.com"
     USER_EMAIL_SENDER_NAME = "ATI"
-    USER_ALLOW_LOGIN_WITHOUT_CONFIRMED_EMAIL = False
+    USER_ALLOW_LOGIN_WITHOUT_CONFIRMED_EMAIL = True
+    USER_ENABLE_CONFIRM_EMAIL = False
     MAIL_SUPPRESS_SEND = True
     # Override urls
 
@@ -38,6 +39,10 @@ class Config:
     #USER_LOGIN_TEMPLATE = "usuario/login.html"
     #USER_RESET_PASSWORD_TEMPLATE = ""
     USER_REGISTER_TEMPLATE = "usuario/registro.html"
+
+    USER_AFTER_LOGIN_ENDPOINT = "mural_blueprint.index"
+    USER_AFTER_REGISTER_ENDPOINT = "mural_blueprint.index"
+    USER_AFTER_LOGOUT_ENDPOINT = "usuario_blueprint.index"
 
     # === Configuracion FlaskBabel ===
     BABEL_DEFAULT_LOCALE = "es_VE"

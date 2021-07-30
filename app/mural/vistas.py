@@ -1,7 +1,9 @@
 from flask import Blueprint, render_template
+from flask_user.decorators import login_required
 mural_blueprint = Blueprint('mural_blueprint', __name__, template_folder='templates')
 
 @mural_blueprint.route("/")
+@login_required
 def index():
     """
     Vista principal del mural
