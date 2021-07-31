@@ -43,11 +43,12 @@ class User(db.Document, UserMixin):
     # User authentication information
     username = db.StringField(unique=True)
     password = db.StringField()
+    active = db.BooleanField(db_field="is_active", default=True)
+    email = db.EmailField()
 
     # Fields pedido en los requerimientos
     nombre = db.StringField()
     foto = db.ImageField(size=MAX_IMAGE_SIZE) # foto se guarda en la db
-    email = db.EmailField()
     ci = db.IntField(unique=True)
     fecha_nacimiento = db.DateTimeField()
     genero = db.StringField(choices=USUARIO_GENEROS)
