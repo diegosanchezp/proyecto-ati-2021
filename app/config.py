@@ -31,18 +31,18 @@ class Config:
     # Override urls
 
     USER_REGISTER_URL = "/registro"
-    # USER_LOGIN_URL = ""
+    USER_LOGIN_URL = "/"
     # USER_LOGOUT_URL = ""
 
     # Override templates
 
-    #USER_LOGIN_TEMPLATE = "usuario/login.html"
+    USER_LOGIN_TEMPLATE = "usuario/login.html"
     #USER_RESET_PASSWORD_TEMPLATE = ""
     USER_REGISTER_TEMPLATE = "usuario/registro.html"
 
     USER_AFTER_LOGIN_ENDPOINT = "mural_blueprint.index"
     USER_AFTER_REGISTER_ENDPOINT = "mural_blueprint.index"
-    USER_AFTER_LOGOUT_ENDPOINT = "usuario_blueprint.index"
+    USER_AFTER_LOGOUT_ENDPOINT = "user.login"
 
     # === Configuracion FlaskBabel ===
     BABEL_DEFAULT_LOCALE = "es_VE"

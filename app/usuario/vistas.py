@@ -2,13 +2,6 @@ from flask import Blueprint, render_template
 from .forms import RegisterForm
 usuario_blueprint = Blueprint('usuario_blueprint', __name__, template_folder='templates')
 
-@usuario_blueprint.route("/")
-def index():
-    """
-    Login, vista principal
-    """
-    return render_template("usuario/login.html")
-
 @usuario_blueprint.route("/recuperar")
 def recuperar_password():
     """
