@@ -2,77 +2,77 @@
 {% block body %}
 
   <main class="d-flex flex-column align-items-center justify-content-center mx-3">
-    <h1 class="text-center my-2">Cambiar informacion de <br>Perfil</h1>
+    <h1 class="text-center my-2">{{_("Cambiar informacion de")}} <br>{{_("Perfil")}}</h1>
     <section id="main-edit-fields" class="border rounded-1 p-4">
       <form class="container">
         <div class="row">
           <div class="col mb-3">
-            <label for="nombreInput" class="form-label">Nombre y apellido</label>
+            <label for="nombreInput" class="form-label">{{_("Nombre y apellido")}}</label>
             <input type="text" class="form-control" id="nombreInput" aria-describedby="emailHelp">
           </div>
           <div class="col mb-3">
-            <label for="exampleInputEmail1" class="form-label">Correo electronico</label>
+            <label for="exampleInputEmail1" class="form-label">{{_("Correo electronico")}}</label>
             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
           </div>
         </div>
         <div class="row">
           <div class="col mb-3">
-            <label for="cedulaInput" class="form-label">Número cedula de identidad</label>
+            <label for="cedulaInput" class="form-label">{{_("Número cedula de identidad")}}</label>
             <input type="number" class="form-control" id="cedulaInput" aria-describedby="cedulaHelp">
           </div>
           <div class="col mb-3">
-            <label for="gender" class="form-label">Género</label>
+            <label for="gender" class="form-label">{{_("Género")}}</label>
             <select id="gender" class="form-select" aria-label="gender">
-              <option value="g">Masculino</option>
-              <option value="g">Femenino</option>
+              <option value="g">{{_("Masculino")}}</option>
+              <option value="g">{{_("Femenino")}}</option>
             </select>
           </div>
         </div>
         <div class="row">
           <div class="col mb-3">
-            <label for="colorInput" class="form-label">Color Favorito</label>
+            <label for="colorInput" class="form-label">{{_("Color Favorito")}}</label>
             <input type="text" class="form-control" id="colorInput" aria-describedby="colorHelp">
           </div>
           <div class="col mb-3">
-            <label for="librosInput" class="form-label">Libros Favoritos</label>
+            <label for="librosInput" class="form-label">{{_("Libros Favoritos")}}</label>
             <input type="text" class="form-control" id="librosInput" aria-describedby="librosHelp">
           </div>
         </div>
         <div class="row">
           <div class="col mb-3">
-            <label for="musicaInput" class="form-label">Musica Favorita</label>
+            <label for="musicaInput" class="form-label">{{_("Musica Favorita")}}</label>
             <input type="text" class="form-control" id="musicaInput" aria-describedby="musicaHelp">
           </div>
           <div class="col mb-3">
-            <label for="videoInput" class="form-label">Videojuegos Favoritos</label>
+            <label for="videoInput" class="form-label">{{_("Videojuegos Favoritos")}}</label>
             <input type="text" class="form-control" id="videoInput" aria-describedby="videoHelp">
           </div>
         </div>
         <div class="row">
           <div class="col mb-3">
-            <label for="lenguajesInput" class="form-label">Lenguajes</label>
+            <label for="lenguajesInput" class="form-label">{{_("Lenguajes")}}</label>
             <input type="text" class="form-control" id="lenguajesInput" aria-describedby="lenguajesHelp">
           </div>
         </div>
         <div class="row">
           <div class="col mb-3">
-            <label for="descripcionInput" class="form-label">Descripcion</label>
+            <label for="descripcionInput" class="form-label">{{_("Descripcion")}}</label>
             <textarea type="text" class="form-control pb-5" id="descripcionInput" aria-describedby="descripcionHelp"></textarea>
           </div>
         </div>
         <div class="row pb-3 gap-3">
           <div class="col d-flex justify-content-center">
-            <button type="submit" class="btn bg-primary text-white px-4">Guardar Cambios</button>
+            <button type="submit" class="btn bg-primary text-white px-4">{{_("Guardar Cambios")}}</button>
           </div>
           <div class="col d-flex justify-content-center">
-            <button type="submit" class="btn bg-danger text-white px-4">Cancelar</button>
+            <button type="submit" class="btn bg-danger text-white px-4">{{_("Cancelar")}}</button>
           </div>
         </div>
       </form>
     </section>  
     <section id="social-media-actions" class="border rounded-1 p-4 my-4 ">
       <div>
-        <label for="formFileInput" class="form-label d-flex mx-3">Cambiar imagen</label>
+        <label for="formFileInput" class="form-label d-flex mx-3">{{_("Cambiar imagen")}}</label>
       </div>
       <div class="d-flex justify-content-center mb-2">
         <img class="img-fluid rounded" src="https://sm.ign.com/t/ign_es/game/a/among-us/among-us_crsm.200.jpg">

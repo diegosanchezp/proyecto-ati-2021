@@ -4,7 +4,7 @@
 {% block base_body %}
 
   <main class="d-flex flex-column align-items-center justify-content-center mx-4">
-    <h1 class="text-center my-2">Registrate en el sistema</h1>
+    <h1 class="text-center my-2">{{_("Registrate en el sistema")}}</h1>
     <section id="main-register-actions" class="border rounded-1 p-4">
       <form class="container" method="POST" action="">
         {{ form.hidden_tag() }}
@@ -46,20 +46,20 @@
           </div>
         </div>
         <div class="d-flex flex-row justify-content-center">
-          <button type="submit" class="btn btn-primary px-4">Registrar</button>
+          <button type="submit" class="btn btn-primary px-4">{{_("Registrar")}}</button>
         </div>
       </form>
 
       <section id="alternativas" class="d-flex flex-row justify-content-center mt-4">
         <div class="d-flex flex-column align-items-center">
-          <p>¿ Ya tienes cuenta ?</p>
-          <a class="d-block" href="{{ url_for("user.login") }}">Ingresa</a>
+          <p>{{_("¿ Ya tienes cuenta ?")}}</p>
+          <a class="d-block" href="{{ url_for("user.login") }}">{{_("Ingresa")}}</a>
         </div>
       </section>
     </section>
 
     <section id="social-media-actions" class="my-4">
-      <h2 class="text-center">Registrate con tu cuenta de Twitter o Facebook</h2>
+      <h2 class="text-center">{{_("Registrate con tu cuenta de Twitter o Facebook")}}</h2>
       <div class="d-flex flex-row justify-content-center gap-4">
         <button type="button" class="btn btn-secondary">
           <div class="d-flex flex-row">

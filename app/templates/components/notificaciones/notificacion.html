@@ -12,19 +12,19 @@
         {% if conectado %}
         <a href="{{ url_for('usuario_blueprint.ver_perfil')}}" 
            class="btn btn-dark ms-auto align-self-center"
-           role="button">Ver Perfil</a>
+           role="button">{{_("Ver Perfil")}}</a>
         {% endif %}
 
         {% if publicacion %}
         <a href="{{ url_for('mural_blueprint.publicaciones')}}" 
            class="btn btn-dark ms-auto align-self-center"
-           role="button">Ver publicacion</a>
+           role="button">{{_("Ver publicacion")}}</a>
         {% endif %}
 
         {% if chat %}
         <a href="{{ url_for('chat_blueprint.index')}}" 
            class="btn btn-dark ms-auto align-self-center"
-           role="button">Ver chat</a>
+           role="button">{{_("Ver chat")}}</a>
         {% endif %}
 
     </div>

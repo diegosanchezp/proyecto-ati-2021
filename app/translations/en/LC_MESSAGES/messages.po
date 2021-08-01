@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-07-22 01:26+0000\n"
+"POT-Creation-Date: 2021-07-26 04:14+0000\n"
 "PO-Revision-Date: 2021-07-16 14:19-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -26,6 +26,16 @@ msgstr "Chat with"
 msgid "Hoy"
 msgstr "Today"
 
+#: app/templates/components/badge-amigo.html:14
+#: app/templates/components/badge-resulado.html:7
+#: app/templates/components/mural/amigo-lista.html:17
+msgid "Ver perfil"
+msgstr "See my profile"
+
+#: app/templates/components/badge-resulado.html:9
+msgid "Agregar como amigo"
+msgstr "Add friend"
+
 #: app/templates/components/sidebar.html:36
 msgid "Cerrar Sesión"
 msgstr "Close session"
@@ -41,6 +51,60 @@ msgstr "Friends"
 #: app/templates/components/sidebar.html:54
 msgid "Ver todos mis amigos"
 msgstr "See all my friends"
+
+#: app/templates/components/mural/amigo-lista.html:16
+#: app/templates/usuario/ver_perfil.html:22
+msgid "Chatear"
+msgstr "Chat"
+
+#: app/templates/components/mural/comentario.html:27
+#: app/templates/components/mural/comentarioResponder.html:20
+msgid "Responder"
+msgstr "Answer"
+
+#: app/templates/components/mural/comentarioEscribir.html:16
+msgid "Comentar"
+msgstr "Comentaries"
+
+#: app/templates/components/mural/comentarioEscribir.html:17
+#: app/templates/components/mural/comentarioResponder.html:21
+#: app/templates/mural/create_publication.html:51
+#: app/templates/usuario/editar_password.html:25
+#: app/templates/usuario/editar_perfil.html:68
+msgid "Cancelar"
+msgstr "Cancel"
+
+#: app/templates/components/mural/comentarioResponder.html:13
+msgid "Estas respondiendo al comentario de Cesar"
+msgstr "You're answering Cesar's comment"
+
+#: app/templates/components/mural/publicacion.html:49
+msgid "Comentarios 10"
+msgstr "Comentaries"
+
+#: app/templates/components/mural/publicacion.html:60
+#: app/templates/components/notificaciones/notificacion.html:21
+#: app/templates/usuario/mi_perfil.html:123
+#: app/templates/usuario/ver_perfil.html:131
+msgid "Ver publicacion"
+msgstr "See publication"
+
+#: app/templates/components/mural/searchBar.html:6
+#: app/templates/usuario/ver_perfil.html:20
+msgid "Amigo"
+msgstr "Friends"
+
+#: app/templates/components/mural/searchBar.html:7
+msgid "Desconocido"
+msgstr "Stranger"
+
+#: app/templates/components/notificaciones/notificacion.html:15
+msgid "Ver Perfil"
+msgstr "See my profile"
+
+#: app/templates/components/notificaciones/notificacion.html:27
+msgid "Ver chat"
+msgstr "View chat"
 
 #: app/templates/mural/create_publication.html:6
 msgid "Crea tu publicacion"
@@ -75,13 +139,190 @@ msgstr "Private"
 msgid "Publicar"
 msgstr "Publish"
 
-#: app/templates/mural/create_publication.html:51
-msgid "Cancelar"
-msgstr "Cancel"
+#: app/templates/mural/mural.html:12
+msgid "Publicaciones de Personas"
+msgstr "Peoples publications"
+
+#: app/templates/mural/muralDetallePublicacion.html:12
+msgid "Realiza un Comentario"
+msgstr "Make a comment"
+
+#: app/templates/mural/muralDetallePublicacion.html:41
+msgid "Ver mas comentarios"
+msgstr "Comentaries"
+
+#: app/templates/mural/resultados_busqueda.html:9
+msgid "Encuentra personas"
+msgstr "Find people"
+
+#: app/templates/usuario/configuracion.html:7
+msgid "¿Notificar amigos conectados por correo?"
+msgstr "Recieve an email when your friends are connected?"
+
+#: app/templates/usuario/configuracion.html:18
+msgid "¿Notificar comentarios por correo?"
+msgstr "Recieve an email when someone comments?"
+
+#: app/templates/usuario/configuracion.html:29
+msgid "¿Notificar mensajes de chat por correo?"
+msgstr "Recieve an email when someone sent you a message?"
+
+#: app/templates/usuario/configuracion.html:40
+msgid "Color del perfil"
+msgstr "See my profile"
+
+#: app/templates/usuario/configuracion.html:49
+msgid "Color del muro"
+msgstr "Color of your wall"
+
+#: app/templates/usuario/configuracion.html:58
+msgid "Lenguaje"
+msgstr "Language"
+
+#: app/templates/usuario/configuracion.html:71
+msgid "Configuracion avanzada"
+msgstr "Advanced configuration"
+
+#: app/templates/usuario/configuracion.html:77
+msgid "Editar Perfil"
+msgstr "See my profile"
+
+#: app/templates/usuario/configuracion.html:82
+msgid "Editar Contraseña"
+msgstr "Edit Password"
+
+#: app/templates/usuario/configuracion.html:87
+msgid "Editar Privacidad"
+msgstr "Edit Privacy"
+
+#: app/templates/usuario/editar_password.html:5
+msgid "Cambio de contraseña"
+msgstr "Change password"
+
+#: app/templates/usuario/editar_password.html:9
+msgid "Antigua Contraseña"
+msgstr "Old password"
+
+#: app/templates/usuario/editar_password.html:13
+msgid "Nueva Contraseña"
+msgstr "New password"
+
+#: app/templates/usuario/editar_password.html:17
+msgid "Repetir Contraseña"
+msgstr "Repeat password"
+
+#: app/templates/usuario/editar_password.html:22
+#: app/templates/usuario/editar_perfil.html:65
+msgid "Guardar Cambios"
+msgstr "Save changes"
+
+#: app/templates/usuario/editar_perfil.html:5
+msgid "Cambiar informacion de"
+msgstr "Change information "
+
+#: app/templates/usuario/editar_perfil.html:5
+msgid "Perfil"
+msgstr "See my profile"
+
+#: app/templates/usuario/editar_perfil.html:10
+msgid "Nombre y apellido"
+msgstr "Name and lastname"
+
+#: app/templates/usuario/editar_perfil.html:14
+msgid "Correo electronico"
+msgstr "Email"
+
+#: app/templates/usuario/editar_perfil.html:20
+msgid "Número cedula de identidad"
+msgstr "ID number"
+
+#: app/templates/usuario/editar_perfil.html:24
+#: app/templates/usuario/mi_perfil.html:34
+#: app/templates/usuario/ver_perfil.html:42
+msgid "Género"
+msgstr "Genre"
+
+#: app/templates/usuario/editar_perfil.html:26
+#: app/templates/usuario/registro.html:33
+msgid "Masculino"
+msgstr "Masculine"
+
+#: app/templates/usuario/editar_perfil.html:27
+#: app/templates/usuario/registro.html:34
+msgid "Femenino"
+msgstr "Femenine"
+
+#: app/templates/usuario/editar_perfil.html:33
+msgid "Color Favorito"
+msgstr "Favorite color"
+
+#: app/templates/usuario/editar_perfil.html:37
+msgid "Libros Favoritos"
+msgstr "Favorite videogames"
+
+#: app/templates/usuario/editar_perfil.html:43
+msgid "Musica Favorita"
+msgstr "Favorite music"
+
+#: app/templates/usuario/editar_perfil.html:47
+msgid "Videojuegos Favoritos"
+msgstr "Favorite videogames"
+
+#: app/templates/usuario/editar_perfil.html:53
+msgid "Lenguajes"
+msgstr "Languages"
+
+#: app/templates/usuario/editar_perfil.html:59
+msgid "Descripcion"
+msgstr "Personal description"
+
+#: app/templates/usuario/editar_perfil.html:75
+msgid "Cambiar imagen"
+msgstr "Change image"
+
+#: app/templates/usuario/editar_privacidad.html:7
+msgid "¿Cambiar a un perfil privado?"
+msgstr "Change to a private profile?"
+
+#: app/templates/usuario/editar_privacidad.html:17
+msgid "¿Publicaciones por defecto privadas?"
+msgstr "Change default publications to private?"
+
+#: app/templates/usuario/login.html:4
+msgid "Ingresa al sistema"
+msgstr "Log in to the system"
+
+#: app/templates/usuario/login.html:14
+msgid "Contraseña"
+msgstr "Password"
+
+#: app/templates/usuario/login.html:18
+msgid "Ingresar"
+msgstr "Log in"
+
+#: app/templates/usuario/login.html:24
+msgid "¿ No tienes cuenta ?"
+msgstr "You don't have an account?"
+
+#: app/templates/usuario/login.html:25
+msgid "Registrate"
+msgstr "Register"
+
+#: app/templates/usuario/login.html:29
+msgid "¿ Olvidaste tu contraseña ?"
+msgstr "Forgot your password?"
+
+#: app/templates/usuario/login.html:30
+#: app/templates/usuario/recuperar_password.html:23
+msgid "Recuperar"
+msgstr "Recover"
+
+#: app/templates/usuario/login.html:37
+msgid "Ingresa con tu cuenta de Twitter o Facebook"
+msgstr "Log in with your Twitter or Facebook account"
 
 #: app/templates/usuario/mi_perfil.html:15
 #: app/templates/usuario/ver_perfil.html:21
-#, fuzzy
 msgid "Amigos:"
 msgstr "Friends"
 
@@ -99,11 +340,6 @@ msgstr "ID"
 #: app/templates/usuario/ver_perfil.html:38
 msgid "Fecha de nacimiento"
 msgstr "Date of birth"
-
-#: app/templates/usuario/mi_perfil.html:34
-#: app/templates/usuario/ver_perfil.html:42
-msgid "Género"
-msgstr "Genre"
 
 #: app/templates/usuario/mi_perfil.html:38
 #: app/templates/usuario/ver_perfil.html:46
@@ -150,20 +386,93 @@ msgstr "at"
 msgid "Comentarios"
 msgstr "Comentaries"
 
-#: app/templates/usuario/mi_perfil.html:123
-#: app/templates/usuario/ver_perfil.html:131
-msgid "Ver publicacion"
-msgstr "See publication"
-
-#: app/templates/usuario/ver_perfil.html:20
-#, fuzzy
-msgid "Amigo"
+#: app/templates/usuario/mis_amigos.html:6
+msgid "Amigos: 2"
 msgstr "Friends"
 
-#: app/templates/usuario/ver_perfil.html:22
-msgid "Chatear"
-msgstr "Chat"
+#: app/templates/usuario/mis_amigos.html:7
+msgid "Amigos de Diego Sanchez"
+msgstr "Friends of Diego Sanchez"
+
+#: app/templates/usuario/recuperar_pass_token_enviado.html:6
+#: app/templates/usuario/recuperar_password.html:5
+msgid "Recupera tu contraseña"
+msgstr "Recover password"
+
+#: app/templates/usuario/recuperar_pass_token_enviado.html:14
+#: app/templates/usuario/recuperar_password.html:11
+msgid "Regresar"
+msgstr "Go back"
+
+#: app/templates/usuario/recuperar_pass_token_enviado.html:18
+msgid "Se envio un token para recuperar tu cuenta a la dirección de email"
+msgstr "A token has been sent to your Email to recover your account"
+
+#: app/templates/usuario/recuperar_pass_token_enviado.html:19
+msgid "¿ No ves el email ?"
+msgstr "Can't see the email?"
+
+#: app/templates/usuario/recuperar_pass_token_enviado.html:22
+msgid "Enviar de nuevo"
+msgstr "Sent again"
+
+#: app/templates/usuario/recuperar_password.html:15
+msgid "Recupera tu contraseña ingresando el email de tu cuenta."
+msgstr "Recover your password by entering your account email"
+
+#: app/templates/usuario/registro.html:6
+msgid "Registrate en el sistema"
+msgstr "Register into the app"
+
+#: app/templates/usuario/registro.html:11
+msgid "Nombre *"
+msgstr "Name *"
+
+#: app/templates/usuario/registro.html:15
+msgid "Número cedula de identidad *"
+msgstr "ID number"
+
+#: app/templates/usuario/registro.html:25
+msgid "Fecha de nacimiento *"
+msgstr "Date of birth"
+
+#: app/templates/usuario/registro.html:31
+msgid "Género *"
+msgstr "Genre"
+
+#: app/templates/usuario/registro.html:39
+msgid "Registrar"
+msgstr "Register"
+
+#: app/templates/usuario/registro.html:45
+msgid "¿ Ya tienes cuenta ?"
+msgstr "Already have an account?"
+
+#: app/templates/usuario/registro.html:46
+msgid "Ingresa"
+msgstr "Log In"
+
+#: app/templates/usuario/registro.html:52
+msgid "Registrate con tu cuenta de Twitter o Facebook"
+msgstr "Register with your Twitter of Facebook account"
+
+#: app/templates/usuario/usuario.html:3
+msgid "Mi cuenta"
+msgstr "My Account"
 
 #: app/templates/usuario/ver_perfil.html:23
 msgid "Eliminar Amistad"
 msgstr "Delete friendship"
+
+#~ msgid "Estas respondiendo al comentario de %(username)"
+#~ msgstr "You're responding to %(username) comment"
+
+#~ msgid "Comentarios %(comment_number)"
+#~ msgstr "Comments  %(comment_number)"
+
+#~ msgid "Amigos: %(nro_amigos)"
+#~ msgstr "Friends: %(nro_amigos)"
+
+#~ msgid "Amigos de %(usuario_nombre)"
+#~ msgstr "Friends of %(usuario_nombre)"
+

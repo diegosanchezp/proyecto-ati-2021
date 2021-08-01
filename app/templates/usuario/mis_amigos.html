@@ -3,8 +3,8 @@
 <div class="d-flex flex-column justify-content-center align-items-center">
     <img id="sidebar-profile-icon" src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/person-circle.svg")}}" alt="icono de perfil">
     <p class="mt-2"><b>Diego Sánchez</b></p>
-    <div class="badge bg-primary">Amigos: 2</div>
-    <h2 class="m-4">Amigos de Diego Sánchez</h2>
+    <div class="badge bg-primary">{{_("Amigos")}}: 2</div>
+    <h2 class="m-4">{{ _("Amigos de") }} Diego Sanchez</h2>
     {# Friend list #}
     <ul class="friend-list">
       <li>
