@@ -13,29 +13,30 @@
   {# Render the input #}
 
   {% if field.type != "SelectField" %}
-    {% set ariaAttr = [field.id, "Help"]|join("")  %}
+    {% set ariaAttr = field.id ~ "Help"  %}
     {% do kwargs.update({"aria-describedby": ariaAttr})  %}
-    {{ field(
-        class_='form-control',
-        **kwargs
-       )
-    }}
+    {% set fieldClass = 'form-control' %}
   {% else %}
     {% do kwargs.update({"aria-label": field.id})  %}
-    {{ field(
-        class_='form-select',
-        **kwargs
-       )
-    }}
+    {% set fieldClass = 'form-select' %}
   {% endif %}
 
-  {# TODO: Use for errors
+  {{ field(
+      class_= fieldClass if not field.errors else fieldClass ~ " is-invalid",
+      **kwargs
+     )
+  }}
+
+  {#
+    Using
     https://getbootstrap.com/docs/5.0/forms/validation/#server-side
+
+    To display errors
   #}
 
   {% if field.errors %}
     {% for e in field.errors %}
-      <p class="help-block">{{ e }}</p>
+      <span id="{{field.id ~ "Feedback" }}" class="invalid-feedback">{{ e }}</span>
     {% endfor %}
   {% endif %}
 {%- endmacro %}
