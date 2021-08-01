@@ -11,26 +11,26 @@
         {{ form.csrf_token }}
 
         <div class="row">
-          <div class="col col-md-auto mb-3">
+          <div class="col">
             {{ render_field(form.nombre) }}
           </div>
-          <div class="col col-md-auto mb-3">
+          <div class="col">
             {{ render_field(form.ci) }}
           </div>
         </div>
 
         <div class="row">
-          <div class="col col-md-auto mb-3">
+          <div class="col">
             {% set user_field = form.username if user_manager.USER_ENABLE_USERNAME else form.email %}
             {{ render_field(user_field) }}
           </div>
-          <div class="col mb-3">
+          <div class="col">
             {{ render_field(form.fecha_nacimiento) }}
           </div>
         </div>
 
         <div class="row">
-          <div class="col col-md-auto mb-3">
+          <div class="col">
             {{ render_field(form.genero) }}
           </div>
         </div>
