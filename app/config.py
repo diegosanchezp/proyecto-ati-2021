@@ -31,6 +31,7 @@ class Config:
     #USER_ENABLE_CONFIRM_EMAIL = False
     MAIL_SUPPRESS_SEND = False
     MAIL_PORT = 8025
+    MAIL_SERVER = "email_server"
 
     # Override urls
 

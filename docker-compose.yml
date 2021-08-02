@@ -16,7 +16,7 @@ services:
     container_name: email_server
     ports:
       - '8025:8025'
-    entrypoint: ["python", "-m", "smtpd", "--nosetuid", "--class", "DebuggingServer"]
+    entrypoint: ["python3", "-m", "smtpd", "--nosetuid", "--class", "DebuggingServer", "email_server:8025"]
   flask:
     stdin_open: true
     tty: true
@@ -35,3 +35,4 @@ services:
       - ./app:/app/app
       - ./package.json:/app/package.json
     entrypoint: ["python3","run.py"]
+
