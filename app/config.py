@@ -22,12 +22,17 @@ class Config:
     USER_APP_NAME = "ATI Social"      # Shown in and email templates and page footers
     USER_ENABLE_USERNAME = False    # Disable username authentication
     USER_REQUIRE_RETYPE_PASSWORD = True    # Se le indicca al usuario ingresar la contraseña de nuevo
+
+    # - E-mail settings
     USER_ENABLE_EMAIL = True      # Enable email authentication
     USER_EMAIL_SENDER_EMAIL = "noresponder@ati.com"
     USER_EMAIL_SENDER_NAME = "ATI"
     USER_ALLOW_LOGIN_WITHOUT_CONFIRMED_EMAIL = True
     USER_ENABLE_CONFIRM_EMAIL = False
-    MAIL_SUPPRESS_SEND = True
+    MAIL_SUPPRESS_SEND = False
+    MAIL_PORT = 8025
+    MAIL_SERVER = "email_server"
+
     # Override urls
 
     USER_REGISTER_URL = "/registro"
