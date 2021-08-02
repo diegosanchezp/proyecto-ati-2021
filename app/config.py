@@ -28,7 +28,7 @@ class Config:
     USER_EMAIL_SENDER_EMAIL = "noresponder@ati.com"
     USER_EMAIL_SENDER_NAME = "ATI"
     USER_ALLOW_LOGIN_WITHOUT_CONFIRMED_EMAIL = True
-    #USER_ENABLE_CONFIRM_EMAIL = False
+    USER_ENABLE_CONFIRM_EMAIL = False
     MAIL_SUPPRESS_SEND = False
     MAIL_PORT = 8025
     MAIL_SERVER = "email_server"
