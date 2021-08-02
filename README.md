@@ -14,8 +14,7 @@ cp .env.example .env
 Ejecute los siguientes comandos para construir y levantar los contenedores de docker, estos son pasos obligatorios
 
 ```sh
-chmod +x build.sh
-./build.sh
+chmod +x build.sh && ./build.sh
 ```
 
 ## Dependencias de node (npm)
