@@ -45,6 +45,7 @@ class User(db.Document, UserMixin):
     password = db.StringField()
     active = db.BooleanField(db_field="is_active", default=True)
     email = db.EmailField()
+    email_confirmed_at = db.DateTimeField(default=None)
 
     # Fields pedido en los requerimientos
     nombre = db.StringField()

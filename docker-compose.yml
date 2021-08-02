@@ -8,10 +8,18 @@ services:
       - ./data:/data/db
     ports:
       - '27017:27017'
-  flask:
+  email:
     stdin_open: true
     tty: true
     build: ./
+    image: webapp:1
+    container_name: email_server
+    ports:
+      - '8025:8025'
+    entrypoint: ["python", "-m", "smtpd", "--nosetuid", "--class", "DebuggingServer"]
+  flask:
+    stdin_open: true
+    tty: true
     image: webapp:1
     container_name: flask
     restart: always
@@ -19,9 +27,11 @@ services:
       - APP_NAME=./run.py
       - FLASK_ENV=development
     depends_on:
+      - email
       - mongodb_contenedor
     ports:
       - '5000:5000'
     volumes:
       - ./app:/app/app
       - ./package.json:/app/package.json
+    entrypoint: ["python3","run.py"]
