@@ -1,7 +1,7 @@
 from wtforms import validators, fields
 from wtforms.fields import html5
 from flask_babel import _
-from app.models.user import USUARIO_GENEROS
+from app.models.user import User, USUARIO_GENEROS
 
 from flask_user.forms import (
     RegisterForm as CoreRegisterForm,
@@ -25,6 +25,11 @@ class RegisterForm(CoreRegisterForm):
         validators=[validators.InputRequired(message=_("Género requerido"))],
         choices=USUARIO_GENEROS
     )
+
+    def populate_obj(self, obj):
+        super().populate_obj(obj)
+        if isinstance(obj, User):
+            obj.set_username_from_nombre()
 
 class LoginForm(CoreLoginForm):
     #Creo que no hace falta customizarlo
