@@ -33,22 +33,25 @@ class Config:
     MAIL_PORT = 8025
     MAIL_SERVER = "email_server"
 
-    # Override urls
+    # - Override urls
 
     USER_REGISTER_URL = "/registro"
     USER_LOGIN_URL = "/"
+    USER_FORGOT_PASSWORD_URL = "/recuperar"
+
     # USER_LOGOUT_URL = ""
 
-    # Override templates
+    # - Override templates
 
     USER_LOGIN_TEMPLATE = "usuario/login.html"
-    #USER_RESET_PASSWORD_TEMPLATE = ""
+    USER_FORGOT_PASSWORD_TEMPLATE = "usuario/recuperar_password.html"
     USER_REGISTER_TEMPLATE = "usuario/registro.html"
+    #USER_RESET_PASSWORD_TEMPLATE = ""
 
     USER_AFTER_LOGIN_ENDPOINT = "mural_blueprint.index"
-    USER_AFTER_REGISTER_ENDPOINT = "mural_blueprint.index"
     USER_AFTER_LOGOUT_ENDPOINT = "user.login"
-
+    USER_AFTER_REGISTER_ENDPOINT = "mural_blueprint.index"
+    USER_AFTER_FORGOT_PASSWORD_ENDPOINT = "usuario_blueprint.recuperar_token"
     # === Configuracion FlaskBabel ===
     BABEL_DEFAULT_LOCALE = "es_VE"
 
