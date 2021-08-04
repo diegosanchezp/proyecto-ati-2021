@@ -4,7 +4,8 @@
   "description": "Proyecto ATI",
   "scripts": {
     "build": "sass --load-path=node_modules --style=expanded --update --source-map --source-map-urls relative app/static_src/:app/static/",
-    "dev-css": "sass --watch --load-path=node_modules --style=expanded --update --source-map --source-map-urls relative app/static_src/:app/static/"
+    "dev-css": "sass --watch --load-path=node_modules --style=expanded --update --source-map --source-map-urls relative app/static_src/:app/static/",
+    "email-server": "python -m smtpd --nosetuid --class DebuggingServer"
   },
   "repository": {
     "type": "git",
