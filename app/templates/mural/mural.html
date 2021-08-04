@@ -8,6 +8,8 @@
     </div>
 
     <div class="row">
+        {# Renderizar mensajes flash #}
+        {% include "components/flash_messages.html" %}
         {# AGREGAR TITULO DINAMICAMENTE #}
         <h1 class="d-flex justify-content-center"> {{_("Publicaciones de Personas")}} </h1>
         {% include 'components/mural/publicacion.html' %}
