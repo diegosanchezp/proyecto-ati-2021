@@ -72,13 +72,16 @@ class User(db.Document, UserMixin):
 
         super().__init__(*args, **kwargs)
 
-        # Create username from nombre
-        if self.username is None and self.nombre is not None:
-            self.username = self.nombre.lower().replace(" ", "_")
+        self.set_username_from_nombre()
 
         # Create default configuration
         if self.config is None:
             self.config = UserConfig(notificaciones=UserNotificationsConfig())
+
+    def set_username_from_nombre(self):
+        """ Create username from nombre """
+        if self.username is None and self.nombre is not None:
+            self.username = self.nombre.lower().replace(" ", "_")
 
     def save(self, *args, **kwargs):
         self.config.save()
