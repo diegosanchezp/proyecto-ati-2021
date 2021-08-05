@@ -1,5 +1,4 @@
 from flask import Blueprint, render_template
-from .forms import RegisterForm
 usuario_blueprint = Blueprint('usuario_blueprint', __name__, template_folder='templates')
 
 @usuario_blueprint.route("/recuperar")
@@ -40,7 +39,7 @@ def editar_privacidad():
 
     return render_template("usuario/editar_privacidad.html")
 
-@usuario_blueprint.route("/editar-perfil")
+@usuario_blueprint.route("/editar-perfil-pers")
 def editar_perfil():
     """
     Vista de editar perfil

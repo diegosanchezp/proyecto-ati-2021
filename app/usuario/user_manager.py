@@ -2,6 +2,7 @@ from flask_user import UserManager
 from app.usuario.forms import (
     RegisterForm as CustomRegisterFormClass,
     LoginForm as CustomLoginFormClass,
+    EditUserProfileForm as CustomEditUserProfileFormClass
 )
 class CustomUserManager(UserManager):
     """
@@ -14,5 +15,6 @@ class CustomUserManager(UserManager):
         # Configure customized forms
         self.RegisterFormClass = CustomRegisterFormClass
         self.LoginFormClass = CustomLoginFormClass
+        self.EditUserProfileFormClass = CustomEditUserProfileFormClass
         # NB: assign:  xyz_form = XyzForm   -- the class!
         #   (and not:  xyz_form = XyzForm() -- the instance!)

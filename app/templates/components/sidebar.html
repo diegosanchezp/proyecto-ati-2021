@@ -25,7 +25,7 @@ Contexto requerido
 
     <div id="sidebar-profile-info" class="d-flex flex-column justify-content-center align-items-center">
       <img id="sidebar-profile-icon" src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/person-circle.svg")}}" alt="icono de perfil">
-      <p class="text-center">Diego Sánchez</p>
+      <p class="text-center">{{ current_user.nombre }}</p>
     </div>
     <a href="{{ url_for("usuario_blueprint.configuracion") }}">
       <img src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/gear.svg")}}" class="sidebar-icon-size" alt="icono configuracion">

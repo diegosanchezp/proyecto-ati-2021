@@ -38,15 +38,18 @@ class Config:
     USER_REGISTER_URL = "/registro"
     USER_LOGIN_URL = "/"
     # USER_LOGOUT_URL = ""
+    USER_EDIT_USER_PROFILE_URL = "/editar-perfil"
 
     # Override templates
 
     USER_LOGIN_TEMPLATE = "usuario/login.html"
     #USER_RESET_PASSWORD_TEMPLATE = ""
     USER_REGISTER_TEMPLATE = "usuario/registro.html"
+    USER_EDIT_USER_PROFILE_TEMPLATE = "usuario/editar_perfil.html" 
 
     USER_AFTER_LOGIN_ENDPOINT = "mural_blueprint.index"
     USER_AFTER_REGISTER_ENDPOINT = "mural_blueprint.index"
+    USER_AFTER_EDIT_USER_PROFILE_ENDPOINT = "user.edit_user_profile"
     USER_AFTER_LOGOUT_ENDPOINT = "user.login"
 
     # === Configuracion FlaskBabel ===

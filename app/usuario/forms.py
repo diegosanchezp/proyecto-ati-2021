@@ -1,11 +1,14 @@
-from wtforms import validators, fields
-from wtforms.fields import html5
+from wtforms import validators, fields, widgets
+from wtforms.fields import html5 as html5_fields
+from wtforms.widgets import html5 as html5_widgets
 from flask_babel import _
 from app.models.user import USUARIO_GENEROS
+from app.usuario.custom_fields import StringListField
 
 from flask_user.forms import (
     RegisterForm as CoreRegisterForm,
     LoginForm as CoreLoginForm,
+    EditUserProfileForm as CoreEditUserProfileForm
 )
 
 class RegisterForm(CoreRegisterForm):
@@ -13,11 +16,11 @@ class RegisterForm(CoreRegisterForm):
         label=_("Nombre"),
         validators=[validators.InputRequired(message=_("Nombre Requirido"))]
     )
-    ci = html5.IntegerField(label=_("Número cédula de identidad"),
+    ci = html5_fields.IntegerField(label=_("Cédula de identidad"),
         validators=[validators.InputRequired(message=_("Cédula requerida"))]
     )
 
-    fecha_nacimiento = html5.DateField(label=_("Fecha de nacimiento"),
+    fecha_nacimiento = html5_fields.DateField(label=_("Fecha de nacimiento"),
         validators=[validators.InputRequired(message=_("Fecha de nacimiento requerida"))]
     )
 
@@ -27,5 +30,64 @@ class RegisterForm(CoreRegisterForm):
     )
 
 class LoginForm(CoreLoginForm):
-    #Creo que no hace falta customizarlo
-    pass
+    """Customized user login form"""
+    email = fields.StringField(_('Correo eletronico'), validators=[
+        validators.DataRequired(_('El correo electronico es un campo obligatorio')),
+        validators.Email(_('Correo electronico invalido'))
+    ])
+    password = fields.PasswordField(
+        label=_("Contraseña"), validators=[
+        validators.DataRequired(_('La contraseña es un campo obligatorio')),
+    ])
+    remember_me = fields.BooleanField(
+        label=_("Recuerdame")
+        )
+
+class EditUserProfileForm(CoreEditUserProfileForm):
+    """Customized Edit user profile form"""
+
+    first_name = fields.StringField(
+        label=_("Primer nombre")
+        )
+    last_name = fields.StringField(
+        label=_("Apellido")
+        )
+    nombre = fields.StringField(
+        label=_("Nombre"),
+         validators=[validators.DataRequired()]
+        )
+    ci = html5_fields.IntegerField(
+        label=_('Cédula de identidad'),
+        validators=[validators.DataRequired()]
+        )
+    genero = fields.SelectField(
+        label=_("Género"),
+        validators=[validators.InputRequired(message=_("Género requerido"))],
+        choices=USUARIO_GENEROS
+    )
+    email = fields.StringField(
+        label=_("Correo electrónico"),
+        render_kw={'disabled':''}
+        )
+    fecha_nacimiento = html5_fields.DateField(
+        label=_("Fecha de nacimiento")
+    )
+    descripcion = fields.TextAreaField(
+        label=_("Descripción")
+    )
+    color = fields.StringField(
+        label=_("Color favorito")
+    )
+    libro = fields.StringField(
+        label=_("Libro favorito")
+    )
+    musica = fields.StringField(
+        label=_("Música favorita")
+    )
+    video_juegos = StringListField(
+        label=_("Video Juegos favoritos")
+    )   
+    lenguajes_programacion = StringListField(
+        label=_("Lenguajes de programación conocidos")
+    )
+

@@ -57,8 +57,8 @@ class User(db.Document, UserMixin):
     color = db.StringField()
     libro = db.StringField()
     musica = db.StringField()
-    video_juegos = db.ListField()
-    lenguajes_programacion = db.ListField()
+    video_juegos = db.ListField(db.StringField())
+    lenguajes_programacion = db.ListField(db.StringField())
     config = db.ReferenceField("UserConfig")
     amigos = db.ListField(db.ReferenceField("self"))
     meta = {
@@ -80,7 +80,8 @@ class User(db.Document, UserMixin):
         if self.config is None:
             self.config = UserConfig(notificaciones=UserNotificationsConfig())
 
-    def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs): 
+    
         self.config.save()
         return super().save(*args, **kwargs)
 
