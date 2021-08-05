@@ -39,14 +39,6 @@ def editar_privacidad():
 
     return render_template("usuario/editar_privacidad.html")
 
-@usuario_blueprint.route("/editar-perfil-pers")
-def editar_perfil():
-    """
-    Vista de editar perfil
-    """
-
-    return render_template("usuario/editar_perfil.html")
-
 @usuario_blueprint.route("/configuracion")
 def configuracion():
     """

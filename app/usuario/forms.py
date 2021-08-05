@@ -30,18 +30,9 @@ class RegisterForm(CoreRegisterForm):
     )
 
 class LoginForm(CoreLoginForm):
-    """Customized user login form"""
-    email = fields.StringField(_('Correo eletronico'), validators=[
-        validators.DataRequired(_('El correo electronico es un campo obligatorio')),
-        validators.Email(_('Correo electronico invalido'))
-    ])
-    password = fields.PasswordField(
-        label=_("Contraseña"), validators=[
-        validators.DataRequired(_('La contraseña es un campo obligatorio')),
-    ])
-    remember_me = fields.BooleanField(
-        label=_("Recuerdame")
-        )
+    #No se hacen cambios
+    pass
+    
 
 class EditUserProfileForm(CoreEditUserProfileForm):
     """Customized Edit user profile form"""
