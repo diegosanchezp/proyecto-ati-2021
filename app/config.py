@@ -38,6 +38,7 @@ class Config:
     USER_REGISTER_URL = "/registro"
     USER_LOGIN_URL = "/"
     USER_FORGOT_PASSWORD_URL = "/recuperar"
+    USER_CHANGE_PASSWORD_URL = "/editar-password"
 
     # USER_LOGOUT_URL = ""
 
@@ -46,6 +47,8 @@ class Config:
     USER_LOGIN_TEMPLATE = "usuario/login.html"
     USER_FORGOT_PASSWORD_TEMPLATE = "usuario/recuperar_password.html"
     USER_REGISTER_TEMPLATE = "usuario/registro.html"
+    USER_CHANGE_PASSWORD_TEMPLATE = "usuario/editar_password.html"
+
     #USER_RESET_PASSWORD_TEMPLATE = ""
 
     USER_AFTER_LOGIN_ENDPOINT = "mural_blueprint.index"

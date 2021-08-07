@@ -24,13 +24,6 @@ def ver_perfil():
     Vista de ver perfil
     """
     return render_template("usuario/ver_perfil.html")
-@usuario_blueprint.route("/editar-password")
-def editar_password():
-    """
-    Vista de editar password
-    """
-
-    return render_template("usuario/editar_password.html")
 
 @usuario_blueprint.route("/editar-privacidad")
 def editar_privacidad():
