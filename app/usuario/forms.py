@@ -3,7 +3,7 @@ from wtforms.fields import html5 as html5_fields
 from wtforms.widgets import html5 as html5_widgets
 from flask_babel import _
 from app.models.user import USUARIO_GENEROS
-from app.usuario.custom_fields import StringListField
+from app.usuario.custom_fields import StringListField, ImageField
 
 from flask_user.forms import (
     RegisterForm as CoreRegisterForm,
@@ -55,6 +55,9 @@ class EditUserProfileForm(CoreEditUserProfileForm):
         label=_("Género"),
         validators=[validators.InputRequired(message=_("Género requerido"))],
         choices=USUARIO_GENEROS
+    )
+    foto = ImageField(
+
     )
     email = fields.StringField(
         label=_("Correo electrónico"),

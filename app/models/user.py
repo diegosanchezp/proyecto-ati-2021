@@ -49,7 +49,7 @@ class User(db.Document, UserMixin):
 
     # Fields pedido en los requerimientos
     nombre = db.StringField()
-    foto = db.ImageField(size=MAX_IMAGE_SIZE) # foto se guarda en la db
+    foto = db.FileField() # foto se guarda en la db
     ci = db.IntField(unique=True)
     fecha_nacimiento = db.DateTimeField()
     genero = db.StringField(choices=USUARIO_GENEROS)
@@ -80,8 +80,8 @@ class User(db.Document, UserMixin):
         if self.config is None:
             self.config = UserConfig(notificaciones=UserNotificationsConfig())
 
-    def save(self, *args, **kwargs): 
-    
+    def save(self, *args, **kwargs):
+
         self.config.save()
         return super().save(*args, **kwargs)
 
