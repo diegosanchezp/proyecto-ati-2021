@@ -5,6 +5,8 @@
   <main class="vh-100 d-flex flex-column align-items-center justify-content-center mx-2">
     <h1 class="text-center my-4">{{_("Recupera tu contraseña")}}</h1>
 
+    {% include "components/flash_messages.html" %}
+
     <div id="acciones-form" class="d-flex flex-column justify-content-center border rounded-1 p-4">
 
       <a class="text-decoration-none" href="{{ url_for("usuario_blueprint.recuperar_password") }}">
@@ -15,11 +17,10 @@
           </figcaption>
         </figure>
       </a>
-      <p>{{_("Se envio un token para recuperar tu cuenta a la dirección de email")}} <email> </p>
       <p>{{_("¿ No ves el email ?")}}</p>
 
       <div class="d-flex flex-row justify-content-center">
-        <button type="button" class="btn btn-primary px-4">{{_("Enviar de nuevo")}}</button>
+        <a role="button" href="{{ url_for("user.forgot_password") }}" class="btn btn-primary px-4">{{_("Enviar de nuevo")}}</a>
       </div>
 
     </div>

@@ -8,6 +8,3 @@ RUN apt-get update && \
     apt-get install -y nodejs && \
     pip3 install --no-deps -r requirements.txt && \
     npm install
-
-# run the software contained in your image
-CMD ["python3","run.py"]

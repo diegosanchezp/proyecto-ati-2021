@@ -1,5 +1,4 @@
 import flask
-from flask_user import UserManager
 from flask_mongoengine import MongoEngine
 from app.utils import register_blueprints
 from flask_babel import Babel
@@ -7,6 +6,7 @@ from flask_babel import Babel
 # Instanciar extensiones de flask
 db = MongoEngine()
 babel = Babel()
+
 def create_app(config_class="Config"):
     """ Flask application factory """
 
@@ -14,7 +14,7 @@ def create_app(config_class="Config"):
     app = flask.Flask(__name__)
     # Cargar configuracion
     app.config.from_object(f"app.config.{config_class}")
-
+    app.jinja_env.add_extension('jinja2.ext.do')
     # Setup Flask-MongoEngine
     db.init_app(app)
 
@@ -28,7 +28,8 @@ def create_app(config_class="Config"):
 
     # Setup Flask-User and specify the User data-model
     from app.models.user import User
-    user_manager = UserManager(app, db, User)
+    from app.usuario.user_manager import CustomUserManager
+    user_manager = CustomUserManager(app, db, User)
 
     # Initialize Flask-Babel
     babel.init_app(app)
