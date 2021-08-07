@@ -1,25 +1,5 @@
 from flask import Blueprint, render_template
 usuario_blueprint = Blueprint('usuario_blueprint', __name__, template_folder='templates')
-from app.models.user import User
-
-@usuario_blueprint.route("/borrar-db")
-def borrar_db():
-    """
-    Vista de recuperación de contraseña
-    """
-    User.objects().delete()
-    return "Borrada!"
-
-@usuario_blueprint.route("/ver-db")
-def ver_db():
-    """
-    Vista de recuperación de contraseña
-    """
-    user = User.objects().first()
-    print(user.foto)
-    return "Vista!"
-
-
 
 @usuario_blueprint.route("/recuperar")
 def recuperar_password():
