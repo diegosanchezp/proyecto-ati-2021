@@ -51,13 +51,13 @@ class EditUserProfileForm(CoreEditUserProfileForm):
         label=_('Cédula de identidad'),
         validators=[validators.DataRequired()]
         )
-    genero = fields.SelectField(
-        label=_("Género"),
+    genero = fields.SelectField(label=_("Género"),
         validators=[validators.InputRequired(message=_("Género requerido"))],
         choices=USUARIO_GENEROS
     )
-    foto = ImageField(
-
+    nombre_foto = fields.FileField(
+        label=_("Foto de perfil"),
+        validators=[]
     )
     email = fields.StringField(
         label=_("Correo electrónico"),
@@ -80,7 +80,7 @@ class EditUserProfileForm(CoreEditUserProfileForm):
     )
     video_juegos = StringListField(
         label=_("Video Juegos favoritos")
-    )   
+    )
     lenguajes_programacion = StringListField(
         label=_("Lenguajes de programación conocidos")
     )

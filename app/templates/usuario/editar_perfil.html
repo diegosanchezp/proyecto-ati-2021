@@ -8,81 +8,73 @@
   <main class="d-flex flex-column align-items-center justify-content-center mx-3">
     <h1 class="text-center my-2">{{_("Cambiar informacion de")}} <br>{{_("Perfil")}}</h1>
     <section id="main-edit-fields" class="border rounded-1 p-4">
-      <form action="" class="container" method="POST">
+      <form action="" enctype="multipart/form-data" class="container" method="POST">
 
         {{ form.csrf_token }}
         {{ form.hidden_tag() }}
 
         <div class="row">
-          <div class="col mb-3">
-            {{render_field(form.foto)}}
+          <div class="col-12 d-flex justify-content-center">
+            <img src="{{current_user.get_foto_url()}}" alt="foto de perfil">
+          </div>
+          <div class="col">
+            {{render_field(form.nombre_foto)}}
           </div>
         </div>
         <div class="row">
-          <div class="col mb-3">
+          <div class="col">
             {{render_field(form.nombre)}}
           </div>
-          <div class="col mb-3">
+          <div class="col">
             {{render_field(form.email)}}
           </div>
         </div>
         <div class="row">
-          <div class="col mb-3">
+          <div class="col">
             {{render_field(form.ci)}}
           </div>
-          <div class="col mb-3">
+          <div class="col">
             {{render_field(form.genero)}}
           </div>
         </div>
         <div class="row">
-          <div class="col mb-3">
+          <div class="col">
             {{render_field(form.color)}}
           </div>
-          <div class="col mb-3">
+          <div class="col">
             {{render_field(form.libro)}}
           </div>
         </div>
         <div class="row">
-          <div class="col mb-3">
+          <div class="col">
             {{render_field(form.musica)}}
           </div>
-          <div class="col mb-3">
+          <div class="col">
             {{render_field(form.fecha_nacimiento)}}
           </div>
         </div>
         <div class="row">
-          <div class="col mb-3">
+          <div class="col">
             {{render_field(form.lenguajes_programacion)}}
           </div>
-          <div class="col mb-3 list-group">
+          <div class="col list-group">
             {{render_field(form.video_juegos)}}
           </div>
         </div>
         <div class="row">
-          <div class="col mb-3">
+          <div class="col">
             {{render_field(form.descripcion)}}
           </div>
         </div>
-        <div class="row pb-3 gap-3">
+        <div class="row mt-2 pb-3 gap-3">
           <div class="col d-flex justify-content-center">
             <button class="btn btn-primary text-white px-4">{{_("Actualizar")}}</button>
           </div>
           <div class="col d-flex justify-content-center">
-            <button class="btn btn-secondary text-white px-4">{{_("Cancelar")}}</button>
+            <a role="button" href="{{ url_for("mural_blueprint.index") }}" class="btn btn-secondary text-white px-4">{{_("Cancelar")}}</a>
           </div>
         </div>
       </form>
-    </section>  
-    <section id="social-media-actions" class="border rounded-1 p-4 my-4 ">
-      <div>
-        <label for="formFileInput" class="form-label d-flex mx-3">{{_("Cambiar imagen")}}</label>
-      </div>
-      <div class="d-flex justify-content-center mb-2">
-        <img class="img-fluid rounded" src="https://sm.ign.com/t/ign_es/game/a/among-us/among-us_crsm.200.jpg">
-      </div>
-      <div class="d-flex justify-content-center">
-        <input class="form-control w-100" type="file" id="formFileInput">
-      </div>
     </section>
   </main>
 

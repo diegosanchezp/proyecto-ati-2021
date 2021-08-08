@@ -1,11 +1,12 @@
 """
 Modelos relacionados con usuarios
 """
+from flask import url_for
 from flask_babel import lazy_gettext as _l
 from flask_user import UserMixin
 from app import db
 from app.constants import MAX_IMAGE_SIZE
-
+from typing import Union
 
 class UserNotificationsConfig(db.EmbeddedDocument):
     """
@@ -49,7 +50,7 @@ class User(db.Document, UserMixin):
 
     # Fields pedido en los requerimientos
     nombre = db.StringField()
-    foto = db.FileField() # foto se guarda en la db
+    foto = db.ImageField(size=MAX_IMAGE_SIZE) # foto se guarda en la db
     ci = db.IntField(unique=True)
     fecha_nacimiento = db.DateTimeField()
     genero = db.StringField(choices=USUARIO_GENEROS)
@@ -79,6 +80,13 @@ class User(db.Document, UserMixin):
         # Create default configuration
         if self.config is None:
             self.config = UserConfig(notificaciones=UserNotificationsConfig())
+
+    def get_foto_url(self) -> Union[str, None]:
+        breakpoint()
+        if bool(self.foto):
+            return url_for("media_blueprint.foto_perfil", user_id=self.id)
+        else:
+            return None
 
     def save(self, *args, **kwargs):
 
