@@ -12,6 +12,14 @@ from flask_user.forms import (
 )
 
 class RegisterForm(CoreRegisterForm):
+    """
+    Formulario de registro extendido
+
+    Warning:
+    Los nombres de los fields que se guardan en bd
+    tienen que ser los mismos de los del modelo de usuario
+    """
+
     nombre = fields.StringField(
         label=_("Nombre"),
         validators=[validators.InputRequired(message=_("Nombre Requirido"))]
@@ -40,13 +48,16 @@ class EditUserProfileForm(CoreEditUserProfileForm):
     first_name = fields.StringField(
         label=_("Primer nombre")
         )
+
     last_name = fields.StringField(
         label=_("Apellido")
         )
+
     nombre = fields.StringField(
         label=_("Nombre"),
          validators=[validators.DataRequired()]
         )
+
     ci = html5_fields.IntegerField(
         label=_('Cédula de identidad'),
         validators=[validators.DataRequired()]
@@ -55,33 +66,45 @@ class EditUserProfileForm(CoreEditUserProfileForm):
         validators=[validators.InputRequired(message=_("Género requerido"))],
         choices=USUARIO_GENEROS
     )
+
     nombre_foto = fields.FileField(
         label=_("Foto de perfil"),
         validators=[]
     )
+
     email = fields.StringField(
         label=_("Correo electrónico"),
         render_kw={'disabled':''}
         )
+
     fecha_nacimiento = html5_fields.DateField(
         label=_("Fecha de nacimiento")
     )
+
     descripcion = fields.TextAreaField(
         label=_("Descripción")
     )
+
     color = fields.StringField(
         label=_("Color favorito")
     )
+
     libro = fields.StringField(
         label=_("Libro favorito")
     )
+
     musica = fields.StringField(
         label=_("Música favorita")
     )
+
     video_juegos = StringListField(
         label=_("Video Juegos favoritos")
     )
+
     lenguajes_programacion = StringListField(
         label=_("Lenguajes de programación conocidos")
     )
 
+    delete_foto = fields.BooleanField(
+        label=_("¿ Borrar foto ?"),
+    )

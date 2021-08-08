@@ -47,6 +47,10 @@ class CustomUserManager(UserManager):
                 current_user.foto.replace(image_data, content_type=image_data.mimetype)
                 current_user.save()
 
+            if form.delete_foto.data and current_user.foto:
+                current_user.foto.delete()
+                current_user.save()
+
             return redirect(self._endpoint_url(self.USER_AFTER_EDIT_USER_PROFILE_ENDPOINT))
 
         # Render form

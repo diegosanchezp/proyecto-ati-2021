@@ -1,7 +1,7 @@
 {% extends "mural_base.html" %}
 
 {% from "flask_user/_macros.html" import render_checkbox_field %}
-{% from "form_macros.html" import render_field %}
+{% from "form_macros.html" import render_field, render_checkbox_field %}
 
 {% block body %}
 
@@ -15,12 +15,27 @@
 
         <div class="row">
           <div class="col-12 d-flex justify-content-center">
-            <img src="{{current_user.get_foto_url()}}" alt="foto de perfil">
+            {% set profile_pic = current_user.get_foto_url() %}
+            {% if profile_pic %}
+              <img id="editar-perfil-form-pic" src="{{ profile_pic }}" alt="foto de perfil">
+            {% else %}
+              <img id="sidebar-profile-icon" src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/person-circle.svg")}}" alt="icono de perfil">
+            {% endif %}
           </div>
-          <div class="col">
+        </div>
+
+        <div class="row">
+          <div class="col-12">
             {{render_field(form.nombre_foto)}}
           </div>
         </div>
+
+        <div class="row">
+          <div class="col-12">
+            {{render_checkbox_field(form.delete_foto)}}
+          </div>
+        </div>
+
         <div class="row">
           <div class="col">
             {{render_field(form.nombre)}}

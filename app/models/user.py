@@ -82,7 +82,6 @@ class User(db.Document, UserMixin):
             self.config = UserConfig(notificaciones=UserNotificationsConfig())
 
     def get_foto_url(self) -> Union[str, None]:
-        breakpoint()
         if bool(self.foto):
             return url_for("media_blueprint.foto_perfil", user_id=self.id)
         else:
