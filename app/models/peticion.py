@@ -1,6 +1,10 @@
 from app import db
 from enum import Enum
-from abc import ABC
+from flask_mongoengine import BaseQuerySet as QuerySet
+
+from flask import g
+from flask_login import current_user
+from mongoengine.queryset.visitor import Q
 
 class AbstractModel(db.Document):
     """
@@ -90,10 +94,21 @@ class TipoNotificaciones(Enum):
 class NotiEvento(Enum):
     LEER = "leer"
 
+class NotiQuerySet(QuerySet):
+    def get_notificaciones_usuario(self) -> QuerySet:
+        """
+        Obtener notificaciones del usuario autenticado
+        """
+        return self.filter(
+            Q(receptor=current_user) & Q(estado=NotificacionEstado.NO_LEIDA)
+        )
+
 class Notificacion(AbstractModel):
     """
     Modelo de notificaciones
     """
+    meta = {'queryset_class': NotiQuerySet}
+
     estado = db.EnumField(
         NotificacionEstado,
         default=NotificacionEstado.NO_LEIDA
