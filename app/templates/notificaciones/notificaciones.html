@@ -5,6 +5,7 @@
 {% from "components/pagination.html" import render_navigation%}
 
 <section>
+  {% include "components/flash_messages.html" %}
   {% for notificacion in notificaciones.items %}
     {{ render_notificacion(notificacion) }}
   {% else %}
