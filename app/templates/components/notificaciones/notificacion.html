@@ -3,17 +3,23 @@
   - NotiEvento
 #}
 
+{% from "components/profile_pic.html" import profile_pic %}
+
 {% macro render_notificacion(notificacion) -%}
 
 <div class="border border-2 rounded mt-2">
   <div class="d-flex flex-row p-2 gap-2">
-
-    <img id="notificacion-profile-icon"
-         class="notificacion-profile-icon border border-2 rounded-circle align-self-center"
-         src="{{ url_for('static', filename='node_modules/bootstrap-icons/icons/person-circle.svg')}}"
-         alt="icono de perfil">
+    
+      {{ profile_pic(
+          user=notificacion.emisor,
+          class_profile="notificacion-profile-pic",
+          id_not_profile="notificacion-profile-icon",
+          class_not_profile="notificacion-profile-icon border border-2 rounded-circle align-self-center"
+         )
+      }}
 
     <p class="font-weight-bold name w-75 publicacion-profile-name m-0">
+      {{ notificacion.emisor.nombre }}:
       {{ notificacion.descripcion }}
     </p>
 
