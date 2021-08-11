@@ -39,4 +39,20 @@
       <span id="{{field.id ~ "Feedback" }}" class="invalid-feedback">{{ e }}</span>
     {% endfor %}
   {% endif %}
+  
+{%- endmacro %}
+
+{% macro render_checkbox_field(field, label=None) -%}
+  <div class="form-check">
+    {% if not label %}{% set label=field.label.text %}{% endif %}
+    <label class="form-check-label" for="{{field.id}}">
+      {{ label|safe }}
+      {% if field.flags.required %}
+        *
+      {% endif %}
+    </label>
+    {{ field(
+      class_="form-check-input"
+    )}}
+  </div>
 {%- endmacro %}
