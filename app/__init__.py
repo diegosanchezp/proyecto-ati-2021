@@ -1,6 +1,9 @@
 import flask
 from flask_mongoengine import MongoEngine
-from app.utils import register_blueprints
+from app.utils import (
+    register_blueprints,
+    before_request,
+)
 from flask_babel import Babel
 
 # Instanciar extensiones de flask
@@ -43,4 +46,8 @@ def create_app(config_class="Config"):
 
     # Registar todos los blueprints
     register_blueprints(app)
+
+    # Cargar funciones que se ejecutan antes de cada request
+    before_request(app)
+
     return app
