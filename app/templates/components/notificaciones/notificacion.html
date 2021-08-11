@@ -1,4 +1,8 @@
-{# Requiere como contexto la constante TipoNotificaciones #}
+{# Requiere como contexto las constantes 
+  - TipoNotificaciones 
+  - NotiEvento
+#}
+
 {% macro render_notificacion(notificacion) -%}
 
 <div class="border border-2 rounded mt-2">
@@ -14,28 +18,15 @@
     </p>
 
     <div id="notificacion-actions" class="d-flex flex-row gap-2 justify-content-end w-25">
-      {% if notificacion.tipo == TipoNotificaciones.AMIGO_CONECTADO %}
-      <a href="{{ url_for('usuario_blueprint.ver_perfil')}}"
-         class="btn btn-dark ms-auto align-self-center"
-         role="button">{{_("Ver Perfil")}}</a>
-      {% endif %}
-
-      {% if notificacion.tipo == TipoNotificaciones.COMENTARIO %}
-      <a href="{{ url_for('mural_blueprint.publicaciones')}}"
-         class="btn btn-dark ms-auto align-self-center"
-         role="button">{{_("Ver publicacion")}}</a>
-      {% endif %}
-
-      {% if notificacion.tipo == TipoNotificaciones.MENSAJE_CHAT %}
-      <a href="{{ url_for('chat_blueprint.index')}}" 
-         class="btn btn-dark ms-auto align-self-center"
-         role="button">{{_("Ver chat")}}</a>
-      {% endif %}
+    {% set urlmap = notificacion.get_url() %}
+    <a href="{{urlmap.url}}"
+       class="btn btn-dark ms-auto align-self-center"
+       role="button">{{urlmap.texto}}</a>
       
       <form action="" method="POST" class="d-flex flex-column justify-content-center">
         <input type="hidden" name="id_notificacion" value="{{ notificacion.id }}">
         <button name="action_event" value="{{ NotiEvento.LEER.value }}" class="btn btn-dark" type="submit">
-          Marcar como leida
+          {{ _("Marcar como leida") }}
         </button>
       </form>
 

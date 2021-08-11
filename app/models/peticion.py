@@ -2,7 +2,8 @@ from app import db
 from enum import Enum
 from flask_mongoengine import BaseQuerySet as QuerySet
 
-from flask import g
+from flask import g, url_for
+from flask_babel import _
 from flask_login import current_user
 from mongoengine.queryset.visitor import Q
 
@@ -121,3 +122,36 @@ class Notificacion(AbstractModel):
     }
 
     tipo = db.EnumField(TipoNotificaciones, required=True)
+
+    # Referencia al modelo (recurso) que genero la notificacion
+    # - Comentario en una publicacion 
+    # - Amigo conectado
+    # - Mensaje de chat
+
+    recurso = db.GenericReferenceField()
+
+    def get_url(self) -> dict[Enum, dict[str, str]]:
+        """
+        Generar un url dependiendo del tipo recurso
+        """
+
+        # Todo: poner parametros para url_for en el map, utilizando
+        # self.recurso
+        urlmap = {
+            TipoNotificaciones.AMIGO_CONECTADO: {
+                "url": url_for('usuario_blueprint.ver_perfil'),
+                "texto": _("Ver Perfil")
+            },
+
+            TipoNotificaciones.COMENTARIO: {
+                "url": url_for('mural_blueprint.publicaciones'),
+                "texto": _("Ver publicacion")
+            },
+
+            TipoNotificaciones.MENSAJE_CHAT: {
+                "url": url_for('chat_blueprint.index'),
+                "texto": _("Ver chat")
+            }
+        }
+
+        return urlmap[self.tipo]
