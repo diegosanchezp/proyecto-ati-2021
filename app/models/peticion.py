@@ -1,7 +1,7 @@
 from app import db
 from enum import Enum
 from flask_mongoengine import BaseQuerySet as QuerySet
-
+from typing import Dict
 from flask import g, url_for
 from flask_babel import _
 from flask_login import current_user
@@ -130,7 +130,7 @@ class Notificacion(AbstractModel):
 
     recurso = db.GenericReferenceField()
 
-    def get_url(self) -> dict[Enum, dict[str, str]]:
+    def get_url(self) -> Dict[Enum, Dict[str, str]]:
         """
         Generar un url dependiendo del tipo recurso
         """
