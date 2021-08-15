@@ -2,7 +2,7 @@ from wtforms import validators, fields, widgets
 from wtforms.fields import html5 as html5_fields
 from wtforms.widgets import html5 as html5_widgets
 from flask_babel import _
-from app.models.user import USUARIO_GENEROS
+from app.models.user import USUARIO_GENEROS, User
 from app.usuario.custom_fields import StringListField, ImageField
 
 from flask_user.forms import (

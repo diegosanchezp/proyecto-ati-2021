@@ -8,7 +8,7 @@ Requiere como context un objeto tipo Usuario
     esto es temportal #}
     {% set profile_pic = None %}
     {# {% set profile_pic = user.get_foto_url() %} #}
-    <a href="{{ url_for('usuario_blueprint.ver_perfil') }}">
+    <a href="{{ url_for("usuario_blueprint.mi_perfil") }}">
       {% if profile_pic %}
         <img class="amigo-lista-profile-icon main-avatar-img" src="{{ profile_pic }}" alt="imagen de perfil">
       {% else %}
@@ -25,7 +25,7 @@ Requiere como context un objeto tipo Usuario
     <p>Aaron Morillo</p>
     <div class="d-flex flex-row gap-2">
       <a href="{{ url_for('chat_blueprint.index') }}"><button type="button" class="btn btn-dark">{{_("Chatear")}}</button></a>
-      <a class="btn btn-dark" href="{{ url_for("usuario_blueprint.ver_perfil") }}">{{_("Ver perfil")}}</a>
+      <a class="btn btn-dark" href="{{ url_for("usuario_blueprint.mi_perfil") }}">{{_("Ver perfil")}}</a>
     </div>
   </section>
   

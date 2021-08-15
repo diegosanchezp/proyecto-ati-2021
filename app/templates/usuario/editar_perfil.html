@@ -17,9 +17,9 @@
           <div class="col-12 d-flex justify-content-center">
             {% set profile_pic = current_user.get_foto_url() %}
             {% if profile_pic %}
-              <img id="editar-perfil-form-pic" src="{{ profile_pic }}" alt="foto de perfil">
+              <img id="editar-perfil-form-pic" src="{{ profile_pic }}" class="avatar-img m-1" alt="foto de perfil">
             {% else %}
-              <img id="sidebar-profile-icon" src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/person-circle.svg")}}" alt="icono de perfil">
+              <img id="sidebar-profile-icon" src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/person-circle.svg")}}" class="avatar-img m-1" alt="icono de perfil">
             {% endif %}
           </div>
         </div>
