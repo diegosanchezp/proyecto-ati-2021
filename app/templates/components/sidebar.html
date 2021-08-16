@@ -40,18 +40,19 @@ Contexto requerido
 
   <section id="sidebar-call-to-actions" class="d-flex flex-row gap-2">
     <a class="btn btn-secondary px-2" href="{{ url_for("user.logout") }}">{{ _("Cerrar Sesión") }}</a>
-    <a class="btn btn-primary" href="{{ url_for("usuario_blueprint.mi_perfil") }}">{{_("Ver mi perfil") }}</a>
+    <a class="btn btn-primary" href="{{ url_for("usuario_blueprint.ver_perfil", username=current_user.username)}}">{{_("Ver mi perfil") }}</a>
   </section>
 
   <section id="sidebar-friend-list-container">
     <p class="my-2 text-center">{{ _("Amigos") }}</p>
     <ul id="sidebar-friend-list" class="d-flex flex-column">
-      <li>
-        {% include "components/mural/amigo-lista.html" %}
-      </li>
-      <li>
-        {% include "components/mural/amigo-lista.html" %}
-      </li>
+      {% if current_user.amigos %}
+        {% for amigo in current_user.amigos %}
+          {% include "components/mural/amigo-lista.html" %}
+        {% endfor %}
+       {% else %}
+        <li>_(No tienes personas agregadas como amigos, ¡busca gente conocela!)</li>
+      {% endif %}
     </ul>
     
   </section>

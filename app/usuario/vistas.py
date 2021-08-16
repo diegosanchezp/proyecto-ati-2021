@@ -26,6 +26,11 @@ def ver_perfil(username):
     Vista de ver perfil
     """
     target_user = User.objects(username=username).first()
+    if target_user.amigos is []:
+        friend = User.objects(username="diego_sanchez").first()
+        target_user.amigos.append(friend)
+        target_user.save()
+        
     target_user_format = {
         'nombre' : target_user.nombre,
         'email' : target_user.email,
@@ -43,6 +48,7 @@ def ver_perfil(username):
     if target_user.username == current_user.username:
         it_is_the_current_user = True
     
+    print(current_user.amigos)
     return render_template("usuario/ver_perfil.html", target_user = target_user_format, it_is_the_current_user = it_is_the_current_user)
 
 @usuario_blueprint.route("/editar-privacidad")
