@@ -1,4 +1,5 @@
 {% extends "mural_base.html" %}
+{% from "components/profile_pic.html" import profile_pic %}
 
 {% block extrahead %}
 <script defer src="{{ url_for('static', filename='js/perfil/perfil.js') }}"></script>
@@ -11,29 +12,44 @@
     <div class="d-flex flex-column">
         <div class="d-flex justify-content-center m-3">
             <div class="profile-avatar m-2 d-flex flex-column">
-                <!--<img src="{{ url_for('static', filename='img/iceberg.jpg' ) }}" class="avatar-img m-1" alt="Imagen del avatar">-->
-                {% if target_user.foto %}
-                    <img id="editar-perfil-form-pic" src="{{ target_user.foto }}" class="avatar-img m-1" alt="foto de perfil">
-                {% else %}
-                    <img id="sidebar-profile-icon" src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/person-circle.svg")}}" class="avatar-img m-1" alt="icono de perfil">
-                {% endif %}
-                <h4 class="text-center m-1">{{target_user.name}}</h4>
+                
+                {{ profile_pic(
+                  user=target_user,
+                  class_profile="avatar-img m-1",
+                  class_not_profile="avatar-img m-1"
+                  )
+                }}
+
+                <h4 class="text-center m-1">{{target_user.nombre}}</h4>
+
+                {% include "components/flash_messages.html" %}
             </div>
         </div>
         <div class="d-flex justify-content-center m-3">
             <ul class="interaction-list list-group list-group-horizontal-md">
                 {% if it_is_the_current_user %}
                     <!-- External user buttons -->
-                    <li class="list-group-item"><a href="{{ url_for("usuario_blueprint.mis_amigos") }}"><button class="btn btn-info">{{_("Amigos:")}} 2</button></a></li>
                     <li class="list-group-item">
                         <a href="{{ url_for("user.edit_user_profile") }}"><button class="btn btn-info" >{{_("Editar mi perfil") }}</button></a>
                     </li>
                 {% else %}
                    <!--Current user buttons-->
-                   <li class="list-group-item d-flex justify-content-center"><button class="btn btn-info">{{ _("Amigo") }}</button></li>
-                   <li class="list-group-item d-flex justify-content-center"><button class="btn btn-info">{{ _("Amigos:") }} 3</button></li>
+                   <li class="list-group-item d-flex justify-content-center">
+                     <div class="badge bg-secondary">
+                       {% if is_friend %}
+                         {{_("Soys amigos")}}
+                       {% else %}
+                         {{_("No soys amigos")}}
+                       {% endif %}
+                     </div>
+                   </li>
+                   <li class="list-group-item d-flex justify-content-center"><button class="btn btn-info">{{ _("Amigos") }} {{target_user.amigos|length}}</button></li>
                    <li class="list-group-item d-flex justify-content-center"><a href="{{ url_for("chat_blueprint.index") }}"><button class="btn btn-primary">{{_("Chatear")}}</button></a></li>
-                   <li class="list-group-item d-flex justify-content-center"><button class="btn btn-primary">{{_("Eliminar Amistad")}}</button></li> 
+                   <li class="list-group-item d-flex justify-content-center">
+                     <form action="" method="POST">
+                       <button type="submit" name="action" value="BORRAR AMIGO" class="btn btn-primary">{{_("Eliminar Amistad")}}</button>
+                     </form>
+                   </li>
                 {% endif %}
             </ul>
         </div>
@@ -54,23 +70,23 @@
                   </tr>
                   <tr>
                     <td>{{_("Género")}}</td>
-                    <td>{{target_user.genero}}</td>
+                    <td>{{target_user.get_genero_string()}}</td>
                   </tr>
                   <tr>
                     <td>{{_("Descripción personal")}}</td>
-                    <td>{{target_user.descripcion}}</td>
+                    <td>{{target_user.descripcion|default(_("Sin descripcion"), true)}}</td>
                   </tr>
                   <tr>
                     <td>{{_("Color favorito")}}</td>
-                    <td>{{target_user.color}}</td>
+                    <td>{{target_user.color|default(_("Sin color"), true)}}</td>
                   </tr>
                   <tr>
                     <td>{{_("Videojuegos favoritos")}}</td>
-                    <td>{{target_user.video_juegos}}</td>
+                    <td>{{target_user.video_juegos|join(", ")|default(_("Sin video juegos"), true)}}</td>
                   </tr>
                   <tr>
                     <td>{{_("Lenguajes de programación que conoce")}}</td>
-                    <td>{{target_user.lenguajes_programacion}}</td>
+                    <td>{{target_user.lenguajes_programacion|join(", ")|default(_("Sin lenguajes de programación"), true)}}</td>
                   </tr>
                 </tbody>
             </table>
