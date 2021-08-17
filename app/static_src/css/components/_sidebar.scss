@@ -28,7 +28,8 @@
 }
 
 #main-sidenav {
-  min-width: max-content;
+  max-width: 300px;
+  min-width: 250px;
 }
 
 /* Hide collapsed sidebar when sidebar is visible */

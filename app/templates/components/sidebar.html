@@ -38,7 +38,7 @@ Contexto requerido
     </a>
   </section>
 
-  <section id="sidebar-call-to-actions" class="d-flex flex-row gap-2">
+  <section id="sidebar-call-to-actions" class="d-flex flex-row gap-2 justify-content-center">
     <a class="btn btn-secondary px-2" href="{{ url_for("user.logout") }}">{{ _("Cerrar Sesión") }}</a>
     <a class="btn btn-primary" href="{{ url_for("usuario_blueprint.ver_perfil", username=current_user.username)}}">{{_("Ver mi perfil") }}</a>
   </section>
@@ -50,16 +50,18 @@ Contexto requerido
         {% for amigo in current_user.amigos %}
           {% include "components/mural/amigo-lista.html" %}
         {% endfor %}
+
+        <div class="d-flex justify-content-center my-4">
+          <a class="btn btn-primary" href="{{ url_for("usuario_blueprint.mis_amigos") }}">{{ _("Ver todos mis amigos") }}</a>
+        </div>
        {% else %}
-        <li>_(No tienes personas agregadas como amigos, ¡busca gente conocela!)</li>
+         <li><p class="text-center">{{_("No tienes personas agregadas como amigos, ¡busca gente conocela!")}}</p></li>
       {% endif %}
+
     </ul>
     
   </section>
 
-  <div class="d-flex justify-content-center my-4">
-    <a class="btn btn-primary" href="{{ url_for("usuario_blueprint.mis_amigos") }}">{{ _("Ver todos mis amigos") }}</a>
-  </div>
 </nav>
 
 {# Version collapsed #}
