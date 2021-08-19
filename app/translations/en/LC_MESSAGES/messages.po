@@ -75,11 +75,11 @@ msgid "Cancelar"
 msgstr "Cancel"
 
 #: app/templates/components/mural/comentarioResponder.html:13
-msgid "Estas respondiendo al comentario de Cesar"
-msgstr "You're answering Cesar's comment"
+msgid "Estas respondiendo al comentario de "
+msgstr "You're answering 's comment"
 
 #: app/templates/components/mural/publicacion.html:49
-msgid "Comentarios 10"
+msgid "Comentarios"
 msgstr "Comentaries"
 
 #: app/templates/components/mural/publicacion.html:60
@@ -323,7 +323,7 @@ msgstr "Log in with your Twitter or Facebook account"
 
 #: app/templates/usuario/mi_perfil.html:15
 #: app/templates/usuario/ver_perfil.html:21
-msgid "Amigos:"
+msgid "Amigos"
 msgstr "Friends"
 
 #: app/templates/usuario/mi_perfil.html:22
@@ -387,7 +387,7 @@ msgid "Comentarios"
 msgstr "Comentaries"
 
 #: app/templates/usuario/mis_amigos.html:6
-msgid "Amigos: 2"
+msgid "Amigos"
 msgstr "Friends"
 
 #: app/templates/usuario/mis_amigos.html:7
@@ -425,19 +425,19 @@ msgid "Registrate en el sistema"
 msgstr "Register into the app"
 
 #: app/templates/usuario/registro.html:11
-msgid "Nombre *"
-msgstr "Name *"
+msgid "Nombre"
+msgstr "Name"
 
 #: app/templates/usuario/registro.html:15
-msgid "Número cedula de identidad *"
+msgid "Número cedula de identidad"
 msgstr "ID number"
 
 #: app/templates/usuario/registro.html:25
-msgid "Fecha de nacimiento *"
+msgid "Fecha de nacimiento"
 msgstr "Date of birth"
 
 #: app/templates/usuario/registro.html:31
-msgid "Género *"
+msgid "Género"
 msgstr "Genre"
 
 #: app/templates/usuario/registro.html:39
