@@ -4,11 +4,12 @@
          src="{{ url_for('static', filename='node_modules/bootstrap-icons/icons/arrow-left-square-fill.svg')}}" 
          alt="icono flecha izquierda">
 
-    <span class="border rounded ms-1 me-1 ps-1 pe-1 bg-secondary bg-gradient text-white"> 1 </span>
-    <span class="border rounded ms-1 me-1 ps-1 pe-1 bg-secondary bg-gradient text-white"> 2 </span>
-    <span class="border rounded ms-1 me-1 ps-1 pe-1 bg-secondary bg-gradient text-white"> 3 </span>
-    <span class="border rounded ms-1 me-1 ps-1 pe-1 bg-secondary bg-gradient text-white"> 4 </span>
-
+     {% for number in range(1,pagination_number+1) %}
+          <span class="border rounded ms-1 me-1 ps-1 pe-1 bg-secondary bg-gradient text-white">
+               {{number}}
+          </span>
+     {% endfor %}
+    
     <img class="img-thumbnail"
          src="{{ url_for('static', filename='node_modules/bootstrap-icons/icons/arrow-right-square-fill.svg')}}" 
          alt="icono flecha derecha">

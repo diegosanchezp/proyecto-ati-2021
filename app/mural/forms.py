@@ -4,20 +4,25 @@ from flask_babel import _
 
 
 class PublicacionForm(Form):
-    contenido = TextAreaField('', [validators.Length(max=1000)])
-    tipo_publicacion = SelectField('', 
-                            choices=[('',_('Tipo de Publicacion')),
-                                     ('publica',_('Publica')),
-                                     ('privada',_('Privada'))])
+    contenido = TextAreaField('Contenido', [validators.Length(max=1000)])
+    tipo_publicacion = SelectField('Tipo de publicacion', 
+                            choices=[ ('publica',_('Publica')),
+                                      ('privada',_('Privada')) ] )
 
     # Multiple media files
     #imagenes = ListField(ImageField(size=MAX_IMAGE_SIZE))
     #videos = FieldList(URLFiield())
-    multimedia = FileField('')
-    enlaces = FieldList(StringField())
+    multimedia = FileField('Multimedia')
+    enlaces = FieldList(StringField('Enlace'))
 
     #comentarios = FieldList(ReferenceField("Comentario"))
     #autor = ReferenceField("User")
+
+class SearchBarForm(Form):
+    tipo_busqueda = SelectField('Tipo de busqueda', 
+                            choices=[ ('amigo',_('Amigo')),
+                                      ('desconocido',_('Desconocido')) ] )
+    texto_busqueda = StringField('Persona a buscar')
 
 class ComentarioForm(Form):
     #respuestas = FieldList(ReferenceField("self"))

@@ -21,7 +21,9 @@
     </div>
 
     <div class="row mt-1">
-      {% include 'components/pagination.html' %}
+      {% with pagination_number = pagination_number %}
+        {% include 'components/pagination.html' %}
+      {% endwith %}
     </div>
 </div>
 

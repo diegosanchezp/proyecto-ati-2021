@@ -12,13 +12,13 @@
 
     <form action="{{ url_for('mural_blueprint.create_publication') }}" method="POST" class="container-fluid">
         <div class="row">
-            {{ render_field( form.contenido, rows="15", class="w-100") }}
+            {{ render_field( form.contenido, rows="15", class="w-100",label_visible=false) }}
         </div>
 
         <div class="row justify-content-between">
-            {{ render_field( form.multimedia ) }}
+            {{ render_field( form.multimedia, label_visible=false) }}
 
-            {{ render_field( form.tipo_publicacion ) }}
+            {{ render_field( form.tipo_publicacion, label_visible=false ) }}
        </div>
 
        <div class="row justify-content-center m-2">

@@ -1,17 +1,17 @@
-<form action="{{ url_for('mural_blueprint.resultados_busqueda') }}" >
+{% from "form_macros.html" import render_field %}
+<form action="{{ url_for('mural_blueprint.resultados_busqueda') }}">
   <div class="input-group">
 
     <div class="form-group">
-      <select class="form-select" aria-label="Default select example">
-        <option value="amigo" selected>{{_("Amigo")}}</option>
-        <option value="desconocido">{{_("Desconocido")}}</option>
-      </select>
+      {{ render_field( form.tipo_busqueda, label_visible=false, class="form-select") }}
     </div>
 
-    <input type="text"
-           class="form-control"
-           aria-label="Search input with dropdown button" 
-           placeholder={{_('Busca personas, ingresa un nombre')}}/>
+    
+    {{ render_field( form.texto_busqueda,
+                     label_visible=false,
+                     class="form-control",
+                     placeholder=_('Busca personas, ingresa un nombre') ) }}
+   
 
     <div class="input-group-append">
       <button class="btn btn-light" type="button">
