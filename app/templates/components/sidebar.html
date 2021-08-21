@@ -6,6 +6,8 @@ Contexto requerido
   - lista_amigos: QuerySet<User>
 #}
 
+{% from "components/profile_pic.html" import profile_pic %}
+
 {# Version no collapsado #}
 <nav class="px-3 border-end border-dark collapse show" id="main-sidenav">
   <header id="sidebar-header" class="d-flex flex-row justify-content-between mt-2 mb-4">
@@ -16,16 +18,20 @@ Contexto requerido
   </header>
 
   <section id="sidebar-profile">
-    <a href="{{ url_for('notificaciones_blueprint.index')}}" class="position-relative">
+    <a href="{{ url_for('notificaciones_blueprint.index', page=1)}}" class="position-relative">
       <img src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/bell.svg")}}" class="sidebar-icon-size" alt="icono notificaciones">
       <span class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-danger">
-        <span>2</span>
+        <span>{{g.numero_notificaciones}}</span>
       </span>
     </a>
 
     <div id="sidebar-profile-info" class="d-flex flex-column justify-content-center align-items-center">
-      <img id="sidebar-profile-icon" src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/person-circle.svg")}}" alt="icono de perfil">
-      <p class="text-center">Diego Sánchez</p>
+      {{ profile_pic(
+          user=current_user,
+          id_profile="sidebar-profile-pic",
+          id_not_profile="sidebar-profile-icon",
+      ) }}
+      <p class="text-center">{{ current_user.nombre }}</p>
     </div>
     <a href="{{ url_for("usuario_blueprint.configuracion") }}">
       <img src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/gear.svg")}}" class="sidebar-icon-size" alt="icono configuracion">
@@ -33,7 +39,7 @@ Contexto requerido
   </section>
 
   <section id="sidebar-call-to-actions" class="d-flex flex-row gap-2">
-    <a class="btn btn-secondary px-2" href="{{ url_for("usuario_blueprint.index") }}">{{ _("Cerrar Sesión") }}</a>
+    <a class="btn btn-secondary px-2" href="{{ url_for("user.logout") }}">{{ _("Cerrar Sesión") }}</a>
     <a class="btn btn-primary" href="{{ url_for("usuario_blueprint.mi_perfil") }}">{{_("Ver mi perfil") }}</a>
   </section>
 

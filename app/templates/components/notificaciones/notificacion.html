@@ -1,32 +1,42 @@
-<div class="row mt-2 ms-1 me-1 border border-2 rounded">
+{# Requiere como contexto las constantes 
+  - TipoNotificaciones 
+  - NotiEvento
+#}
 
-    <div class="d-flex flex-row pt-2 pb-2">
+{% from "components/profile_pic.html" import profile_pic %}
 
-        <img id="notificacion-profile-icon"
-            class="notificacion-profile-icon border border-2 rounded-circle align-self-center"
-            src="{{ url_for('static', filename='node_modules/bootstrap-icons/icons/person.svg')}}" 
-            alt="icono de perfil">
+{% macro render_notificacion(notificacion) -%}
 
-        <span class="d-block font-weight-bold name publicacion-profile-name ms-1">{{content}}</span>
+<div class="border border-2 rounded mt-2">
+  <div class="d-flex flex-row p-2 gap-2">
+    
+      {{ profile_pic(
+          user=notificacion.emisor,
+          class_profile="notificacion-profile-pic",
+          id_not_profile="notificacion-profile-icon",
+          class_not_profile="notificacion-profile-icon border border-2 rounded-circle align-self-center"
+         )
+      }}
 
-        {% if conectado %}
-        <a href="{{ url_for('usuario_blueprint.ver_perfil')}}" 
-           class="btn btn-dark ms-auto align-self-center"
-           role="button">Ver Perfil</a>
-        {% endif %}
+    <p class="font-weight-bold name w-75 publicacion-profile-name m-0">
+      {{ notificacion.emisor.nombre }}:
+      {{ notificacion.descripcion }}
+    </p>
 
-        {% if publicacion %}
-        <a href="{{ url_for('mural_blueprint.publicaciones')}}" 
-           class="btn btn-dark ms-auto align-self-center"
-           role="button">Ver publicacion</a>
-        {% endif %}
-
-        {% if chat %}
-        <a href="{{ url_for('chat_blueprint.index')}}" 
-           class="btn btn-dark ms-auto align-self-center"
-           role="button">Ver chat</a>
-        {% endif %}
+    <div id="notificacion-actions" class="d-flex flex-row gap-2 justify-content-end w-25">
+    {% set urlmap = notificacion.get_url() %}
+    <a href="{{urlmap.url}}"
+       class="btn btn-dark ms-auto align-self-center"
+       role="button">{{urlmap.texto}}</a>
+      
+      <form action="" method="POST" class="d-flex flex-column justify-content-center">
+        <input type="hidden" name="id_notificacion" value="{{ notificacion.id }}">
+        <button name="action_event" value="{{ NotiEvento.LEER.value }}" class="btn btn-dark" type="submit">
+          {{ _("Marcar como leida") }}
+        </button>
+      </form>
 
     </div>
-
+  </div>
 </div>
+{%- endmacro %}

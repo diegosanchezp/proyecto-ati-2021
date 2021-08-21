@@ -1,10 +1,10 @@
-<form action="{{ url_for("mural_blueprint.resultados_busqueda") }}" >
+<form action="{{ url_for('mural_blueprint.resultados_busqueda') }}" >
   <div class="input-group">
 
     <div class="form-group">
       <select class="form-select" aria-label="Default select example">
-        <option value="amigo" selected>Amigo</option>
-        <option value="desconocido">Desconocido</option>
+        <option value="amigo" selected>{{_("Amigo")}}</option>
+        <option value="desconocido">{{_("Desconocido")}}</option>
       </select>
     </div>
 

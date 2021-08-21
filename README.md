@@ -14,8 +14,7 @@ cp .env.example .env
 Ejecute los siguientes comandos para construir y levantar los contenedores de docker, estos son pasos obligatorios
 
 ```sh
-chmod +x build.sh
-./build.sh
+chmod +x build.sh && ./build.sh
 ```
 
 ## Dependencias de node (npm)
@@ -27,12 +26,25 @@ Si se hace un cambio a los archivos de código fuente ubicados en `static_src` h
 docker exec flask npm run dev-css
 ```
 
-## Logs de contenedores de flask y mongo
+## Logs de contenedores de flask, mongo y email_server
 
 - Ver los logs de ambos contenedores
 
 ```sh
 docker-compose logs --follow
+```
+
+## Servidor de emails
+
+El servidor de emails es un programa de python que cuando mandas un email lo imprime en la terminal, no lo manda al destinatario, es decir, que si usted pone su email personal no le va a llegar un correo.
+
+
+### Ver emails
+
+Para ver los emails que se mandan a un destinatario, ejecutar
+
+```
+docker logs -f email_server
 ```
 
 ## Arquitectura o estructura del código
@@ -176,7 +188,7 @@ Las traducciones se hacen en archivos de extensión *.po y se guardan en `app/tr
 
 1) Generar traducciones
 ```bash
-# Extraer strings que se marcaron a un archivo donde se pondrán las traducciones
+### Extraer strings que se marcaron a un archivo donde se pondrán las traducciones
 pybabel extract -F babel.cfg -k lazy_gettext,_l -o messages.pot .
 # Actualizar traducciones con los nuevos strings marcados
 pybabel update -i messages.pot -d app/translations
@@ -184,13 +196,13 @@ pybabel update -i messages.pot -d app/translations
 
 2) Abra el archivo `app/translations/en/LC_MESSAGES/messages.po` encuentre el string que quiere traducir y rellene el `msgstr ""`
 ```bash
-# Compilar traducciones para que sean utilizables por babel
+### Compilar traducciones para que sean utilizables por babel
 pybabel compile -d app/translations
 ```
 
 **Importante** después de que compile las traducciones, tiene que reiniciar el contenedor de docker de flask o el servidor, si no hace esto, no vera las traducciones en la página web
 
 ```bash
-# Reiniciar contenedor de flask
+### Reiniciar contenedor de flask
 docker restart flask
 ```

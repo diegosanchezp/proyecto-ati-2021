@@ -4,7 +4,7 @@ Dockerfile
 docker-compose.yml
 .git
 README.md
-dicker-entrypoint.sh
+build.sh
 .gitignore
 .github
 __pycache__
