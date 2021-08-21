@@ -4,6 +4,7 @@ from wtforms.widgets import html5 as html5_widgets
 from flask_babel import _
 from app.models.user import USUARIO_GENEROS
 from app.usuario.custom_fields import StringListField, ImageField
+from app.models.user import User
 
 from flask_user.forms import (
     RegisterForm as CoreRegisterForm,
