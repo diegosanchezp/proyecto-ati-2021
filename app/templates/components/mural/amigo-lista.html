@@ -2,31 +2,34 @@
 Lista de amigos
 Requiere como context un objeto tipo Usuario
 #}
-<article class="friend-card d-flex flex-row gap-2 my-2 p-2 border rounded">
-  <figure class="position-relative">
-    {# Borrar este set cuando ya se tenga el usuario,
-    esto es temportal #}
-    {% set profile_pic = None %}
-    {# {% set profile_pic = user.get_foto_url() %} #}
-    <a href="{{ url_for('usuario_blueprint.ver_perfil') }}">
-      {% if profile_pic %}
-        <img class="amigo-lista-profile-icon main-avatar-img" src="{{ profile_pic }}" alt="imagen de perfil">
-      {% else %}
-        <img class="amigo-lista-profile-icon main-avatar-img" src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/person-circle.svg")}}" alt="icono de perfil">
-      {% endif %}
-    </a>
-    {# Icono de status online #}
-    <span class="person-status-circle bg-success">
-      <span class="visually-hidden">unread messages</span>
-    </span>
-  </figure>
 
-  <section class="d-flex flex-column">
-    <p>Aaron Morillo</p>
-    <div class="d-flex flex-row gap-2">
-      <a href="{{ url_for('chat_blueprint.index') }}"><button type="button" class="btn btn-dark">{{_("Chatear")}}</button></a>
-      <a class="btn btn-dark" href="{{ url_for("usuario_blueprint.ver_perfil") }}">{{_("Ver perfil")}}</a>
-    </div>
-  </section>
-  
-</article>
+{% from "components/profile_pic.html" import profile_pic %}
+
+<li>
+  <article class="friend-card d-flex flex-row gap-2 my-2 p-2 border rounded">
+    <figure class="position-relative">
+      {# Icono de perfil o imagen del usuario #}
+
+      {{ profile_pic(
+          user=amigo,
+          class_profile="amigo-lista-profile-icon main-avatar-img",
+          class_not_profile="amigo-lista-profile-icon main-avatar-img"
+         )
+      }}
+
+      {# Circulo verde de status online #}
+      <span class="person-status-circle bg-success">
+        <span class="visually-hidden">unread messages</span>
+      </span>
+    </figure>
+
+    <section class="d-flex flex-column">
+      <p>{{amigo.nombre}}</p>
+      <div class="d-flex flex-row gap-2">
+        <a href="{{ url_for('chat_blueprint.index') }}"><button type="button" class="btn btn-dark">{{_("Chatear")}}</button></a>
+        <a class="btn btn-dark" href="{{ url_for("usuario_blueprint.ver_perfil", username=amigo.username) }}">{{_("Ver perfil")}}</a>
+      </div>
+    </section>
+    
+  </article>
+</li>

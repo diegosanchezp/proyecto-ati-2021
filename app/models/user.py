@@ -6,7 +6,7 @@ from flask_babel import lazy_gettext as _l
 from flask_user import UserMixin
 from app import db
 from app.constants import MAX_IMAGE_SIZE
-from typing import Union
+from typing import Union, List
 
 class UserNotificationsConfig(db.EmbeddedDocument):
     """
@@ -89,6 +89,12 @@ class User(db.Document, UserMixin):
             return url_for("media_blueprint.foto_perfil", user_id=self.id)
         else:
             return None
+
+    def get_genero_string(self) -> str:
+        """
+        Obtener un string para el genero
+        """
+        return USUARIO_GENEROS[1][1] if self.genero=='F' else USUARIO_GENEROS[0][1]
 
     def save(self, *args, **kwargs):
 
