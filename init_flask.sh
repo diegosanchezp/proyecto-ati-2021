@@ -5,4 +5,4 @@ npm run build && \
 pybabel compile -d app/translations && \
 
 # Iniciar flask server 
-python3.9 run.py
+python3 run.py
