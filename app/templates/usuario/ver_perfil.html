@@ -1,4 +1,5 @@
 {% extends "mural_base.html" %}
+{% from "components/profile_pic.html" import profile_pic %}
 
 {% block extrahead %}
 <script defer src="{{ url_for('static', filename='js/perfil/perfil.js') }}"></script>
@@ -11,16 +12,45 @@
     <div class="d-flex flex-column">
         <div class="d-flex justify-content-center m-3">
             <div class="profile-avatar m-2 d-flex flex-column">
-                <img src="{{ url_for('static', filename='img/iceberg.jpg' ) }}" class="avatar-img m-1" alt="Imagen del avatar">
-                <h4 class="text-center m-1">Aaron Morillo</h4>
+                
+                {{ profile_pic(
+                  user=target_user,
+                  class_profile="avatar-img m-1",
+                  class_not_profile="avatar-img m-1"
+                  )
+                }}
+
+                <h4 class="text-center m-1">{{target_user.nombre}}</h4>
+
+                {% include "components/flash_messages.html" %}
             </div>
         </div>
         <div class="d-flex justify-content-center m-3">
             <ul class="interaction-list list-group list-group-horizontal-md">
-                <li class="list-group-item d-flex justify-content-center"><button class="btn btn-info">{{ _("Amigo") }}</button></li>
-                <li class="list-group-item d-flex justify-content-center"><button class="btn btn-info">{{ _("Amigos") }}: 3</button></li>
-                <li class="list-group-item d-flex justify-content-center"><a href="{{ url_for("chat_blueprint.index") }}"><button class="btn btn-primary">{{_("Chatear")}}</button></a></li>
-                <li class="list-group-item d-flex justify-content-center"><button class="btn btn-primary">{{_("Eliminar Amistad")}}</button></li>
+                {% if it_is_the_current_user %}
+                    <!-- External user buttons -->
+                    <li class="list-group-item">
+                        <a href="{{ url_for("user.edit_user_profile") }}"><button class="btn btn-info" >{{_("Editar mi perfil") }}</button></a>
+                    </li>
+                {% else %}
+                   <!--Current user buttons-->
+                   <li class="list-group-item d-flex justify-content-center">
+                     <div class="badge bg-secondary">
+                       {% if is_friend %}
+                         {{_("Soys amigos")}}
+                       {% else %}
+                         {{_("No soys amigos")}}
+                       {% endif %}
+                     </div>
+                   </li>
+                   <li class="list-group-item d-flex justify-content-center"><button class="btn btn-info">{{ _("Amigos") }} {{target_user.amigos|length}}</button></li>
+                   <li class="list-group-item d-flex justify-content-center"><a href="{{ url_for("chat_blueprint.index") }}"><button class="btn btn-primary">{{_("Chatear")}}</button></a></li>
+                   <li class="list-group-item d-flex justify-content-center">
+                     <form action="" method="POST">
+                       <button type="submit" name="action" value="BORRAR AMIGO" class="btn btn-primary">{{_("Eliminar Amistad")}}</button>
+                     </form>
+                   </li>
+                {% endif %}
             </ul>
         </div>
         <div class="d-flex justify-content-center m-3">
@@ -28,35 +58,35 @@
                 <tbody>
                   <tr>
                     <td>{{_("Email")}}</td>
-                    <td>someone@example.com</td>
+                    <td>{{target_user.email}}</td>
                   </tr>
                   <tr>
                     <td>{{_("CI")}}</td>
-                    <td>12345678</td>
+                    <td>{{target_user.ci}}</td>
                   </tr>
                   <tr>
                     <td>{{_("Fecha de nacimiento")}}</td>
-                    <td>12/23/1995</td>
+                    <td>{{target_user.fecha_nacimiento}}</td>
                   </tr>
                   <tr>
                     <td>{{_("Género")}}</td>
-                    <td>masculino</td>
+                    <td>{{target_user.get_genero_string()}}</td>
                   </tr>
                   <tr>
                     <td>{{_("Descripción personal")}}</td>
-                    <td>Soy un estudiante de la escuela de computacion de la facultad de ciencias.</td>
+                    <td>{{target_user.descripcion|default(_("Sin descripcion"), true)}}</td>
                   </tr>
                   <tr>
                     <td>{{_("Color favorito")}}</td>
-                    <td>Negro</td>
+                    <td>{{target_user.color|default(_("Sin color"), true)}}</td>
                   </tr>
                   <tr>
                     <td>{{_("Videojuegos favoritos")}}</td>
-                    <td>Call of duty, Medal of honor, Battlefield</td>
+                    <td>{{target_user.video_juegos|join(", ")|default(_("Sin video juegos"), true)}}</td>
                   </tr>
                   <tr>
                     <td>{{_("Lenguajes de programación que conoce")}}</td>
-                    <td>C y C++</td>
+                    <td>{{target_user.lenguajes_programacion|join(", ")|default(_("Sin lenguajes de programación"), true)}}</td>
                   </tr>
                 </tbody>
             </table>

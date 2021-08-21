@@ -12,6 +12,13 @@
   width: 80px;
 }
 
+#sidebar-profile-pic {
+  width: 80px;
+  border-radius: 100%;
+  height: 80px;
+  object-fit: cover;
+}
+
 #sidebar-friend-list {
   list-style: none;
 }
@@ -21,7 +28,7 @@
 }
 
 #main-sidenav {
-  min-width: max-content;
+  width: 350px;
 }
 
 /* Hide collapsed sidebar when sidebar is visible */

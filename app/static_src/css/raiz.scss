@@ -13,6 +13,7 @@
 @import 'components/comentario';
 @import "components/mensaje-enviado";
 @import "components/mensaje-recibido";
+@import "components/notificacion";
 
 /* Paginas o vistas */
 @import 'pages/login';
@@ -21,5 +22,5 @@
 @import 'pages/mural';
 @import "pages/profile";
 @import "pages/mis-amigos";
-@import "components/notificacion";
 @import "pages/recuperar_token";
+@import "pages/editar_perfil";

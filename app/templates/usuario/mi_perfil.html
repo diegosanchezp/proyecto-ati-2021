@@ -12,7 +12,10 @@
         </div>
         <div class="d-flex justify-content-center m-3">
             <ul class="interaction-list list-group list-group-horizontal-md">
-                <li class="list-group-item"><a href="{{ url_for("usuario_blueprint.mis_amigos") }}"><button class="btn btn-info">{{_("Amigos")}}: 2</button></a></li>
+                <li class="list-group-item"><a href="{{ url_for("usuario_blueprint.mis_amigos") }}"><button class="btn btn-info">{{_("Amigos:")}} 2</button></a></li>
+                <li class="list-group-item">
+                    <a href="{{ url_for("user.edit_user_profile") }}"><button class="btn btn-info" >{{_("Editar mi perfil") }}</button></a>
+                </li>
             </ul>
         </div>
         <div class="d-flex justify-content-center m-3">

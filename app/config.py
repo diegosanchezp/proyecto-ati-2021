@@ -41,6 +41,7 @@ class Config:
     USER_CHANGE_PASSWORD_URL = "/editar-password"
 
     # USER_LOGOUT_URL = ""
+    USER_EDIT_USER_PROFILE_URL = "/editar-perfil"
 
     # - Override templates
 
@@ -51,10 +52,13 @@ class Config:
 
     #USER_RESET_PASSWORD_TEMPLATE = ""
 
+    USER_EDIT_USER_PROFILE_TEMPLATE = "usuario/editar_perfil.html" 
+
     USER_AFTER_LOGIN_ENDPOINT = "mural_blueprint.index"
     USER_AFTER_LOGOUT_ENDPOINT = "user.login"
     USER_AFTER_REGISTER_ENDPOINT = "mural_blueprint.index"
     USER_AFTER_FORGOT_PASSWORD_ENDPOINT = "usuario_blueprint.recuperar_token"
+    USER_AFTER_EDIT_USER_PROFILE_ENDPOINT = "user.edit_user_profile"
     # === Configuracion FlaskBabel ===
     BABEL_DEFAULT_LOCALE = "es_VE"
 
