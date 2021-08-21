@@ -1,19 +1,20 @@
 from wtforms import Form, BooleanField, StringField, FieldList,TextAreaField,FileField,SelectField, validators
 from flask_babel import _
-
+from app.models.mural import TIPO_PUBLICACIONES
 
 
 class PublicacionForm(Form):
-    contenido = TextAreaField('Contenido', [validators.Length(max=1000)])
-    tipo_publicacion = SelectField('Tipo de publicacion', 
-                            choices=[ ('publica',_('Publica')),
-                                      ('privada',_('Privada')) ] )
+    contenido = TextAreaField(label=_('Contenido'), validators=[
+        validators.Length(max=1000),
+        validators.InputRequired(message=_("Error: publicación vacía"))])
+
+    tipo_publicacion = SelectField(_('Tipo de publicacion'),choices=TIPO_PUBLICACIONES)
 
     # Multiple media files
     #imagenes = ListField(ImageField(size=MAX_IMAGE_SIZE))
     #videos = FieldList(URLFiield())
-    multimedia = FileField('Multimedia')
-    enlaces = FieldList(StringField('Enlace'))
+    multimedia = FileField(label=_('Multimedia'))
+    enlaces = FieldList(StringField(_('Enlace')))
 
     #comentarios = FieldList(ReferenceField("Comentario"))
     #autor = ReferenceField("User")
