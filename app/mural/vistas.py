@@ -9,6 +9,8 @@ from app.mural.forms import ( PublicacionForm, ComentarioForm, SearchBarForm)
 from app.models.mural import ( Publicacion )
 from app.models.user import ( User )
 from datetime import datetime
+from app.models.mural import TIPO_PUBLICACIONES
+
 import math
 
 mural_blueprint = Blueprint('mural_blueprint', __name__, template_folder='templates')
@@ -19,17 +21,14 @@ mural_blueprint = Blueprint('mural_blueprint', __name__, template_folder='templa
 def index():
 
     form = SearchBarForm(request.form)
-    publicaciones_publicas = []
-
     ## Filtrar publicaciones ##
     ## Hay que mejorar un poco la logica ##
-    for publicacion in Publicacion.objects().order_by('-fecha'):
-        if publicacion.tipo_publicacion == 'publica':
-            publicaciones_publicas.append(publicacion)
+
+    publicaciones_publicas = Publicacion.objects(tipo_publicacion=TIPO_PUBLICACIONES[0][0]).order_by('-fecha')
 
     pagination_number = math.ceil(len(publicaciones_publicas)/10)
 
-    return render_template("mural/mural.html", 
+    return render_template("mural/mural.html",
                            publicaciones=publicaciones_publicas,
                            pagination_number=pagination_number,
                            form=form,
