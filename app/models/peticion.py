@@ -1,6 +1,5 @@
 from app import db
 from enum import Enum
-from abc import ABC
 
 class AbstractModel(db.Document):
     """
