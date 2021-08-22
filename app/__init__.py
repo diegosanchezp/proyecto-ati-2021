@@ -3,9 +3,9 @@ from flask_mongoengine import MongoEngine
 from app.utils import (
     register_blueprints,
     before_request,
+    check_upload_folder,
 )
 from flask_babel import Babel
-
 # Instanciar extensiones de flask
 db = MongoEngine()
 babel = Babel()
@@ -43,6 +43,10 @@ def create_app(config_class="Config"):
         from flask import request
         translations = [str(translation) for translation in babel.list_translations()]
         return request.accept_languages.best_match(translations)
+
+    # Verificar que las carpetas de imagenes de modelos
+    # existan, si no crearlas
+    check_upload_folder(app)
 
     # Registar todos los blueprints
     register_blueprints(app)

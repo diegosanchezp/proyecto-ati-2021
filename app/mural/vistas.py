@@ -8,8 +8,10 @@ from flask_babel import _
 from app.mural.forms import ( PublicacionForm, ComentarioForm, SearchBarForm)
 from app.models.mural import ( Publicacion )
 from app.models.user import ( User )
-from datetime import datetime
 from app.models.mural import TIPO_PUBLICACIONES
+from app.utils import get_upload_path
+from datetime import datetime
+from werkzeug.utils import secure_filename
 
 import math
 
@@ -51,6 +53,7 @@ def publicaciones():
 @login_required
 def create_publication():
     """ Vista para crear publicaciones """
+    from flask import current_app
 
     form = PublicacionForm(request.form)
 
@@ -63,6 +66,22 @@ def create_publication():
             autor=current_user,
         )
 
+        # Guardar para obtener un id
+        publicacion.save()
+
+        # Guardar imagenes
+
+        foto_path = get_upload_path(current_app) / current_app.config["PUBLICACIONES_FOLDER"]
+
+        for file_to_upload in request.files.getlist(form.images.name):
+
+            # Todo image name validation, before this step
+            real_img_name = f"{publicacion.id}-{file_to_upload.filename}"
+            file_path = foto_path / real_img_name
+            file_to_upload.save(file_path)
+            publicacion.imagenes.append((real_img_name))
+
+        # Guardar los nombres de las imagenes
         publicacion.save()
 
         # Informar al usuario que se creo la publicacion

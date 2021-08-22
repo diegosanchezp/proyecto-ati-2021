@@ -3,6 +3,7 @@ Modulo de utils
 """
 # Imports utilizado para tipos
 from flask import Flask
+from pathlib import Path
 
 def register_blueprints(app: Flask) -> None:
     """
@@ -41,3 +42,28 @@ def before_request(app: Flask) -> None:
         """
         if not isinstance(current_user, AnonymousUserMixin) :
             g.numero_notificaciones = Notificacion.objects.get_notificaciones_usuario().count()
+
+def get_upload_path(app) -> Path:
+    return Path(app.root_path) / app.config["UPLOAD_FOLDER"]
+
+def check_upload_folder(app: Flask) -> None:
+    """
+    Verificar que las carpetas de imagenes de modelos
+    existan, si no crearlas
+    """
+    folders_to_check = [
+        app.config["PUBLICACIONES_FOLDER"],
+    ]
+
+    upload_path = get_upload_path(app)
+
+    # Verificar que el directorio de uploads exista, si no crearlo
+    if not upload_path.is_dir():
+        upload_path.mkdir()
+        app.logger.info(f"{str(upload_path)} created")
+
+    for folder in folders_to_check:
+        folder_path = upload_path / folder
+        if not folder_path.is_dir():
+            folder_path.mkdir()
+            app.logger.info(f"{str(folder_path)} created")
