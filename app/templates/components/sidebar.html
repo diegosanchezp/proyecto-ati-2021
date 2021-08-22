@@ -11,7 +11,7 @@ Contexto requerido
 {# Version no collapsado #}
 <nav class="px-3 border-end border-dark collapse show" id="main-sidenav">
   <header id="sidebar-header" class="d-flex flex-row justify-content-between mt-2 mb-4">
-    <a href="{{ url_for("mural_blueprint.index") }}" class="m-0 fs-4 text-decoration-none text-reset" id="sidebar-logo">ATI_SOCIAL</a>
+    <a href="{{ url_for("mural_blueprint.index", page=1) }}" class="m-0 fs-4 text-decoration-none text-reset" id="sidebar-logo">ATI_SOCIAL</a>
     <button type="button" class="reset-button" data-bs-toggle="collapse" data-bs-target="#main-sidenav">
       <img src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/x-lg.svg")}}" alt="icono colapsar sidebar">
     </button>

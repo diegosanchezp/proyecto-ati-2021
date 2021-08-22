@@ -1,6 +1,10 @@
 {% extends "mural_base.html" %}
 
+{% from "components/notificaciones/notificacion.html" import render_notificacion with context %}
+
 {% block body %}
+
+{% from "components/pagination.html" import render_navigation %}
 
 <div class="container mt-1 ps-3 pe-5">
     <div class="row pt-1 pb-1 border">
@@ -13,17 +17,15 @@
 
         <h1 class="d-flex justify-content-center"> {{_("Publicaciones de Personas")}} </h1>
 
-        {% for publicacion in publicaciones %}
+        {% for publicacion in publicaciones.items %}
           {% with publicacion = publicacion %}
             {% include "components/mural/publicacion.html" %}
           {% endwith %}
         {% endfor %}
     </div>
 
-    <div class="row mt-1">
-      {% with pagination_number = pagination_number %}
-        {% include 'components/pagination.html' %}
-      {% endwith %}
+    <div class="d-flex mt-1 justify-content-center">
+      {{ render_navigation(publicaciones, "mural_blueprint.index") }}
     </div>
 </div>
 

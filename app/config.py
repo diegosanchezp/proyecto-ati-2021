@@ -54,9 +54,9 @@ class Config:
 
     USER_EDIT_USER_PROFILE_TEMPLATE = "usuario/editar_perfil.html" 
 
-    USER_AFTER_LOGIN_ENDPOINT = "mural_blueprint.index"
+    USER_AFTER_LOGIN_ENDPOINT = "mural_blueprint.index_proxy"
     USER_AFTER_LOGOUT_ENDPOINT = "user.login"
-    USER_AFTER_REGISTER_ENDPOINT = "mural_blueprint.index"
+    USER_AFTER_REGISTER_ENDPOINT = "mural_blueprint.index_proxy"
     USER_AFTER_FORGOT_PASSWORD_ENDPOINT = "usuario_blueprint.recuperar_token"
     USER_AFTER_EDIT_USER_PROFILE_ENDPOINT = "user.edit_user_profile"
     # === Configuracion FlaskBabel ===

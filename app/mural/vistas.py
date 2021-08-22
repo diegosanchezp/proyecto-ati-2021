@@ -15,24 +15,33 @@ import math
 
 mural_blueprint = Blueprint('mural_blueprint', __name__, template_folder='templates')
 
-""" Vista principal del mural """
-@mural_blueprint.route("/")
+@mural_blueprint.route("/", methods=["GET"])
 @login_required
-def index():
+def index_proxy():
+    """
+    Proxi view to redirect from login and register
+    beacuse flask_user endpoint doesn't support parameters
+    """
+    redirect(url_for("mural_blueprint.index", page=1))
 
+@mural_blueprint.route("/<int:page>", methods=["GET"])
+@login_required
+def index(page: int):
+    """ Vista principal del mural """
     form = SearchBarForm(request.form)
     ## Filtrar publicaciones ##
     ## Hay que mejorar un poco la logica ##
 
     publicaciones_publicas = Publicacion.objects(tipo_publicacion=TIPO_PUBLICACIONES[0][0]).order_by('-fecha')
 
-    pagination_number = math.ceil(len(publicaciones_publicas)/10)
 
     return render_template("mural/mural.html",
-                           publicaciones=publicaciones_publicas,
-                           pagination_number=pagination_number,
-                           form=form,
-                           detalleButton=True)
+        # Cambiar per_page a un numero más razonable por ejemplo
+        # per_page=10
+       publicaciones=publicaciones_publicas.paginate(page=page, per_page=2),
+       form=form,
+       detalleButton=True
+   )
 
 @mural_blueprint.route("/publicacion/detalle")
 def publicaciones():
@@ -60,7 +69,7 @@ def create_publication():
 
         flash(_("Publicación creada"), 'success')
 
-        return redirect(url_for('mural_blueprint.index'))
+        return redirect(url_for('mural_blueprint.index', page=1))
 
     return render_template("mural/create_publication.html", form=form)
 
