@@ -1,20 +1,38 @@
+{% from "form_macros.html" import render_field %}
+
 {# Container gris #}
+<form action="" method="POST">
 <div class="bg-greysito p-2">
     <div class="d-flex flex-row align-items-start">
         {# Perfil icono #}
         <img id="publicacion-profile-icon"
             class="publicacion-profile-icon border border-2 rounded-circle"
             src="{{ url_for('static', filename='node_modules/bootstrap-icons/icons/person-circle.svg')}}" 
-            alt="icono de perfil">
+            alt="icono de perfil"/>
 
         {# Area para comentar #}
-        <textarea id="text-comment" class="form-control ml-1 shadow-none textarea"></textarea>
+        {{ render_field( form.contenido,
+                         id="text-comment",
+                         class="form-control ml-1 shadow-none textarea",
+                         label_visible=false) }}
     </div>
 
     {# Botones #}
     <div class="mt-2 text-right">
-        <button type="button" class="btn btn-dark">{{_("Comentar")}}</button>
-        <button type="button" class="btn btn-light border rounded">{{_("Cancelar")}}</button>
+        <button id="comentar" 
+                name="comentar" 
+                class="btn btn-dark" 
+                type="submit">
+
+            {{_("Comentar")}}
+        </button>
+        <a id="cancelar_publicar" 
+               name="cancelar_publicar" 
+               href="/mural" 
+               class="btn btn-secondary m-2 w-25">
+                {{_("Cancelar")}}
+        </a>
     </div>
 
 </div>
+</form>

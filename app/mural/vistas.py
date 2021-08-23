@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for
 from flask_user.decorators import login_required
 from flask_user import current_user
 from app.mural.forms import ( PublicacionForm, ComentarioForm, SearchBarForm)
-from app.models.mural import ( Publicacion )
+from app.models.mural import ( Publicacion, Comentario )
 from app.models.user import ( User )
 from datetime import datetime
 import math
@@ -31,9 +31,32 @@ def index():
                            form=form,
                            detalleButton=True)
 
-@mural_blueprint.route("/publicacion/detalle")
-def publicaciones():
-    return render_template("mural/muralDetallePublicacion.html", detalleButton=False)
+@mural_blueprint.route("/publicacion/detalle", methods=['GET', 'POST'])
+def detalle_publicacion():
+
+    user = current_user
+    form = ComentarioForm(request.form)
+
+    publicacionID = request.args.get('publicacionID')
+    publicacion = Publicacion.objects.get(id=publicacionID)
+
+    if request.method == 'POST' and form.validate():
+
+        comentario = Comentario()
+        comentario.contenido = form.contenido.data
+        comentario.fecha = datetime.now()
+        comentario.usuario = user
+        comentario.publicacion = publicacion
+
+        comentario.save()
+
+        publicacion.comentarios.append(comentario)
+        publicacion.save()
+
+    return render_template("mural/muralDetallePublicacion.html",
+                            detalleButton=False, 
+                            publicacion=publicacion, 
+                            form=form)
 
 """ Vista para crear publicaciones """
 @mural_blueprint.route("/crear-publicacion", methods=['GET', 'POST'])
@@ -49,7 +72,7 @@ def create_publication():
         publicacion.tipo_publicacion = form.tipo_publicacion.data
         publicacion.fecha = datetime.now()
         publicacion.autor = user
-        
+
         publicacion.save()
 
         return redirect(url_for('mural_blueprint.index'))
