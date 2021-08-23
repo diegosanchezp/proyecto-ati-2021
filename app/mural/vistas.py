@@ -24,7 +24,7 @@ def index_proxy():
     Proxi view to redirect from login and register
     beacuse flask_user endpoint doesn't support parameters
     """
-    redirect(url_for("mural_blueprint.index", page=1))
+    return redirect(url_for("mural_blueprint.index", page=1))
 
 @mural_blueprint.route("/<int:page>", methods=["GET"])
 @login_required
