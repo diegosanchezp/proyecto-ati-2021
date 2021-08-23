@@ -6,7 +6,7 @@ from flask_user.decorators import login_required
 from flask_user import current_user
 from flask_babel import _
 from app.mural.forms import ( PublicacionForm, ComentarioForm, SearchBarForm)
-from app.models.mural import ( Publicacion )
+from app.models.mural import ( Publicacion, Comentario )
 from app.models.user import ( User )
 from app.models.mural import TIPO_PUBLICACIONES
 from app.utils import get_upload_path
@@ -45,9 +45,32 @@ def index(page: int):
        detalleButton=True
    )
 
-@mural_blueprint.route("/publicacion/detalle")
-def publicaciones():
-    return render_template("mural/muralDetallePublicacion.html", detalleButton=False)
+@mural_blueprint.route("/publicacion/detalle", methods=['GET', 'POST'])
+def detalle_publicacion():
+
+    user = current_user
+    form = ComentarioForm(request.form)
+
+    publicacionID = request.args.get('publicacionID')
+    publicacion = Publicacion.objects.get(id=publicacionID)
+
+    if request.method == 'POST' and form.validate():
+
+        comentario = Comentario()
+        comentario.contenido = form.contenido.data
+        comentario.fecha = datetime.now()
+        comentario.usuario = user
+        comentario.publicacion = publicacion
+
+        comentario.save()
+
+        publicacion.comentarios.append(comentario)
+        publicacion.save()
+
+    return render_template("mural/muralDetallePublicacion.html",
+                            detalleButton=False, 
+                            publicacion=publicacion, 
+                            form=form)
 
 @mural_blueprint.route("/crear-publicacion", methods=['GET', 'POST'])
 @login_required

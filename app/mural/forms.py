@@ -37,7 +37,7 @@ class SearchBarForm(FlaskForm):
 class ComentarioForm(FlaskForm):
     #respuestas = FieldList(ReferenceField("self"))
     #publicacion = ReferenceField("Publicacion")
-    contenido = StringField('Texto', [validators.Length(max=800)])
+    contenido = TextAreaField('Contenido', [validators.Length(max=800)])
     #usuario = ReferenceField("User")
     # No se define un campo de fecha de creacion, esta
     # se obtendra utilizando el timestamp de mongoDB

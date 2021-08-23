@@ -16,8 +16,9 @@ class Publicacion(db.Document):
     imagenes = db.ListField(db.StringField())
     # Videos sera por los momentos una lista de urls
     videos = db.ListField(db.URLField())
+
     enlaces = db.ListField(db.URLField())
-    fecha = db.DateTimeField()
+
     comentarios = db.ListField(db.ReferenceField("Comentario"))
     autor = db.ReferenceField("User")
 
@@ -31,9 +32,12 @@ class Publicacion(db.Document):
         return [url_for("media_blueprint.foto_publicacion", file_name=img_name) for img_name in self.imagenes]
 
 class Comentario(db.Document):
+    contenido = db.StringField()
+    fecha = db.DateTimeField()
+    
     respuestas = db.ListField(db.ReferenceField("self"))
-    publicacion = db.ReferenceField("Publicacion")
-    contenido = db.StringField(max_length="800")
     usuario = db.ReferenceField("User")
+    publicacion = db.ReferenceField("Publicacion")
+    
     # No se define un campo de fecha de creacion, esta
     # se obtendra utilizando el timestamp de mongoDB
