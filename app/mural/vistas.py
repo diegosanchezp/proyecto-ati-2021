@@ -1,35 +1,49 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import (
+    Blueprint, render_template, request, redirect, url_for,
+    flash,
+)
 from flask_user.decorators import login_required
 from flask_user import current_user
+from flask_babel import _
 from app.mural.forms import ( PublicacionForm, ComentarioForm, SearchBarForm)
 from app.models.mural import ( Publicacion, Comentario )
 from app.models.user import ( User )
+from app.models.mural import TIPO_PUBLICACIONES
+from app.utils import get_upload_path
 from datetime import datetime
+from werkzeug.utils import secure_filename
+
 import math
 
 mural_blueprint = Blueprint('mural_blueprint', __name__, template_folder='templates')
 
-""" Vista principal del mural """
-@mural_blueprint.route("/")
+@mural_blueprint.route("/", methods=["GET"])
 @login_required
-def index():
+def index_proxy():
+    """
+    Proxi view to redirect from login and register
+    beacuse flask_user endpoint doesn't support parameters
+    """
+    redirect(url_for("mural_blueprint.index", page=1))
 
+@mural_blueprint.route("/<int:page>", methods=["GET"])
+@login_required
+def index(page: int):
+    """ Vista principal del mural """
     form = SearchBarForm(request.form)
-    publicaciones_publicas = []
-
     ## Filtrar publicaciones ##
     ## Hay que mejorar un poco la logica ##
-    for publicacion in Publicacion.objects().order_by('-fecha'):
-        if publicacion.tipo_publicacion == 'publica':
-            publicaciones_publicas.append(publicacion)
 
-    pagination_number = math.ceil(len(publicaciones_publicas)/10)
+    publicaciones_publicas = Publicacion.objects(tipo_publicacion=TIPO_PUBLICACIONES[0][0]).order_by('-fecha')
 
-    return render_template("mural/mural.html", 
-                           publicaciones=publicaciones_publicas,
-                           pagination_number=pagination_number,
-                           form=form,
-                           detalleButton=True)
+
+    return render_template("mural/mural.html",
+        # Cambiar per_page a un numero más razonable por ejemplo
+        # per_page=10
+       publicaciones=publicaciones_publicas.paginate(page=page, per_page=2),
+       form=form,
+       detalleButton=True
+   )
 
 @mural_blueprint.route("/publicacion/detalle", methods=['GET', 'POST'])
 def detalle_publicacion():
@@ -58,24 +72,46 @@ def detalle_publicacion():
                             publicacion=publicacion, 
                             form=form)
 
-""" Vista para crear publicaciones """
 @mural_blueprint.route("/crear-publicacion", methods=['GET', 'POST'])
+@login_required
 def create_publication():
+    """ Vista para crear publicaciones """
+    from flask import current_app
 
-    user = current_user
     form = PublicacionForm(request.form)
 
     if request.method == 'POST' and form.validate():
 
-        publicacion = Publicacion()
-        publicacion.contenido = form.contenido.data
-        publicacion.tipo_publicacion = form.tipo_publicacion.data
-        publicacion.fecha = datetime.now()
-        publicacion.autor = user
+        publicacion = Publicacion(
+            contenido=form.contenido.data,
+            tipo_publicacion=form.tipo_publicacion.data,
+            fecha=datetime.now(),
+            autor=current_user,
+        )
 
+        # Guardar para obtener un id
         publicacion.save()
 
-        return redirect(url_for('mural_blueprint.index'))
+        # Guardar imagenes
+
+        foto_path = get_upload_path(current_app) / current_app.config["PUBLICACIONES_FOLDER"]
+
+        for file_to_upload in request.files.getlist(form.images.name):
+
+            # Todo image name validation, before this step
+            real_img_name = f"{publicacion.id}-{file_to_upload.filename}"
+            file_path = foto_path / real_img_name
+            file_to_upload.save(file_path)
+            publicacion.imagenes.append((real_img_name))
+
+        # Guardar los nombres de las imagenes
+        publicacion.save()
+
+        # Informar al usuario que se creo la publicacion
+
+        flash(_("Publicación creada"), 'success')
+
+        return redirect(url_for('mural_blueprint.index', page=1))
 
     return render_template("mural/create_publication.html", form=form)
 

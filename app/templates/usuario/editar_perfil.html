@@ -1,85 +1,95 @@
 {% extends "mural_base.html" %}
+
+{% from "flask_user/_macros.html" import render_checkbox_field %}
+{% from "form_macros.html" import render_field, render_checkbox_field %}
+
 {% block body %}
 
   <main class="d-flex flex-column align-items-center justify-content-center mx-3">
     <h1 class="text-center my-2">{{_("Cambiar informacion de")}} <br>{{_("Perfil")}}</h1>
     <section id="main-edit-fields" class="border rounded-1 p-4">
-      <form class="container">
+      <form action="" enctype="multipart/form-data" class="container" method="POST">
+
+        {{ form.csrf_token }}
+        {{ form.hidden_tag() }}
+
         <div class="row">
-          <div class="col mb-3">
-            <label for="nombreInput" class="form-label">{{_("Nombre y apellido")}}</label>
-            <input type="text" class="form-control" id="nombreInput" aria-describedby="emailHelp">
+          <div class="col-12 d-flex justify-content-center">
+            {% set profile_pic = current_user.get_foto_url() %}
+            {% if profile_pic %}
+              <img id="editar-perfil-form-pic" src="{{ profile_pic }}" class="avatar-img m-1" alt="foto de perfil">
+            {% else %}
+              <img id="sidebar-profile-icon" src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/person-circle.svg")}}" class="avatar-img m-1" alt="icono de perfil">
+            {% endif %}
           </div>
-          <div class="col mb-3">
-            <label for="exampleInputEmail1" class="form-label">{{_("Correo electronico")}}</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            {{render_field(form.nombre_foto)}}
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            {{render_checkbox_field(form.delete_foto)}}
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            {{render_field(form.nombre)}}
+          </div>
+          <div class="col">
+            {{render_field(form.email)}}
           </div>
         </div>
         <div class="row">
-          <div class="col mb-3">
-            <label for="cedulaInput" class="form-label">{{_("Número cedula de identidad")}}</label>
-            <input type="number" class="form-control" id="cedulaInput" aria-describedby="cedulaHelp">
+          <div class="col">
+            {{render_field(form.ci)}}
           </div>
-          <div class="col mb-3">
-            <label for="gender" class="form-label">{{_("Género")}}</label>
-            <select id="gender" class="form-select" aria-label="gender">
-              <option value="g">{{_("Masculino")}}</option>
-              <option value="g">{{_("Femenino")}}</option>
-            </select>
+          <div class="col">
+            {{render_field(form.genero)}}
           </div>
         </div>
         <div class="row">
-          <div class="col mb-3">
-            <label for="colorInput" class="form-label">{{_("Color Favorito")}}</label>
-            <input type="text" class="form-control" id="colorInput" aria-describedby="colorHelp">
+          <div class="col">
+            {{render_field(form.color)}}
           </div>
-          <div class="col mb-3">
-            <label for="librosInput" class="form-label">{{_("Libros Favoritos")}}</label>
-            <input type="text" class="form-control" id="librosInput" aria-describedby="librosHelp">
+          <div class="col">
+            {{render_field(form.libro)}}
           </div>
         </div>
         <div class="row">
-          <div class="col mb-3">
-            <label for="musicaInput" class="form-label">{{_("Musica Favorita")}}</label>
-            <input type="text" class="form-control" id="musicaInput" aria-describedby="musicaHelp">
+          <div class="col">
+            {{render_field(form.musica)}}
           </div>
-          <div class="col mb-3">
-            <label for="videoInput" class="form-label">{{_("Videojuegos Favoritos")}}</label>
-            <input type="text" class="form-control" id="videoInput" aria-describedby="videoHelp">
+          <div class="col">
+            {{render_field(form.fecha_nacimiento)}}
           </div>
         </div>
         <div class="row">
-          <div class="col mb-3">
-            <label for="lenguajesInput" class="form-label">{{_("Lenguajes")}}</label>
-            <input type="text" class="form-control" id="lenguajesInput" aria-describedby="lenguajesHelp">
+          <div class="col">
+            {{render_field(form.lenguajes_programacion)}}
+          </div>
+          <div class="col list-group">
+            {{render_field(form.video_juegos)}}
           </div>
         </div>
         <div class="row">
-          <div class="col mb-3">
-            <label for="descripcionInput" class="form-label">{{_("Descripcion")}}</label>
-            <textarea type="text" class="form-control pb-5" id="descripcionInput" aria-describedby="descripcionHelp"></textarea>
+          <div class="col">
+            {{render_field(form.descripcion)}}
           </div>
         </div>
-        <div class="row pb-3 gap-3">
+        <div class="row mt-2 pb-3 gap-3">
           <div class="col d-flex justify-content-center">
-            <button type="submit" class="btn bg-primary text-white px-4">{{_("Guardar Cambios")}}</button>
+            <button class="btn btn-primary text-white px-4">{{_("Actualizar")}}</button>
           </div>
           <div class="col d-flex justify-content-center">
-            <button type="submit" class="btn bg-danger text-white px-4">{{_("Cancelar")}}</button>
+            <a role="button" href="{{ url_for("mural_blueprint.index", page=1) }}" class="btn btn-secondary text-white px-4">{{_("Cancelar")}}</a>
           </div>
         </div>
       </form>
-    </section>  
-    <section id="social-media-actions" class="border rounded-1 p-4 my-4 ">
-      <div>
-        <label for="formFileInput" class="form-label d-flex mx-3">{{_("Cambiar imagen")}}</label>
-      </div>
-      <div class="d-flex justify-content-center mb-2">
-        <img class="img-fluid rounded" src="https://sm.ign.com/t/ign_es/game/a/among-us/among-us_crsm.200.jpg">
-      </div>
-      <div class="d-flex justify-content-center">
-        <input class="form-control w-100" type="file" id="formFileInput">
-      </div>
     </section>
   </main>
 

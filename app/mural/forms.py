@@ -1,30 +1,40 @@
-from wtforms import Form, BooleanField, StringField, FieldList,TextAreaField,FileField,SelectField, validators
+from wtforms import (
+    BooleanField, StringField,
+    FieldList,TextAreaField,
+    SelectField, MultipleFileField,
+    validators,
+)
+
+from flask_wtf import FlaskForm
+from flask_wtf.file import FileField
+
 from flask_babel import _
+from app.models.mural import TIPO_PUBLICACIONES
 
 
+class PublicacionForm(FlaskForm):
+    contenido = TextAreaField(label=_('Contenido'), validators=[
+        validators.Length(max=1000),
+        validators.InputRequired(message=_("Error: publicación vacía"))])
 
-class PublicacionForm(Form):
-    contenido = TextAreaField('Contenido', [validators.Length(max=1000)])
-    tipo_publicacion = SelectField('Tipo de publicacion', 
-                            choices=[ ('publica',_('Publica')),
-                                      ('privada',_('Privada')) ] )
+    tipo_publicacion = SelectField(_('Tipo de publicacion'),choices=TIPO_PUBLICACIONES)
 
     # Multiple media files
+    images = MultipleFileField(label=_("Imágenes"))
     #imagenes = ListField(ImageField(size=MAX_IMAGE_SIZE))
     #videos = FieldList(URLFiield())
-    multimedia = FileField('Multimedia')
-    enlaces = FieldList(StringField('Enlace'))
+    enlaces = FieldList(StringField(_('Enlace')))
 
     #comentarios = FieldList(ReferenceField("Comentario"))
     #autor = ReferenceField("User")
 
-class SearchBarForm(Form):
+class SearchBarForm(FlaskForm):
     tipo_busqueda = SelectField('Tipo de busqueda', 
                             choices=[ ('amigo',_('Amigo')),
                                       ('desconocido',_('Desconocido')) ] )
     texto_busqueda = StringField('Persona a buscar')
 
-class ComentarioForm(Form):
+class ComentarioForm(FlaskForm):
     #respuestas = FieldList(ReferenceField("self"))
     #publicacion = ReferenceField("Publicacion")
     contenido = TextAreaField('Contenido', [validators.Length(max=800)])

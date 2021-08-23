@@ -1,11 +1,12 @@
 """
 Modelos relacionados con usuarios
 """
+from flask import url_for
 from flask_babel import lazy_gettext as _l
 from flask_user import UserMixin
 from app import db
 from app.constants import MAX_IMAGE_SIZE
-
+from typing import Union, List
 
 class UserNotificationsConfig(db.EmbeddedDocument):
     """
@@ -57,8 +58,8 @@ class User(db.Document, UserMixin):
     color = db.StringField()
     libro = db.StringField()
     musica = db.StringField()
-    video_juegos = db.ListField()
-    lenguajes_programacion = db.ListField()
+    video_juegos = db.ListField(db.StringField())
+    lenguajes_programacion = db.ListField(db.StringField())
     config = db.ReferenceField("UserConfig")
     amigos = db.ListField(db.ReferenceField("self"))
     meta = {
@@ -83,7 +84,20 @@ class User(db.Document, UserMixin):
         if self.username is None and self.nombre is not None:
             self.username = self.nombre.lower().replace(" ", "_")
 
+    def get_foto_url(self) -> Union[str, None]:
+        if bool(self.foto):
+            return url_for("media_blueprint.foto_perfil", user_id=self.id)
+        else:
+            return None
+
+    def get_genero_string(self) -> str:
+        """
+        Obtener un string para el genero
+        """
+        return USUARIO_GENEROS[1][1] if self.genero=='F' else USUARIO_GENEROS[0][1]
+
     def save(self, *args, **kwargs):
+
         self.config.save()
         return super().save(*args, **kwargs)
 

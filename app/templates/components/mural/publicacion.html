@@ -26,23 +26,9 @@
 
     {# Multimedia #}
     <div class="row mt-3">
-        
-        {% if publicacion.multimedia %}
-        <div class="col d-flex justify-content-center">
-            <img id="publicacion-image-icon"
-            class="w-50"
-            src="{{ url_for('static', filename='node_modules/bootstrap-icons/icons/image.svg')}}" 
-            alt="icono de imagen">
-        </div>
-        
-
-        <div class="col d-flex justify-content-center border border-2 rounded">
-            <img id="publicacion-image-icon"
-            class="w-50"
-            src="{{ url_for('static', filename='node_modules/bootstrap-icons/icons/play-circle-fill.svg')}}" 
-            alt="icono de imagen">
-        </div>
-        {% endif %}
+      {% for img_url in publicacion.get_image_urls() %}
+        <img src="{{img_url}}" alt="imagenes de la publicacion">
+      {% endfor %}
     </div>
 
     {# Comments number #}

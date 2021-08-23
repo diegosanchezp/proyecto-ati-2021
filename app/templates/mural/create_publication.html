@@ -10,29 +10,30 @@
         <h1> {{_("Crea una publicacion")}} </h1>
     </div>
 
-    <form action="{{ url_for('mural_blueprint.create_publication') }}" method="POST" class="container-fluid">
+    <form action="" method="POST" class="container-fluid" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
         <div class="row">
-            {{ render_field( form.contenido, rows="15", class="w-100",label_visible=false) }}
+            {{ render_field( form.contenido, rows="15", class="w-100" ) }}
+        </div>
+
+        <div class="row">
+          {{ render_field(form.images) }}
         </div>
 
         <div class="row justify-content-between">
-            {{ render_field( form.multimedia, label_visible=false) }}
 
-            {{ render_field( form.tipo_publicacion, label_visible=false ) }}
-       </div>
+            {{ render_field( form.tipo_publicacion ) }}
+        </div>
 
        <div class="row justify-content-center m-2">
             <button id="publicar" 
-                    name="publicar" 
                     class="btn btn-primary m-2 w-25" 
                     type="submit">
-
                 {{_("Publicar")}}
             </button>
 
             <a id="cancelar_publicar" 
-               name="cancelar_publicar" 
-               href="/mural" 
+               href="{{url_for("mural_blueprint.index",page=1)}}"
                class="btn btn-secondary m-2 w-25">
                 {{_("Cancelar")}}
             </a>

@@ -18,6 +18,11 @@ class Config:
     # Configuracion de flask
     TESTING = False
 
+    # === Configuracion para archivos de usuario ===
+
+    MAX_CONTENT_LENGTH = 1024*768
+    UPLOAD_FOLDER = "uploads"
+    PUBLICACIONES_FOLDER = "publicaciones"
     # === Configuracion de FlaskUser ====
     USER_APP_NAME = "ATI Social"      # Shown in and email templates and page footers
     USER_ENABLE_USERNAME = False    # Disable username authentication
@@ -32,7 +37,6 @@ class Config:
     MAIL_SUPPRESS_SEND = False
     MAIL_PORT = 8025
     MAIL_SERVER = "email_server"
-
     # - Override urls
 
     USER_REGISTER_URL = "/registro"
@@ -41,6 +45,7 @@ class Config:
     USER_CHANGE_PASSWORD_URL = "/editar-password"
 
     # USER_LOGOUT_URL = ""
+    USER_EDIT_USER_PROFILE_URL = "/editar-perfil"
 
     # - Override templates
 
@@ -51,10 +56,13 @@ class Config:
 
     #USER_RESET_PASSWORD_TEMPLATE = ""
 
-    USER_AFTER_LOGIN_ENDPOINT = "mural_blueprint.index"
+    USER_EDIT_USER_PROFILE_TEMPLATE = "usuario/editar_perfil.html" 
+
+    USER_AFTER_LOGIN_ENDPOINT = "mural_blueprint.index_proxy"
     USER_AFTER_LOGOUT_ENDPOINT = "user.login"
-    USER_AFTER_REGISTER_ENDPOINT = "mural_blueprint.index"
+    USER_AFTER_REGISTER_ENDPOINT = "mural_blueprint.index_proxy"
     USER_AFTER_FORGOT_PASSWORD_ENDPOINT = "usuario_blueprint.recuperar_token"
+    USER_AFTER_EDIT_USER_PROFILE_ENDPOINT = "user.edit_user_profile"
     # === Configuracion FlaskBabel ===
     BABEL_DEFAULT_LOCALE = "es_VE"
 
