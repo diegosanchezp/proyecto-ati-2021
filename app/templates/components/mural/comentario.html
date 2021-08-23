@@ -22,7 +22,8 @@
         </p>
         </div>
 
-        <button type="button" class="btn btn-dark" data-bs-toggle="collapse" data-bs-target="#{{ respuesta_id }}">{{_("Responder")}}
+        <button type="button" class="btn btn-dark" data-bs-toggle="collapse" data-bs-target="#123">
+            {{_("Responder")}}
         </button>
         
     </div>
@@ -30,6 +31,6 @@
 
 
 {# Esto es una respuesta al comentario el id tiene que ser unico #}
-<div class="collapse" id="{{ respuesta_id }}">
+<div class="collapse" id="123">
   {% include "components/mural/comentarioResponder.html" %}
 </div>

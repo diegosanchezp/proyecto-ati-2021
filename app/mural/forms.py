@@ -21,12 +21,8 @@ class PublicacionForm(FlaskForm):
 
     # Multiple media files
     images = MultipleFileField(label=_("Imágenes"))
-    #imagenes = ListField(ImageField(size=MAX_IMAGE_SIZE))
     #videos = FieldList(URLFiield())
     enlaces = FieldList(StringField(_('Enlace')))
-
-    #comentarios = FieldList(ReferenceField("Comentario"))
-    #autor = ReferenceField("User")
 
 class SearchBarForm(FlaskForm):
     tipo_busqueda = SelectField('Tipo de busqueda', 
@@ -35,9 +31,4 @@ class SearchBarForm(FlaskForm):
     texto_busqueda = StringField('Persona a buscar')
 
 class ComentarioForm(FlaskForm):
-    #respuestas = FieldList(ReferenceField("self"))
-    #publicacion = ReferenceField("Publicacion")
     contenido = TextAreaField('Contenido', [validators.Length(max=800)])
-    #usuario = ReferenceField("User")
-    # No se define un campo de fecha de creacion, esta
-    # se obtendra utilizando el timestamp de mongoDB

@@ -26,6 +26,7 @@ def index_proxy():
     """
     redirect(url_for("mural_blueprint.index", page=1))
 
+
 @mural_blueprint.route("/<int:page>", methods=["GET"])
 @login_required
 def index(page: int):
@@ -56,11 +57,12 @@ def detalle_publicacion():
 
     if request.method == 'POST' and form.validate():
 
-        comentario = Comentario()
-        comentario.contenido = form.contenido.data
-        comentario.fecha = datetime.now()
-        comentario.usuario = user
-        comentario.publicacion = publicacion
+        comentario = Comentario(
+                contenido = form.contenido.data,
+                fecha = datetime.now(),
+                usuario = user,
+                publicacion = publicacion
+            )
 
         comentario.save()
 
