@@ -6,6 +6,9 @@ app/static/css
 app/static/node_modules
 # app/static/js
 
+# User uploaded files
+app/uploads
+
 # Dependency directories
 node_modules/
 jspm_packages/
