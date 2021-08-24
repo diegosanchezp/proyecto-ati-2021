@@ -9,7 +9,7 @@ from app.mural.forms import ( PublicacionForm, ComentarioForm, SearchBarForm)
 from app.models.mural import ( Publicacion, Comentario )
 from app.models.user import ( User )
 from app.models.mural import TIPO_PUBLICACIONES
-from app.utils import get_upload_path
+from app.utils import get_upload_path, allowed_file_extension
 from datetime import datetime
 from werkzeug.utils import secure_filename
 
@@ -75,10 +75,23 @@ def detalle_publicacion(publicacionID: str):
 def create_publication():
     """ Vista para crear publicaciones """
     from flask import current_app
+    template = "mural/create_publication.html"
 
     form = PublicacionForm(request.form)
 
     if request.method == 'POST' and form.validate():
+
+        images_valid = []
+
+        # Verificar que todas las imagenes sean validas, antes de guardar la publicacion
+        for file_to_upload in request.files.getlist(form.images.name):
+            # Sanitize filename
+            filename = secure_filename(file_to_upload.filename)
+            images_valid.append(allowed_file_extension(filename))
+
+        if not all(images_valid):
+            flash(_("Alguna de las imágenes son inválidas, intenta de nuevo"), "danger")
+            return render_template(template, form=form)
 
         publicacion = Publicacion(
             contenido=form.contenido.data,
@@ -96,11 +109,14 @@ def create_publication():
 
         for file_to_upload in request.files.getlist(form.images.name):
 
-            # Todo image name validation, before this step
-            real_img_name = f"{publicacion.id}-{file_to_upload.filename}"
-            file_path = foto_path / real_img_name
-            file_to_upload.save(file_path)
-            publicacion.imagenes.append((real_img_name))
+            # Sanitize filename
+            filename = secure_filename(file_to_upload.filename)
+
+            if allowed_file_extension(filename):
+                real_img_name = f"{publicacion.id}-{filename}"
+                file_path = foto_path / real_img_name
+                file_to_upload.save(file_path)
+                publicacion.imagenes.append((real_img_name))
 
         # Guardar los nombres de las imagenes
         publicacion.save()
@@ -111,7 +127,7 @@ def create_publication():
 
         return redirect(url_for('mural_blueprint.index', page=1))
 
-    return render_template("mural/create_publication.html", form=form)
+    return render_template(template, form=form)
 
 """ Resultados busqueda """
 @mural_blueprint.route("/resultados-busqueda", methods=['GET', 'POST'])

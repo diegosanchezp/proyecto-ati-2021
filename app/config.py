@@ -23,6 +23,7 @@ class Config:
     MAX_CONTENT_LENGTH = 1024*768
     UPLOAD_FOLDER = "uploads"
     PUBLICACIONES_FOLDER = "publicaciones"
+
     # === Configuracion de FlaskUser ====
     USER_APP_NAME = "ATI Social"      # Shown in and email templates and page footers
     USER_ENABLE_USERNAME = False    # Disable username authentication
