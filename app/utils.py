@@ -4,6 +4,9 @@ Modulo de utils
 # Imports utilizado para tipos
 from flask import Flask
 from pathlib import Path
+from typing import List
+from app.constants import UPLOAD_EXTENSIONS
+import os
 
 def register_blueprints(app: Flask) -> None:
     """
@@ -22,6 +25,15 @@ def register_blueprints(app: Flask) -> None:
     app.register_blueprint(notificaciones_blueprint, url_prefix="/notificaciones")
     app.register_blueprint(usuario_blueprint, url_prefix="/")
     app.register_blueprint(media_blueprint, url_prefix="/media")
+
+def register_signals() -> None:
+    """
+    Registrar signals de modelos
+    """
+    from mongoengine import signals
+    from app.models.mural import Publicacion
+
+    signals.post_delete.connect(Publicacion.post_delete, sender=Publicacion)
 
 def before_request(app: Flask) -> None:
     """
@@ -67,3 +79,18 @@ def check_upload_folder(app: Flask) -> None:
         if not folder_path.is_dir():
             folder_path.mkdir()
             app.logger.info(f"{str(folder_path)} created")
+
+def allowed_file_extension(filename) -> bool:
+    """
+    Verificar que el nombre de un archivo tenga las
+    extensiones correctas
+    """
+    from flask import current_app
+    if not bool(filename): # Empty filename
+        return False
+
+    file_ext = os.path.splitext(filename)[1]
+    return file_ext in UPLOAD_EXTENSIONS
+
+def get_mime_types() -> List[str]:
+    return [f"image/{_type.replace('.','')}" for _type in UPLOAD_EXTENSIONS]

@@ -5,10 +5,11 @@
 {% block body %}
 
 <div class="container-fluid">
-
     <div class="row text-center">
         <h1> {{_("Crea una publicacion")}} </h1>
     </div>
+
+    {% include "components/flash_messages.html" %}
 
     <form action="" method="POST" class="container-fluid" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
