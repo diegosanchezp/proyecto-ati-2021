@@ -26,9 +26,11 @@
 
     {# Multimedia #}
     <div class="row mt-3">
-      {% for img_url in publicacion.get_image_urls() %}
+    {% for img_url in publicacion.get_image_urls() %}
+      {% if img_url %}
         <img src="{{img_url}}" alt="imagenes de la publicacion">
-      {% endfor %}
+      {% endif %}
+    {% endfor %}
     </div>
 
     {# Comments number #}

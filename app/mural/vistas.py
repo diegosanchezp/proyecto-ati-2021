@@ -58,7 +58,7 @@ def detalle_publicacion(publicacionID: str):
                 fecha = datetime.now(),
                 usuario = current_user,
                 publicacion = publicacion
-            )
+                )
 
         comentario.save()
 
@@ -67,8 +67,38 @@ def detalle_publicacion(publicacionID: str):
 
     return render_template("mural/muralDetallePublicacion.html",
                             detalleButton=False, 
-                            publicacion=publicacion, 
+                            publicacion=publicacion,
+                            current_user=current_user,
                             form=form)
+
+@mural_blueprint.route("/comentar_comentario/<string:comentarioID>", methods=['POST'])
+def comentar_comentario(comentarioID: str):
+    form = ComentarioForm(request.form)
+
+    print('')
+    print('-------------------------------------')
+    print(comentarioID)
+
+    comentario = Comentario.objects.get(id=comentarioID)
+
+    print(comentario)
+    print('-------------------------------------')
+    print('')
+
+    if request.method == 'POST' and form.validate():
+        comentario_respuesta = Comentario(
+                contenido = form.contenido.data,
+                fecha = datetime.now(),
+                usuario = current_user,
+                publicacion = comentario.publicacion
+                )
+
+        comentario_respuesta.save()
+
+        comentario.respuestas.append(comentario_respuesta)
+        comentario.save()
+
+    return redirect(url_for('mural_blueprint.detalle_publicacion', publicacionID=comentario.publicacion.id))
 
 @mural_blueprint.route("/crear-publicacion", methods=['GET', 'POST'])
 @login_required
@@ -90,23 +120,21 @@ def create_publication():
         # Guardar para obtener un id
         publicacion.save()
 
-        # Guardar imagenes
+        if form.images.data:
+            # Guardar imagenes
+            foto_path = get_upload_path(current_app) / current_app.config["PUBLICACIONES_FOLDER"]
 
-        foto_path = get_upload_path(current_app) / current_app.config["PUBLICACIONES_FOLDER"]
+            for file_to_upload in request.files.getlist(form.images.name):
+                # Todo image name validation, before this step
+                real_img_name = f"{publicacion.id}-{file_to_upload.filename}"
+                file_path = foto_path / real_img_name
+                file_to_upload.save(file_path)
+                publicacion.imagenes.append((real_img_name))
 
-        for file_to_upload in request.files.getlist(form.images.name):
-
-            # Todo image name validation, before this step
-            real_img_name = f"{publicacion.id}-{file_to_upload.filename}"
-            file_path = foto_path / real_img_name
-            file_to_upload.save(file_path)
-            publicacion.imagenes.append((real_img_name))
-
-        # Guardar los nombres de las imagenes
-        publicacion.save()
+            # Guardar los nombres de las imagenes
+            publicacion.save()
 
         # Informar al usuario que se creo la publicacion
-
         flash(_("Publicación creada"), 'success')
 
         return redirect(url_for('mural_blueprint.index', page=1))

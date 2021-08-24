@@ -20,7 +20,7 @@
     {# Comentarios de la publicacion #}
     <div class="row">
       {% for comentario in publicacion.comentarios %}
-          {% with respuesta_id=comentario.id, comentario=comentario %}
+          {% with comentario=comentario %}
             {% include "components/mural/comentario.html"%}
           {% endwith %}
       {% endfor %}
@@ -33,3 +33,4 @@
 </div>
 
 {% endblock body %}
+

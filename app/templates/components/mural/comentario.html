@@ -1,5 +1,8 @@
-<div class="d-flex flex-column comment-section mb-2">
+{% block extrahead %}
+<script defer src="{{ url_for('static', filename='js/mural/mural.js') }}"></script>
+{% endblock extrahead %}
 
+<div class="d-flex flex-column comment-section mb-2">
     <div class="bg-greysito p-2">
 
         {# Info perfil #}
@@ -22,15 +25,25 @@
         </p>
         </div>
 
-        <button type="button" class="btn btn-dark" data-bs-toggle="collapse" data-bs-target="#123">
+        <button class="btn btn-dark"
+                type="button"
+                onclick="collapseFunc('res{{comentario.id}}')" >
             {{_("Responder")}}
         </button>
         
     </div>
 </div>
 
+{# Comentarios del comentario #}
+<div class="ps-5">
+    {% for comentario_respuesta in comentario.respuestas %}
+          {% with comentario=comentario_respuesta %}
+            {% include "components/mural/comentario.html"%}
+          {% endwith %}
+      {% endfor %}
+</div>
 
 {# Esto es una respuesta al comentario el id tiene que ser unico #}
-<div class="collapse" id="123">
+<div class="mb-2 d-none" id="res{{comentario.id}}">
   {% include "components/mural/comentarioResponder.html" %}
 </div>
