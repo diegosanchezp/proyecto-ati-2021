@@ -4,6 +4,7 @@ from app.utils import (
     register_blueprints,
     before_request,
     check_upload_folder,
+    register_signals,
 )
 from flask_babel import Babel
 # Instanciar extensiones de flask
@@ -50,6 +51,9 @@ def create_app(config_class="Config"):
 
     # Registar todos los blueprints
     register_blueprints(app)
+    
+    # Registrar señales
+    register_signals()
 
     # Cargar funciones que se ejecutan antes de cada request
     before_request(app)

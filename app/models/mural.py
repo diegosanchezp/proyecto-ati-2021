@@ -44,6 +44,17 @@ class Publicacion(db.Document):
         from flask import current_app as app
         return get_upload_path(app) / app.config["PUBLICACIONES_FOLDER"]
 
+    @classmethod
+    def post_delete(cls, sender, document, **kwargs):
+        """
+        Borrar images cuando la publicacion se borre
+        """
+        imgs_path = cls.get_images_path()
+
+        for img_name in document.imagenes:
+            file_path = imgs_path / img_name
+            file_path.unlink(missing_ok=True)
+
 class Comentario(db.Document):
     contenido = db.StringField()
     fecha = db.DateTimeField()

@@ -26,6 +26,15 @@ def register_blueprints(app: Flask) -> None:
     app.register_blueprint(usuario_blueprint, url_prefix="/")
     app.register_blueprint(media_blueprint, url_prefix="/media")
 
+def register_signals() -> None:
+    """
+    Registrar signals de modelos
+    """
+    from mongoengine import signals
+    from app.models.mural import Publicacion
+
+    signals.post_delete.connect(Publicacion.post_delete, sender=Publicacion)
+
 def before_request(app: Flask) -> None:
     """
     Funciones que se ejecutan antes de cada request, generalmente
