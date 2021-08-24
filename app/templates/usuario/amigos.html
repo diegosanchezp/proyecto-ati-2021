@@ -1,0 +1,38 @@
+{% extends "mural_base.html" %}
+{% block body %}
+
+{% from "components/profile_pic.html" import profile_pic %}
+
+<div class="d-flex flex-column justify-content-center align-items-center">
+    {% if target_user.foto %}
+      {{ profile_pic(
+        user=target_user,
+        id_profile="sidebar-profile-pic",
+        id_not_profile="sidebar-profile-pic",
+        class_profile= "m-4", 
+        class_not_profile= "m-4"
+      ) }}
+    {% else %}
+      <img id="sidebar-profile-pic" class="m-4" src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/person-circle.svg")}}" alt="imagen de perfil">
+    {% endif %}
+    <p class="mt-2"><b>{{ target_user.nombre }}</b></p>
+    <div class="badge bg-primary">{{_("Amigos")}}: {{target_user.amigos|length}}</div>
+    <h2 class="m-4">{{ _("Amigos de") }} {{ target_user.nombre }}</h2>
+    {# Friend list #}
+    {% if target_user.amigos %}
+      <ul class="friend-list">
+        {% for amigo in target_user.amigos %}
+          {% include "components/badge-amigo.html" %}
+        {% endfor %}
+      </ul>
+    {% elif not(current_user.amigos) %}
+      <li>
+        <p class="text-center">{{_("No tienes personas agregadas como amigos, ¡busca gente conocela!")}}</p>
+      </li>
+    {% else %}
+    <li class="list-group-item">
+      <p class="text-center">{{_("Esta persona no tiene amigos aún!")}}</p>
+    </li>
+    {% endif %}
+</div>
+{% endblock body %}

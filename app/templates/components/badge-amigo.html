@@ -4,12 +4,21 @@ Contexto requerido
 - User: User model instance
 #}
 
-{# Person #}
+{% from "components/profile_pic.html" import profile_pic %}
 
-<div class="d-flex flex-row justify-content-between align-items-center border rounded w-100 p-2">
-  <div class="d-flex flex-row align-items-center">
-    <a href="{{ url_for('usuario_blueprint.ver_perfil') }}"><img id="sidebar-profile-icon" class="wh-32 amigo-lista-profile-icon main-avatar-img" src="{{ url_for('static', filename='img/iceberg.jpg' ) }}" alt="icono de perfil"></a>
-    <p class="m-0">Aaron Morillo</p>
+{# Person #}
+<li>
+  <div class="d-flex flex-row justify-content-between align-items-center border rounded w-100 p-2">
+    <div class="d-flex flex-row align-items-center">
+      <a href="{{ url_for('usuario_blueprint.ver_perfil', username=amigo.username ) }}">
+        {{profile_pic(
+          user=amigo,
+          class_profile="wh-32 amigo-lista-profile-icon main-avatar-img",
+          class_not_profile = "wh-32 amigo-lista-profile-icon main-avatar-img"
+        )}}
+      </a>
+      <p class="m-0">{{amigo.nombre}}</p>
+    </div>
+    <button type="button" class="btn btn-secondary"><a href="{{ url_for("usuario_blueprint.ver_perfil", username=amigo.username) }}" class="text-decoration-none text-white">{{_("Ver perfil")}}</a></button>
   </div>
-  <button type="button" class="btn btn-secondary"><a href="{{ url_for("usuario_blueprint.ver_perfil") }}" class="text-decoration-none text-white">{{_("Ver perfil")}}</a></button>
-</div>
+</li>
