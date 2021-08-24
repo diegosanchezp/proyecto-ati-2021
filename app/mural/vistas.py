@@ -92,7 +92,7 @@ def create_publication():
 
         # Guardar imagenes
 
-        foto_path = get_upload_path(current_app) / current_app.config["PUBLICACIONES_FOLDER"]
+        foto_path = Publicacion.get_images_path()
 
         for file_to_upload in request.files.getlist(form.images.name):
 

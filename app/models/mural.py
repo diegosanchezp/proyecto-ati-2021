@@ -1,7 +1,9 @@
 from app import db
 from app.constants import MAX_IMAGE_SIZE
+from app.utils import get_upload_path
 from flask_babel import _
 from typing import List
+from pathlib import Path # Utilizado como tipo
 from flask import url_for
 TIPO_PUBLICACIONES = [
     ("PUBLICA", _("Publica")),
@@ -31,6 +33,16 @@ class Publicacion(db.Document):
         Obtener urls para las imagenes de esta publicacion
         """
         return [url_for("media_blueprint.foto_publicacion", file_name=img_name) for img_name in self.imagenes]
+
+    @staticmethod
+    def get_images_path() -> Path:
+        """
+        Obtener el path de la carpeta en donde se guardan las
+        imagenes de las publicaciones.
+        """
+
+        from flask import current_app as app
+        return get_upload_path(app) / app.config["PUBLICACIONES_FOLDER"]
 
 class Comentario(db.Document):
     contenido = db.StringField()

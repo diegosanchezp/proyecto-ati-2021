@@ -3,7 +3,6 @@ from flask import (
 )
 from app.models.user import User
 from app.models.mural import Publicacion
-from app.utils import get_upload_path
 
 media_blueprint = Blueprint('media_blueprint', __name__)
 
@@ -30,7 +29,5 @@ def foto_publicacion(file_name):
     """
     Obtener la foto de una publicacion
     """
-    from flask import current_app
 
-    foto_path = get_upload_path(current_app) / current_app.config["PUBLICACIONES_FOLDER"]
-    return send_from_directory(foto_path,file_name)
+    return send_from_directory(Publicacion.get_images_path(),file_name)
