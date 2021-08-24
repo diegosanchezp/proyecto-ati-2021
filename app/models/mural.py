@@ -11,6 +11,7 @@ TIPO_PUBLICACIONES = [
 class Publicacion(db.Document):
     contenido = db.StringField()
     tipo_publicacion = db.StringField(choices=TIPO_PUBLICACIONES)
+    fecha = db.DateTimeField()
     multimedia = db.FileField()
     # Arreglo de nombre de imagenes
     imagenes = db.ListField(db.StringField())

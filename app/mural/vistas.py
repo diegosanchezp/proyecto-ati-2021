@@ -46,21 +46,17 @@ def index(page: int):
        detalleButton=True
    )
 
-@mural_blueprint.route("/publicacion/detalle", methods=['GET', 'POST'])
-def detalle_publicacion():
-
-    user = current_user
+@mural_blueprint.route("/publicacion/detalle/<string:publicacionID>", methods=['GET', 'POST'])
+def detalle_publicacion(publicacionID: str):
     form = ComentarioForm(request.form)
 
-    publicacionID = request.args.get('publicacionID')
     publicacion = Publicacion.objects.get(id=publicacionID)
 
     if request.method == 'POST' and form.validate():
-
         comentario = Comentario(
                 contenido = form.contenido.data,
                 fecha = datetime.now(),
-                usuario = user,
+                usuario = current_user,
                 publicacion = publicacion
             )
 

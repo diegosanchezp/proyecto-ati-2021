@@ -2,7 +2,7 @@ from wtforms import (
     BooleanField, StringField,
     FieldList,TextAreaField,
     SelectField, MultipleFileField,
-    validators,
+    validators, Form
 )
 
 from flask_wtf import FlaskForm
@@ -30,5 +30,10 @@ class SearchBarForm(FlaskForm):
                                       ('desconocido',_('Desconocido')) ] )
     texto_busqueda = StringField('Persona a buscar')
 
-class ComentarioForm(FlaskForm):
-    contenido = TextAreaField('Contenido', [validators.Length(max=800)])
+class ComentarioForm(Form):
+    contenido = TextAreaField(label=_('Contenido'),
+                              validators=[
+                               validators.Length(max=800),
+                               validators.InputRequired(message=_("Error: publicación vacía"))
+                               ]
+                              )

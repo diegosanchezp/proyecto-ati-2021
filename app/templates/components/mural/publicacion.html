@@ -44,7 +44,7 @@
     {% if detalleButton%}
     <div class="row d-flex justify-content-center mt-3">
 
-        <a href="{{ url_for('mural_blueprint.detalle_publicacion') + '?publicacionID=' + publicacion.id|string }}"
+        <a href="{{ url_for('mural_blueprint.detalle_publicacion', publicacionID=publicacion.id) }}"
            class="btn btn-info w-25 d-flex justify-content-center ">
             {{_("Ver publicacion")}}
         </a>
