@@ -5,7 +5,7 @@ from flask import (
 from flask_user.decorators import login_required
 from flask_user import current_user
 from flask_babel import _
-from app.usuario.forms import ( ConfigForm)
+from app.usuario.forms import ConfigForm
 from app.models.user import ( UserConfig, UserNotificationsConfig)
 import math
 
@@ -40,9 +40,9 @@ def editar_privacidad():
     """
     Vista de editar privacidad
     """
-    form = ConfigForm(request.form)
+    form = ConfigForm(request.form, obj=current_user.config)
 
-    return render_template("usuario/editar_privacidad.html", form=form, UserConfig=UserConfig)
+    return render_template("usuario/editar_privacidad.html", form=form)
 
 @login_required
 @usuario_blueprint.route("/configuracion", methods=['GET', 'POST'])
@@ -50,25 +50,17 @@ def configuracion():
     """
     Vista de configuracion
     """
-    form = ConfigForm(request.form)
+    # Obtener un formulario con la data proveniente del request y del
+    # objeto config del usuario autenticado
+    form = ConfigForm(formdata=request.form, obj=current_user.config)
+    if request.method == 'POST' and form.validate():
+        # Guardar la config
+        updated_config = form.save()
+        # Update form with data from the updated config object
+        form = ConfigForm(obj=updated_config)
 
-    if request.method == 'POST':
-        userConfig = UserConfig(
-                color_perfil = request.form['colorProfile'],
-                color_muro = request.form['colorWall']
-            )
 
-        userNotificationsConfig = UserNotificationsConfig(
-                comentarios = request.form['emailMessage'],
-                mensajes_chat = request.form['emailNotification'],
-                amigos_conectados = request.form['emailFriend'],
-            )
-
-        userConfig.save()
-
-    return render_template("usuario/configuracion.html", form=form, UserNotificationsConfig=UserNotificationsConfig, UserConfig=UserConfig)
-
-    
+    return render_template("usuario/configuracion.html", form=form)
 
 @usuario_blueprint.route("/mis-amigos")
 def mis_amigos():

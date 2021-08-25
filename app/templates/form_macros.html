@@ -1,4 +1,4 @@
-{% macro render_field(field, label=None, label_visible=true, right_url=None, right_label=None) -%}
+{% macro render_field(field, label=None, label_visible=True, right_url=None, right_label=None) -%}
 
   {% if field.type != 'HiddenField' and label_visible %}
     {% if not label %}{% set label=field.label.text %}{% endif %}
@@ -42,17 +42,20 @@
   
 {%- endmacro %}
 
-{% macro render_checkbox_field(field, label=None) -%}
+{% macro render_checkbox_field(field, label=None, show_label=True) -%}
   <div class="form-check">
-    {% if not label %}{% set label=field.label.text %}{% endif %}
-    <label class="form-check-label" for="{{field.id}}">
+    {% if show_label %}
+      {% if not label %}{% set label=field.label.text %}{% endif %}
+      <label class="form-check-label" for="{{field.id}}">
       {{ label|safe }}
       {% if field.flags.required %}
         *
       {% endif %}
+    {% endif %}
     </label>
     {{ field(
-      class_="form-check-input"
+    class_="form-check-input",
+    checked=field.object_data
     )}}
   </div>
 {%- endmacro %}

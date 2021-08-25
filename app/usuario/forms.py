@@ -4,7 +4,7 @@ from wtforms.widgets import html5 as html5_widgets
 from flask_babel import _
 from app.models.user import USUARIO_GENEROS, LANGUAGES
 from app.usuario.custom_fields import StringListField, ImageField
-from app.models.user import User
+from app.models.user import User, UserConfig
 
 from flask_user.forms import (
     RegisterForm as CoreRegisterForm,
@@ -15,43 +15,14 @@ from flask_user.forms import (
 from app.models.user import ( UserConfig, UserNotificationsConfig )
 
 from flask_wtf import FlaskForm as CoreConfigForm
-from flask import current_app as app
+from flask_mongoengine.wtf.orm import model_form
 
-
-class ConfigForm(CoreConfigForm):
-    """
-    Formulario de configuracion
-    """
-
-    emailFriend = fields.BooleanField(
-        label=_(""), render_kw={'checked': UserNotificationsConfig().amigos_conectados}
-    )
-
-    emailNotification = fields.BooleanField(
-        label=_(""), render_kw={'checked': UserNotificationsConfig().comentarios}
-    )
-
-    emailMessage = fields.BooleanField(
-        label=_(""), render_kw={'checked': UserNotificationsConfig().mensajes_chat}
-    )
-
-    colorProfile = fields.StringField(label=_(""),widget=html5_widgets.ColorInput(), default=UserConfig().color_perfil)
-
-    colorWall = fields.StringField(label=_(""),widget=html5_widgets.ColorInput(), default=UserConfig().color_muro)
-
-    language = fields.SelectField(label=_(""),
-        choices=LANGUAGES
-    )
-
-    privateProfile = fields.BooleanField(
-        label=_(""), render_kw={'checked': UserConfig().perfil_privado}
-    )
-
-    privatePublications = fields.BooleanField(
-        label=_(""), render_kw={'checked': UserConfig().publicaciones_privadas}
-    )
-
-
+ConfigForm = model_form(
+    model=UserConfig,field_args={
+        "color_perfil": { "widget": html5_widgets.ColorInput() },
+        "color_muro": { "widget": html5_widgets.ColorInput() }
+    }
+)
 
 class RegisterForm(CoreRegisterForm):
     """

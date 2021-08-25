@@ -22,11 +22,10 @@ class UserNotificationsConfig(db.EmbeddedDocument):
     def __str__(self):
         return f"comentarios={self.comentarios} mensajes_chat={self.mensajes_chat}"
 
-
-LANGUAGES = {
-    'en',
-    'es_VE'
-}
+LANGUAGES = (
+    ('en', _l("English")),
+    ('es_VE',_l("Español Venezuela"))
+)
 
 class UserConfig(db.Document):
     """
@@ -37,6 +36,7 @@ class UserConfig(db.Document):
     publicaciones_privadas = db.BooleanField(default=False)
     perfil_privado = db.BooleanField(default=False)
     notificaciones = db.EmbeddedDocumentField("UserNotificationsConfig")
+    lenguaje = db.StringField(choices=LANGUAGES)
 
 USUARIO_GENEROS = (
     ("M", _l("Masculino")),
