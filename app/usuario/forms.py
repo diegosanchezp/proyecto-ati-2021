@@ -24,6 +24,11 @@ ConfigForm = model_form(
     }
 )
 
+PrivacyForm =  model_form(
+    model=UserConfig,
+    exclude=("color_perfil", "color_muro", "notificaciones","lenguaje")
+)
+
 class RegisterForm(CoreRegisterForm):
     """
     Formulario de registro extendido

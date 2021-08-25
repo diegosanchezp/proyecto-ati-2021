@@ -5,7 +5,7 @@ from flask import (
 from flask_user.decorators import login_required
 from flask_user import current_user
 from flask_babel import _
-from app.usuario.forms import ConfigForm
+from app.usuario.forms import ConfigForm, PrivacyForm
 from app.models.user import ( UserConfig, UserNotificationsConfig)
 import math
 
@@ -34,18 +34,21 @@ def ver_perfil():
     """
     return render_template("usuario/ver_perfil.html")
 
+@usuario_blueprint.route("/editar-privacidad", methods=['GET', 'POST'])
 @login_required
-@usuario_blueprint.route("/editar-privacidad")
 def editar_privacidad():
     """
     Vista de editar privacidad
     """
-    form = ConfigForm(request.form, obj=current_user.config)
-
+    form = PrivacyForm(request.form, obj=current_user.config)
+    if request.method == 'POST' and form.validate():
+        updated_config = form.save()
+        # Update form with data from the updated config object
+        form = PrivacyForm(obj=updated_config)
     return render_template("usuario/editar_privacidad.html", form=form)
 
-@login_required
 @usuario_blueprint.route("/configuracion", methods=['GET', 'POST'])
+@login_required
 def configuracion():
     """
     Vista de configuracion
@@ -59,6 +62,7 @@ def configuracion():
         # Update form with data from the updated config object
         form = ConfigForm(obj=updated_config)
 
+        flash(_("Config Guardada"), "success")
 
     return render_template("usuario/configuracion.html", form=form)
 
