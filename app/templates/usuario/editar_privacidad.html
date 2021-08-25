@@ -1,4 +1,8 @@
 {% extends "mural_base.html" %}
+
+{% from "flask_user/_macros.html" import render_checkbox_field %}
+{% from "form_macros.html" import render_field, render_field2, render_checkbox_field %}
+
 {% block body %}
 
 <main class="vh-100 d-flex flex-column mt-5 gap-5">
@@ -7,9 +11,7 @@
       <p>{{_("¿Cambiar a un perfil privado?")}}</p>
     </div>
     <div class="d-flex ">
-      <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-      </div>
+      {{render_checkbox_field(form.privateProfile)}}
     </div>
   </div>
   <div class="d-flex flex-row border rounded-2 px-3 py-2 justify-content-between mx-4 align-items-center">
@@ -17,9 +19,7 @@
       <p>{{_("¿Publicaciones por defecto privadas?")}}</p>
     </div>
     <div class="d-flex ">
-      <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-      </div>
+      {{render_checkbox_field(form.privatePublications)}}
     </div>
   </div>
 </main>
