@@ -9,7 +9,7 @@ Contexto requerido
 {# Person #}
 <li>
   <div class="d-flex flex-row justify-content-between align-items-center border rounded w-100 p-2">
-    <div class="d-flex flex-row align-items-center">
+    <div class="d-flex flex-row align-items-center gap-2">
       <a href="{{ url_for('usuario_blueprint.ver_perfil', username=amigo.username ) }}">
         {{profile_pic(
           user=amigo,
