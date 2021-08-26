@@ -63,12 +63,13 @@ def configuracion():
 
     return render_template("usuario/configuracion.html")
 
-@usuario_blueprint.route("/mis-amigos")
-def mis_amigos():
+@usuario_blueprint.route("/amigos/<username>")
+def amigos(username):
+    target_user = User.objects.get_or_404(username=username)
     """
     Mis amigos
     """
-    return render_template("usuario/mis_amigos.html")
+    return render_template("usuario/amigos.html", target_user=target_user)
 
 @usuario_blueprint.route("/mi-perfil")
 def mi_perfil():
