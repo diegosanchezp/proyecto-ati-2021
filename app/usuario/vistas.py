@@ -1,5 +1,17 @@
-from flask import Blueprint, render_template
+from flask import (
+    Blueprint,
+    render_template,
+    url_for
+)
+
 usuario_blueprint = Blueprint('usuario_blueprint', __name__, template_folder='templates')
+
+from flask_dance.contrib.facebook import make_facebook_blueprint, facebook
+
+facebook_blueprint = make_facebook_blueprint(
+    redirect_to="user.fb_callback",
+    scope="email,user_birthday,user_gender,public_profile"
+)
 
 @usuario_blueprint.route("/recuperar")
 def recuperar_password():

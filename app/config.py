@@ -14,11 +14,15 @@ class Config:
         "host": "mongodb",
         "port": 27017
     }
-
     # Configuracion de flask
     TESTING = False
 
+    # Facebook OAUTH login
+    FACEBOOK_OAUTH_CLIENT_ID = "138076435140848"
+    FACEBOOK_OAUTH_CLIENT_SECRET = "44b507b0fb348cf0b380ddb7f5cfa20c"
+
     # === Configuracion de FlaskUser ====
+    USER_ENABLE_AUTH0 = True
     USER_APP_NAME = "ATI Social"      # Shown in and email templates and page footers
     USER_ENABLE_USERNAME = False    # Disable username authentication
     USER_REQUIRE_RETYPE_PASSWORD = True    # Se le indicca al usuario ingresar la contraseña de nuevo
@@ -46,19 +50,21 @@ class Config:
     # - Override templates
 
     USER_LOGIN_TEMPLATE = "usuario/login.html"
+    USER_LOGIN_AUTH0_TEMPLATE = "usuario/login.html"
     USER_FORGOT_PASSWORD_TEMPLATE = "usuario/recuperar_password.html"
     USER_REGISTER_TEMPLATE = "usuario/registro.html"
     USER_CHANGE_PASSWORD_TEMPLATE = "usuario/editar_password.html"
+    USER_EDIT_USER_PROFILE_TEMPLATE = "usuario/editar_perfil.html"
 
     #USER_RESET_PASSWORD_TEMPLATE = ""
-
-    USER_EDIT_USER_PROFILE_TEMPLATE = "usuario/editar_perfil.html" 
 
     USER_AFTER_LOGIN_ENDPOINT = "mural_blueprint.index"
     USER_AFTER_LOGOUT_ENDPOINT = "user.login"
     USER_AFTER_REGISTER_ENDPOINT = "mural_blueprint.index"
     USER_AFTER_FORGOT_PASSWORD_ENDPOINT = "usuario_blueprint.recuperar_token"
     USER_AFTER_EDIT_USER_PROFILE_ENDPOINT = "user.edit_user_profile"
+    USER_AFTER_LOGOUT_ENDPOINT = "user.login"
+
     # === Configuracion FlaskBabel ===
     BABEL_DEFAULT_LOCALE = "es_VE"
 

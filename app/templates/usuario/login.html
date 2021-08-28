@@ -55,12 +55,12 @@
             <div>Twitter</div>
           </div>
         </button>
-        <button type="button" class="btn btn-secondary">
+        <a class="btn btn-secondary" href="{{ url_for("facebook.login")}}">
           <div class="d-flex flex-row">
             <img class="me-2" src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/facebook.svg")}}" alt="icono facebook">
             <div>Facebook</div>
           </div>
-        </button>
+        </a>
       </div>
     </section>
 
