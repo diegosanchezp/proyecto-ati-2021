@@ -12,7 +12,7 @@ def register_blueprints(app: Flask) -> None:
     from app.mural.vistas import mural_blueprint
     from app.chat.vistas import chat_blueprint
     from app.notificaciones.vistas import notificaciones_blueprint
-    from app.usuario.vistas import usuario_blueprint
+    from app.usuario.vistas import usuario_blueprint, facebook_blueprint
     from app.media.vistas import media_blueprint
 
     # Registrar blueprints con la app de Flask
@@ -21,6 +21,7 @@ def register_blueprints(app: Flask) -> None:
     app.register_blueprint(notificaciones_blueprint, url_prefix="/notificaciones")
     app.register_blueprint(usuario_blueprint, url_prefix="/")
     app.register_blueprint(media_blueprint, url_prefix="/media")
+    app.register_blueprint(facebook_blueprint, url_prefix="/fb")
 
 def before_request(app: Flask) -> None:
     """
