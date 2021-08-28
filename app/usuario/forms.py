@@ -134,4 +134,5 @@ class EditUserProfileForm(CoreEditUserProfileForm):
 
     delete_foto = fields.BooleanField(
         label=_("¿ Borrar foto ?"),
+        default=False,
     )
