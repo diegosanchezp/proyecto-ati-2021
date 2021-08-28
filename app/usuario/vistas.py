@@ -1,10 +1,16 @@
 from flask import (
     Blueprint, render_template,
-    request, flash, url_for
+    request, flash, url_for,
+    redirect,
 )
-from app.models.user import USUARIO_GENEROS
 from flask_login import current_user
+from flask_user.decorators import login_required
+from flask_user import current_user
 from flask_babel import _
+from app.usuario.forms import ConfigForm, PrivacyForm
+from app.models.user import (
+    UserConfig, UserNotificationsConfig, USUARIO_GENEROS
+)
 
 usuario_blueprint = Blueprint('usuario_blueprint', __name__, template_folder='templates')
 from app.models.user import User
@@ -54,21 +60,39 @@ def ver_perfil(username):
         is_friend=target_user in current_user.amigos
     )
 
-@usuario_blueprint.route("/editar-privacidad")
+@usuario_blueprint.route("/editar-privacidad", methods=['GET', 'POST'])
+@login_required
 def editar_privacidad():
     """
     Vista de editar privacidad
     """
+    form = PrivacyForm(request.form, obj=current_user.config)
+    if request.method == 'POST' and form.validate():
+        updated_config = form.save()
+        # Update form with data from the updated config object
+        form = PrivacyForm(obj=updated_config)
+        flash(_("Config privacidad guardada"), "success")
+    return render_template("usuario/editar_privacidad.html", form=form)
 
-    return render_template("usuario/editar_privacidad.html")
-
-@usuario_blueprint.route("/configuracion")
+@usuario_blueprint.route("/configuracion", methods=['GET', 'POST'])
+@login_required
 def configuracion():
     """
     Vista de configuracion
     """
+    # Obtener un formulario con la data proveniente del request y del
+    # objeto config del usuario autenticado
+    form = ConfigForm(formdata=request.form, obj=current_user.config)
+    if request.method == 'POST' and form.validate():
+        # Guardar la config
+        updated_config = form.save()
+        # Update form with data from the updated config object
+        form = ConfigForm(obj=updated_config)
 
-    return render_template("usuario/configuracion.html")
+        flash(_("Config Guardada"), "success")
+        return redirect("configuracion")
+
+    return render_template("usuario/configuracion.html", form=form)
 
 @usuario_blueprint.route("/amigos/<username>")
 def amigos(username):

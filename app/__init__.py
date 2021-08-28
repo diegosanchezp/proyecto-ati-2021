@@ -5,6 +5,7 @@ from app.utils import (
     before_request,
 )
 from flask_babel import Babel
+from flask_login.mixins import AnonymousUserMixin
 
 # Instanciar extensiones de flask
 db = MongoEngine()
@@ -37,12 +38,12 @@ def create_app(config_class="Config"):
     # Initialize Flask-Babel
     babel.init_app(app)
 
-    # Use the browser's language preferences to select an available translation
     @babel.localeselector
     def get_locale():
-        from flask import request
-        translations = [str(translation) for translation in babel.list_translations()]
-        return request.accept_languages.best_match(translations)
+        from flask_user import current_user
+        # if a user is logged in, use the locale from the user settings
+        if not isinstance(current_user, AnonymousUserMixin):
+            return current_user.config.lenguaje
 
     # Registar todos los blueprints
     register_blueprints(app)

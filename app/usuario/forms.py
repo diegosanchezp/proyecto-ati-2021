@@ -2,14 +2,35 @@ from wtforms import validators, fields, widgets
 from wtforms.fields import html5 as html5_fields
 from wtforms.widgets import html5 as html5_widgets
 from flask_babel import _
-from app.models.user import USUARIO_GENEROS, User
+from app.models.user import (
+    USUARIO_GENEROS, User,
+    UserConfig,
+    LANGUAGES,
+)
 from app.usuario.custom_fields import StringListField, ImageField
-from app.models.user import User
+from app.models.user import User, UserConfig
 
 from flask_user.forms import (
     RegisterForm as CoreRegisterForm,
     LoginForm as CoreLoginForm,
     EditUserProfileForm as CoreEditUserProfileForm
+)
+
+from app.models.user import ( UserConfig, UserNotificationsConfig )
+
+from flask_wtf import FlaskForm as CoreConfigForm
+from flask_mongoengine.wtf.orm import model_form
+
+ConfigForm = model_form(
+    model=UserConfig,field_args={
+        "color_perfil": { "widget": html5_widgets.ColorInput() },
+        "color_muro": { "widget": html5_widgets.ColorInput() }
+    }
+)
+
+PrivacyForm =  model_form(
+    model=UserConfig,
+    exclude=("color_perfil", "color_muro", "notificaciones","lenguaje")
 )
 
 class RegisterForm(CoreRegisterForm):

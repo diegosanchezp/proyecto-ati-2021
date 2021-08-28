@@ -1,15 +1,23 @@
 {% extends "mural_base.html" %}
+
+{% from "form_macros.html" import render_field, render_checkbox_field %}
+
 {% block body %}
 
-<form class="d-flex flex-column justify-content-start gap-5 mt-4">
+
+{% include "components/flash_messages.html" %}
+
+<form action="" class="d-flex flex-column justify-content-start gap-5 mt-4" method="POST">
+
+  {{ form.hidden_tag() }}
+  {{ form.notificaciones.hidden_tag() }}
+
   <div class="d-flex flex-row border rounded-2 px-3 py-2 justify-content-between mx-4 align-items-center">
     <div class="d-flex pt-3">
       <p>{{_("¿Notificar amigos conectados por correo?")}}</p>
     </div>
     <div class="d-flex ">
-      <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-      </div>
+      {{render_checkbox_field(show_label=False,field=form.notificaciones.amigos_conectados)}}
     </div>
   </div>
 
@@ -18,9 +26,7 @@
       <p>{{_("¿Notificar comentarios por correo?")}}</p>
     </div>
     <div class="d-flex ">
-      <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" id="SwitchEmail">
-      </div>
+        {{render_checkbox_field(show_label=False, field=form.notificaciones.comentarios)}}
     </div>
   </div>
 
@@ -29,9 +35,7 @@
       <p>{{_("¿Notificar mensajes de chat por correo?")}}</p>
     </div>
     <div class="d-flex ">
-      <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" id="SwitchEmails">
-      </div>
+      {{render_checkbox_field(show_label=False, field=form.notificaciones.mensajes_chat)}}
     </div>
   </div>
 
@@ -39,8 +43,8 @@
     <div class="d-flex pt-3">
       <p>{{_("Color del perfil")}}</p>
     </div>
-    <div class="d-flex">
-      <input type="color" class="btn form-control-color d-flex" id="profileColorInput" value="#563d7c" title="Choose your color" >
+    <div class="d-flex pt-3 ">
+      {{form.color_perfil()}}
     </div>
   </div>
 
@@ -48,23 +52,30 @@
     <div class="d-flex pt-3">
       <p>{{_("Color del muro")}}</p>
     </div>
-    <div class="d-flex">
-      <input type="color" class="btn form-control-color d-flex" id="MuralColorInput" value="#563d7c" title="Choose your color" >
+    <div class="d-flex pt-3">
+      {{form.color_muro()}}
     </div>
   </div>
 
-  <div class="d-flex flex-row border rounded-2 px-3 py-2 justify-content-between mx-4 align-items-center">
+  <div class="d-flex flex-row border rounded-2 px-3 py-2 justify-content-between mx-4">
     <div class="d-flex pt-3">
       <p>{{_("Lenguaje")}}</p>
     </div>
-    <div class="form-group">
-    <select class="form-control" id="LanguageFormControlSelect1">
-      <option>Español</option>
-      <option>English</option>
-    </select>
+    <div class="mt-3">
+      {{render_field(label_visible=False, field=form.lenguaje)}}
     </div>
   </div>
+  <div class="row mt-2 pb-3 gap-3">
+    <div class="col d-flex justify-content-center">
+      <button type="submit" class="btn btn-primary text-white px-4">{{_("Guardar")}}</button>
+    </div>
+    <div class="col d-flex justify-content-center">
+      <a role="button" href="{{ url_for("usuario_blueprint.configuracion") }}" class="btn btn-secondary text-white px-4">{{_("Cancelar")}}</a>
+    </div>
+  </div>
+</form>
 
+<section>
   <hr class="mx-4"/>
 
   <div class="d-flex">
@@ -83,6 +94,5 @@
       </a>
     </div>
   </div>
-
-</form>
+</section>
 {% endblock body %}

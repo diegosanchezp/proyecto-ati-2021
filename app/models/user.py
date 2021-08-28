@@ -22,19 +22,27 @@ class UserNotificationsConfig(db.EmbeddedDocument):
     def __str__(self):
         return f"comentarios={self.comentarios} mensajes_chat={self.mensajes_chat}"
 
+LANGUAGES = (
+    ('en', _l("English")),
+    ('es_VE',_l("Español Venezuela"))
+)
+
 class UserConfig(db.Document):
     """
     Configuracion de un usuario
     """
-    color_perfil = db.StringField()
-    color_muro = db.StringField()
+    color_perfil = db.StringField(default="#FFFFFF")
+    color_muro = db.StringField(default="#FFFFFF")
     publicaciones_privadas = db.BooleanField(default=False)
+    perfil_privado = db.BooleanField(default=False)
     notificaciones = db.EmbeddedDocumentField("UserNotificationsConfig")
+    lenguaje = db.StringField(choices=LANGUAGES)
 
 USUARIO_GENEROS = (
     ("M", _l("Masculino")),
     ("F", _l("Femenino")),
 )
+
 
 class User(db.Document, UserMixin):
     """
