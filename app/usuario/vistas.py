@@ -63,6 +63,7 @@ def configuracion():
         form = ConfigForm(obj=updated_config)
 
         flash(_("Config Guardada"), "success")
+        return redirect("configuracion")
 
     return render_template("usuario/configuracion.html", form=form)
 

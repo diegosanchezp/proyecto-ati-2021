@@ -169,7 +169,7 @@ msgstr "Recieve an email when someone sent you a message?"
 
 #: app/templates/usuario/configuracion.html:40
 msgid "Color del perfil"
-msgstr "See my profile"
+msgstr "Color of your profile"
 
 #: app/templates/usuario/configuracion.html:49
 msgid "Color del muro"
@@ -185,7 +185,7 @@ msgstr "Advanced configuration"
 
 #: app/templates/usuario/configuracion.html:77
 msgid "Editar Perfil"
-msgstr "See my profile"
+msgstr "Edit profile"
 
 #: app/templates/usuario/configuracion.html:82
 msgid "Editar Contraseña"
@@ -463,6 +463,11 @@ msgstr "My Account"
 #: app/templates/usuario/ver_perfil.html:23
 msgid "Eliminar Amistad"
 msgstr "Delete friendship"
+
+#: app/templates/usuario/configuracion.html:68
+#: app/templates/usuario/editar_perfil.html:27
+msgid "Guardar"
+msgstr "Save"
 
 #~ msgid "Estas respondiendo al comentario de %(username)"
 #~ msgstr "You're responding to %(username) comment"
