@@ -5,6 +5,8 @@
 {% block body %}
 
 
+{% include "components/flash_messages.html" %}
+
 <form action="" class="d-flex flex-column justify-content-start gap-5 mt-4" method="POST">
 
   {{ form.hidden_tag() }}

@@ -45,6 +45,7 @@ def editar_privacidad():
         updated_config = form.save()
         # Update form with data from the updated config object
         form = PrivacyForm(obj=updated_config)
+        flash(_("Config privacidad guardada"), "success")
     return render_template("usuario/editar_privacidad.html", form=form)
 
 @usuario_blueprint.route("/configuracion", methods=['GET', 'POST'])

@@ -4,6 +4,8 @@
 
 {% block body %}
 
+{% include "components/flash_messages.html" %}
+
 <form class="vh-100 d-flex flex-column mt-5 gap-5" action="" method="POST">
   {{ form.csrf_token() }}
   <div class="d-flex flex-row border rounded-2 px-3 py-2 justify-content-between mx-4 align-items-center">

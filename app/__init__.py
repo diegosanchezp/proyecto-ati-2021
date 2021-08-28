@@ -44,9 +44,6 @@ def create_app(config_class="Config"):
         # if a user is logged in, use the locale from the user settings
         if not isinstance(current_user, AnonymousUserMixin):
             return current_user.config.lenguaje
-        # otherwise try to guess the language from the user accept
-        # header the browser transmits.  We support de/fr/en in this
-        # example.  The best match wins.
 
     # Registar todos los blueprints
     register_blueprints(app)
