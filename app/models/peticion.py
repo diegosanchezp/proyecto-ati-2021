@@ -144,7 +144,7 @@ class Notificacion(AbstractModel):
             },
 
             TipoNotificaciones.COMENTARIO: {
-                "url": url_for('mural_blueprint.publicaciones'),
+                "url": url_for('mural_blueprint.detalle_publicacion', publicacionID=self.recurso.id),
                 "texto": _("Ver publicacion")
             },
 
