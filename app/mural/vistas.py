@@ -73,6 +73,14 @@ def detalle_publicacion(publicacionID: str):
         publicacion.comentarios.append(comentario)
         publicacion.save()
 
+        n = Notificacion(
+            emisor=current_user,
+            receptor=publicacion.autor,
+            descripcion=f"{current_user.nombre} ha comentado tu publicación",
+            tipo=TipoNotificaciones.COMENTARIO,
+            recurso=publicacion,
+        )
+        n.save()
     return render_template("mural/muralDetallePublicacion.html",
                             detalleButton=False, 
                             publicacion=publicacion,
@@ -98,7 +106,8 @@ def comentar_comentario(comentarioID: str):
         comentario.respuestas.append(comentario_respuesta)
         comentario.save()
 
-        # Enviar notificacion al autor del comentario
+        # Enviar notificacion al autor del comentario que se esta
+        # respondiendo
         n = Notificacion(
             emisor=current_user,
             receptor=comentario.usuario,
@@ -107,6 +116,18 @@ def comentar_comentario(comentarioID: str):
             recurso=comentario.publicacion,
         )
         n.save()
+
+        # Enviar notificacion al autor de la publicacion, de que su publicacion ha sido comentada
+        n2 = Notificacion(
+            emisor=current_user,
+            receptor=comentario.publicacion.autor,
+            descripcion=f"{current_user.nombre} ha comentado tu publicación",
+            tipo=TipoNotificaciones.COMENTARIO,
+            recurso=comentario.publicacion,
+        )
+
+        n2.save()
+
     return redirect(url_for('mural_blueprint.detalle_publicacion', publicacionID=comentario.publicacion.id))
 
 @mural_blueprint.route("/crear-publicacion", methods=['GET', 'POST'])
