@@ -47,9 +47,7 @@ def index(page: int):
 
 
     return render_template("mural/mural.html",
-        # Cambiar per_page a un numero más razonable por ejemplo
-        # per_page=10
-       publicaciones=publicaciones_publicas.paginate(page=page, per_page=2),
+       publicaciones=publicaciones_publicas.paginate(page=page, per_page=10),
        form=form,
        detalleButton=True
    )

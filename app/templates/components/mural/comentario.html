@@ -45,5 +45,7 @@
 
 {# Esto es una respuesta al comentario el id tiene que ser unico #}
 <div class="mb-2 d-none" id="res{{comentario.id}}">
-  {% include "components/mural/comentarioResponder.html" %}
+  {% with comentario_responder=true %}
+    {% include "components/mural/comentarioEscribir.html" %}
+  {% endwith %}
 </div>
