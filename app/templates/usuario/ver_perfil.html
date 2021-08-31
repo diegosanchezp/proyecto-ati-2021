@@ -30,7 +30,12 @@
                 {% if it_is_the_current_user %}
                     <!-- External user buttons -->
                     <li class="list-group-item">
-                        <a href="{{ url_for("user.edit_user_profile") }}"><button class="btn btn-info" >{{_("Editar mi perfil") }}</button></a>
+                        <a href="{{ url_for('user.edit_user_profile') }}">
+                            <button class="btn btn-info" >{{_("Editar mi perfil") }}</button>
+                        </a>
+                        <a href="{{ url_for('mural_blueprint.create_publication') }}">
+                            <button class="btn btn-info" >{{_("Crear Publicacion") }}</button>
+                        </a>
                     </li>
                 {% else %}
                    <!--Current user buttons-->
