@@ -5,15 +5,23 @@ from flask import (
 from flask_user.decorators import login_required
 from flask_user import current_user
 from flask_babel import _
-from app.mural.forms import ( PublicacionForm, ComentarioForm, SearchBarForm)
-from app.models.mural import ( Publicacion, Comentario )
+from app.mural.forms import (
+    PublicacionForm,
+    ComentarioForm,
+    SearchBarForm
+)
+from app.models.mural import (
+    Publicacion, Comentario,
+    TIPO_PUBLICACIONES
+)
+
 from app.models.user import ( User )
-from app.models.mural import TIPO_PUBLICACIONES
+from app.models.peticion import (
+    Notificacion, TipoNotificaciones,
+)
 from app.utils import get_upload_path, allowed_file_extension
 from datetime import datetime
 from werkzeug.utils import secure_filename
-
-import math
 
 mural_blueprint = Blueprint('mural_blueprint', __name__, template_folder='templates')
 
@@ -65,6 +73,14 @@ def detalle_publicacion(publicacionID: str):
         publicacion.comentarios.append(comentario)
         publicacion.save()
 
+        n = Notificacion(
+            emisor=current_user,
+            receptor=publicacion.autor,
+            descripcion=f"{current_user.nombre} ha comentado tu publicación",
+            tipo=TipoNotificaciones.COMENTARIO,
+            recurso=publicacion,
+        )
+        n.save()
     return render_template("mural/muralDetallePublicacion.html",
                             detalleButton=False, 
                             publicacion=publicacion,
@@ -74,9 +90,9 @@ def detalle_publicacion(publicacionID: str):
 @mural_blueprint.route("/comentar_comentario/<string:comentarioID>", methods=['POST'])
 def comentar_comentario(comentarioID: str):
     form = ComentarioForm(request.form)
-
+    # Todo validar si el comentario respuesta pertence a la publicacion que se esta conectando
     comentario = Comentario.objects.get(id=comentarioID)
-
+    
     if request.method == 'POST' and form.validate():
         comentario_respuesta = Comentario(
                 contenido = form.contenido.data,
@@ -89,6 +105,28 @@ def comentar_comentario(comentarioID: str):
 
         comentario.respuestas.append(comentario_respuesta)
         comentario.save()
+
+        # Enviar notificacion al autor del comentario que se esta
+        # respondiendo
+        n = Notificacion(
+            emisor=current_user,
+            receptor=comentario.usuario,
+            descripcion=f"{current_user.nombre} ha respondido tu comentario de la publicacion",
+            tipo=TipoNotificaciones.COMENTARIO,
+            recurso=comentario.publicacion,
+        )
+        n.save()
+
+        # Enviar notificacion al autor de la publicacion, de que su publicacion ha sido comentada
+        n2 = Notificacion(
+            emisor=current_user,
+            receptor=comentario.publicacion.autor,
+            descripcion=f"{current_user.nombre} ha comentado tu publicación",
+            tipo=TipoNotificaciones.COMENTARIO,
+            recurso=comentario.publicacion,
+        )
+
+        n2.save()
 
     return redirect(url_for('mural_blueprint.detalle_publicacion', publicacionID=comentario.publicacion.id))
 
