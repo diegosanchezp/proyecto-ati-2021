@@ -3,6 +3,7 @@ Modelos relacionados con usuarios
 """
 from flask import url_for
 from flask_babel import lazy_gettext as _l
+from flask_babel import _
 from flask_user import UserMixin
 from app import db
 from app.constants import MAX_IMAGE_SIZE
@@ -36,6 +37,18 @@ USUARIO_GENEROS = (
     ("F", _l("Femenino")),
 )
 
+ESTADO_SOLICITUD = [
+    ("PENDIENTE", _("Pendiente")),
+    ("ACEPTADA", _("Aceptada")),
+    ("RECHAZADA", _("Rechazada")),
+]
+class Solicitud_Amistad(db.Document):
+    """ Solicitudes que son enviadas """
+    estado = db.StringField(choices=ESTADO_SOLICITUD)
+    emisor = db.ReferenceField("User")
+    receptor = db.ReferenceField("User")
+
+
 class User(db.Document, UserMixin):
     """
     Modelo usuario
@@ -60,7 +73,10 @@ class User(db.Document, UserMixin):
     musica = db.StringField()
     video_juegos = db.ListField(db.StringField())
     lenguajes_programacion = db.ListField(db.StringField())
+
+    # Relaciones
     config = db.ReferenceField("UserConfig")
+    solicitudes = db.ListField(db.ReferenceField("Solicitud_Amistad"))
     amigos = db.ListField(db.ReferenceField("self"))
     meta = {
         "cascade": True,
