@@ -1,22 +1,23 @@
+{% from "components/profile_pic.html" import profile_pic %}
 {% from "form_macros.html" import render_field %}
 
 {# Container gris #}
 
-{% if comentario_responder %}
-<form action="{{ url_for('mural_blueprint.comentar_comentario', comentarioID=comentario.id)}}"
+  <form action="
+        {% if comentario_responder %}
+          {{ url_for('mural_blueprint.comentar_comentario', comentarioID=comentario.id) }}
+        {% endif %}"
       method="POST">
-{% else %}
-<form action="" method="POST">
-{% endif %}
 
 <div class="bg-greysito p-2">
     <div class="d-flex flex-row align-items-start">
         <div class="d-flex gap-2">
             {# Perfil icono #}
-            <img id="publicacion-profile-icon"
-                class="publicacion-profile-icon border border-2 rounded-circle"
-                src="{{ url_for('static', filename='node_modules/bootstrap-icons/icons/person-circle.svg')}}" 
-                alt="icono de perfil"/>
+          {{ profile_pic(
+              user=current_user,
+              class_profile="comentario-profile-pic",
+              class_not_profile="publicacion-profile-icon border border-2 rounded-circle",
+          ) }}
 
             {# Cuando se esta respondiendo a un comentario #}
             {% if comentario_responder %}
