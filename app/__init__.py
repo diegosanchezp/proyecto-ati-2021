@@ -3,6 +3,8 @@ from flask_mongoengine import MongoEngine
 from app.utils import (
     register_blueprints,
     before_request,
+    check_upload_folder,
+    register_signals,
 )
 from flask_babel import Babel
 from flask_login.mixins import AnonymousUserMixin
@@ -45,8 +47,15 @@ def create_app(config_class="Config"):
         if not isinstance(current_user, AnonymousUserMixin):
             return current_user.config.lenguaje
 
+    # Verificar que las carpetas de imagenes de modelos
+    # existan, si no crearlas
+    check_upload_folder(app)
+
     # Registar todos los blueprints
     register_blueprints(app)
+    
+    # Registrar señales
+    register_signals()
 
     # Cargar funciones que se ejecutan antes de cada request
     before_request(app)

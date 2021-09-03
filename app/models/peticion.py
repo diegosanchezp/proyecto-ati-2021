@@ -139,12 +139,12 @@ class Notificacion(AbstractModel):
         # self.recurso
         urlmap = {
             TipoNotificaciones.AMIGO_CONECTADO: {
-                "url": url_for('usuario_blueprint.ver_perfil'),
+                "url": url_for('usuario_blueprint.ver_perfil', username=self.emisor.id),
                 "texto": _("Ver Perfil")
             },
 
             TipoNotificaciones.COMENTARIO: {
-                "url": url_for('mural_blueprint.publicaciones'),
+                "url": url_for('mural_blueprint.detalle_publicacion', publicacionID=self.recurso.id),
                 "texto": _("Ver publicacion")
             },
 

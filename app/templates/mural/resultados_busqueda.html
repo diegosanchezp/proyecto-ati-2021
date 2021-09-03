@@ -5,9 +5,15 @@
   <div class="row pt-1 pb-1 border">
     {% include "components/mural/searchBar.html" %}
   </div>
+
   <div>
     <h2 class="text-center mt-4">{{_("Encuentra personas")}}</h2>
-    {% include "components/badge-resulado.html" %}
+      
+      {% for user in filtered_users %}
+        {% with user = user %}
+          {% include "components/badge-resultado.html" %}
+        {% endwith %}
+      {% endfor %}
   </div>
 </div>
 

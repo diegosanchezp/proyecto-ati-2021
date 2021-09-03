@@ -14,26 +14,18 @@
 
     {# Escribir comentario  #}
     <div class="row mb-3">
-        {% include "components/mural/comentarioEscribir.html" %}
+        {% with comentario_responder=false %}
+            {% include "components/mural/comentarioEscribir.html" %}
+        {% endwith %}
     </div>
 
     {# Comentarios de la publicacion #}
     <div class="row">
-      {% with respuesta_id="respuesta_1" %}
-        {% include "components/mural/comentario.html"%}
-      {% endwith %}
-        
-        {# Comentario respuesta, recordar agregar las clases al mostrar #}
-        <div class="mt-2 mb-2 ps-5">
-          {% with respuesta_id="respuesta_2" %}
+      {% for comentario in publicacion.comentarios %}
+          {% with comentario=comentario %}
             {% include "components/mural/comentario.html"%}
           {% endwith %}
-        </div>
-
-        {% with respuesta_id="respuesta_3" %}
-          {% include "components/mural/comentario.html"%}
-        {% endwith %}
- 
+      {% endfor %}
     </div>
 
     {# Boton para ver mas comentarios #}
@@ -43,3 +35,4 @@
 </div>
 
 {% endblock body %}
+

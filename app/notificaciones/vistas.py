@@ -39,7 +39,7 @@ def index(page: int):
 
     return render_template(
             "notificaciones/notificaciones.html",
-            notificaciones=notificaciones.paginate(page=page, per_page=2),
+            notificaciones=notificaciones.paginate(page=page, per_page=10),
             TipoNotificaciones=TipoNotificaciones,
             NotiEvento=NotiEvento,
             )

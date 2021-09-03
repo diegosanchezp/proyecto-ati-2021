@@ -34,5 +34,5 @@ services:
     volumes:
       - ./app:/app/app
       - ./package.json:/app/package.json
-    entrypoint: ["bash", "init_flask.sh"]
+    entrypoint: ["bash"]
 
