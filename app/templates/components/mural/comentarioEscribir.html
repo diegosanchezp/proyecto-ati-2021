@@ -10,14 +10,20 @@
       method="POST">
 
 <div class="bg-greysito p-2">
-    <div class="d-flex flex-row align-items-start">
-        <div class="d-flex gap-2">
-            {# Perfil icono #}
-          {{ profile_pic(
-              user=current_user,
-              class_profile="comentario-profile-pic",
-              class_not_profile="publicacion-profile-icon border border-2 rounded-circle",
-          ) }}
+    <div class="d-flex flex-row align-items-start m-2">
+        <div class="d-flex flew-row gap-2">
+          {# Perfil icono #}
+          <div class="d-flex flew-column">
+            {{ profile_pic(
+                user=current_user,
+                class_profile="comentario-profile-pic",
+                class_not_profile="publicacion-profile-icon border border-2 rounded-circle",
+            ) }}
+            
+        <span class="d-block font-weight-bold name publicacion-profile-name ms-1">
+            {{current_user.nombre}}
+        </span>
+          </div>
 
             {# Cuando se esta respondiendo a un comentario #}
             {% if comentario_responder %}
