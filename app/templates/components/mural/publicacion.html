@@ -1,11 +1,16 @@
+{% from "components/profile_pic.html" import profile_pic %}
 <div class="container border border-dark rounded pt-2 pb-2 mb-4">
 
     {# Name and picture #}
     <div class="d-flex flex-row">
-        <img id="publicacion-profile-icon2"
-            class="publicacion-profile-icon border border-2 rounded-circle"
-            src="{{ url_for('static', filename='node_modules/bootstrap-icons/icons/person.svg')}}" 
-            alt="icono de perfil"/>
+        
+
+          {{ profile_pic(
+              user=publicacion.autor,
+              id_profile="publicacion-profile-icon",
+              id_not_profile="publicacion-profile-icon",
+              class_not_profile="publicacion-profile-icon border border-2 rounded-circle",
+          ) }}
 
         <span class="d-block font-weight-bold name publicacion-profile-name ms-1">
             {{publicacion.autor.nombre}}
