@@ -37,17 +37,6 @@ USUARIO_GENEROS = (
     ("F", _l("Femenino")),
 )
 
-ESTADO_SOLICITUD = [
-    ("PENDIENTE", _("Pendiente")),
-    ("ACEPTADA", _("Aceptada")),
-    ("RECHAZADA", _("Rechazada")),
-]
-class Solicitud_Amistad(db.Document):
-    """ Solicitudes que son enviadas """
-    estado = db.StringField(choices=ESTADO_SOLICITUD)
-    emisor = db.ReferenceField("User")
-    receptor = db.ReferenceField("User")
-
 
 class User(db.Document, UserMixin):
     """
@@ -76,7 +65,6 @@ class User(db.Document, UserMixin):
 
     # Relaciones
     config = db.ReferenceField("UserConfig")
-    solicitudes = db.ListField(db.ReferenceField("Solicitud_Amistad"))
     amigos = db.ListField(db.ReferenceField("self"))
     meta = {
         "cascade": True,

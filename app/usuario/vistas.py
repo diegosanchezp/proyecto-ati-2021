@@ -8,7 +8,8 @@ from flask_login import current_user
 from flask_babel import _
 
 usuario_blueprint = Blueprint('usuario_blueprint', __name__, template_folder='templates')
-from app.models.user import User, Solicitud_Amistad, ESTADO_SOLICITUD
+from app.models.user import User
+from app.models.peticion import Peticion, TipoPeticiones, PeticionEstado
 
 @usuario_blueprint.route("/recuperar")
 def recuperar_password():
@@ -41,76 +42,83 @@ def ver_perfil(username):
 
     # Chequear si hay una solicitud de amistad entre las personas
     is_solicitud = 'none'
-    for solicitud in current_user.solicitudes:
-        if solicitud.emisor == current_user:
-            is_solicitud = 'emisor'
-            break
-        elif solicitud.receptor == current_user :
-            is_solicitud = 'receptor'
-            break
-        else:
-            is_solicitud = 'none'
-            break
+    peticiones_query = Peticion.objects()
 
+    if peticiones_query:
+        # Chequear si soy emisor de una solicitud
+        try:
+            emisor_query = peticiones_query.get(emisor=current_user, receptor=target_user)
+            if emisor_query:
+                is_solicitud = 'emisor'
+        except Exception as e:
+            print('\n\n\n\n')
+            print('No se encontro current user EMISOR')
+            print(e)
+            print('\n\n\n\n')
 
+        # Chequear si soy receptor de una solicitud
+        try:
+            receptor_query = peticiones_query.get(emisor=target_user, receptor=current_user)
+            if receptor_query:
+                is_solicitud = 'receptor'
+        except Exception as e:
+            print('\n\n\n\n')
+            print('No se encontro current user RECEPTOR')
+            print(e)
+            print('\n\n\n\n')
+        
+
+    # Solicitar amistad a un usuario
     if request.method == "POST" and request.form["action"] == "SOLICITAR_AMISTAD":
-        # Solicitar amistad a un usuario
         if not it_is_the_current_user:
-            solicitud = Solicitud_Amistad( estado = ESTADO_SOLICITUD[0][0],
-                                           emisor = current_user,
-                                           receptor = target_user,
-                                         )
+            
+            solicitud = Peticion( estado = PeticionEstado.ESPERA,
+                                  tipo = TipoPeticiones.AMISTAD,
+                                  emisor = current_user,
+                                  receptor = target_user
+                                )
             solicitud.save()
 
-            current_user.solicitudes.append(solicitud)
-            current_user.save()
+            flash(_("Solicitud enviada"), 'success')
+            print('\n\n Solicitar')
+            return redirect(request.url)
 
-            target_user.solicitudes.append(solicitud)
-            target_user.save()
-
-        flash(_("Solicitud enviada"), 'success')
-        return redirect(request.url)
-
+    # Aceptar amigo
     if request.method == "POST" and request.form["action"] == "ACEPTAR_SOLICITUD":
-        # Aceptar amigo
         if not it_is_the_current_user:
-            if is_solicitud == 'emisor':
-                solicitud = Solicitud_Amistad.objects.get_or_404(emisor=current_user)
-            if is_solicitud == 'receptor':
-                solicitud = Solicitud_Amistad.objects.get_or_404(receptor=current_user)
 
             # Update current user
-            current_user.solicitudes.remove(solicitud)
             current_user.amigos.append(target_user)
             current_user.save()
 
-            target_user.solicitudes.remove(solicitud)
+            # Update target user
             target_user.amigos.append(current_user)
             target_user.save()
 
-            solicitud.delete()
+            # Aqui se debe de crear la notificacion
 
-            flash(_("Amistad aceptada"), 'success')
+            # Una peticion aceptada es useless ya que is_friend se esta
+            # chequeando directamente con la lista de amigos
+            peticion_delete = Peticion.objects.get(emisor=target_user)
+            peticion_delete.delete()
+
+            flash(_("Solicitud aceptada"), 'success')
+            print('\n\nAceptar solicitud')
             return redirect(request.url)
 
+    # Rechazar amigo
     if request.method == "POST" and request.form["action"] == "RECHAZAR_SOLICITUD":
-        # Aceptar amigo
         if not it_is_the_current_user:
-            if is_solicitud == 'emisor':
-                solicitud = Solicitud_Amistad.objects.get_or_404(emisor=current_user)
-            if is_solicitud == 'receptor':
-                solicitud = Solicitud_Amistad.objects.get_or_404(receptor=current_user)
 
-            # Update current user
-            current_user.solicitudes.remove(solicitud)
-            current_user.save()
+            # Aqui se debe de crear la notificacion
 
-            target_user.solicitudes.remove(solicitud)
-            target_user.save()
+            # Una peticion rechazada no tiene mas logica de momento
+            # Normalmente al ser rechazada se puede volver a solicitar amistad
+            peticion_delete = Peticion.objects.get(emisor=target_user)
+            peticion_delete.delete()
 
-            solicitud.delete()
-
-            flash(_("Amistad rechazada"), 'success')
+            flash(_("Solicitud Rechazada"), 'warning')
+            print('\n\nRechazo')
             return redirect(request.url)
 
     if request.method == "POST" and request.form["action"] == "BORRAR_AMIGO":
