@@ -1,7 +1,7 @@
 import unittest
 from app.models.peticion import (
     Notificacion, NotiEvento, NotificacionEstado, TipoNotificaciones,
-    Peticion, TipoPeticiones, PeticionEnvento, PeticionEstado
+    Peticion, TipoPeticiones, PeticionEvento, PeticionEstado
 )
 
 from mongoengine import ValidationError
