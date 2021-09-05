@@ -3,7 +3,16 @@
   - NotiEvento
 #}
 
+{% from "components/peticion_form.html" import peticion_form with context %}
 {% from "components/profile_pic.html" import profile_pic %}
+
+{% macro action_anchor(url,text) -%}
+
+  <a href="{{ url }}"
+     class="btn btn-dark ms-auto align-self-center"
+     role="button">{{ text }}</a>
+
+{%- endmacro %}
 
 {% macro render_notificacion(notificacion) -%}
 
@@ -19,22 +28,43 @@
       }}
 
     <p class="font-weight-bold name w-75 publicacion-profile-name m-0">
-      {{ notificacion.emisor.nombre }}:
+    <a href="{{url_for("usuario_blueprint.ver_perfil", username=notificacion.emisor.username)}}">{{notificacion.emisor.nombre}}</a>
       {{ notificacion.descripcion }}
     </p>
 
     <div id="notificacion-actions" class="d-flex flex-row gap-2 justify-content-end w-25">
-    {% set urlmap = notificacion.get_url() %}
-    <a href="{{urlmap.url}}"
-       class="btn btn-dark ms-auto align-self-center"
-       role="button">{{urlmap.texto}}</a>
+
+    {# ======= #}
+    {% if notificacion.tipo == TipoNotificaciones.SOLICITUD_AMISTAD and notificacion.recurso.estado == PeticionEstado.ESPERA %}
+      <article class="d-flex flex-row gap-2">
+        {{ peticion_form(
+          peticion_id=notificacion.recurso.id,
+          redirect_url=url_for("notificaciones_blueprint.index", page=1),
+        )}}
+      </article>
+    {% else %}
+      {# ======= #}
+      {% if notificacion.tipo == TipoNotificaciones.AMIGO_CONECTADO  %}
+        {{ action_anchor(url_for("usuario_blueprint.ver_perfil"), _("Ver Perfil")) }}
+      {% endif %}
+
+      {% if notificacion.tipo == TipoNotificaciones.COMENTARIO %}
       
+        {{ action_anchor(url_for("mural_blueprint.detalle_publicacion", publicacionID=notificacion.recurso.id), _("Ver publicacion")) }}
+      {% endif %}
+
+      {% if notificacion.tipo == TipoNotificaciones.MENSAJE_CHAT %}
+      
+        {{ action_anchor(url_for("chat_blueprint.index"), _("Ver chat")) }}
+      {% endif %}
+      {# Boton marcar notificacion como leida #}
       <form action="" method="POST" class="d-flex flex-column justify-content-center">
         <input type="hidden" name="id_notificacion" value="{{ notificacion.id }}">
         <button name="action_event" value="{{ NotiEvento.LEER.value }}" class="btn btn-dark" type="submit">
           {{ _("Marcar como leida") }}
         </button>
       </form>
+    {% endif %}
 
     </div>
   </div>

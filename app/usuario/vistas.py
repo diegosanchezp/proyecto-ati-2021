@@ -3,6 +3,8 @@ from flask import (
     request, flash, url_for,
     redirect,
 )
+from app.models.user import USUARIO_GENEROS
+from app.models.mural import ( Publicacion, TIPO_PUBLICACIONES ) 
 from flask_login import current_user
 from flask_user.decorators import login_required
 from flask_user import current_user
@@ -22,42 +24,84 @@ facebook_blueprint = make_facebook_blueprint(
     scope="email,user_birthday,user_gender,public_profile"
 )
 
-@usuario_blueprint.route("/recuperar")
-def recuperar_password():
-    """
-    Vista de recuperación de contraseña
-    """
+from flask_user.decorators import login_required
 
-    return render_template("usuario/recuperar_password.html")
-
-@usuario_blueprint.route("/recuperar-token")
-def recuperar_token():
-    """
-    Vista de recuperación de contraseña
-    """
-
-    return render_template("usuario/recuperar_pass_token_enviado.html")
+usuario_blueprint = Blueprint('usuario_blueprint', __name__, template_folder='templates')
+from app.models.user import User
+from app.models.peticion import (
+    Peticion,
+    TipoPeticiones,
+    PeticionEstado,
+    PeticionEvento,
+    NotiEvento,
+    Notificacion,
+    TipoNotificaciones,
+)
 
 @usuario_blueprint.route("/ver-perfil/<username>", methods=["POST", "GET"])
+@login_required
 def ver_perfil(username):
     """
     Vista de ver perfil
     """
     target_user = User.objects.get_or_404(username=username)
-
     it_is_the_current_user = target_user == current_user
 
-    if request.method == "POST" and request.form["action"] == "BORRAR AMIGO":
-        # Delete a friend
+    if it_is_the_current_user:
+        publicaciones = Publicacion.objects(autor=current_user).order_by('-fecha')
+    else:
+        publicaciones = Publicacion.objects(autor=target_user).order_by('-fecha')
+
+    # Solicitar amistad a un usuario
+    if request.method == "POST" and request.form["action"] == "SOLICITAR_AMISTAD":
         if not it_is_the_current_user:
-            flash(_("Amistad borrada"), 'success')
+            
+            solicitud = Peticion( estado = PeticionEstado.ESPERA,
+                                  tipo = TipoPeticiones.AMISTAD,
+                                  emisor = current_user,
+                                  receptor = target_user
+                                )
+            solicitud.save()
+
+            n = Notificacion(
+                tipo=TipoNotificaciones.SOLICITUD_AMISTAD,
+                emisor=current_user,
+                receptor=target_user,
+                descripcion=f"quiere ser tu amigo",
+                recurso=solicitud,
+            )
+
+            n.save()
+
+            flash(_("Solicitud amistad enviada"), 'success')
+            return redirect(request.url)
+
+    if request.method == "POST" and request.form["action"] == "BORRAR_AMIGO":
+        # Borrar amigo
+        if not it_is_the_current_user:
             current_user.amigos.remove(target_user)
             current_user.save()
 
+            target_user.amigos.remove(current_user)
+            target_user.save()
+
+            flash(_("Amistad borrada"), 'success')
+            return redirect(request.url)
+    peticion=None
+    if not it_is_the_current_user:
+        # Soy la persona que realizo la solicitud
+        peticion = Peticion.objects(emisor=current_user,receptor=target_user, estado=PeticionEstado.ESPERA).first()
+        if not peticion:
+            # Soy la persona que recibe la solicitud
+            peticion = Peticion.objects(emisor=target_user,receptor=current_user, estado=PeticionEstado.ESPERA).first()
     return render_template("usuario/ver_perfil.html",
         target_user = target_user,
         it_is_the_current_user = it_is_the_current_user,
-        is_friend=target_user in current_user.amigos
+        is_friend=target_user in current_user.amigos,
+        peticion=peticion,
+        publicaciones = publicaciones,
+        PeticionEvento=PeticionEvento,
+        PeticionEstado=PeticionEstado,
     )
 
 @usuario_blueprint.route("/editar-privacidad", methods=['GET', 'POST'])

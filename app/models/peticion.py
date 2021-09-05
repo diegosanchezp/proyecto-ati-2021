@@ -49,7 +49,7 @@ class TipoPeticiones(Enum):
     CHAT = "peticion para chatear"
     AMISTAD = "solicitud de amistad"
 
-class PeticionEnvento(Enum):
+class PeticionEvento(Enum):
     ACEPTAR = "aceptar"
     RECHAZAR = "rechazar"
 
@@ -64,13 +64,15 @@ class Peticion(AbstractModel):
 
     maquina_estado = {
         PeticionEstado.ESPERA: {
-            PeticionEnvento.ACEPTAR: PeticionEstado.ACEPTADA,
-            PeticionEnvento.RECHAZAR: PeticionEstado.RECHAZADA,
+            PeticionEvento.ACEPTAR: PeticionEstado.ACEPTADA,
+            PeticionEvento.RECHAZAR: PeticionEstado.RECHAZADA,
         }
     }
 
     tipo = db.EnumField(TipoPeticiones, required=True)
 
+    def __str__(self):
+        return f"emisor={self.emisor.username} receptor={self.receptor.username} estado={self.estado}"
 #TIPO_NOTIFICACIONES = (
 #    ("MENSAJE_CHAT", "mensaje chat"),
 #    ("COMENTARIO", "comentario"),
@@ -91,6 +93,7 @@ class TipoNotificaciones(Enum):
     MENSAJE_CHAT="mensaje chat"
     COMENTARIO = "comentario"
     AMIGO_CONECTADO = "amigo conectado"
+    SOLICITUD_AMISTAD = "solicitud amistad"
 
 class NotiEvento(Enum):
     LEER = "leer"
@@ -102,7 +105,7 @@ class NotiQuerySet(QuerySet):
         """
         return self.filter(
             Q(receptor=current_user) & Q(estado=NotificacionEstado.NO_LEIDA)
-        )
+        ).order_by("-id")
 
 class Notificacion(AbstractModel):
     """
@@ -127,31 +130,6 @@ class Notificacion(AbstractModel):
     # - Comentario en una publicacion 
     # - Amigo conectado
     # - Mensaje de chat
+    # - solicitud amistad
 
     recurso = db.GenericReferenceField()
-
-    def get_url(self) -> Dict[Enum, Dict[str, str]]:
-        """
-        Generar un url dependiendo del tipo recurso
-        """
-
-        # Todo: poner parametros para url_for en el map, utilizando
-        # self.recurso
-        urlmap = {
-            TipoNotificaciones.AMIGO_CONECTADO: {
-                "url": url_for('usuario_blueprint.ver_perfil', username=self.emisor.id),
-                "texto": _("Ver Perfil")
-            },
-
-            TipoNotificaciones.COMENTARIO: {
-                "url": url_for('mural_blueprint.detalle_publicacion', publicacionID=self.recurso.id),
-                "texto": _("Ver publicacion")
-            },
-
-            TipoNotificaciones.MENSAJE_CHAT: {
-                "url": url_for('chat_blueprint.index'),
-                "texto": _("Ver chat")
-            }
-        }
-
-        return urlmap[self.tipo]

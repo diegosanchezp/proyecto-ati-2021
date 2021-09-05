@@ -3,6 +3,7 @@ Modelos relacionados con usuarios
 """
 from flask import url_for
 from flask_babel import lazy_gettext as _l
+from flask_babel import _
 from flask_user import UserMixin
 from app import db
 from app.constants import MAX_IMAGE_SIZE
@@ -68,6 +69,8 @@ class User(db.Document, UserMixin):
     musica = db.StringField()
     video_juegos = db.ListField(db.StringField())
     lenguajes_programacion = db.ListField(db.StringField())
+
+    # Relaciones
     config = db.ReferenceField("UserConfig")
     amigos = db.ListField(db.ReferenceField("self"))
     meta = {

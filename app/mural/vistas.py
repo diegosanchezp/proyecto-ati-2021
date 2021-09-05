@@ -147,9 +147,10 @@ def create_publication():
             filename = secure_filename(file_to_upload.filename)
             images_valid.append(allowed_file_extension(filename))
 
-        if not all(images_valid):
-            flash(_("Alguna de las imágenes son inválidas, intenta de nuevo"), "danger")
-            return render_template(template, form=form)
+        # Esto hace obligatorio subir una imagen
+        #if images_valid and not all(images_valid):
+        #    flash(_("Alguna de las imágenes son inválidas, intenta de nuevo"), "danger")
+        #    return render_template(template, form=form)
 
         publicacion = Publicacion(
             contenido=form.contenido.data,
