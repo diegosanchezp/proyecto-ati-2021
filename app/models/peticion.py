@@ -105,7 +105,7 @@ class NotiQuerySet(QuerySet):
         """
         return self.filter(
             Q(receptor=current_user) & Q(estado=NotificacionEstado.NO_LEIDA)
-        )
+        ).order_by("-id")
 
 class Notificacion(AbstractModel):
     """
