@@ -8,7 +8,9 @@ from flask_login import current_user
 from app.models.peticion import (
     Notificacion, NotificacionEstado,
     NotiEvento,
-    TipoNotificaciones
+    TipoNotificaciones,
+    PeticionEvento,
+    PeticionEstado,
 )
 from flask_babel import _
 from mongoengine.queryset.visitor import Q
@@ -42,4 +44,6 @@ def index(page: int):
             notificaciones=notificaciones.paginate(page=page, per_page=10),
             TipoNotificaciones=TipoNotificaciones,
             NotiEvento=NotiEvento,
+            PeticionEvento=PeticionEvento,
+            PeticionEstado=PeticionEstado,
             )
