@@ -20,74 +20,6 @@ from app.models.peticion import (
     TipoNotificaciones,
 )
 
-@usuario_blueprint.post("/procesar-peticion-amistad")
-@login_required
-def procesar_peticion_amistad():
-    """
-    Vista para aceptar o rechazar solicitudes de amistad
-
-    La persona quien creo la solicitud de amistad es
-    peticion.emisor
-
-    La persona quien acepta la solicitud de amistad es el
-    current_user
-    """
-    try:
-        peticion = Peticion.objects.get(id=request.form["peticion_id"])
-    except Peticion.DoesNotExist:
-        flash(_("La peticion que intentas actualizar no existe"), "danger")
-        return redirect(request.args.redirect)
-
-
-    if not peticion.tipo == TipoPeticiones.AMISTAD:
-        flash(_("Error: la peticion no es de tipo amistad"), "danger")
-        return redirect(request.args.get("redirect"))
-
-    # Peticion.receptor should be the current_user
-    if not current_user == peticion.receptor:
-        flash(_("Esta peticion no te corresponde"), "danger")
-        return redirect(request.args.get("redirect"))
-
-    n = Notificacion(
-        tipo=TipoNotificaciones.SOLICITUD_AMISTAD,
-        recurso=peticion,
-        emisor=peticion.receptor,
-        receptor=peticion.emisor,
-    )
-
-    if request.form["action"] == PeticionEvento.ACEPTAR.value:
-        peticion.transition(PeticionEvento.ACEPTAR)
-        flash(_("Solicitud aceptada"), 'success')
-        n.descripcion = f"ha aceptado tu {peticion.tipo.value}"
-
-        # Añadirse como amigos
-
-        # La persona quien acepta la solicitud de amistad
-        current_user.amigos.append(peticion.emisor)
-        current_user.save()
-
-        # La persona quien creo la solicitud de amistad
-        peticion.emisor.amigos.append(current_user)
-        peticion.emisor.save()
-        
-    if request.form["action"] == PeticionEvento.RECHAZAR.value:
-        peticion.transition(PeticionEvento.RECHAZAR)
-        flash(_("Solicitud rechazada"), 'warning')
-        n.descripcion = f"ha rechazado tu {peticion.tipo.value}"
-
-    # Marcar como leida la notificaion asociada a la peticion
-    try:
-        npeticion = Notificacion.objects.get(receptor=current_user,emisor=peticion.emisor,recurso=peticion)
-        npeticion.transition(NotiEvento.LEER)
-        npeticion.save()
-    except Notificacion.DoesNotExist:
-        pass
-
-    n.save()
-    peticion.save()
-
-    return redirect(request.args.get("redirect"))
-
 @usuario_blueprint.route("/ver-perfil/<username>", methods=["POST", "GET"])
 @login_required
 def ver_perfil(username):
@@ -137,6 +69,7 @@ def ver_perfil(username):
 
             flash(_("Amistad borrada"), 'success')
             return redirect(request.url)
+    peticion=None
     if not it_is_the_current_user:
         # Soy la persona que realizo la solicitud
         peticion = Peticion.objects(emisor=current_user,receptor=target_user, estado=PeticionEstado.ESPERA).first()

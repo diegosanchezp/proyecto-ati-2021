@@ -5,7 +5,7 @@
 
 {% macro peticion_form(redirect_url,peticion_id) -%}
 
-{% set form_url = url_for("usuario_blueprint.procesar_peticion_amistad")%}
+{% set form_url = url_for("notificaciones_blueprint.procesar_peticion_amistad")%}
 <form action="{{form_url}}?redirect={{redirect_url}}" method="POST">
   <input type="hidden" name="peticion_id" value="{{peticion_id}}">
   <button type="submit" name="action" value="{{PeticionEvento.ACEPTAR.value}}" class="btn btn-success">
