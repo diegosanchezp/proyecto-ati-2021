@@ -140,17 +140,25 @@ def create_publication():
     if request.method == 'POST' and form.validate():
 
         images_valid = []
+        at_least_one_image = False
+
+        # Encontar si existe por lo menos una imagen
+        for file_to_upload in request.files.getlist(form.images.name):
+            at_least_one_image = bool(file_to_upload)
+            if at_least_one_image:
+                break
 
         # Verificar que todas las imagenes sean validas, antes de guardar la publicacion
-        for file_to_upload in request.files.getlist(form.images.name):
-            # Sanitize filename
-            filename = secure_filename(file_to_upload.filename)
-            images_valid.append(allowed_file_extension(filename))
+        if at_least_one_image:
+            for file_to_upload in request.files.getlist(form.images.name):
+                # Sanitize filename
+                if bool(file_to_upload):
+                    filename = secure_filename(file_to_upload.filename)
+                    images_valid.append(allowed_file_extension(filename))
 
-        # Esto hace obligatorio subir una imagen
-        #if images_valid and not all(images_valid):
-        #    flash(_("Alguna de las imágenes son inválidas, intenta de nuevo"), "danger")
-        #    return render_template(template, form=form)
+        if not all(images_valid):
+            flash(_("Imágenes inválidas, intenta de nuevo, solo se aceptan .jpg, .png, .gif"), "danger")
+            return render_template(template, form=form)
 
         publicacion = Publicacion(
             contenido=form.contenido.data,
@@ -162,9 +170,10 @@ def create_publication():
         # Guardar para obtener un id
         publicacion.save()
 
-        if form.images.data:
-            foto_path = Publicacion.get_images_path()
+        foto_path = Publicacion.get_images_path()
 
+        # Guardar las imagenes en disco
+        if at_least_one_image:
             for file_to_upload in request.files.getlist(form.images.name):
 
                 # Sanitize filename
