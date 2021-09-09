@@ -5,10 +5,10 @@ from app.utils import (
     before_request,
     check_upload_folder,
     register_signals,
+    register_context_procesor,
 )
 from flask_babel import Babel
 from flask_login.mixins import AnonymousUserMixin
-
 # Instanciar extensiones de flask
 db = MongoEngine()
 babel = Babel()
@@ -59,5 +59,8 @@ def create_app(config_class="Config"):
 
     # Cargar funciones que se ejecutan antes de cada request
     before_request(app)
+
+    # Cargar variables o funciones al procesador de contexto de flask
+    register_context_procesor(app)
 
     return app

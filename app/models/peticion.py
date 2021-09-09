@@ -4,7 +4,6 @@ from flask_mongoengine import BaseQuerySet as QuerySet
 from typing import Dict
 from flask import g, url_for
 from flask_babel import _
-from flask_login import current_user
 from mongoengine.queryset.visitor import Q
 
 class AbstractModel(db.Document):
@@ -99,12 +98,12 @@ class NotiEvento(Enum):
     LEER = "leer"
 
 class NotiQuerySet(QuerySet):
-    def get_notificaciones_usuario(self) -> QuerySet:
+    def get_notificaciones_usuario(self, user) -> QuerySet:
         """
         Obtener notificaciones del usuario autenticado
         """
         return self.filter(
-            Q(receptor=current_user) & Q(estado=NotificacionEstado.NO_LEIDA)
+            Q(receptor=user) & Q(estado=NotificacionEstado.NO_LEIDA)
         ).order_by("-id")
 
 class Notificacion(AbstractModel):

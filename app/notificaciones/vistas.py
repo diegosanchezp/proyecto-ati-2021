@@ -29,7 +29,7 @@ def index(page: int):
     Vista principal de las notificaciones
     """
 
-    notificaciones = Notificacion.objects.get_notificaciones_usuario()
+    notificaciones = Notificacion.objects.get_notificaciones_usuario(current_user)
     if request.method == "POST" and request.form["action_event"] == NotiEvento.LEER.value:
         # Si la notificación pertenece al usuario y no esta leida
         try:

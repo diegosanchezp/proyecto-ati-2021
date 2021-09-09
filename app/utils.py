@@ -36,25 +36,36 @@ def register_signals() -> None:
 
     signals.post_delete.connect(Publicacion.post_delete, sender=Publicacion)
 
+def register_context_procesor(app: Flask) -> None:
+    """
+    Cargar variables o funciones al procesador de contexto de flask
+    """
+
+    @app.context_processor
+    def inject_count_notificaciones():
+        """
+        Cargar una funcion, usable en templates
+        para contar el numero de notificaciones
+        """
+        def count_notificaciones(user):
+            """
+            Contar numero de notificaciones de un usuario
+            """
+            from flask_login.mixins import AnonymousUserMixin
+            from app.models.peticion import Notificacion
+            # Check that the user is logged in
+            if not isinstance(user, AnonymousUserMixin):
+                return Notificacion.objects.get_notificaciones_usuario(user).count()
+
+        return dict(count_notificaciones=count_notificaciones)
+        
 def before_request(app: Flask) -> None:
     """
     Funciones que se ejecutan antes de cada request, generalmente
     para establecer contexto global
-    """
-    
-    from flask_login import current_user
-    from flask_login.mixins import AnonymousUserMixin
-    from flask import g
-    from app.models.peticion import Notificacion
 
-    @app.before_request
-    def load_notifications_number():
-        """
-        Cargar numero de notificaciones en el objeto global
-        de flask
-        """
-        if not isinstance(current_user, AnonymousUserMixin) :
-            g.numero_notificaciones = Notificacion.objects.get_notificaciones_usuario().count()
+    https://flask.palletsprojects.com/en/2.0.x/api/#flask.Flask.before_request
+    """
 
 def get_upload_path(app) -> Path:
     return Path(app.root_path) / app.config["UPLOAD_FOLDER"]
