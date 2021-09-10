@@ -18,8 +18,8 @@ class AbstractModel(db.Document):
     }
 
     descripcion = db.StringField()
-    emisor = db.ReferenceField("User")
-    receptor = db.ReferenceField("User")
+    emisor = db.ReferenceField("User", reverse_delete_rule=db.CASCADE)
+    receptor = db.ReferenceField("User", reverse_delete_rule=db.CASCADE)
     def __str__(self):
         return f"estado={self.estado}"
 
@@ -131,4 +131,5 @@ class Notificacion(AbstractModel):
     # - Mensaje de chat
     # - solicitud amistad
 
+    # La Notificacion se borra si el recurso es borrado
     recurso = db.GenericReferenceField()
