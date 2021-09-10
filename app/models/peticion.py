@@ -5,7 +5,7 @@ from typing import Dict
 from flask import g, url_for
 from flask_babel import _
 from mongoengine.queryset.visitor import Q
-
+from app.models.user import User
 class AbstractModel(db.Document):
     """
     Clase abstracta para modelos que utilizan maquinas de
@@ -18,8 +18,8 @@ class AbstractModel(db.Document):
     }
 
     descripcion = db.StringField()
-    emisor = db.ReferenceField("User", reverse_delete_rule=db.CASCADE)
-    receptor = db.ReferenceField("User", reverse_delete_rule=db.CASCADE)
+    emisor = db.ReferenceField(User, reverse_delete_rule=db.CASCADE)
+    receptor = db.ReferenceField(User, reverse_delete_rule=db.CASCADE)
     def __str__(self):
         return f"estado={self.estado}"
 
