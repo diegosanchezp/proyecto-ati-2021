@@ -1,5 +1,6 @@
 {% from "form_macros.html" import render_field %}
-<form action="{{ url_for('mural_blueprint.resultados_busqueda') }}">
+<form action="{{ url_for('mural_blueprint.resultados_busqueda') }}" method="GET">
+  {{ form.hidden_tag() }}
   <div class="input-group">
 
     <div class="form-group">
@@ -9,12 +10,11 @@
     
     {{ render_field( form.texto_busqueda,
                      label_visible=false,
-                     class="form-control",
                      placeholder=_('Busca personas, ingresa un nombre') ) }}
    
 
     <div class="input-group-append">
-      <button class="btn btn-light" type="button">
+      <button class="btn btn-light" type="submit">
         <img src="{{ url_for('static', filename='node_modules/bootstrap-icons/icons/search.svg') }}" />
       </button>
     </div>

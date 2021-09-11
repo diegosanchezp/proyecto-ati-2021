@@ -8,7 +8,8 @@ from flask_babel import _
 from app.mural.forms import (
     PublicacionForm,
     ComentarioForm,
-    SearchBarForm
+    SearchBarForm,
+    TIPO_BUSQUEDA,
 )
 from app.models.mural import (
     Publicacion, Comentario,
@@ -80,7 +81,7 @@ def detalle_publicacion(publicacionID: str):
         )
         n.save()
     return render_template("mural/muralDetallePublicacion.html",
-                            detalleButton=False, 
+                            detalleButton=False,
                             publicacion=publicacion,
                             current_user=current_user,
                             form=form)
@@ -90,7 +91,7 @@ def comentar_comentario(comentarioID: str):
     form = ComentarioForm(request.form)
     # Todo validar si el comentario respuesta pertence a la publicacion que se esta conectando
     comentario = Comentario.objects.get(id=comentarioID)
-    
+
     if request.method == 'POST' and form.validate():
         comentario_respuesta = Comentario(
                 contenido = form.contenido.data,
@@ -196,14 +197,40 @@ def create_publication():
     return render_template(template, form=form)
 
 """ Resultados busqueda """
-@mural_blueprint.route("/resultados-busqueda", methods=['GET', 'POST'])
+@mural_blueprint.get("/resultados-busqueda")
+@login_required
 def resultados_busqueda():
 
-    form = SearchBarForm(request.form)
+    form = SearchBarForm(request.args)
 
-    tipo_busqueda = request.args.get('tipo_busqueda')
-    texto_busqueda = request.args.get('texto_busqueda')
+    if form.validate():
+        tipo_busqueda = form.tipo_busqueda.data
 
-    filtered_users = User.objects(nombre__icontains = texto_busqueda)
+        texto_busqueda = form.texto_busqueda.data
 
-    return render_template("mural/resultados_busqueda.html", form=form, filtered_users = filtered_users)
+        user_match_list = User.objects( # List of User instances
+            nombre__icontains = texto_busqueda,
+            # Exclude current user from query
+            username__ne=current_user.username,
+        ).select_related()
+
+        search_results = []
+
+        if tipo_busqueda == TIPO_BUSQUEDA[0][0]: # desconocido
+            # Exclude friends of current user
+            for user in user_match_list:
+                if user not in current_user.amigos:
+                    search_results.append(user)
+
+        if tipo_busqueda == TIPO_BUSQUEDA[1][0]: #amigo
+            for user in user_match_list:
+                if user in current_user.amigos:
+                    search_results.append(user)
+
+    return render_template(
+        "mural/resultados_busqueda.html",
+        form=form,
+        search_query=texto_busqueda,
+        filtered_users=search_results,
+        TIPO_BUSQUEDA=TIPO_BUSQUEDA,
+    )

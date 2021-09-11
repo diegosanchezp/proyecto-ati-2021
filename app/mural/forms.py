@@ -26,11 +26,15 @@ class PublicacionForm(FlaskForm):
     })
     #videos = FieldList(URLFiield())
     enlaces = FieldList(StringField(_('Enlace')))
-
+TIPO_BUSQUEDA=[
+    ('desconocido',_('Desconocido')),
+    ('amigo',_('Amigo')),
+]
 class SearchBarForm(FlaskForm):
-    tipo_busqueda = SelectField('Tipo de busqueda', 
-                            choices=[ ('amigo',_('Amigo')),
-                                      ('desconocido',_('Desconocido')) ] )
+    tipo_busqueda = SelectField(
+        'Tipo de busqueda',
+        choices=TIPO_BUSQUEDA,
+    )
     texto_busqueda = StringField('Persona a buscar')
 
 class ComentarioForm(Form):

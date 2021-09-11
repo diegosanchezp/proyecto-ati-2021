@@ -7,12 +7,24 @@
   </div>
 
   <div>
-    <h2 class="text-center mt-4">{{_("Encuentra personas")}}</h2>
-      
+      <h2 class="text-center">
+        {% if filtered_users|length > 0 and search_query %}
+          {{ _("Personas que se llaman %(nombre)s", nombre=search_query) }}
+        {% else %}
+          {{ _("Resultados de busqueda") }}
+        {% endif %}
+      </h2>
       {% for user in filtered_users %}
-        {% with user = user %}
+
+        {% with user=user %}
           {% include "components/badge-resultado.html" %}
         {% endwith %}
+      {% else %}
+        <p>
+          {{ _("No se encontraron coincidencias con")}}
+          <b>{{ search_query }}</b>,
+          {{ _("busca de nuevo") }}
+        </p>
       {% endfor %}
   </div>
 </div>
