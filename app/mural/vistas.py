@@ -15,7 +15,7 @@ from app.models.mural import (
     Publicacion, Comentario,
     TIPO_PUBLICACIONES
 )
-
+from typing import List
 from app.models.user import ( User )
 from app.models.peticion import (
     Notificacion, TipoNotificaciones,
@@ -129,6 +129,40 @@ def comentar_comentario(comentarioID: str):
 
     return redirect(url_for('mural_blueprint.detalle_publicacion', publicacionID=comentario.publicacion.id))
 
+def check_imgs_names(request_file_list) -> List[bool]:
+    """
+    Sanitizar nombres de archivos,
+    """
+
+    images_valid = []
+    at_least_one_image = False
+
+    # Encontar si existe por lo menos una imagen
+    for file_to_upload in request_file_list:
+        at_least_one_image = bool(file_to_upload)
+        if at_least_one_image:
+            break
+
+    # Verificar que todas las imagenes sean validas, antes de guardar la publicacion
+    if at_least_one_image:
+        for file_to_upload in request_file_list:
+            # Sanitize filename
+            if bool(file_to_upload):
+                filename = secure_filename(file_to_upload.filename)
+                images_valid.append(allowed_file_extension(filename))
+
+    return images_valid, at_least_one_image
+
+def save_imgs(request_file_list, publicacion, foto_path) -> None:
+    for file_to_upload in request_file_list:
+        # Sanitize filename
+        filename = secure_filename(file_to_upload.filename)
+
+        real_img_name = f"{publicacion.id}-{filename}"
+        file_path = foto_path / real_img_name
+        file_to_upload.save(file_path)
+        publicacion.imagenes.append((real_img_name))
+
 @mural_blueprint.route("/crear-publicacion", methods=['GET', 'POST'])
 @login_required
 def create_publication():
@@ -139,23 +173,10 @@ def create_publication():
     form = PublicacionForm(request.form)
 
     if request.method == 'POST' and form.validate():
+        request_file_list = request.files.getlist(form.images.name)
 
-        images_valid = []
-        at_least_one_image = False
-
-        # Encontar si existe por lo menos una imagen
-        for file_to_upload in request.files.getlist(form.images.name):
-            at_least_one_image = bool(file_to_upload)
-            if at_least_one_image:
-                break
-
-        # Verificar que todas las imagenes sean validas, antes de guardar la publicacion
-        if at_least_one_image:
-            for file_to_upload in request.files.getlist(form.images.name):
-                # Sanitize filename
-                if bool(file_to_upload):
-                    filename = secure_filename(file_to_upload.filename)
-                    images_valid.append(allowed_file_extension(filename))
+        # Validar imagenes
+        images_valid, at_least_one_image = check_imgs_names(request_file_list)
 
         if not all(images_valid):
             flash(_("Imágenes inválidas, intenta de nuevo, solo se aceptan .jpg, .png, .gif"), "danger")
@@ -175,16 +196,7 @@ def create_publication():
 
         # Guardar las imagenes en disco
         if at_least_one_image:
-            for file_to_upload in request.files.getlist(form.images.name):
-
-                # Sanitize filename
-                filename = secure_filename(file_to_upload.filename)
-
-                if allowed_file_extension(filename):
-                    real_img_name = f"{publicacion.id}-{filename}"
-                    file_path = foto_path / real_img_name
-                    file_to_upload.save(file_path)
-                    publicacion.imagenes.append((real_img_name))
+            save_imgs(request_file_list, publicacion, foto_path)
 
         # Guardar los nombres de las imagenes
         publicacion.save()
@@ -196,11 +208,67 @@ def create_publication():
 
     return render_template(template, form=form)
 
-""" Resultados busqueda """
+@mural_blueprint.route("/editar-publicacion/<string:publicacionID>", methods=['GET', 'POST'])
+@login_required
+def edit_publication(publicacionID: str):
+    """ Editar publicacion """
+    template = "mural/create_publication.html"
+
+    publicacion = Publicacion.objects.get_or_404(id=publicacionID)
+
+    def ret_render(form):
+        """
+        Helper for rendering the template
+        """
+        return render_template(template, form=form, EDITING=True, publicacion=publicacion)
+
+    if request.method == "GET":
+        form = PublicacionForm(data={
+            "contenido": publicacion.contenido,
+            "tipo_publicacion": publicacion.tipo_publicacion,
+        })
+
+    if request.method == "POST":
+        form = PublicacionForm(data=request.form)
+        if form.validate():
+            # Actualizar publicacion
+            publicacion.contenido = form.contenido.data
+            publicacion.tipo_publicacion = form.tipo_publicacion.data
+
+            request_file_list = request.files.getlist(form.images.name)
+            foto_path = Publicacion.get_images_path()
+
+            # Validar imagenes nuevas a añadir
+            images_valid, at_least_one_image = check_imgs_names(request_file_list)
+
+            if not all(images_valid):
+                flash(_("Imágenes inválidas, intenta de nuevo, solo se aceptan .jpg, .png, .gif"), "danger")
+                return ret_render(form=form)
+
+            foto_path = Publicacion.get_images_path()
+
+            # Guardar las imagenes nuveas en disco
+            if at_least_one_image:
+                save_imgs(request_file_list, publicacion, foto_path)
+
+            # Borrar images ya asociadas a una publicacion
+            for img_to_delete in request.form.getlist("images_to_delete"):
+                if allowed_file_extension(img_to_delete):
+                    # Eliminar nombre de imagen en bd
+                    publicacion.imagenes.remove(img_to_delete)
+
+                    # Eliminar imagen del disco
+                    file_path = foto_path / img_to_delete
+                    file_path.unlink(missing_ok=True)
+
+            # Guardar publicacion actualizada
+            publicacion.save()
+    return ret_render(form=form)
+
 @mural_blueprint.get("/resultados-busqueda")
 @login_required
 def resultados_busqueda():
-
+    """ Resultados busqueda """
     form = SearchBarForm(request.args)
 
     if form.validate():

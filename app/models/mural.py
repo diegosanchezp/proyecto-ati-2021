@@ -2,7 +2,7 @@ from app import db
 from app.constants import MAX_IMAGE_SIZE
 from app.utils import get_upload_path
 from flask_babel import _
-from typing import List
+from typing import List, Tuple
 from pathlib import Path # Utilizado como tipo
 from flask import url_for
 TIPO_PUBLICACIONES = [
@@ -36,6 +36,18 @@ class Publicacion(db.Document):
         Obtener urls para las imagenes de esta publicacion
         """
         return [url_for("media_blueprint.foto_publicacion", file_name=img_name) for img_name in self.imagenes]
+
+    def get_imgs_name_urls(self) -> Tuple[str, str]:
+        return [
+            (
+                img_name,
+                url_for(
+                    "media_blueprint.foto_publicacion",
+                    file_name=img_name,
+                )
+            ) \
+            for img_name in self.imagenes
+        ]
 
     @staticmethod
     def get_images_path() -> Path:

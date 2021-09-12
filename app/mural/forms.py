@@ -21,11 +21,12 @@ class PublicacionForm(FlaskForm):
     tipo_publicacion = SelectField(_('Tipo de publicacion'),choices=TIPO_PUBLICACIONES)
 
     # Multiple media files
-    images = MultipleFileField(label=_("Imágenes"), render_kw={
+    images = MultipleFileField(label=_("Añadir imágenes"), render_kw={
         "accept": ", ".join(get_mime_types())
     })
     #videos = FieldList(URLFiield())
     enlaces = FieldList(StringField(_('Enlace')))
+
 TIPO_BUSQUEDA=[
     ('desconocido',_('Desconocido')),
     ('amigo',_('Amigo')),

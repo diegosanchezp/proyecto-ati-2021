@@ -6,4 +6,25 @@ textarea {
     width: auto;
 }
 
+.thumbnail-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  grid-template-rows: 200px;
+  grid-gap: 1em;
+}
+.thumbnail {
+  position: relative;
+}
+.thumbnail-img {
+  width: 100%;
+  object-fit: scale-down;
+  height: 100%;
+}
 
+.thumbnail-checkbox {
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  width: 30px;
+  height: 30px;
+}
