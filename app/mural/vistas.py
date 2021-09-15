@@ -222,6 +222,10 @@ def edit_publication(publicacionID: str):
         """
         return render_template(template, form=form, EDITING=True, publicacion=publicacion)
 
+    if not current_user == publicacion.autor:
+        flash(_("Esta publicacion no la puedes editar, no eres el dueño"), "error")
+        return redirect(url_for("mural_blueprint.index", page=1))
+
     if request.method == "GET":
         form = PublicacionForm(data={
             "contenido": publicacion.contenido,
@@ -253,13 +257,20 @@ def edit_publication(publicacionID: str):
 
             # Borrar images ya asociadas a una publicacion
             for img_to_delete in request.form.getlist("images_to_delete"):
-                if allowed_file_extension(img_to_delete):
-                    # Eliminar nombre de imagen en bd
-                    publicacion.imagenes.remove(img_to_delete)
+                if not allowed_file_extension(img_to_delete):
+                    flash(_("Solo se permiten borrar imagenes de extensiones .jpg, .png, .gif"), "error")
+                    continue
+                if img_to_delete not in publicacion.imagenes:
+                    flash(_("%(img)s no es una imagen de la publicación", img=img_to_delete), "error")
+                    # Continue to the next loop iteration
+                    continue
 
-                    # Eliminar imagen del disco
-                    file_path = foto_path / img_to_delete
-                    file_path.unlink(missing_ok=True)
+                # Eliminar nombre de imagen en bd
+                publicacion.imagenes.remove(img_to_delete)
+
+                # Eliminar imagen del disco
+                file_path = foto_path / img_to_delete
+                file_path.unlink(missing_ok=True)
 
             # Guardar publicacion actualizada
             publicacion.save()
