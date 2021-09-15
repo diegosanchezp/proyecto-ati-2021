@@ -31,11 +31,16 @@
 
     {# Multimedia #}
     <div class="row mt-3">
-    {% for img_url in publicacion.get_image_urls() %}
-      {% if img_url %}
-        <img src="{{img_url}}" alt="imagenes de la publicacion">
-      {% endif %}
-    {% endfor %}
+      
+      <div class="thumbnail-grid">
+        {% for img_url in publicacion.get_image_urls() %}
+          {% if img_url %}
+            <div class="thumbnail rounded">
+              <img src="{{img_url}}" class="thumbnail-img" alt="imagenes de la publicacion {{publicacion.id}}">
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
     </div>
 
     {# Comments number #}
