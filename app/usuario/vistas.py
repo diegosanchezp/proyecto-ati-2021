@@ -110,7 +110,7 @@ def ver_publicaciones(username):
     return render_template("usuario/ver_publicaciones.html",
         detalleButton=True,
         target_user = target_user,
-        publicaciones = publicaciones.paginate(page=1, per_page=10),
+        publicaciones = publicaciones.paginate(page=1, per_page=10)
     )
 
 

@@ -16,7 +16,7 @@
           {{_("Publicaciones de")}} {{ target_user.nombre }}
         </h1>
 
-        {% for publicacion in publicaciones %}
+        {% for publicacion in publicaciones.items %}
           {% with publicacion = publicacion %}
             {% include "components/mural/publicacion.html" %}
           {% endwith %}
