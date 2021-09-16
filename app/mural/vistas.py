@@ -80,6 +80,7 @@ def detalle_publicacion(publicacionID: str):
             recurso=publicacion,
         )
         n.save()
+
     return render_template("mural/muralDetallePublicacion.html",
                             detalleButton=False,
                             publicacion=publicacion,

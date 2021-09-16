@@ -2,10 +2,6 @@
 {% from "components/peticion_form.html" import peticion_form with context %}
 {% from "components/profile_pic.html" import profile_pic %}
 
-{% block extrahead %}
-  <script defer src="{{ url_for('static', filename='js/perfil/perfil.js') }}"></script>
-{% endblock extrahead %}
-
 {% block body %}
 
 
@@ -80,12 +76,16 @@
                         peticion_id=peticion.id,
                         redirect_url=url_for("usuario_blueprint.ver_perfil", username=target_user.username),
                       )}}
+
                     {% else %}
+
                       {# Si cree la solicitud de amistad #}
                       <div class="badge bg-secondary text-wrap text-center">
                         {{_("Solicitud de amistad enviada, esperando por aceptacion")}}
                       </div>
+
                     {% endif %}
+
                   {% endif %}
                 {% else %}
                   <form action="" method="POST">
@@ -140,19 +140,11 @@
       </div>
 
       <div class="d-flex justify-content-center m-3">
-        <div class="d-flex flex-row">
-          <button id='show-button' class="btn btn-secondary m-2">{{_("Ver publicaciones")}}</button>
-          <button id='hide-button' class="btn btn-secondary hidden m-2">{{_("Ocultar publicaciones")}}</button>
-        </div>      
-      </div>
-
-      <div id="publication-list-container" class="d-flex flex-wrap justify-content-center m-3 hidden">
-        {% for publicacion in publicaciones %}
-          {% with publicacion = publicacion, detalleButton = true %}
-            {% include "components/mural/publicacion.html" %}
-          {% endwith %}
-        {% endfor %}
-      </div>
+        <a href="{{ url_for('usuario_blueprint.ver_publicaciones', username=target_user.username) }}"
+           class="btn btn-secondary m-2">
+            {{_("Ver publicaciones")}}
+        </a>
+      </div>        
     </div>
   </div>
 

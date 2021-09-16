@@ -1,0 +1,31 @@
+{% extends "mural_base.html" %}
+
+{% from "components/notificaciones/notificacion.html" import render_notificacion with context %}
+
+{% block body %}
+
+{% from "components/pagination.html" import render_navigation %}
+
+<div class="container mt-1 ps-3 pe-5">
+
+    <div class="row">
+        {# Renderizar mensajes flash #}
+        {% include "components/flash_messages.html" %}
+
+        <h1 class="d-flex justify-content-center"> 
+          {{_("Publicaciones de")}} {{ target_user.nombre }}
+        </h1>
+
+        {% for publicacion in publicaciones %}
+          {% with publicacion = publicacion %}
+            {% include "components/mural/publicacion.html" %}
+          {% endwith %}
+        {% endfor %}
+    </div>
+
+    <div class="d-flex mt-1 justify-content-center">
+      {{ render_navigation(publicaciones, "usuario_blueprint.ver_publicaciones") }}
+    </div>
+</div>
+
+{% endblock body %}
