@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-07-26 04:14+0000\n"
+"POT-Creation-Date: 2021-09-16 04:34+0000\n"
 "PO-Revision-Date: 2021-07-16 14:19-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -18,6 +18,86 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
+#: app/models/mural.py:9
+msgid "Publica"
+msgstr "Public"
+
+#: app/models/mural.py:10
+msgid "Privada"
+msgstr "Private"
+
+#: app/mural/forms.py:17 app/mural/forms.py:42
+#, fuzzy
+msgid "Contenido"
+msgstr "Stranger"
+
+#: app/mural/forms.py:18
+msgid "Solo 1000 caracteres son permitidos"
+msgstr "You can write only 1000 characters"
+
+#: app/mural/forms.py:19 app/mural/forms.py:45
+#, fuzzy
+msgid "Error: publicación vacía"
+msgstr "See publication"
+
+#: app/mural/forms.py:21
+msgid "Tipo de publicacion"
+msgstr "Type of publication"
+
+#: app/mural/forms.py:24
+#, fuzzy
+msgid "Añadir imágenes"
+msgstr "Change image"
+
+#: app/mural/forms.py:28
+msgid "Enlace"
+msgstr "Link"
+
+#: app/mural/forms.py:31
+msgid "Desconocido"
+msgstr "Stranger"
+
+#: app/mural/forms.py:32
+msgid "Amigo"
+msgstr "Friends"
+
+#: app/mural/vistas.py:183 app/mural/vistas.py:246
+msgid "Imágenes inválidas, intenta de nuevo, solo se aceptan .jpg, .png, .gif"
+msgstr "Invalid image, only .jpg, .png, .gif are accepted"
+
+#: app/mural/vistas.py:206
+#, fuzzy
+msgid "Publicación creada"
+msgstr "See publications"
+
+#: app/notificaciones/vistas.py:40
+msgid "Notificación leída"
+msgstr "Notification opened"
+
+#: app/notificaciones/vistas.py:42
+msgid "No se puede leer notificación no existente"
+msgstr "Cannot read notification, it doesnt exist"
+
+#: app/notificaciones/vistas.py:73
+msgid "La peticion que intentas actualizar no existe"
+msgstr "The petition you're trying to update doesnt exist"
+
+#: app/notificaciones/vistas.py:83
+msgid "Error: la peticion no es de tipo amistad"
+msgstr "Error: the petition type isn't a friend one"
+
+#: app/notificaciones/vistas.py:88
+msgid "Esta peticion no te corresponde"
+msgstr "This petition doesn't belong to you"
+
+#: app/notificaciones/vistas.py:100
+msgid "Solicitud aceptada"
+msgstr "Request accepted"
+
+#: app/notificaciones/vistas.py:115
+msgid "Solicitud rechazada"
+msgstr "Request declined"
+
 #: app/templates/chat/chat.html:6
 msgid "Chat con"
 msgstr "Chat with"
@@ -26,120 +106,129 @@ msgstr "Chat with"
 msgid "Hoy"
 msgstr "Today"
 
-#: app/templates/components/badge-amigo.html:14
-#: app/templates/components/badge-resulado.html:7
-#: app/templates/components/mural/amigo-lista.html:17
+#: app/templates/components/badge-amigo.html:22
+#: app/templates/components/badge-resultado.html:15
+#: app/templates/components/mural/amigo-lista.html:30
 msgid "Ver perfil"
 msgstr "See my profile"
 
-#: app/templates/components/badge-resulado.html:9
-msgid "Agregar como amigo"
-msgstr "Add friend"
+#: app/templates/components/peticion_form.html:12
+msgid "Aceptar solicitud"
+msgstr "Accept request"
 
-#: app/templates/components/sidebar.html:36
+#: app/templates/components/peticion_form.html:19
+msgid "Rechazar solicitud"
+msgstr "Decline Request"
+
+#: app/templates/components/sidebar.html:42
 msgid "Cerrar Sesión"
 msgstr "Close session"
 
-#: app/templates/components/sidebar.html:37
+#: app/templates/components/sidebar.html:43
 msgid "Ver mi perfil"
 msgstr "See my profile"
 
-#: app/templates/components/sidebar.html:41
+#: app/templates/components/sidebar.html:47
+#: app/templates/usuario/amigos.html:19
+#: app/templates/usuario/ver_perfil.html:51
 msgid "Amigos"
 msgstr "Friends"
 
-#: app/templates/components/sidebar.html:54
+#: app/templates/components/sidebar.html:55
 msgid "Ver todos mis amigos"
 msgstr "See all my friends"
 
-#: app/templates/components/mural/amigo-lista.html:16
-#: app/templates/usuario/ver_perfil.html:22
+#: app/templates/components/sidebar.html:58
+#: app/templates/usuario/amigos.html:30
+msgid "No tienes personas agregadas como amigos, ¡busca gente conocela!"
+msgstr "You don't have friends, Go lets find some!"
+
+#: app/templates/components/mural/amigo-lista.html:29
+#: app/templates/usuario/ver_perfil.html:56
 msgid "Chatear"
 msgstr "Chat"
 
-#: app/templates/components/mural/comentario.html:27
-#: app/templates/components/mural/comentarioResponder.html:20
+#: app/templates/components/mural/comentario.html:34
+#: app/templates/components/mural/comentarioEscribir.html:49
 msgid "Responder"
 msgstr "Answer"
 
-#: app/templates/components/mural/comentarioEscribir.html:16
-msgid "Comentar"
-msgstr "Comentaries"
+#: app/templates/components/mural/comentarioEscribir.html:31
+#, fuzzy
+msgid "Estas respondiendo al comentario de"
+msgstr "You're answering 's comment"
 
-#: app/templates/components/mural/comentarioEscribir.html:17
-#: app/templates/components/mural/comentarioResponder.html:21
-#: app/templates/mural/create_publication.html:51
-#: app/templates/usuario/editar_password.html:25
-#: app/templates/usuario/editar_perfil.html:68
+#: app/templates/components/mural/comentarioEscribir.html:52
+#: app/templates/components/mural/comentarioEscribir.html:68
+#: app/templates/mural/create_publication.html:67
+#: app/templates/usuario/configuracion.html:73
+#: app/templates/usuario/editar_password.html:30
+#: app/templates/usuario/editar_perfil.html:89
 msgid "Cancelar"
 msgstr "Cancel"
 
-#: app/templates/components/mural/comentarioResponder.html:13
-msgid "Estas respondiendo al comentario de "
-msgstr "You're answering 's comment"
+#: app/templates/components/mural/comentarioEscribir.html:62
+msgid "Comentar"
+msgstr "Comentaries"
 
-#: app/templates/components/mural/publicacion.html:49
+#: app/templates/components/mural/publicacion.html:47
+#: app/templates/usuario/mi_perfil.html:117
 msgid "Comentarios"
 msgstr "Comentaries"
 
-#: app/templates/components/mural/publicacion.html:60
-#: app/templates/components/notificaciones/notificacion.html:21
-#: app/templates/usuario/mi_perfil.html:123
-#: app/templates/usuario/ver_perfil.html:131
+#: app/templates/components/mural/publicacion.html:57
+#: app/templates/components/notificaciones/notificacion.html:53
+#: app/templates/usuario/mi_perfil.html:126
 msgid "Ver publicacion"
 msgstr "See publication"
 
-#: app/templates/components/mural/searchBar.html:6
-#: app/templates/usuario/ver_perfil.html:20
-msgid "Amigo"
-msgstr "Friends"
+#: app/templates/components/mural/publicacion.html:64
+#: app/templates/mural/create_publication.html:11
+#, fuzzy
+msgid "Editar publicacion"
+msgstr "See publication"
 
-#: app/templates/components/mural/searchBar.html:7
-msgid "Desconocido"
-msgstr "Stranger"
+#: app/templates/components/mural/searchBar.html:13
+msgid "Busca personas, ingresa un nombre"
+msgstr "Find people, write a name"
 
-#: app/templates/components/notificaciones/notificacion.html:15
+#: app/templates/components/notificaciones/notificacion.html:48
 msgid "Ver Perfil"
 msgstr "See my profile"
 
-#: app/templates/components/notificaciones/notificacion.html:27
+#: app/templates/components/notificaciones/notificacion.html:58
 msgid "Ver chat"
 msgstr "View chat"
 
-#: app/templates/mural/create_publication.html:6
-msgid "Crea tu publicacion"
+#: app/templates/components/notificaciones/notificacion.html:64
+msgid "Marcar como leida"
+msgstr "Mark as read"
+
+#: app/templates/mural/create_publication.html:13
+#, fuzzy
+msgid "Crea una publicacion"
 msgstr "Create your publication"
 
-#: app/templates/mural/create_publication.html:20
-#: app/templates/mural/create_publication.html:27
-msgid "Añadir Imagenes y Videos"
-msgstr "Add images and videos"
+#: app/templates/mural/create_publication.html:34
+#, fuzzy
+msgid "Eliminar imágenes"
+msgstr "Change image"
 
-#: app/templates/mural/create_publication.html:36
-msgid "Cerrar"
-msgstr "Close"
+#: app/templates/mural/create_publication.html:35
+msgid "selecciona para eliminar"
+msgstr "select to delete"
 
-#: app/templates/mural/create_publication.html:37
-msgid "Aceptar"
-msgstr "Accept"
+#: app/templates/mural/create_publication.html:58
+#: app/templates/usuario/configuracion.html:70
+#: app/templates/usuario/editar_privacidad.html:29
+msgid "Guardar"
+msgstr "Save"
 
-#: app/templates/mural/create_publication.html:44
-msgid "Tipo de publicacion"
-msgstr "Type of publication"
-
-#: app/templates/mural/create_publication.html:45
-msgid "Publica"
-msgstr "Public"
-
-#: app/templates/mural/create_publication.html:46
-msgid "Privada"
-msgstr "Private"
-
-#: app/templates/mural/create_publication.html:50
+#: app/templates/mural/create_publication.html:60
 msgid "Publicar"
 msgstr "Publish"
 
-#: app/templates/mural/mural.html:12
+#: app/templates/mural/mural.html:18
 msgid "Publicaciones de Personas"
 msgstr "Peoples publications"
 
@@ -147,312 +236,235 @@ msgstr "Peoples publications"
 msgid "Realiza un Comentario"
 msgstr "Make a comment"
 
-#: app/templates/mural/muralDetallePublicacion.html:41
-msgid "Ver mas comentarios"
-msgstr "Comentaries"
+#: app/templates/mural/resultados_busqueda.html:12
+#, python-format
+msgid "Personas que se llaman %(nombre)s"
+msgstr "People called %(nombre)"
 
-#: app/templates/mural/resultados_busqueda.html:9
-msgid "Encuentra personas"
-msgstr "Find people"
+#: app/templates/mural/resultados_busqueda.html:14
+msgid "Resultados de busqueda"
+msgstr "Search Results"
 
-#: app/templates/usuario/configuracion.html:7
+#: app/templates/mural/resultados_busqueda.html:24
+msgid "No se encontraron coincidencias con"
+msgstr "No matches found with"
+
+#: app/templates/mural/resultados_busqueda.html:26
+#, fuzzy
+msgid "busca de nuevo"
+msgstr "Sent again"
+
+#: app/templates/usuario/amigos.html:20
+#, fuzzy
+msgid "Amigos de"
+msgstr "Friends"
+
+#: app/templates/usuario/amigos.html:34
+msgid "Esta persona no tiene amigos aún!"
+msgstr "This persons doesnt have any friends yet"
+
+#: app/templates/usuario/configuracion.html:17
 msgid "¿Notificar amigos conectados por correo?"
 msgstr "Recieve an email when your friends are connected?"
 
-#: app/templates/usuario/configuracion.html:18
+#: app/templates/usuario/configuracion.html:26
 msgid "¿Notificar comentarios por correo?"
 msgstr "Recieve an email when someone comments?"
 
-#: app/templates/usuario/configuracion.html:29
+#: app/templates/usuario/configuracion.html:35
 msgid "¿Notificar mensajes de chat por correo?"
 msgstr "Recieve an email when someone sent you a message?"
 
-#: app/templates/usuario/configuracion.html:40
+#: app/templates/usuario/configuracion.html:44
 msgid "Color del perfil"
 msgstr "Color of your profile"
 
-#: app/templates/usuario/configuracion.html:49
+#: app/templates/usuario/configuracion.html:53
 msgid "Color del muro"
 msgstr "Color of your wall"
 
-#: app/templates/usuario/configuracion.html:58
+#: app/templates/usuario/configuracion.html:62
 msgid "Lenguaje"
 msgstr "Language"
 
-#: app/templates/usuario/configuracion.html:71
+#: app/templates/usuario/configuracion.html:82
 msgid "Configuracion avanzada"
 msgstr "Advanced configuration"
 
-#: app/templates/usuario/configuracion.html:77
-msgid "Editar Perfil"
-msgstr "Edit profile"
-
-#: app/templates/usuario/configuracion.html:82
+#: app/templates/usuario/configuracion.html:88
 msgid "Editar Contraseña"
 msgstr "Edit Password"
 
-#: app/templates/usuario/configuracion.html:87
+#: app/templates/usuario/configuracion.html:93
 msgid "Editar Privacidad"
 msgstr "Edit Privacy"
 
-#: app/templates/usuario/editar_password.html:5
+#: app/templates/usuario/editar_password.html:6
 msgid "Cambio de contraseña"
 msgstr "Change password"
 
-#: app/templates/usuario/editar_password.html:9
-msgid "Antigua Contraseña"
-msgstr "Old password"
-
-#: app/templates/usuario/editar_password.html:13
-msgid "Nueva Contraseña"
-msgstr "New password"
-
-#: app/templates/usuario/editar_password.html:17
-msgid "Repetir Contraseña"
-msgstr "Repeat password"
-
-#: app/templates/usuario/editar_password.html:22
-#: app/templates/usuario/editar_perfil.html:65
+#: app/templates/usuario/editar_password.html:27
 msgid "Guardar Cambios"
 msgstr "Save changes"
 
-#: app/templates/usuario/editar_perfil.html:5
+#: app/templates/usuario/editar_perfil.html:9
 msgid "Cambiar informacion de"
 msgstr "Change information "
 
-#: app/templates/usuario/editar_perfil.html:5
+#: app/templates/usuario/editar_perfil.html:9
 msgid "Perfil"
 msgstr "See my profile"
 
-#: app/templates/usuario/editar_perfil.html:10
-msgid "Nombre y apellido"
-msgstr "Name and lastname"
+#: app/templates/usuario/editar_perfil.html:86
+msgid "Actualizar"
+msgstr "Update"
 
-#: app/templates/usuario/editar_perfil.html:14
-msgid "Correo electronico"
-msgstr "Email"
-
-#: app/templates/usuario/editar_perfil.html:20
-msgid "Número cedula de identidad"
-msgstr "ID number"
-
-#: app/templates/usuario/editar_perfil.html:24
-#: app/templates/usuario/mi_perfil.html:34
-#: app/templates/usuario/ver_perfil.html:42
-msgid "Género"
-msgstr "Genre"
-
-#: app/templates/usuario/editar_perfil.html:26
-#: app/templates/usuario/registro.html:33
-msgid "Masculino"
-msgstr "Masculine"
-
-#: app/templates/usuario/editar_perfil.html:27
-#: app/templates/usuario/registro.html:34
-msgid "Femenino"
-msgstr "Femenine"
-
-#: app/templates/usuario/editar_perfil.html:33
-msgid "Color Favorito"
-msgstr "Favorite color"
-
-#: app/templates/usuario/editar_perfil.html:37
-msgid "Libros Favoritos"
-msgstr "Favorite videogames"
-
-#: app/templates/usuario/editar_perfil.html:43
-msgid "Musica Favorita"
-msgstr "Favorite music"
-
-#: app/templates/usuario/editar_perfil.html:47
-msgid "Videojuegos Favoritos"
-msgstr "Favorite videogames"
-
-#: app/templates/usuario/editar_perfil.html:53
-msgid "Lenguajes"
-msgstr "Languages"
-
-#: app/templates/usuario/editar_perfil.html:59
-msgid "Descripcion"
-msgstr "Personal description"
-
-#: app/templates/usuario/editar_perfil.html:75
-msgid "Cambiar imagen"
-msgstr "Change image"
-
-#: app/templates/usuario/editar_privacidad.html:7
+#: app/templates/usuario/editar_privacidad.html:13
 msgid "¿Cambiar a un perfil privado?"
 msgstr "Change to a private profile?"
 
-#: app/templates/usuario/editar_privacidad.html:17
+#: app/templates/usuario/editar_privacidad.html:21
 msgid "¿Publicaciones por defecto privadas?"
 msgstr "Change default publications to private?"
 
-#: app/templates/usuario/login.html:4
+#: app/templates/usuario/login.html:8
 msgid "Ingresa al sistema"
 msgstr "Log in to the system"
 
-#: app/templates/usuario/login.html:14
-msgid "Contraseña"
-msgstr "Password"
-
-#: app/templates/usuario/login.html:18
+#: app/templates/usuario/login.html:25
 msgid "Ingresar"
 msgstr "Log in"
 
-#: app/templates/usuario/login.html:24
+#: app/templates/usuario/login.html:37
 msgid "¿ No tienes cuenta ?"
 msgstr "You don't have an account?"
 
-#: app/templates/usuario/login.html:25
+#: app/templates/usuario/login.html:38
 msgid "Registrate"
 msgstr "Register"
 
-#: app/templates/usuario/login.html:29
+#: app/templates/usuario/login.html:42
 msgid "¿ Olvidaste tu contraseña ?"
 msgstr "Forgot your password?"
 
-#: app/templates/usuario/login.html:30
+#: app/templates/usuario/login.html:43
 #: app/templates/usuario/recuperar_password.html:23
 msgid "Recuperar"
 msgstr "Recover"
 
-#: app/templates/usuario/login.html:37
+#: app/templates/usuario/login.html:50
 msgid "Ingresa con tu cuenta de Twitter o Facebook"
 msgstr "Log in with your Twitter or Facebook account"
 
 #: app/templates/usuario/mi_perfil.html:15
-#: app/templates/usuario/ver_perfil.html:21
-msgid "Amigos"
+#, fuzzy
+msgid "Amigos:"
 msgstr "Friends"
 
-#: app/templates/usuario/mi_perfil.html:22
-#: app/templates/usuario/ver_perfil.html:30
+#: app/templates/usuario/mi_perfil.html:17
+#: app/templates/usuario/ver_perfil.html:32
+#, fuzzy
+msgid "Editar mi perfil"
+msgstr "See my profile"
+
+#: app/templates/usuario/mi_perfil.html:25
+#: app/templates/usuario/ver_perfil.html:107
 msgid "Email"
 msgstr "Email"
 
-#: app/templates/usuario/mi_perfil.html:26
-#: app/templates/usuario/ver_perfil.html:34
+#: app/templates/usuario/mi_perfil.html:29
+#: app/templates/usuario/ver_perfil.html:111
 msgid "CI"
 msgstr "ID"
 
-#: app/templates/usuario/mi_perfil.html:30
-#: app/templates/usuario/ver_perfil.html:38
+#: app/templates/usuario/mi_perfil.html:33
+#: app/templates/usuario/ver_perfil.html:115 app/usuario/forms.py:53
+#: app/usuario/forms.py:108
 msgid "Fecha de nacimiento"
 msgstr "Date of birth"
 
-#: app/templates/usuario/mi_perfil.html:38
-#: app/templates/usuario/ver_perfil.html:46
-msgid "Descripción personal"
-msgstr "Personal description"
-
-#: app/templates/usuario/mi_perfil.html:42
-#: app/templates/usuario/ver_perfil.html:50
-msgid "Color favorito"
-msgstr "Favorite color"
-
-#: app/templates/usuario/mi_perfil.html:46
-#: app/templates/usuario/ver_perfil.html:54
-msgid "Videojuegos favoritos"
-msgstr "Favorite videogames"
-
-#: app/templates/usuario/mi_perfil.html:50
-#: app/templates/usuario/ver_perfil.html:58
-msgid "Lenguajes de programación que conoce"
-msgstr "Known programming languages"
-
-#: app/templates/usuario/mi_perfil.html:59
-#: app/templates/usuario/ver_perfil.html:67
-msgid "Ver publicaciones"
-msgstr "See publications"
-
-#: app/templates/usuario/mi_perfil.html:60
-#: app/templates/usuario/ver_perfil.html:68
-msgid "Ocultar publicaciones"
-msgstr "Hide publications"
-
-#: app/templates/usuario/mi_perfil.html:81
-#: app/templates/usuario/ver_perfil.html:89
-msgid "Publicado"
-msgstr "Published"
-
-#: app/templates/usuario/mi_perfil.html:81
-#: app/templates/usuario/ver_perfil.html:89
-msgid "a las"
-msgstr "at"
-
-#: app/templates/usuario/mi_perfil.html:114
-#: app/templates/usuario/ver_perfil.html:122
-msgid "Comentarios"
-msgstr "Comentaries"
-
-#: app/templates/usuario/mis_amigos.html:6
-msgid "Amigos"
-msgstr "Friends"
-
-#: app/templates/usuario/mis_amigos.html:7
-msgid "Amigos de Diego Sanchez"
-msgstr "Friends of Diego Sanchez"
-
-#: app/templates/usuario/recuperar_pass_token_enviado.html:6
-#: app/templates/usuario/recuperar_password.html:5
-msgid "Recupera tu contraseña"
-msgstr "Recover password"
-
-#: app/templates/usuario/recuperar_pass_token_enviado.html:14
-#: app/templates/usuario/recuperar_password.html:11
-msgid "Regresar"
-msgstr "Go back"
-
-#: app/templates/usuario/recuperar_pass_token_enviado.html:18
-msgid "Se envio un token para recuperar tu cuenta a la dirección de email"
-msgstr "A token has been sent to your Email to recover your account"
-
-#: app/templates/usuario/recuperar_pass_token_enviado.html:19
-msgid "¿ No ves el email ?"
-msgstr "Can't see the email?"
-
-#: app/templates/usuario/recuperar_pass_token_enviado.html:22
-msgid "Enviar de nuevo"
-msgstr "Sent again"
-
-#: app/templates/usuario/recuperar_password.html:15
-msgid "Recupera tu contraseña ingresando el email de tu cuenta."
-msgstr "Recover your password by entering your account email"
-
-#: app/templates/usuario/registro.html:6
-msgid "Registrate en el sistema"
-msgstr "Register into the app"
-
-#: app/templates/usuario/registro.html:11
-msgid "Nombre"
-msgstr "Name"
-
-#: app/templates/usuario/registro.html:15
-msgid "Número cedula de identidad"
-msgstr "ID number"
-
-#: app/templates/usuario/registro.html:25
-msgid "Fecha de nacimiento"
-msgstr "Date of birth"
-
-#: app/templates/usuario/registro.html:31
+#: app/templates/usuario/mi_perfil.html:37
+#: app/templates/usuario/ver_perfil.html:119 app/usuario/forms.py:57
+#: app/usuario/forms.py:92
 msgid "Género"
 msgstr "Genre"
 
-#: app/templates/usuario/registro.html:39
+#: app/templates/usuario/mi_perfil.html:41
+#: app/templates/usuario/ver_perfil.html:123
+msgid "Descripción personal"
+msgstr "Personal description"
+
+#: app/templates/usuario/mi_perfil.html:45
+#: app/templates/usuario/ver_perfil.html:127 app/usuario/forms.py:116
+msgid "Color favorito"
+msgstr "Favorite color"
+
+#: app/templates/usuario/mi_perfil.html:49
+#: app/templates/usuario/ver_perfil.html:131
+msgid "Videojuegos favoritos"
+msgstr "Favorite videogames"
+
+#: app/templates/usuario/mi_perfil.html:53
+#: app/templates/usuario/ver_perfil.html:135
+msgid "Lenguajes de programación que conoce"
+msgstr "Known programming languages"
+
+#: app/templates/usuario/mi_perfil.html:62
+#: app/templates/usuario/ver_perfil.html:145
+msgid "Ver publicaciones"
+msgstr "See publications"
+
+#: app/templates/usuario/mi_perfil.html:63
+msgid "Ocultar publicaciones"
+msgstr "Hide publications"
+
+#: app/templates/usuario/mi_perfil.html:84
+msgid "Publicado"
+msgstr "Published"
+
+#: app/templates/usuario/mi_perfil.html:84
+msgid "a las"
+msgstr "at"
+
+#: app/templates/usuario/recuperar_pass_token_enviado.html:6
+#: app/templates/usuario/recuperar_password.html:6
+msgid "Recupera tu contraseña"
+msgstr "Recover password"
+
+#: app/templates/usuario/recuperar_pass_token_enviado.html:16
+#: app/templates/usuario/recuperar_password.html:12
+msgid "Regresar"
+msgstr "Go back"
+
+#: app/templates/usuario/recuperar_pass_token_enviado.html:20
+msgid "¿ No ves el email ?"
+msgstr "Can't see the email?"
+
+#: app/templates/usuario/recuperar_pass_token_enviado.html:23
+msgid "Enviar de nuevo"
+msgstr "Sent again"
+
+#: app/templates/usuario/recuperar_password.html:16
+msgid "Recupera tu contraseña ingresando el email de tu cuenta."
+msgstr "Recover your password by entering your account email"
+
+#: app/templates/usuario/registro.html:7
+msgid "Registrate en el sistema"
+msgstr "Register into the app"
+
+#: app/templates/usuario/registro.html:51
 msgid "Registrar"
 msgstr "Register"
 
-#: app/templates/usuario/registro.html:45
+#: app/templates/usuario/registro.html:57
 msgid "¿ Ya tienes cuenta ?"
 msgstr "Already have an account?"
 
-#: app/templates/usuario/registro.html:46
+#: app/templates/usuario/registro.html:58
 msgid "Ingresa"
 msgstr "Log In"
 
-#: app/templates/usuario/registro.html:52
+#: app/templates/usuario/registro.html:64
 msgid "Registrate con tu cuenta de Twitter o Facebook"
 msgstr "Register with your Twitter of Facebook account"
 
@@ -460,14 +472,155 @@ msgstr "Register with your Twitter of Facebook account"
 msgid "Mi cuenta"
 msgstr "My Account"
 
-#: app/templates/usuario/ver_perfil.html:23
+#: app/templates/usuario/ver_perfil.html:35
+#, fuzzy
+msgid "Crear Publicacion"
+msgstr "See publication"
+
+#: app/templates/usuario/ver_perfil.html:43
+msgid "Soys amigos"
+msgstr "You're friends"
+
+#: app/templates/usuario/ver_perfil.html:45
+msgid "No soys amigos"
+msgstr "You're not friends"
+
+#: app/templates/usuario/ver_perfil.html:65
 msgid "Eliminar Amistad"
 msgstr "Delete friendship"
 
-#: app/templates/usuario/configuracion.html:68
-#: app/templates/usuario/editar_perfil.html:27
-msgid "Guardar"
-msgstr "Save"
+#: app/templates/usuario/ver_perfil.html:84
+msgid "Solicitud de amistad enviada, esperando por aceptacion"
+msgstr "Friendship request sended, waiting for accept"
+
+#: app/templates/usuario/ver_perfil.html:93
+#, fuzzy
+msgid "Solicitar Amistad"
+msgstr "Delete friendship"
+
+#: app/templates/usuario/ver_perfil.html:124
+#, fuzzy
+msgid "Sin descripcion"
+msgstr "Personal description"
+
+#: app/templates/usuario/ver_perfil.html:128
+msgid "Sin color"
+msgstr "No color"
+
+#: app/templates/usuario/ver_perfil.html:132
+msgid "Sin video juegos"
+msgstr "No video games"
+
+#: app/templates/usuario/ver_perfil.html:136
+#, fuzzy
+msgid "Sin lenguajes de programación"
+msgstr "Known programming languages"
+
+#: app/templates/usuario/ver_publicaciones.html:16
+#, fuzzy
+msgid "Publicaciones de"
+msgstr "See publications"
+
+#: app/usuario/forms.py:46 app/usuario/forms.py:84
+msgid "Nombre"
+msgstr "Name"
+
+#: app/usuario/forms.py:47
+#, fuzzy
+msgid "Nombre Requirido"
+msgstr "Name and lastname"
+
+#: app/usuario/forms.py:49 app/usuario/forms.py:89
+#, fuzzy
+msgid "Cédula de identidad"
+msgstr "ID number"
+
+#: app/usuario/forms.py:50
+msgid "Cédula requerida"
+msgstr "ID required"
+
+#: app/usuario/forms.py:54
+#, fuzzy
+msgid "Fecha de nacimiento requerida"
+msgstr "Date of birth"
+
+#: app/usuario/forms.py:58 app/usuario/forms.py:93
+msgid "Género requerido"
+msgstr "Gender required"
+
+#: app/usuario/forms.py:76
+msgid "Primer nombre"
+msgstr "First name"
+
+#: app/usuario/forms.py:80
+#, fuzzy
+msgid "Apellido"
+msgstr "Name and lastname"
+
+#: app/usuario/forms.py:98
+#, fuzzy
+msgid "Foto de perfil"
+msgstr "Color of your profile"
+
+#: app/usuario/forms.py:103
+#, fuzzy
+msgid "Correo electrónico"
+msgstr "Email"
+
+#: app/usuario/forms.py:112
+#, fuzzy
+msgid "Descripción"
+msgstr "Personal description"
+
+#: app/usuario/forms.py:120
+#, fuzzy
+msgid "Libro favorito"
+msgstr "Favorite videogames"
+
+#: app/usuario/forms.py:124
+#, fuzzy
+msgid "Música favorita"
+msgstr "Favorite music"
+
+#: app/usuario/forms.py:128
+#, fuzzy
+msgid "Video Juegos favoritos"
+msgstr "Favorite videogames"
+
+#: app/usuario/forms.py:132
+#, fuzzy
+msgid "Lenguajes de programación conocidos"
+msgstr "Known programming languages"
+
+#: app/usuario/forms.py:136
+msgid "¿ Borrar foto ?"
+msgstr "Delete all?"
+
+#: app/usuario/user_manager.py:39
+msgid "No haz dado autrización para obtener tus datos"
+msgstr "You haven't gave authorization to obtain your data"
+
+#: app/usuario/user_manager.py:44
+msgid ""
+"Error: no se pudieron obtener los datos del usuario de facebook, intenta "
+"de nuevo"
+msgstr "Error: we couldn't obtain facebook data, try again"
+
+#: app/usuario/vistas.py:71
+msgid "Solicitud amistad enviada"
+msgstr "Friendship request sended"
+
+#: app/usuario/vistas.py:83
+msgid "Amistad borrada"
+msgstr "Friendship deleted"
+
+#: app/usuario/vistas.py:128
+msgid "Config privacidad guardada"
+msgstr "Privacity config saved"
+
+#: app/usuario/vistas.py:146
+msgid "Config Guardada"
+msgstr "Config saved"
 
 #~ msgid "Estas respondiendo al comentario de %(username)"
 #~ msgstr "You're responding to %(username) comment"
@@ -480,4 +633,58 @@ msgstr "Save"
 
 #~ msgid "Amigos de %(usuario_nombre)"
 #~ msgstr "Friends of %(usuario_nombre)"
+
+#~ msgid "Agregar como amigo"
+#~ msgstr "Add friend"
+
+#~ msgid "Añadir Imagenes y Videos"
+#~ msgstr "Add images and videos"
+
+#~ msgid "Cerrar"
+#~ msgstr "Close"
+
+#~ msgid "Aceptar"
+#~ msgstr "Accept"
+
+#~ msgid "Ver mas comentarios"
+#~ msgstr "Comentaries"
+
+#~ msgid "Encuentra personas"
+#~ msgstr "Find people"
+
+#~ msgid "Editar Perfil"
+#~ msgstr "Edit profile"
+
+#~ msgid "Antigua Contraseña"
+#~ msgstr "Old password"
+
+#~ msgid "Nueva Contraseña"
+#~ msgstr "New password"
+
+#~ msgid "Repetir Contraseña"
+#~ msgstr "Repeat password"
+
+#~ msgid "Masculino"
+#~ msgstr "Masculine"
+
+#~ msgid "Femenino"
+#~ msgstr "Femenine"
+
+#~ msgid "Color Favorito"
+#~ msgstr "Favorite color"
+
+#~ msgid "Videojuegos Favoritos"
+#~ msgstr "Favorite videogames"
+
+#~ msgid "Lenguajes"
+#~ msgstr "Languages"
+
+#~ msgid "Contraseña"
+#~ msgstr "Password"
+
+#~ msgid "Amigos de Diego Sanchez"
+#~ msgstr "Friends of Diego Sanchez"
+
+#~ msgid "Se envio un token para recuperar tu cuenta a la dirección de email"
+#~ msgstr "A token has been sent to your Email to recover your account"
 

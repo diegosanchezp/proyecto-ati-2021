@@ -47,11 +47,6 @@ def ver_perfil(username):
     target_user = User.objects.get_or_404(username=username)
     it_is_the_current_user = target_user == current_user
 
-    if it_is_the_current_user:
-        publicaciones = Publicacion.objects(autor=current_user).order_by('-fecha')
-    else:
-        publicaciones = Publicacion.objects(autor=target_user).order_by('-fecha')
-
     # Solicitar amistad a un usuario
     if request.method == "POST" and request.form["action"] == "SOLICITAR_AMISTAD":
         if not it_is_the_current_user:
@@ -99,10 +94,25 @@ def ver_perfil(username):
         it_is_the_current_user = it_is_the_current_user,
         is_friend=target_user in current_user.amigos,
         peticion=peticion,
-        publicaciones = publicaciones,
         PeticionEvento=PeticionEvento,
         PeticionEstado=PeticionEstado,
     )
+
+
+@usuario_blueprint.route("/ver-perfil/<username>/publicaciones", methods=["GET"])
+@login_required
+def ver_publicaciones(username):
+    """ Ver publicaciones de usuario """
+
+    target_user = User.objects.get_or_404(username=username)
+    publicaciones = Publicacion.objects(autor=target_user).order_by('-fecha')
+    
+    return render_template("usuario/ver_publicaciones.html",
+        detalleButton=True,
+        target_user = target_user,
+        publicaciones = publicaciones.paginate(page=1, per_page=10)
+    )
+
 
 @usuario_blueprint.route("/editar-privacidad", methods=['GET', 'POST'])
 @login_required

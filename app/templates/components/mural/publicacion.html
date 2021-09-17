@@ -53,14 +53,19 @@
     </div>
 
     {# Detalles publicacion #}
-    {% if detalleButton%}
     <div class="row d-flex justify-content-center mt-3">
-
+        {% if detalleButton %}
         <a href="{{ url_for('mural_blueprint.detalle_publicacion', publicacionID=publicacion.id) }}"
-           class="btn btn-info w-25 d-flex justify-content-center ">
+           class="btn btn-info w-25 d-flex justify-content-center me-3">
             {{_("Ver publicacion")}}
         </a>
-        
+        {% endif %}
+
+        {% if publicacion.autor == current_user %}
+          <a href="{{url_for("mural_blueprint.edit_publication", publicacionID=publicacion.id)}}"
+           class="btn btn-primary w-25 d-flex justify-content-center ">
+            {{_("Editar publicacion")}}
+        </a>
+        {% endif %}
     </div>
-    {% endif %}
 </div>
