@@ -38,6 +38,14 @@ from app.models.peticion import (
     TipoNotificaciones,
 )
 
+@usuario_blueprint.get("/token-enviado")
+def recuperar_token():
+    """
+    Vista que muestra mensaje de exito despues
+    de que se envio token para recuperar contraseña
+    """
+    return render_template("usuario/recuperar_pass_token_enviado.html")
+
 @usuario_blueprint.route("/ver-perfil/<username>", methods=["POST", "GET"])
 @login_required
 def ver_perfil(username):
