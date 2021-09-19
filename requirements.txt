@@ -40,3 +40,4 @@ eventlet==0.32.0
 flask-socketio==5.1.1
 python-engineio==4.2.1
 python-socketio==5.4.0
+greenlet==1.1.0
