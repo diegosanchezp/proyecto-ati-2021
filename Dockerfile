@@ -1,5 +1,4 @@
 FROM ubuntu:latest
-COPY protocols /etc
 WORKDIR /app
 COPY . ./
 # Install dependencies and compile files
