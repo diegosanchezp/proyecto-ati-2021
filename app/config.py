@@ -61,7 +61,7 @@ class Config:
     USER_CHANGE_PASSWORD_TEMPLATE = "usuario/editar_password.html"
     USER_EDIT_USER_PROFILE_TEMPLATE = "usuario/editar_perfil.html"
 
-    #USER_RESET_PASSWORD_TEMPLATE = ""
+    USER_RESET_PASSWORD_TEMPLATE = "usuario/reset_password.html"
 
     USER_EDIT_USER_PROFILE_TEMPLATE = "usuario/editar_perfil.html" 
 
