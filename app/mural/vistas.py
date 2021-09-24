@@ -23,6 +23,7 @@ from app.models.peticion import (
 from app.utils import get_upload_path, allowed_file_extension
 from datetime import datetime
 from werkzeug.utils import secure_filename
+from mongoengine.queryset.visitor import Q
 
 mural_blueprint = Blueprint('mural_blueprint', __name__, template_folder='templates')
 
@@ -41,10 +42,13 @@ def index_proxy():
 def index(page: int):
     """ Vista principal del mural """
     form = SearchBarForm(request.form)
-    ## Filtrar publicaciones ##
-    ## Hay que mejorar un poco la logica ##
 
-    publicaciones_publicas = Publicacion.objects(tipo_publicacion=TIPO_PUBLICACIONES[0][0]).order_by('-fecha')
+    ## Filtrar publicaciones ##
+    publicaciones_publicas = Publicacion.objects.filter(
+                                                        Q(tipo_publicacion = TIPO_PUBLICACIONES[0][0]) |
+                                                        Q(autor  = current_user) |
+                                                        Q(autor__in = current_user.amigos)
+                                                        ).order_by('-fecha')
 
 
     return render_template("mural/mural.html",
