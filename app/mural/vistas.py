@@ -173,6 +173,9 @@ def create_publication():
 
     form = PublicacionForm(request.form)
 
+    if current_user.config.publicaciones_privadas:
+        form.tipo_publicacion.choices = [TIPO_PUBLICACIONES[1] , TIPO_PUBLICACIONES[0]]
+
     if request.method == 'POST' and form.validate():
         request_file_list = request.files.getlist(form.images.name)
 
