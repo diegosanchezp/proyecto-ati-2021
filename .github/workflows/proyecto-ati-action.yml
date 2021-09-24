@@ -30,6 +30,13 @@ jobs:
       - name: Test with unittest
         run: |
           SECRET_KEY="aaaaaaaaaaaaaaaaaa" python -m unittest discover -v -s app/tests/ -p "*_test.py"
+  docker-file-builds:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: "flask ati image builds"
+      run: |
+        docker build .
   deploy-to-production:
     runs-on: ubuntu-latest
     needs: tests
