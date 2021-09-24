@@ -103,7 +103,7 @@
       </div>
 
       {# Info del usuario #}
-      {% if (not is_private) or (is_private and is_friend) %}
+      {% if (not is_private) or (is_private and is_friend) or (it_is_the_current_user) %}
       <div class="d-flex justify-content-center m-3">
         <table class="table">
           <tbody>
