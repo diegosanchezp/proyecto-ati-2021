@@ -38,6 +38,8 @@ from app.models.peticion import (
     TipoNotificaciones,
 )
 
+from mongoengine.queryset.visitor import Q
+
 @usuario_blueprint.get("/token-enviado")
 def recuperar_token():
     """
@@ -119,7 +121,13 @@ def ver_publicaciones(username):
     """ Ver publicaciones de usuario """
 
     target_user = User.objects.get_or_404(username=username)
-    publicaciones = Publicacion.objects(autor=target_user).order_by('-fecha')
+
+    ## Filtrar publicaciones ##
+    publicaciones = Publicacion.objects.filter(
+                            (Q(autor  = target_user) & Q(tipo_publicacion = TIPO_PUBLICACIONES[0][0])) |
+                            (Q(autor  = target_user) & Q(autor__in = current_user.amigos)) |
+                            (Q(autor  = target_user) & Q(autor  = current_user))
+                            ).order_by('-fecha')
     
     return render_template("usuario/ver_publicaciones.html",
         detalleButton=True,
