@@ -54,6 +54,7 @@ def ver_perfil(username):
     """
     target_user = User.objects.get_or_404(username=username)
     it_is_the_current_user = target_user == current_user
+    is_private = target_user.config.perfil_privado
 
     # Solicitar amistad a un usuario
     if request.method == "POST" and request.form["action"] == "SOLICITAR_AMISTAD":
@@ -90,6 +91,7 @@ def ver_perfil(username):
 
             flash(_("Amistad borrada"), 'success')
             return redirect(request.url)
+
     peticion=None
     if not it_is_the_current_user:
         # Soy la persona que realizo la solicitud
@@ -97,10 +99,14 @@ def ver_perfil(username):
         if not peticion:
             # Soy la persona que recibe la solicitud
             peticion = Peticion.objects(emisor=target_user,receptor=current_user, estado=PeticionEstado.ESPERA).first()
+    
     return render_template("usuario/ver_perfil.html",
         target_user = target_user,
         it_is_the_current_user = it_is_the_current_user,
+
+        is_private = is_private,
         is_friend=target_user in current_user.amigos,
+
         peticion=peticion,
         PeticionEvento=PeticionEvento,
         PeticionEstado=PeticionEstado,
