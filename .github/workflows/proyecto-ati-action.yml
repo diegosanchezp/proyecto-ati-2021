@@ -34,9 +34,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: "flask ati image builds"
-      run: |
-        docker build .
+      - name: flask ati image builds
+        run: |
+          docker build .
   deploy-to-production:
     runs-on: ubuntu-latest
     needs: tests
