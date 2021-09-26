@@ -23,7 +23,7 @@ class BaseSeleniumUnitTest(unittest.TestCase):
         self.driver.get("http://localhost:5000/")
 
         # 3 | type | id=email | aaron@mail.com
-        self.driver.find_element(By.ID, "email").send_keys("aaron@mail.com")
+        self.driver.find_element(By.ID, "email").send_keys("diego@mail.com")
 
         # 6 | doubleClick | id=password | 
         element = self.driver.find_element(By.ID, "password")
