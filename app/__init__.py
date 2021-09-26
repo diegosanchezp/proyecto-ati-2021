@@ -9,11 +9,13 @@ from app.utils import (
 )
 from flask_babel import Babel
 from flask_login.mixins import AnonymousUserMixin
+from flask_socketio import SocketIO
 # Instanciar extensiones de flask
 db = MongoEngine()
 babel = Babel()
+socketio = SocketIO()
 
-def create_app(config_class="Config"):
+def create_app(config_class="Config") -> flask.Flask:
     """ Flask application factory """
 
     # Instanciar aplicacion de flask
@@ -23,6 +25,9 @@ def create_app(config_class="Config"):
     app.jinja_env.add_extension('jinja2.ext.do')
     # Setup Flask-MongoEngine
     db.init_app(app)
+    
+    # Setup flask socketio
+    socketio.init_app(app)
 
     # Verificar si la conexion a base de datos esta funcionando
     if not app.testing:
