@@ -4,17 +4,6 @@ const scrollToNewMessage = function(){
   referenceNewMessage.scrollIntoView({ behavior: 'smooth' });
 }
 
-
-// Cuando la pestaña este por cerrar notificar al receptor
-// que me estoy desconectando
-document.addEventListener("beforeunload", ()=>{
-  const socket = io();
-  socket.emit(
-    "desconectar_con_amigo",
-    JSON.stringify({receptorId: receptorId})
-  );
-});
-
 document.addEventListener('DOMContentLoaded', () => {
 
   const messagesList = document.getElementById("messages-list-real-time");
@@ -28,39 +17,29 @@ document.addEventListener('DOMContentLoaded', () => {
   const emisorName = dataEl.dataset.emisorName;
   const receptorName = dataEl.dataset.receptorName;
   const socket = io();
+
+  // Variable gloabl para saber si mi amigo esta conectado
   let amigoConectado = false;
 
   socket.on("connect", () => {
-    // Crear una room privada para el current user
-    socket.emit("crear_room", JSON.stringify({emisorId: emisorId}));
-    socket.emit(
-      "conectar_con_amigo",
-      JSON.stringify({receptorId: receptorId})
-    );
+    console.log("connected");
   });
   
   socket.on("amigo_conectado", (data)=>{
-    statusAmigoConexion.innerHTML = data;
+    statusAmigoConexion.innerHTML = `${data}`;
+    statusAmigoConexion.setAttribute("class", "text-success");
     amigoConectado = true;
   });
 
   socket.on("amigo_desconectado", (data)=>{
     statusAmigoConexion.innerHTML = data;
+    statusAmigoConexion.setAttribute("class", "text-danger");
     amigoConectado = false;
-  });
-
-  // Este evento significa que cree mi room
-  socket.on("room_creada", (data)=>{
-    console.log(data);
   });
 
   // Socket perdio conexion con el server
   socket.on("disconnect", () => {
-    console.log("socket desconectado");
-    socket.emit(
-      "desconectar_con_amigo",
-      JSON.stringify({receptorId: receptorId})
-    );
+    console.log("socket perdio conexion con el server");
   });
 
   form.onsubmit = (e) => {

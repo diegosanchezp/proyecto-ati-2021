@@ -12,26 +12,28 @@ import datetime
 
 chat_blueprint = Blueprint('chat_blueprint', __name__, template_folder='templates')
 
-@socketio.on('crear_room')
-def join(data):
+@socketio.on("connect")
+def connected():
     """
-    Crear una room para el current user, para que tus amigos
-    se puedan unir y chatear contigo
+    Setup inicial de cuando se conecta un socket
     """
 
+    #Crear una room para el current user, para que tus amigos
+    # se puedan unir y chatear contigo
     room = str(current_user.id)
     join_room(room)
-    emit("room_creada", "connected")
 
-@socketio.on('conectar_con_amigo')
-def conectar_con_amigo(data):
-    """
-    Notificar al receptor de los mensajes que el current_user
-    esta conectado
-    """
+    # Notificar a todos mis amigos de que estoy conectado
+    for friend in current_user.amigos:
+        emit("amigo_conectado", _("%(nombre)s se ha conectado", nombre=current_user.nombre), to=str(friend.id))
 
-    decoded_data = json.loads(data)
-    emit("amigo_conectado", _("%(nombre)s se ha conectado", nombre=current_user.nombre),to=decoded_data["receptorId"])
+@socketio.on('disconnect')
+def test_disconnect():
+    # Notificar a todos mis amigos de que estoy desconectado
+    leave_room(str(current_user.id))
+
+    for friend in current_user.amigos:
+        emit("amigo_desconectado", _("%(nombre)s se ha desconectado", nombre=current_user.nombre), to=str(friend.id))
 
 @socketio.on('message')
 def handle_message(data: str):
@@ -51,9 +53,6 @@ def handle_message(data: str):
 
     emit("mensaje_privado", decoded_data["mensaje"], to=decoded_data["receptorId"])
 
-@socketio.on('disconnect')
-def test_disconnect():
-    print(request)
 
 @chat_blueprint.route("/<string:username>")
 def index(username):
