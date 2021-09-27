@@ -38,6 +38,8 @@ from app.models.peticion import (
     TipoNotificaciones,
 )
 
+from mongoengine.queryset.visitor import Q
+
 @usuario_blueprint.get("/token-enviado")
 def recuperar_token():
     """
@@ -54,6 +56,7 @@ def ver_perfil(username):
     """
     target_user = User.objects.get_or_404(username=username)
     it_is_the_current_user = target_user == current_user
+    is_private = target_user.config.perfil_privado
 
     # Solicitar amistad a un usuario
     if request.method == "POST" and request.form["action"] == "SOLICITAR_AMISTAD":
@@ -90,6 +93,7 @@ def ver_perfil(username):
 
             flash(_("Amistad borrada"), 'success')
             return redirect(request.url)
+
     peticion=None
     if not it_is_the_current_user:
         # Soy la persona que realizo la solicitud
@@ -97,10 +101,14 @@ def ver_perfil(username):
         if not peticion:
             # Soy la persona que recibe la solicitud
             peticion = Peticion.objects(emisor=target_user,receptor=current_user, estado=PeticionEstado.ESPERA).first()
+    
     return render_template("usuario/ver_perfil.html",
         target_user = target_user,
         it_is_the_current_user = it_is_the_current_user,
+
+        is_private = is_private,
         is_friend=target_user in current_user.amigos,
+
         peticion=peticion,
         PeticionEvento=PeticionEvento,
         PeticionEstado=PeticionEstado,
@@ -113,7 +121,13 @@ def ver_publicaciones(username):
     """ Ver publicaciones de usuario """
 
     target_user = User.objects.get_or_404(username=username)
-    publicaciones = Publicacion.objects(autor=target_user).order_by('-fecha')
+
+    ## Filtrar publicaciones ##
+    publicaciones = Publicacion.objects.filter(
+                            (Q(autor  = target_user) & Q(tipo_publicacion = TIPO_PUBLICACIONES[0][0])) |
+                            (Q(autor  = target_user) & Q(autor__in = current_user.amigos)) |
+                            (Q(autor  = target_user) & Q(autor  = current_user))
+                            ).order_by('-fecha')
     
     return render_template("usuario/ver_publicaciones.html",
         detalleButton=True,

@@ -38,9 +38,11 @@
           {% else %}
 
             <li class="list-group-item d-flex justify-content-center">
-              <div class="badge bg-secondary text-wrap text-center">
+              <div class="badge bg-secondary text-wrap text-center p-2">
                 {% if is_friend %}
                   {{_("Soys amigos")}}
+                {% elif is_private %}
+                  {{_("Este perfil es privado")}}
                 {% else %}
                   {{_("No soys amigos")}}
                 {% endif %}
@@ -100,6 +102,8 @@
         </ul>
       </div>
 
+      {# Info del usuario #}
+      {% if (not is_private) or (is_private and is_friend) or (it_is_the_current_user) %}
       <div class="d-flex justify-content-center m-3">
         <table class="table">
           <tbody>
@@ -144,7 +148,8 @@
            class="btn btn-secondary m-2">
             {{_("Ver publicaciones")}}
         </a>
-      </div>        
+      </div>
+      {% endif %}
     </div>
   </div>
 
