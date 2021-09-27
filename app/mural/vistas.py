@@ -45,10 +45,10 @@ def index(page: int):
 
     ## Filtrar publicaciones ##
     publicaciones_publicas = Publicacion.objects.filter(
-                                                        Q(tipo_publicacion = TIPO_PUBLICACIONES[0][0]) |
-                                                        Q(autor  = current_user) |
-                                                        Q(autor__in = current_user.amigos)
-                                                        ).order_by('-fecha')
+        Q(tipo_publicacion = TIPO_PUBLICACIONES[0][0]) |
+        Q(autor  = current_user) |
+        Q(autor__in = current_user.amigos)
+    ).order_by('-fecha')
 
 
     return render_template("mural/mural.html",
