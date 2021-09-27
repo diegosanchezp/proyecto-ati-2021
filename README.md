@@ -206,3 +206,23 @@ pybabel compile -d app/translations
 ### Reiniciar contenedor de flask
 docker restart flask
 ```
+
+## Pruebas unitarias de selenium
+
+Las pruebas unitarias de selenium **solo se pueden correr dentro del contenedor del servico de flask**.
+
+Debe de tener en cuenta las precondiciones que se listan en la [matriz de pruebas](https://docs.google.com/spreadsheets/d/1caXQq9I3zi7K1eNlq3zNJNa2p0VWPFOK/edit?usp=sharing&ouid=103607191941499792375&rtpof=true&sd=true)
+
+```sh
+# Entrar al contenedor que corre el servicio de flask
+docker exec -it flask bash
+
+# Correr todas las pruebas unitarias de selenium
+python3 -m unittest discover -v -s app/tests/ -p "test_*.py"
+```
+
+Si desea ejecutar una sola prueba unitaria
+
+```sh
+python3 -m unittest app/tests/test_login.py
+```
