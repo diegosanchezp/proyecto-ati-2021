@@ -61,13 +61,14 @@ document.addEventListener('DOMContentLoaded', () => {
     var today = new Date();
     var date = today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    var dateTime = date+', '+time;
+    var dateTime = time+', '+date;
 
     form.message.value = '';
     let content = '';
     let newLi = document.createElement("li");
+    newLi.setAttribute("class", "list-group-item border rounded shadow");
     let newArticle = document.createElement("article");
-    newArticle.setAttribute("class", "d-flex flex-row-reverse gap-2 my-2 p-2 border rounded");
+    newArticle.setAttribute("class", "d-flex flex-row-reverse gap-2 my-2 p-2");
     let newFigure =document.createElement("figure");
     newFigure.setAttribute("class", "position-relative");
     let newImg = document.createElement("img");
@@ -83,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
     content = document.createTextNode(emisorName);
     newP1.appendChild(content);
     let newDiv = document.createElement("div");
-    newDiv.setAttribute("class", "d-flex flex-column gap-2");
+    newDiv.setAttribute("class", "d-flex flex-column gap-2 text-end");
     let newP2 = document.createElement("p");
     content = document.createTextNode(message);
     newP2.appendChild(content);
@@ -109,13 +110,14 @@ document.addEventListener('DOMContentLoaded', () => {
     var today = new Date();
     var date = today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    var dateTime = date+', '+time;
+    var dateTime = time+', '+date;
 
     console.log(data)
     let content = '';
     let newLi = document.createElement("li");
+    newLi.setAttribute("class", "list-group-item border rounded shadow bg-light");
     let newArticle = document.createElement("article");
-    newArticle.setAttribute("class", "d-flex gap-2 my-2 p-2 border rounded");
+    newArticle.setAttribute("class", "d-flex gap-2 my-2 p-2");
     let newFigure =document.createElement("figure");
     newFigure.setAttribute("class", "position-relative");
     let newImg = document.createElement("img");
