@@ -54,9 +54,11 @@
             </li>
 
             <li class="list-group-item d-flex justify-content-center">
-              <a href="{{ url_for('chat_blueprint.index', username=current_user.username) }}">
-                <button class="btn btn-primary">{{_("Chatear")}}</button>
-              </a>
+              {% if is_friend %}
+                <a href="{{ url_for('chat_blueprint.index', username=target_user.username) }}">
+                  <button class="btn btn-primary">{{_("Chatear")}}</button>
+                </a>
+              {% endif %}
             </li>
 
             <li class="list-group-item d-flex justify-content-center">
