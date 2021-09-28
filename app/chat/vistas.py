@@ -62,7 +62,7 @@ def index(username):
     receiver = User.objects.get_or_404(username= username)
     # Si no eres amigo no puedes chatear con esta persona
     if receiver not in current_user.amigos:
-        redirect(location=url_for("mural_blueprint.index", page=1))
+        return redirect(location=url_for("mural_blueprint.index", page=1))
     messages = MensajeChat.objects(
         (Q(receptor=receiver.id) & Q(emisor=current_user.id)) \
         | (Q(receptor=current_user.id) & Q(emisor=receiver.id)))
