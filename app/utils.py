@@ -33,8 +33,10 @@ def register_signals() -> None:
     """
     from mongoengine import signals
     from app.models.mural import Publicacion
+    from app.models.peticion import Notificacion
 
     signals.post_delete.connect(Publicacion.post_delete, sender=Publicacion)
+    signals.post_save.connect(Notificacion.post_save, sender=Notificacion)
 
 def register_context_procesor(app: Flask) -> None:
     """

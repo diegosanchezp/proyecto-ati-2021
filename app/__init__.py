@@ -10,10 +10,13 @@ from app.utils import (
 from flask_babel import Babel
 from flask_login.mixins import AnonymousUserMixin
 from flask_socketio import SocketIO
+from flask_mail import Mail
+
 # Instanciar extensiones de flask
 db = MongoEngine()
 babel = Babel()
 socketio = SocketIO()
+mail = Mail()
 
 def create_app(config_class="Config") -> flask.Flask:
     """ Flask application factory """
@@ -28,6 +31,9 @@ def create_app(config_class="Config") -> flask.Flask:
     
     # Setup flask socketio
     socketio.init_app(app)
+
+    # Setup Flask-Mail
+    mail.init_app(app)
 
     # Verificar si la conexion a base de datos esta funcionando
     if not app.testing:

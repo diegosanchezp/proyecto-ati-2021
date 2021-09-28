@@ -133,3 +133,33 @@ class Notificacion(AbstractModel):
 
     # La Notificacion se borra si el recurso es borrado
     recurso = db.GenericReferenceField()
+
+    @classmethod
+    def post_save(cls, sender, document, **kwargs):
+        """
+        Enviar mensaje por correo de notificacion
+        """
+        from flask_login import current_user
+        from flask_mail import Message
+        from app import mail
+
+        msg = Message(
+            sender="noreply@atisocial.com",
+            recipients=[current_user.email],
+            body=document.descripcion,
+        )
+
+        if document.tipo == TipoNotificaciones.MENSAJE_CHAT and \
+            current_user.config.notificaciones.mensajes_chat:
+                msg.subject = _("Notificacion de mensaje de chat")
+                mail.send(msg)
+
+        elif document.tipo == TipoNotificaciones.COMENTARIO and \
+            current_user.config.notificaciones.comentarios:
+                msg.subject = _("Han comentado tu publicacion")
+                mail.send(msg)
+
+        elif document.tipo == TipoNotificaciones.AMIGO_CONECTADO and \
+            current_user.config.notificaciones.comentarios:
+                msg.subject = _("Notificación de amigo conectado")
+                mail.send(msg)
