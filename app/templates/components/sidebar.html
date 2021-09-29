@@ -39,7 +39,7 @@ Contexto requerido
   </section>
 
   <section id="sidebar-call-to-actions" class="d-flex flex-row gap-2 justify-content-center">
-    <a class="btn btn-secondary px-2" href="{{ url_for("user.logout") }}">{{ _("Cerrar Sesión") }}</a>
+    <a id="cerrar-sesion-boton" class="btn btn-secondary px-2" href="{{ url_for("user.logout") }}">{{ _("Cerrar Sesión") }}</a>
     <a class="btn btn-primary" href="{{ url_for("usuario_blueprint.ver_perfil", username=current_user.username)}}">{{_("Ver mi perfil") }}</a>
   </section>
 
