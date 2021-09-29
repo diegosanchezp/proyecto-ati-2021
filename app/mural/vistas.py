@@ -79,7 +79,7 @@ def detalle_publicacion(publicacionID: str):
         n = Notificacion(
             emisor=current_user,
             receptor=publicacion.autor,
-            descripcion=f"{current_user.nombre} ha comentado tu publicación",
+            descripcion=f"ha comentado tu publicación",
             tipo=TipoNotificaciones.COMENTARIO,
             recurso=publicacion,
         )
@@ -115,7 +115,7 @@ def comentar_comentario(comentarioID: str):
         n = Notificacion(
             emisor=current_user,
             receptor=comentario.usuario,
-            descripcion=f"{current_user.nombre} ha respondido tu comentario de la publicacion",
+            descripcion=f"ha respondido tu comentario de la publicacion",
             tipo=TipoNotificaciones.COMENTARIO,
             recurso=comentario.publicacion,
         )
@@ -125,7 +125,7 @@ def comentar_comentario(comentarioID: str):
         n2 = Notificacion(
             emisor=current_user,
             receptor=comentario.publicacion.autor,
-            descripcion=f"{current_user.nombre} ha comentado tu publicación",
+            descripcion=f"ha comentado tu publicación",
             tipo=TipoNotificaciones.COMENTARIO,
             recurso=comentario.publicacion,
         )

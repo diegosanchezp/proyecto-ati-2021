@@ -17,22 +17,28 @@
 {% macro render_notificacion(notificacion) -%}
 
 <div class="border border-2 rounded mt-2">
-  <div class="d-flex flex-row p-2 gap-2">
-    
-      {{ profile_pic(
-          user=notificacion.emisor,
-          class_profile="notificacion-profile-pic",
-          id_not_profile="notificacion-profile-icon",
-          class_not_profile="notificacion-profile-icon border border-2 rounded-circle align-self-center"
-         )
-      }}
+  <div class="d-flex flex-wrap justify-content-md-between p-2 gap-2">
+    <div class="d-flex">
+        {{ profile_pic(
+            user=notificacion.emisor,
+            class_profile="notificacion-profile-pic",
+            id_not_profile="notificacion-profile-icon",
+            class_not_profile="notificacion-profile-icon border border-2 rounded-circle align-self-center"
+           )
+        }}
+        
+      <p class="font-weight-bold name publicacion-profile-name m-0 ms-2">
+        <a href="{{url_for('usuario_blueprint.ver_perfil', username=notificacion.emisor.username)}}"
+           class="link-dark"
+        >
+          {{notificacion.emisor.nombre}}
+        </a>
 
-    <p class="font-weight-bold name w-75 publicacion-profile-name m-0">
-    <a href="{{url_for("usuario_blueprint.ver_perfil", username=notificacion.emisor.username)}}">{{notificacion.emisor.nombre}}</a>
-      {{ notificacion.descripcion }}
-    </p>
+        {{ notificacion.descripcion }}
+      </p>
+    </div>
 
-    <div id="notificacion-actions" class="d-flex flex-row gap-2 justify-content-end w-25">
+    <div id="notificacion-actions" class="d-flex flex-row gap-2">
 
     {# ======= #}
     {% if notificacion.tipo == TipoNotificaciones.SOLICITUD_AMISTAD and notificacion.recurso.estado == PeticionEstado.ESPERA %}
