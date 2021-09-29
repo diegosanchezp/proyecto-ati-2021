@@ -40,7 +40,7 @@ class TestEditprofile(BaseSeleniumUnitTest):
     self.driver.find_element(By.ID, "color").click()
     # 6 | type | id=color | Azul 
     self.driver.find_element(By.ID, "color").clear()
-    self.driver.find_element(By.ID, "color").send_keys("Azul")
+    self.driver.find_element(By.ID, "color").send_keys("Amarillo")
     # 7 | click | id=libro | 
     self.driver.find_element(By.ID, "libro").click()
     # 8 | type | id=libro | TLOR
@@ -55,7 +55,7 @@ class TestEditprofile(BaseSeleniumUnitTest):
     self.driver.find_element(By.ID, "lenguajes_programacion").click()
     # 12 | type | id=lenguajes_programacion | PhP, Ruby
     self.driver.find_element(By.ID, "lenguajes_programacion").clear()
-    self.driver.find_element(By.ID, "lenguajes_programacion").send_keys("PhP, Ruby")
+    self.driver.find_element(By.ID, "lenguajes_programacion").send_keys("C/C++, Python, Javascript")
     # 13 | click | id=video_juegos | 
     self.driver.find_element(By.ID, "video_juegos").click()
     # 14 | type | id=video_juegos | TLOU II, Sekiro
@@ -76,7 +76,7 @@ class TestEditprofile(BaseSeleniumUnitTest):
 
     self.assertEqual(self.driver.current_url, "http://localhost:5000/ver-perfil/diego_sanchez")
 
-    self.assertEqual(self.driver.find_element(By.ID, "color").text , "Azul")
+    self.assertEqual(self.driver.find_element(By.ID, "color").text , "Amarillo")
 
     self.assertEqual(self.driver.find_element(By.ID, "book").text , "TLOR")    
 
@@ -90,11 +90,11 @@ class TestEditprofile(BaseSeleniumUnitTest):
 
     self.assertEqual(self.driver.find_element(By.ID, "video_games").text , "Geometry dash")
 
-    self.assertEqual(self.driver.find_element(By.ID, "programming_languages").text , "PhP, Ruby")
+    self.assertEqual(self.driver.find_element(By.ID, "programming_languages").text , "C/C++, Python, Javascript")
 
-    self.assertEqual(self.driver.find_element(By.ID, "id").text , "134423")
+    self.assertEqual(self.driver.find_element(By.ID, "id").text , "26334929")
 
-    self.assertEqual(self.driver.find_element(By.ID, "birthday").text , "11/02/3344")
+    self.assertEqual(self.driver.find_element(By.ID, "birthday").text , "14/09/1998")
 
     #comprobar foto de perfil
     #self.assertEqual(self.driver.find_element(By.ID, "main-profile-pic").get_attribute('src') , "http://localhost:5000/media/foto_perfil/615108d38064bb1b82d7760c")
