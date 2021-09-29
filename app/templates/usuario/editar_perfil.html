@@ -19,7 +19,7 @@
             {% if profile_pic %}
               <img id="editar-perfil-form-pic" src="{{ profile_pic }}" class="avatar-img m-1" alt="foto de perfil">
             {% else %}
-              <img id="sidebar-profile-icon" src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/person-circle.svg")}}" class="avatar-img m-1" alt="icono de perfil">
+              <img id="profile-icon" src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/person-circle.svg")}}" class="avatar-img m-1" alt="icono de perfil">
             {% endif %}
           </div>
         </div>
@@ -86,7 +86,7 @@
             <a role="button" href="{{ url_for("mural_blueprint.index", page=1) }}" class="btn btn-secondary text-white px-4">{{_("Cancelar")}}</a>
           </div>
           <div class="col d-flex justify-content-center">
-            <button class="btn btn-primary text-white px-4">{{_("Actualizar")}}</button>
+            <button id="actualizar-perfil-boton" class="btn btn-primary text-white px-4">{{_("Actualizar")}}</button>
           </div>
         </div>
       </form>

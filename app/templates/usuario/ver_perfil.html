@@ -12,6 +12,8 @@
 
           {{ profile_pic(
           user=target_user,
+          id_profile="main-profile-pic",
+          id_not_profile="main-profile-pic",
           class_profile="avatar-img m-1",
           class_not_profile="avatar-img m-1"
           )
@@ -28,7 +30,7 @@
           {% if it_is_the_current_user %}
             <!-- External user buttons -->
             <li class="list-group-item">
-              <a href="{{ url_for('user.edit_user_profile') }}">
+              <a id="editar-perfil-boton" href="{{ url_for('user.edit_user_profile') }}">
                 <button class="btn btn-primary text-white">{{_("Editar mi perfil") }}</button>
               </a>
             </li>
@@ -110,42 +112,52 @@
         <div class="container gx-4">
           <div class="row container my-2">
             <div class="row col-md-6 font-weight-bold">{{_("Email")}}:</div>
-            <div class="row col-md-6">{{target_user.email}}</div>
+            <div id="email" class="row col-md-6">{{target_user.email}}</div>
           </div>
 
           <div class="row container my-2">
             <div class="row col-md-6 font-weight-bold">{{_("CI")}}:</div>
-            <div class="row col-md-6">{{target_user.ci}}</div>
+            <div id="id" class="row col-md-6">{{target_user.ci}}</div>
           </div>
 
           <div class="row container my-2">
             <div class="row col-md-6 font-weight-bold">{{_("Fecha de nacimiento")}}:</div>
-            <div class="row col-md-6">{{target_user.fecha_nacimiento}}</div>
+            <div id="birthday" class="row col-md-6">{{target_user.fecha_nacimiento}}</div>
           </div>
 
           <div class="row container my-2">
             <div class="row col-md-6 font-weight-bold">{{_("Género")}}:</div>
-            <div class="row col-md-6">{{target_user.get_genero_string()}}</div>
+            <div id="genre" class="row col-md-6">{{target_user.get_genero_string()}}</div>
           </div>
 
           <div class="row container my-2">
             <div class="row col-md-6 font-weight-bold">{{_("Descripción personal")}}:</div>
-            <div class="row col-md-6">{{target_user.descripcion|default(_("Sin descripcion"), true)}}</div>
+            <div id="description" class="row col-md-6">{{target_user.descripcion|default(_("Sin descripcion"), true)}}</div>
+          </div>
+
+          <div class="row container my-2">
+            <div class="row col-md-6 font-weight-bold">{{_("Música favorita")}}:</div>
+            <div id="music" class="row col-md-6">{{target_user.musica|default(_("Sin música"), true)}}</div>
+          </div>
+
+          <div class="row container my-2">
+            <div class="row col-md-6 font-weight-bold">{{_("Libro favorito")}}:</div>
+            <div id="book" class="row col-md-6">{{target_user.libro|default(_("Sin libro"), true)}}</div>
           </div>
 
           <div class="row container my-2">
             <div class="row col-md-6 font-weight-bold">{{_("Color favorito")}}:</div>
-            <div class="row col-md-6">{{target_user.color|default(_("Sin color"), true)}}</div>
+            <div id="color" class="row col-md-6">{{target_user.color|default(_("Sin color"), true)}}</div>
           </div>
 
           <div class="row container my-2">
             <div class="row col-md-6 font-weight-bold">{{_("Videojuegos favoritos")}}:</div>
-            <div class="row col-md-6">{{target_user.video_juegos|join(", ")|default(_("Sin video juegos"), true)}}</div>
+            <div id="video_games" class="row col-md-6">{{target_user.video_juegos|join(", ")|default(_("Sin video juegos"), true)}}</div>
           </div>
 
           <div class="row container my-2">
             <div class="row col-md-6 font-weight-bold">{{_("Lenguajes de programación que conoce")}}:</div>
-            <div class="row col-md-6">{{target_user.lenguajes_programacion|join(", ")|default(_("Sin lenguajes de programación"), true)}}</div>
+            <div id="programming_languages" class="row col-md-6">{{target_user.lenguajes_programacion|join(", ")|default(_("Sin lenguajes de programación"), true)}}</div>
           </div>
 
         </div>
