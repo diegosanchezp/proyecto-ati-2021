@@ -27,7 +27,7 @@ Requiere como context un objeto tipo Usuario
       <p>{{amigo.nombre}}</p>
       <div class="d-flex flex-row gap-2">
         <a id={{"go-chat-button-with-" + amigo.username }} href="{{ url_for('chat_blueprint.index', username=amigo.username) }}"><button type="button" class="btn btn-dark">{{_("Chatear")}}</button></a>
-        <a class="btn btn-dark" href="{{ url_for("usuario_blueprint.ver_perfil", username=amigo.username) }}">{{_("Ver perfil")}}</a>
+        <a id={{"see-profile-of-" + amigo.username}} class="btn btn-dark" href="{{ url_for("usuario_blueprint.ver_perfil", username=amigo.username) }}">{{_("Ver perfil")}}</a>
       </div>
     </section>
     

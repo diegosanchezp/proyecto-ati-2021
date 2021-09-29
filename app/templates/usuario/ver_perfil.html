@@ -56,7 +56,7 @@
             </li>
 
             <li class="list-group-item d-flex justify-content-center">
-              <a href="{{ url_for('chat_blueprint.index', username=current_user.username) }}">
+              <a id="go-to-chat" href="{{ url_for('chat_blueprint.index', username=current_user.username) }}">
                 <button class="btn btn-primary">{{_("Chatear")}}</button>
               </a>
             </li>

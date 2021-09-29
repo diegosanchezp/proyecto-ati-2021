@@ -39,26 +39,32 @@ class TestEditprofile(BaseSeleniumUnitTest):
 
     self.driver.find_element(By.ID, "color").click()
     # 6 | type | id=color | Azul 
+    self.driver.find_element(By.ID, "color").clear()
     self.driver.find_element(By.ID, "color").send_keys("Azul")
     # 7 | click | id=libro | 
     self.driver.find_element(By.ID, "libro").click()
     # 8 | type | id=libro | TLOR
+    self.driver.find_element(By.ID, "libro").clear()
     self.driver.find_element(By.ID, "libro").send_keys("TLOR")
     # 9 | click | id=musica | 
     self.driver.find_element(By.ID, "musica").click()
     # 10 | type | id=musica | Pop
+    self.driver.find_element(By.ID, "musica").clear()
     self.driver.find_element(By.ID, "musica").send_keys("Pop")
     # 11 | click | id=lenguajes_programacion | 
     self.driver.find_element(By.ID, "lenguajes_programacion").click()
     # 12 | type | id=lenguajes_programacion | PhP, Ruby
+    self.driver.find_element(By.ID, "lenguajes_programacion").clear()
     self.driver.find_element(By.ID, "lenguajes_programacion").send_keys("PhP, Ruby")
     # 13 | click | id=video_juegos | 
     self.driver.find_element(By.ID, "video_juegos").click()
     # 14 | type | id=video_juegos | TLOU II, Sekiro
+    self.driver.find_element(By.ID, "video_juegos").clear()
     self.driver.find_element(By.ID, "video_juegos").send_keys("Geometry dash")
     # 15 | click | id=descripcion | 
     self.driver.find_element(By.ID, "descripcion").click()
     # 16 | type | id=descripcion | Soy un estudiante
+    self.driver.find_element(By.ID, "descripcion").clear()
     self.driver.find_element(By.ID, "descripcion").send_keys("Soy un estudiante")
     # 18 | click | css=.col > .btn-primary | 
     self.driver.find_element(By.ID, "actualizar-perfil-boton").click()
