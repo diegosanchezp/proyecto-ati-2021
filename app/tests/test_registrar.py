@@ -10,6 +10,10 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 class TestRegistrar(BaseSeleniumUnitTest):
   
   def test_registrar(self):
+    """
+    Registrar usuario diego_sanchez, este no tiene que estar
+    registrado en base de datos para que el test pase
+    """
     # Test name: Registrar
     # Step # | name | target | value
     # 1 | open | http://localhost:5000/registro | 
@@ -21,7 +25,7 @@ class TestRegistrar(BaseSeleniumUnitTest):
     # 5 | click | id=ci | 
     self.driver.find_element(By.ID, "ci").click()
     # 6 | type | id=ci | 27989123
-    self.driver.find_element(By.ID, "ci").send_keys("27989123")
+    self.driver.find_element(By.ID, "ci").send_keys("26334929")
     # 7 | click | id=email | 
     self.driver.find_element(By.ID, "email").click()
     # 8 | type | id=email | diego@mail.com
