@@ -25,6 +25,7 @@ facebook_blueprint = make_facebook_blueprint(
 )
 
 from flask_user.decorators import login_required
+import datetime, time
 
 usuario_blueprint = Blueprint('usuario_blueprint', __name__, template_folder='templates')
 from app.models.user import User
@@ -101,7 +102,10 @@ def ver_perfil(username):
         if not peticion:
             # Soy la persona que recibe la solicitud
             peticion = Peticion.objects(emisor=target_user,receptor=current_user, estado=PeticionEstado.ESPERA).first()
-    
+
+    new_format =  datetime.datetime.fromtimestamp(target_user.fecha_nacimiento.timestamp())
+    target_user.fecha_nacimiento = str(new_format.day) + "/" + '{:02d}'.format(new_format.month) + "/" + str(new_format.year)
+
     return render_template("usuario/ver_perfil.html",
         target_user = target_user,
         it_is_the_current_user = it_is_the_current_user,

@@ -5,13 +5,15 @@
 {% block body %}
 
 
-  <div class="container">
-    <div class="d-flex flex-column">
-      <div class="d-flex justify-content-center m-3">
+  <div class="">
+    <div class="d-flex flex-column mx-auto general-container">
+      <div class="d-flex justify-content-center m-3 border-bottom border-secondary">
         <div class="profile-avatar m-2 d-flex flex-column">
 
           {{ profile_pic(
           user=target_user,
+          id_profile="main-profile-pic",
+          id_not_profile="main-profile-pic",
           class_profile="avatar-img m-1",
           class_not_profile="avatar-img m-1"
           )
@@ -23,22 +25,24 @@
         </div>
       </div>
 
-      <div class="d-flex justify-content-center m-3">
-        <ul class="interaction-list list-group list-group-horizontal-md">
+      <div class="d-flexjustify-content-center m-3">
+        <ul class="d-flex flex-column flex-md-row align-items-center justify-content-center interaction-list list-group list-group-horizontal-md">
           {% if it_is_the_current_user %}
             <!-- External user buttons -->
             <li class="list-group-item">
-              <a href="{{ url_for('user.edit_user_profile') }}">
-                <button class="btn btn-info" >{{_("Editar mi perfil") }}</button>
+              <a id="editar-perfil-boton" href="{{ url_for('user.edit_user_profile') }}">
+                <button class="btn btn-primary text-white">{{_("Editar mi perfil") }}</button>
               </a>
+            </li>
+            <li class="list-group-item"></li>
               <a href="{{ url_for('mural_blueprint.create_publication') }}">
-                <button class="btn btn-info" >{{_("Crear Publicacion") }}</button>
+                <button class="btn btn-primary text-white">{{_("Crear Publicacion") }}</button>
               </a>
             </li>
           {% else %}
 
-            <li class="list-group-item d-flex justify-content-center">
-              <div class="badge bg-secondary text-wrap text-center p-2">
+            <li class="list-group-item d-flex align-items-center justify-content-center">
+              <div class="badge bg-secondary text-wrap text-center">
                 {% if is_friend %}
                   {{_("Soys amigos")}}
                 {% elif is_private %}
@@ -55,20 +59,20 @@
 
             <li class="list-group-item d-flex justify-content-center">
               {% if is_friend %}
-                <a href="{{ url_for('chat_blueprint.index', username=target_user.username) }}">
+                <a id="go-to-chat" href="{{ url_for('chat_blueprint.index', username=current_user.username) }}">
                   <button class="btn btn-primary">{{_("Chatear")}}</button>
                 </a>
               {% endif %}
             </li>
 
-            <li class="list-group-item d-flex justify-content-center">
               {% if is_friend %}
-
+              <li class="list-group-item d-flex justify-content-center">
                 <form action="" method="POST">
-                  <button type="submit" name="action" value="BORRAR_AMIGO" class="btn btn-primary">
+                  <button type="submit" name="action" value="BORRAR_AMIGO" class="btn btn-secondary">
                     {{_("Eliminar Amistad")}}
                   </button>
                 </form>
+              </li>
 
               {% else %}
                 {% if peticion %}
@@ -84,19 +88,23 @@
                     {% else %}
 
                       {# Si cree la solicitud de amistad #}
-                      <div class="badge bg-secondary text-wrap text-center">
-                        {{_("Solicitud de amistad enviada, esperando por aceptacion")}}
-                      </div>
+                      <li class="list-group-item d-flex justify-content-center">
+                        <div class="badge bg-secondary text-wrap text-center">
+                          {{_("Solicitud de amistad enviada, esperando por aceptacion")}}
+                        </div>
+                      </li>
 
                     {% endif %}
 
                   {% endif %}
                 {% else %}
+                <li class="list-group-item d-flex justify-content-center">
                   <form action="" method="POST">
                     <button type="submit" name="action" value="SOLICITAR_AMISTAD" class="btn btn-primary">
                       {{_("Solicitar Amistad")}}
                     </button>
                   </form>
+                </li>
                 {% endif %}
             </li>
           {% endif %}
@@ -106,48 +114,64 @@
 
       {# Info del usuario #}
       {% if (not is_private) or (is_private and is_friend) or (it_is_the_current_user) %}
-      <div class="d-flex justify-content-center m-3">
-        <table class="table">
-          <tbody>
-            <tr>
-              <td>{{_("Email")}}</td>
-              <td>{{target_user.email}}</td>
-            </tr>
-            <tr>
-              <td>{{_("CI")}}</td>
-              <td>{{target_user.ci}}</td>
-            </tr>
-            <tr>
-              <td>{{_("Fecha de nacimiento")}}</td>
-              <td>{{target_user.fecha_nacimiento}}</td>
-            </tr>
-            <tr>
-              <td>{{_("Género")}}</td>
-              <td>{{target_user.get_genero_string()}}</td>
-            </tr>
-            <tr>
-              <td>{{_("Descripción personal")}}</td>
-              <td>{{target_user.descripcion|default(_("Sin descripcion"), true)}}</td>
-            </tr>
-            <tr>
-              <td>{{_("Color favorito")}}</td>
-              <td>{{target_user.color|default(_("Sin color"), true)}}</td>
-            </tr>
-            <tr>
-              <td>{{_("Videojuegos favoritos")}}</td>
-              <td>{{target_user.video_juegos|join(", ")|default(_("Sin video juegos"), true)}}</td>
-            </tr>
-            <tr>
-              <td>{{_("Lenguajes de programación que conoce")}}</td>
-              <td>{{target_user.lenguajes_programacion|join(", ")|default(_("Sin lenguajes de programación"), true)}}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="d-flex align-items-center justify-content-center m-3 rounded shadow bg-light py-4">
+        <div class="container gx-4">
+          <div class="row container my-2">
+            <div class="row col-md-6 font-weight-bold">{{_("Email")}}:</div>
+            <div id="email" class="row col-md-6">{{target_user.email}}</div>
+          </div>
+
+          <div class="row container my-2">
+            <div class="row col-md-6 font-weight-bold">{{_("CI")}}:</div>
+            <div id="id" class="row col-md-6">{{target_user.ci}}</div>
+          </div>
+
+          <div class="row container my-2">
+            <div class="row col-md-6 font-weight-bold">{{_("Fecha de nacimiento")}}:</div>
+            <div id="birthday" class="row col-md-6">{{target_user.fecha_nacimiento}}</div>
+          </div>
+
+          <div class="row container my-2">
+            <div class="row col-md-6 font-weight-bold">{{_("Género")}}:</div>
+            <div id="genre" class="row col-md-6">{{target_user.get_genero_string()}}</div>
+          </div>
+
+          <div class="row container my-2">
+            <div class="row col-md-6 font-weight-bold">{{_("Descripción personal")}}:</div>
+            <div id="description" class="row col-md-6">{{target_user.descripcion|default(_("Sin descripcion"), true)}}</div>
+          </div>
+
+          <div class="row container my-2">
+            <div class="row col-md-6 font-weight-bold">{{_("Música favorita")}}:</div>
+            <div id="music" class="row col-md-6">{{target_user.musica|default(_("Sin música"), true)}}</div>
+          </div>
+
+          <div class="row container my-2">
+            <div class="row col-md-6 font-weight-bold">{{_("Libro favorito")}}:</div>
+            <div id="book" class="row col-md-6">{{target_user.libro|default(_("Sin libro"), true)}}</div>
+          </div>
+
+          <div class="row container my-2">
+            <div class="row col-md-6 font-weight-bold">{{_("Color favorito")}}:</div>
+            <div id="color" class="row col-md-6">{{target_user.color|default(_("Sin color"), true)}}</div>
+          </div>
+
+          <div class="row container my-2">
+            <div class="row col-md-6 font-weight-bold">{{_("Videojuegos favoritos")}}:</div>
+            <div id="video_games" class="row col-md-6">{{target_user.video_juegos|join(", ")|default(_("Sin video juegos"), true)}}</div>
+          </div>
+
+          <div class="row container my-2">
+            <div class="row col-md-6 font-weight-bold">{{_("Lenguajes de programación que conoce")}}:</div>
+            <div id="programming_languages" class="row col-md-6">{{target_user.lenguajes_programacion|join(", ")|default(_("Sin lenguajes de programación"), true)}}</div>
+          </div>
+
+        </div>
       </div>
 
-      <div class="d-flex justify-content-center m-3">
+      <div class="d-flex justify-content-center m-3 border-top border-secondary">
         <a href="{{ url_for('usuario_blueprint.ver_publicaciones', username=target_user.username) }}"
-           class="btn btn-secondary m-2">
+           class="btn btn-primary m-2">
             {{_("Ver publicaciones")}}
         </a>
       </div>

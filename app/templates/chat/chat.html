@@ -10,53 +10,53 @@
 {# Elemento utilizado solo para obtener data #}
 <span id="user-data" data-emisor-id="{{current_user.id}}" data-receptor-id="{{receiver.id}}" data-receptor-name="{{receiver.nombre}}" data-emisor-name="{{_('Yo')}}"></span>
 <div class="container">
-    <div class="border p-2 bd-highlight">
+    <div class="border pt-2 px-2 pb-5 bd-highlight mx-auto general-container">
         <div class="card-header flex-row">
             <h4 class="card-title">{{_("Chat con")}} {{receiver.nombre}}</h4>
             <p id="status-amigo-conexion"></p>
         </div>
 
-        <ul id="messages-list" class="messages-list" class="d-flex flex-column">
+        <ul id="messages-list" class="messages-list list-group" class="d-flex flex-column">
             {% if messages %}
                 {% for message in messages %}
                     {% if message.emisor.id == current_user.id %}  
-                        <li>   
-                            <article class="d-flex flex-row-reverse gap-2 my-2 p-2 border rounded">
+                        <li class="list-group-item border rounded shadow my-2">   
+                            <article class="d-flex flex-row-reverse gap-2 my-2 p-2">
                                 <figure class="">
                                     {% set profile_pic_current_user = current_user.get_foto_url() %}
                                     {% if profile_pic_current_user %}
-                                        <img src="{{ profile_pic_current_user }}" class="m-1 rounded-circle"" width="32" height="32" alt="foto de perfil">
+                                        <img src="{{ profile_pic_current_user }}" class="m-1 rounded-circle profile-pic" width="32" height="32" alt="foto de perfil">
                                     {% else %}
-                                        <img src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/person-circle.svg")}}" width="40" height="40" class="m-1 rounded-circle" alt="icono de perfil">
+                                        <img src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/person-circle.svg")}}" width="40" height="40" class="m-1 rounded-circle profile-pic" alt="icono de perfil">
                                     {% endif %}
                                 
                                 </figure>
-                                <section class="d-flex flex-column">
+                                <section class="d-flex flex-column py-2">
                                     <p class="text-end">Yo</p>
-                                    <div class="d-flex flex-column gap-2">
+                                    <div class="d-flex flex-column gap-2 text-end">
                                         <p>{{message.contenido}}</p>
-                                        <p>{{message.fecha_creacion.strftime('%d-%m-%Y, %H:%M:%S')}}</p>
+                                        <p>{{message.fecha_creacion.strftime('%H:%M:%S, %d-%m-%Y')}}</p>
                                     </div>
                                     </section>
                             </article>
                         </li>     
                     {% else %}
-                        <li>   
-                            <article class="d-flex flex-row gap-2 my-2 p-2 border rounded">
+                        <li class="list-group-item border rounded shadow my-2 bg-light">   
+                            <article class="d-flex flex-row gap-2 my-2 p-2">
                                 <figure class="position-relative">
                                     {% set profile_pic_receiver = receiver.get_foto_url() %}
                                     {% if profile_pic_receiver %}
-                                        <img src="{{ profile_pic_receiver }}" class="m-1 amigo-lista-profile-icon rounded-circle"" alt="foto de perfil">
+                                        <img src="{{ profile_pic_receiver }}" class="m-1 amigo-lista-profile-icon rounded-circle profile-pic" alt="foto de perfil">
                                     {% else %}
-                                        <img src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/person-circle.svg")}}" class="m-1 amigo-lista-profile-icon rounded-circle" alt="icono de perfil">
+                                        <img src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/person-circle.svg")}}" class="m-1 amigo-lista-profile-icon rounded-circle profile-pic" alt="icono de perfil">
                                     {% endif %}
                                 
                                 </figure>
-                                <section class="d-flex flex-column">
+                                <section class="d-flex flex-column py-2">
                                     <p>{{message.emisor.nombre}}</p>
                                     <div class="d-flex flex-column gap-2">
                                         <p>{{message.contenido}}</p>
-                                        <p>{{message.fecha_creacion.strftime('%d-%m-%Y, %H:%M:%S')}}</p>
+                                        <p>{{message.fecha_creacion.strftime('%H:%M:%S, %d-%m-%Y')}}</p>
                                     </div>
                                     </section>
                             </article>
@@ -69,46 +69,47 @@
 
         </ul>
 
-        <ul id="messages-list-real-time" class="messages-list">
+        <ul id="messages-list-real-time" class="messages-list list-group">
 
         </ul>
 
         <span id="there-is-a-new-message"></span>
-
-        <form id="message-form">
-            <div class="d-flex flex-row p-2 bd-highlight position-fixed bottom-0 w-75 bg-light"> 
-
-                {% set profile_pic = current_user.get_foto_url() %}
-                {% if profile_pic %}
-                <img src="{{ profile_pic }}" class="m-1 amigo-lista-profile-icon rounded-circle"" alt="foto de perfil">
-                {% else %}
-                <img src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/person-circle.svg")}}" class="m-1 amigo-lista-profile-icon rounded-circle" alt="icono de perfil">
-                {% endif %}
-
-                {% set profile_photo_receiver = receiver.get_foto_url() %}
-                {% if profile_photo_receiver %}
-                    <input id="receiver-photo" type="hidden" value="{{profile_photo_receiver}}">
-                {% else %}
-                    <input id="receiver-photo" type="hidden" value="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/person-circle.svg")}}">
-                {% endif %}
-                {% set profile_photo_sender = current_user.get_foto_url() %}
-                {% if profile_photo_sender %}
-                    <input id="sender-photo" type="hidden" value="{{profile_photo_sender}}">
-                {% else %}
-                    <input id="sender-photo" type="hidden" value="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/person-circle.svg")}}">
-                {% endif %}
-                
-
-                <input id="message-input" name="message" class="m-1 flex-grow-1 message-input" type="text" placeholder="Escribe algo..."> 
-                <button id="send-button" type="submit" class="m-1 border-0" data-abc="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
-                        <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
-                    </svg>
-                </button> 
-                
-            </div>
-       </form>
     </div>
+</div>
+<div class="">
+    <form id="message-form" class="">
+        <div class="position-fixed message-bar d-flex flex-row p-2 bd-highlight bg-light border rounded shadow general-container-xl mx-auto" > 
+
+            {% set profile_pic = current_user.get_foto_url() %}
+            {% if profile_pic %}
+            <img src="{{ profile_pic }}" class="m-1 amigo-lista-profile-icon rounded-circle"" alt="foto de perfil">
+            {% else %}
+            <img src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/person-circle.svg")}}" class="m-1 amigo-lista-profile-icon rounded-circle" alt="icono de perfil">
+            {% endif %}
+
+            {% set profile_photo_receiver = receiver.get_foto_url() %}
+            {% if profile_photo_receiver %}
+                <input id="receiver-photo" type="hidden" value="{{profile_photo_receiver}}">
+            {% else %}
+                <input id="receiver-photo" type="hidden" value="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/person-circle.svg")}}">
+            {% endif %}
+            {% set profile_photo_sender = current_user.get_foto_url() %}
+            {% if profile_photo_sender %}
+                <input id="sender-photo" type="hidden" value="{{profile_photo_sender}}">
+            {% else %}
+                <input id="sender-photo" type="hidden" value="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/person-circle.svg")}}">
+            {% endif %}
+            
+
+            <input id="message-input-text" name="message" class="m-1 flex-grow-1 message-input" type="text" placeholder="Escribe algo..."> 
+            <button id="send-button" type="submit" class="m-1 border-0" data-abc="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+                    <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+                </svg>
+            </button> 
+            
+        </div>
+   </form>
 </div>
 {% endblock body %}

@@ -7,7 +7,7 @@
 
   <main class="d-flex flex-column align-items-center justify-content-center mx-3">
     <h1 class="text-center my-2">{{_("Cambiar informacion de")}} <br>{{_("Perfil")}}</h1>
-    <section id="main-edit-fields" class="border rounded-1 p-4">
+    <section id="main-edit-fields" class="border rounded bg-light p-4 shadow">
       <form action="" enctype="multipart/form-data" class="container" method="POST">
 
         {{ form.csrf_token }}
@@ -19,74 +19,74 @@
             {% if profile_pic %}
               <img id="editar-perfil-form-pic" src="{{ profile_pic }}" class="avatar-img m-1" alt="foto de perfil">
             {% else %}
-              <img id="sidebar-profile-icon" src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/person-circle.svg")}}" class="avatar-img m-1" alt="icono de perfil">
+              <img id="profile-icon" src="{{ url_for("static", filename="node_modules/bootstrap-icons/icons/person-circle.svg")}}" class="avatar-img m-1" alt="icono de perfil">
             {% endif %}
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-12">
+        <div class="row justify-content-md-center my-4">
+          <div class="col-md-10">
             {{render_field(form.nombre_foto)}}
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-12">
+        <div class="row justify-content-md-center my-4">
+          <div class="col-md-10">
             {{render_checkbox_field(form.delete_foto)}}
           </div>
         </div>
 
-        <div class="row">
-          <div class="col">
+        <div class="row justify-content-center align-items-center">
+          <div class="row col-md-5 my-4 mx-1">
             {{render_field(form.nombre)}}
           </div>
-          <div class="col">
+          <div class="row col-md-5 my-4 mx-1">
             {{render_field(form.email)}}
           </div>
         </div>
-        <div class="row">
-          <div class="col">
+        <div class="row justify-content-center align-items-center">
+          <div class="row col-md-5 my-4 mx-1">
             {{render_field(form.ci)}}
           </div>
-          <div class="col">
+          <div class="row col-md-5 my-4 mx-1">
             {{render_field(form.genero)}}
           </div>
         </div>
-        <div class="row">
-          <div class="col">
+        <div class="row justify-content-center align-items-center">
+          <div class="row col-md-5 my-4 mx-1">
             {{render_field(form.color)}}
           </div>
-          <div class="col">
+          <div class="row col-md-5 my-4 mx-1">
             {{render_field(form.libro)}}
           </div>
         </div>
-        <div class="row">
-          <div class="col">
+        <div class="row justify-content-center align-items-center">
+          <div class="row col-md-5 my-4 mx-1">
             {{render_field(form.musica)}}
           </div>
-          <div class="col">
+          <div class="row col-md-5 my-4 mx-1">
             {{render_field(form.fecha_nacimiento)}}
           </div>
         </div>
-        <div class="row">
-          <div class="col">
+        <div class="row justify-content-center align-items-center">
+          <div class="row col-md-5 my-4 mx-1">
             {{render_field(form.lenguajes_programacion)}}
           </div>
-          <div class="col list-group">
+          <div class="row col-md-5 my-4 mx-1">
             {{render_field(form.video_juegos)}}
           </div>
         </div>
-        <div class="row">
-          <div class="col">
+        <div class="row justify-content-center align-items-center">
+          <div class="row col-md-10 my-4 mx-1">
             {{render_field(form.descripcion)}}
           </div>
         </div>
-        <div class="row mt-2 pb-3 gap-3">
-          <div class="col d-flex justify-content-center">
-            <button class="btn btn-primary text-white px-4">{{_("Actualizar")}}</button>
-          </div>
+        <div class="row mt-2 pb-3 gap-3 mx-1">
           <div class="col d-flex justify-content-center">
             <a role="button" href="{{ url_for("mural_blueprint.index", page=1) }}" class="btn btn-secondary text-white px-4">{{_("Cancelar")}}</a>
+          </div>
+          <div class="col d-flex justify-content-center">
+            <button id="actualizar-perfil-boton" class="btn btn-primary text-white px-4">{{_("Actualizar")}}</button>
           </div>
         </div>
       </form>
