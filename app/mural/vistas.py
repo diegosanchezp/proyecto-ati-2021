@@ -58,6 +58,7 @@ def index(page: int):
    )
 
 @mural_blueprint.route("/publicacion/detalle/<string:publicacionID>", methods=['GET', 'POST'])
+@login_required
 def detalle_publicacion(publicacionID: str):
     form = ComentarioForm(request.form)
 
@@ -92,6 +93,7 @@ def detalle_publicacion(publicacionID: str):
                             form=form)
 
 @mural_blueprint.route("/comentar_comentario/<string:comentarioID>", methods=['POST'])
+@login_required
 def comentar_comentario(comentarioID: str):
     form = ComentarioForm(request.form)
     # Todo validar si el comentario respuesta pertence a la publicacion que se esta conectando
