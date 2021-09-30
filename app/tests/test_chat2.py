@@ -12,16 +12,13 @@ import time
 
 class TestChat(BaseSeleniumUnitTest):
   
+  """
+  Simular el entrar por medio del perfil al chat
+  """
   def test_chat(self):
 
-    self.driver.get("http://localhost:5000/")
+    self.login_user()
 
-    # 3 | click | id=email | 
-    self.driver.find_element(By.ID, "email").click()
-    # 4 | type | id=email | diego@mail.com
-    self.driver.find_element(By.ID, "email").send_keys("diego@mail.com")
-    # 5 | type | id=password | Dev123456
-    self.driver.find_element(By.ID, "password").send_keys("Dev123456")
     # 6 | click | css=.btn-primary | 
     self.driver.find_element(By.CSS_SELECTOR, ".btn-primary").click()
 
