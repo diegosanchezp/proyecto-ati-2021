@@ -6,7 +6,7 @@ from app import socketio
 from app.models.user import User
 from app.models.chat import MensajeChat
 from app.models.peticion import Notificacion, TipoNotificaciones
-from flask_user import current_user
+from flask_user import current_user, login_required
 from mongoengine.queryset.visitor import Q
 import datetime
 
@@ -55,6 +55,7 @@ def handle_message(data: str):
 
 
 @chat_blueprint.route("/<string:username>")
+@login_required
 def index(username):
     """
     Vista principal del chat
