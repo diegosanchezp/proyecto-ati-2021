@@ -6,6 +6,7 @@ from app.utils import (
     check_upload_folder,
     register_signals,
     register_context_procesor,
+    load_fixtures,
 )
 from flask_babel import Babel
 from flask_login.mixins import AnonymousUserMixin
@@ -61,6 +62,10 @@ def create_app(config_class="Config") -> flask.Flask:
     # Verificar que las carpetas de imagenes de modelos
     # existan, si no crearlas
     check_upload_folder(app)
+
+    # Cargar fixtures requeridas para los tests de selenium
+    if app.config["DEBUG"]:
+        load_fixtures(app, user_manager)
 
     # Registar todos los blueprints
     register_blueprints(app)
