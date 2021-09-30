@@ -1,4 +1,7 @@
-from flask import Blueprint, render_template, redirect, url_for, request
+from flask import (
+    Blueprint, render_template, redirect, url_for, request,
+    flash,
+)
 from flask_babel import _
 from flask_socketio import emit, join_room, leave_room
 import json
@@ -60,10 +63,14 @@ def index(username):
     """
     Vista principal del chat
     """
+    if current_user.username == username:
+        flash(_("No puedes chatear contigo mismo"), "danger")
+        return redirect(location=url_for("mural_blueprint.index", page=1))
     receiver = User.objects.get_or_404(username= username)
     # Si no eres amigo no puedes chatear con esta persona
     if receiver not in current_user.amigos:
-        redirect(location=url_for("mural_blueprint.index", page=1))
+        flash(_("No eres amigo de %(username)s, agregalo para chatear con él", username=username), "danger")
+        return redirect(location=url_for("mural_blueprint.index", page=1))
     messages = MensajeChat.objects(
         (Q(receptor=receiver.id) & Q(emisor=current_user.id)) \
         | (Q(receptor=current_user.id) & Q(emisor=receiver.id)))
