@@ -181,10 +181,3 @@ def amigos(username):
     Mis amigos
     """
     return render_template("usuario/amigos.html", target_user=target_user)
-
-@usuario_blueprint.route("/mi-perfil")
-def mi_perfil():
-    """
-    Mi perfil
-    """
-    return render_template("usuario/mi_perfil.html")
