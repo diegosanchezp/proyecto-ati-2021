@@ -112,7 +112,7 @@ def load_fixtures(app, user_manager) -> None:
     estos son requeridos para los test de la matriz de prueba
     """
     from app.models.user import User, USUARIO_GENEROS
-    
+    from datetime import datetime
     # Crear usuarios nuevos
     genero_masculino = USUARIO_GENEROS[0][0]
     password="Dev123456"
@@ -124,6 +124,7 @@ def load_fixtures(app, user_manager) -> None:
         email="aaron@mail.com",
         genero=genero_masculino,
         password=user_manager.hash_password(password),
+        fecha_nacimiento=datetime(year=1999, month=10, day=1),
     )
 
     diego = User(
@@ -133,6 +134,7 @@ def load_fixtures(app, user_manager) -> None:
         email="diego@mail.com",
         genero=genero_masculino,
         password=user_manager.hash_password(password),
+        fecha_nacimiento=datetime(year=1998, month=9, day=14),
     )
 
     try:
