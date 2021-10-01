@@ -127,7 +127,7 @@ def comentar_comentario(comentarioID: str):
         n2 = Notificacion(
             emisor=current_user,
             receptor=comentario.publicacion.autor,
-            descripcion=f"{current_user.nombre} ha comentado tu publicación",
+            descripcion=f"ha comentado tu publicación",
             tipo=TipoNotificaciones.COMENTARIO,
             recurso=comentario.publicacion,
         )
