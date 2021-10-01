@@ -29,14 +29,15 @@
         <ul class="d-flex flex-column flex-md-row align-items-center justify-content-center interaction-list list-group list-group-horizontal-md">
           {% if it_is_the_current_user %}
             <!-- External user buttons -->
-            <li class="list-group-item">
-              <a id="editar-perfil-boton" href="{{ url_for('user.edit_user_profile') }}">
-                <button class="btn btn-primary text-white">{{_("Editar mi perfil") }}</button>
+            <li class="list-group-item d-flex flex-column flex-md-row align-content-center justify-content-center gap-3">
+              <a href="{{ url_for('user.edit_user_profile') }}"
+                 class="btn btn-info">
+                {{_("Editar mi perfil") }}
               </a>
-            </li>
-            <li class="list-group-item"></li>
-              <a href="{{ url_for('mural_blueprint.create_publication') }}">
-                <button class="btn btn-primary text-white">{{_("Crear Publicacion") }}</button>
+              <a href="{{ url_for('mural_blueprint.create_publication') }}"
+                 id="ver-perfil-crear-publicacion"
+                 class="btn btn-info">
+                {{_("Crear Publicacion") }}
               </a>
             </li>
           {% else %}

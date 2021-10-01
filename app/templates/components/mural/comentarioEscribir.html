@@ -10,28 +10,27 @@
       method="POST">
 
 <div class="bg-greysito p-2">
-    <div class="d-flex flex-row align-items-start m-2">
-        <div class="d-flex flew-row gap-2">
-          {# Perfil icono #}
-          <div class="d-flex flew-column">
-            {{ profile_pic(
-                user=current_user,
-                class_profile="comentario-profile-pic",
-                class_not_profile="publicacion-profile-icon border border-2 rounded-circle",
-            ) }}
-            
-        <span class="d-block font-weight-bold name publicacion-profile-name ms-1">
+    {# Info del comentario #}
+    <div class="d-flex align-items-center">
+      {# Perfil icono #}
+        {{ profile_pic(
+            user=current_user,
+            class_profile="comentario-profile-pic",
+            class_not_profile="publicacion-profile-icon border border-2 rounded-circle",
+        ) }}
+        
+        {# Perfil nombre #}
+        <span class="ms-1 fw-bolder">
             {{current_user.nombre}}
         </span>
-          </div>
-
-            {# Cuando se esta respondiendo a un comentario #}
-            {% if comentario_responder %}
-                <p class="m-0"> {{ current_user.nombre }} </p>
-                <p> {{ _('Estas respondiendo al comentario de') }} {{ comentario.usuario.nombre }}</p>
-            {% endif %}
-        </div>
     </div>
+
+    {# Cuando se esta respondiendo a un comentario #}
+    {% if comentario_responder %}
+    <span class="mt-2 ms-1">
+        {{ _('Estas respondiendo al comentario de') }} {{ comentario.usuario.nombre }}
+    </span>
+    {% endif %}
 
     {# Area para comentar #}
         {{ render_field( form.contenido,
@@ -41,30 +40,30 @@
 
     {# Botones #}
     {% if comentario_responder %}
-        <div class="d-flex flex-row gap-2 mt-2">
+        <div class="d-flex gap-2 justify-content-center mt-2">
           <button id="comentar" 
                   name="comentar" 
-                  class="btn btn-primary" 
+                  class="btn btn-primary w-button" 
                   type="submit">
             {{_("Responder")}}
           </button>
-          <button class="btn btn-danger" onclick="collapseFunc('res{{comentario.id}}')">
+          <button class="btn btn-danger w-button" onclick="collapseFunc('res{{comentario.id}}')">
             {{_("Cancelar")}}
           </button>
         </div>
     {% else %}
-        <div class="mt-2 text-right">
+        <div class="d-flex gap-2 justify-content-center mt-2">
             <button id="comentar" 
                     name="comentar" 
-                    class="btn btn-dark" 
+                    class="btn btn-dark w-button" 
                     type="submit">
 
                 {{_("Comentar")}}
             </button>
             <a id="cancelar_publicar" 
                    name="cancelar_publicar" 
-                   href="#" 
-                   class="btn btn-secondary m-2 w-25">
+                   href="{{ url_for('mural_blueprint.index', page=1) }}" 
+                   class="btn btn-secondary w-button">
                     {{_("Cancelar")}}
             </a>
         </div>
