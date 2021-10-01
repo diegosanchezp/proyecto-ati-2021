@@ -33,8 +33,10 @@ def register_signals() -> None:
     """
     from mongoengine import signals
     from app.models.mural import Publicacion
+    from app.models.peticion import Notificacion
 
     signals.post_delete.connect(Publicacion.post_delete, sender=Publicacion)
+    signals.post_save.connect(Notificacion.post_save, sender=Notificacion)
 
 def register_context_procesor(app: Flask) -> None:
     """
@@ -104,5 +106,47 @@ def allowed_file_extension(filename) -> bool:
     file_ext = os.path.splitext(filename)[1]
     return file_ext in UPLOAD_EXTENSIONS
 
+def load_fixtures(app, user_manager) -> None:
+    """
+    Cargar cosas en base de datos si no existen,
+    estos son requeridos para los test de la matriz de prueba
+    """
+    from app.models.user import User, USUARIO_GENEROS
+    from datetime import datetime
+    # Crear usuarios nuevos
+    genero_masculino = USUARIO_GENEROS[0][0]
+    password="Dev123456"
+
+    aaron = User(
+        ci=27449007,
+        nombre="Aaron Morillo",
+        username="aaron_morillo",
+        email="aaron@mail.com",
+        genero=genero_masculino,
+        password=user_manager.hash_password(password),
+        fecha_nacimiento=datetime(year=1999, month=10, day=1),
+    )
+
+    diego = User(
+        ci=26334929,
+        nombre="Diego Sánchez",
+        username="diego_sanchez",
+        email="diego@mail.com",
+        genero=genero_masculino,
+        password=user_manager.hash_password(password),
+        fecha_nacimiento=datetime(year=1998, month=9, day=14),
+    )
+
+    try:
+        User.objects.get(username=diego.username)
+    except User.DoesNotExist:
+        diego.save()
+        app.logger.info(f"Usuario {diego.username} creado")
+    try:
+        User.objects.get(username=aaron.username)
+    except User.DoesNotExist:
+        aaron.save()
+        app.logger.info(f"Usuario {aaron.username} creado")
+        
 def get_mime_types() -> List[str]:
     return [f"image/{_type.replace('.','')}" for _type in UPLOAD_EXTENSIONS]

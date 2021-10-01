@@ -12,10 +12,10 @@
 
         <div class="row">
 
-          <div class="col">
+          <div class="col-md-6">
             {{ render_field(form.nombre) }}
           </div>
-          <div class="col">
+          <div class="col-md-6">
             {{ render_field(form.ci) }}
           </div>
         </div>
@@ -25,7 +25,7 @@
             {% set user_field = form.username if user_manager.USER_ENABLE_USERNAME else form.email %}
             {{ render_field(user_field) }}
           </div>
-          <div class="col">
+          <div class="col-md-6">
             {{ render_field(form.fecha_nacimiento) }}
           </div>
 
@@ -37,11 +37,11 @@
           </div>
         </div>
         <div class="row">
-          <div class="col col-md-12 mb-3">
+          <div class="col-md-6 mb-3">
             {{ render_field(form.password, tabindex=230) }}
           </div>
 
-          <div class="col col-md-12 mb-3">
+          <div class="col-md-6 mb-3">
             {% if user_manager.USER_REQUIRE_RETYPE_PASSWORD %}
               {{ render_field(form.retype_password, tabindex=240) }}
             {% endif %}

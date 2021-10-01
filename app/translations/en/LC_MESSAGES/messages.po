@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-09-16 04:34+0000\n"
+"POT-Creation-Date: 2021-09-27 22:42-0400\n"
 "PO-Revision-Date: 2021-07-16 14:19-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -18,6 +18,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
+#: app/chat/vistas.py:28
+#, python-format
+msgid "%(nombre)s se ha conectado"
+msgstr "%(nombre)s has connected"
+
+#: app/chat/vistas.py:36
+#, python-format
+msgid "%(nombre)s se ha desconectado"
+msgstr "%(nombre)s has disconnected"
+
 #: app/models/mural.py:9
 msgid "Publica"
 msgstr "Public"
@@ -26,10 +36,25 @@ msgstr "Public"
 msgid "Privada"
 msgstr "Private"
 
+#: app/models/peticion.py:154
+#, fuzzy
+msgid "Notificacion de mensaje de chat"
+msgstr "Recieve an email when someone sent you a message?"
+
+#: app/models/peticion.py:159
+#, fuzzy
+msgid "Han comentado tu publicacion"
+msgstr "Your post has been commented"
+
+#: app/models/peticion.py:164
+#, fuzzy
+msgid "Notificación de amigo conectado"
+msgstr "Notification of friend connected"
+
 #: app/mural/forms.py:17 app/mural/forms.py:42
 #, fuzzy
 msgid "Contenido"
-msgstr "Stranger"
+msgstr "Content"
 
 #: app/mural/forms.py:18
 msgid "Solo 1000 caracteres son permitidos"
@@ -38,11 +63,11 @@ msgstr "You can write only 1000 characters"
 #: app/mural/forms.py:19 app/mural/forms.py:45
 #, fuzzy
 msgid "Error: publicación vacía"
-msgstr "See publication"
+msgstr "Error: empty post"
 
 #: app/mural/forms.py:21
 msgid "Tipo de publicacion"
-msgstr "Type of publication"
+msgstr "Type of post"
 
 #: app/mural/forms.py:24
 #, fuzzy
@@ -61,14 +86,27 @@ msgstr "Stranger"
 msgid "Amigo"
 msgstr "Friends"
 
-#: app/mural/vistas.py:183 app/mural/vistas.py:246
+#: app/mural/vistas.py:190 app/mural/vistas.py:257
 msgid "Imágenes inválidas, intenta de nuevo, solo se aceptan .jpg, .png, .gif"
 msgstr "Invalid image, only .jpg, .png, .gif are accepted"
 
-#: app/mural/vistas.py:206
+#: app/mural/vistas.py:213
 #, fuzzy
 msgid "Publicación creada"
-msgstr "See publications"
+msgstr "Publicaction created"
+
+#: app/mural/vistas.py:234
+msgid "Esta publicacion no la puedes editar, no eres el dueño"
+msgstr "You can't edit this post"
+
+#: app/mural/vistas.py:269
+msgid "Solo se permiten borrar imagenes de extensiones .jpg, .png, .gif"
+msgstr "You can only delete images of extension .jpg, .png, .gif"
+
+#: app/mural/vistas.py:272
+#, python-format
+msgid "%(img)s no es una imagen de la publicación"
+msgstr "(img)s is not a valid image of the post"
 
 #: app/notificaciones/vistas.py:40
 msgid "Notificación leída"
@@ -98,19 +136,19 @@ msgstr "Request accepted"
 msgid "Solicitud rechazada"
 msgstr "Request declined"
 
-#: app/templates/chat/chat.html:6
+#: app/templates/chat/chat.html:11
+msgid "Yo"
+msgstr "Me"
+
+#: app/templates/chat/chat.html:15
 msgid "Chat con"
 msgstr "Chat with"
-
-#: app/templates/chat/chat.html:8
-msgid "Hoy"
-msgstr "Today"
 
 #: app/templates/components/badge-amigo.html:22
 #: app/templates/components/badge-resultado.html:15
 #: app/templates/components/mural/amigo-lista.html:30
 msgid "Ver perfil"
-msgstr "See my profile"
+msgstr "See profile"
 
 #: app/templates/components/peticion_form.html:12
 msgid "Aceptar solicitud"
@@ -130,7 +168,7 @@ msgstr "See my profile"
 
 #: app/templates/components/sidebar.html:47
 #: app/templates/usuario/amigos.html:19
-#: app/templates/usuario/ver_perfil.html:51
+#: app/templates/usuario/ver_perfil.html:53
 msgid "Amigos"
 msgstr "Friends"
 
@@ -144,7 +182,7 @@ msgid "No tienes personas agregadas como amigos, ¡busca gente conocela!"
 msgstr "You don't have friends, Go lets find some!"
 
 #: app/templates/components/mural/amigo-lista.html:29
-#: app/templates/usuario/ver_perfil.html:56
+#: app/templates/usuario/ver_perfil.html:59
 msgid "Chatear"
 msgstr "Chat"
 
@@ -171,22 +209,22 @@ msgstr "Cancel"
 msgid "Comentar"
 msgstr "Comentaries"
 
-#: app/templates/components/mural/publicacion.html:47
+#: app/templates/components/mural/publicacion.html:50
 #: app/templates/usuario/mi_perfil.html:117
 msgid "Comentarios"
 msgstr "Comentaries"
 
-#: app/templates/components/mural/publicacion.html:57
+#: app/templates/components/mural/publicacion.html:60
 #: app/templates/components/notificaciones/notificacion.html:53
 #: app/templates/usuario/mi_perfil.html:126
 msgid "Ver publicacion"
-msgstr "See publication"
+msgstr "See post"
 
-#: app/templates/components/mural/publicacion.html:64
+#: app/templates/components/mural/publicacion.html:67
 #: app/templates/mural/create_publication.html:11
 #, fuzzy
 msgid "Editar publicacion"
-msgstr "See publication"
+msgstr "See post"
 
 #: app/templates/components/mural/searchBar.html:13
 msgid "Busca personas, ingresa un nombre"
@@ -194,7 +232,7 @@ msgstr "Find people, write a name"
 
 #: app/templates/components/notificaciones/notificacion.html:48
 msgid "Ver Perfil"
-msgstr "See my profile"
+msgstr "See profile"
 
 #: app/templates/components/notificaciones/notificacion.html:58
 msgid "Ver chat"
@@ -207,7 +245,7 @@ msgstr "Mark as read"
 #: app/templates/mural/create_publication.html:13
 #, fuzzy
 msgid "Crea una publicacion"
-msgstr "Create your publication"
+msgstr "Create a post"
 
 #: app/templates/mural/create_publication.html:34
 #, fuzzy
@@ -230,7 +268,7 @@ msgstr "Publish"
 
 #: app/templates/mural/mural.html:18
 msgid "Publicaciones de Personas"
-msgstr "Peoples publications"
+msgstr "Peoples posts"
 
 #: app/templates/mural/muralDetallePublicacion.html:12
 msgid "Realiza un Comentario"
@@ -239,7 +277,7 @@ msgstr "Make a comment"
 #: app/templates/mural/resultados_busqueda.html:12
 #, python-format
 msgid "Personas que se llaman %(nombre)s"
-msgstr "People called %(nombre)"
+msgstr "People called %(nombre)s"
 
 #: app/templates/mural/resultados_busqueda.html:14
 msgid "Resultados de busqueda"
@@ -325,7 +363,7 @@ msgstr "Change to a private profile?"
 
 #: app/templates/usuario/editar_privacidad.html:21
 msgid "¿Publicaciones por defecto privadas?"
-msgstr "Change default publications to private?"
+msgstr "Change default posts to private?"
 
 #: app/templates/usuario/login.html:8
 msgid "Ingresa al sistema"
@@ -335,24 +373,24 @@ msgstr "Log in to the system"
 msgid "Ingresar"
 msgstr "Log in"
 
-#: app/templates/usuario/login.html:37
+#: app/templates/usuario/login.html:38
 msgid "¿ No tienes cuenta ?"
 msgstr "You don't have an account?"
 
-#: app/templates/usuario/login.html:38
+#: app/templates/usuario/login.html:39
 msgid "Registrate"
 msgstr "Register"
 
-#: app/templates/usuario/login.html:42
+#: app/templates/usuario/login.html:43
 msgid "¿ Olvidaste tu contraseña ?"
 msgstr "Forgot your password?"
 
-#: app/templates/usuario/login.html:43
+#: app/templates/usuario/login.html:44
 #: app/templates/usuario/recuperar_password.html:23
 msgid "Recuperar"
 msgstr "Recover"
 
-#: app/templates/usuario/login.html:50
+#: app/templates/usuario/login.html:52
 msgid "Ingresa con tu cuenta de Twitter o Facebook"
 msgstr "Log in with your Twitter or Facebook account"
 
@@ -368,55 +406,55 @@ msgid "Editar mi perfil"
 msgstr "See my profile"
 
 #: app/templates/usuario/mi_perfil.html:25
-#: app/templates/usuario/ver_perfil.html:107
+#: app/templates/usuario/ver_perfil.html:113
 msgid "Email"
 msgstr "Email"
 
 #: app/templates/usuario/mi_perfil.html:29
-#: app/templates/usuario/ver_perfil.html:111
+#: app/templates/usuario/ver_perfil.html:117
 msgid "CI"
 msgstr "ID"
 
 #: app/templates/usuario/mi_perfil.html:33
-#: app/templates/usuario/ver_perfil.html:115 app/usuario/forms.py:53
+#: app/templates/usuario/ver_perfil.html:121 app/usuario/forms.py:53
 #: app/usuario/forms.py:108
 msgid "Fecha de nacimiento"
 msgstr "Date of birth"
 
 #: app/templates/usuario/mi_perfil.html:37
-#: app/templates/usuario/ver_perfil.html:119 app/usuario/forms.py:57
+#: app/templates/usuario/ver_perfil.html:125 app/usuario/forms.py:57
 #: app/usuario/forms.py:92
 msgid "Género"
 msgstr "Genre"
 
 #: app/templates/usuario/mi_perfil.html:41
-#: app/templates/usuario/ver_perfil.html:123
+#: app/templates/usuario/ver_perfil.html:129
 msgid "Descripción personal"
 msgstr "Personal description"
 
 #: app/templates/usuario/mi_perfil.html:45
-#: app/templates/usuario/ver_perfil.html:127 app/usuario/forms.py:116
+#: app/templates/usuario/ver_perfil.html:133 app/usuario/forms.py:116
 msgid "Color favorito"
 msgstr "Favorite color"
 
 #: app/templates/usuario/mi_perfil.html:49
-#: app/templates/usuario/ver_perfil.html:131
+#: app/templates/usuario/ver_perfil.html:137
 msgid "Videojuegos favoritos"
 msgstr "Favorite videogames"
 
 #: app/templates/usuario/mi_perfil.html:53
-#: app/templates/usuario/ver_perfil.html:135
+#: app/templates/usuario/ver_perfil.html:141
 msgid "Lenguajes de programación que conoce"
 msgstr "Known programming languages"
 
 #: app/templates/usuario/mi_perfil.html:62
-#: app/templates/usuario/ver_perfil.html:145
+#: app/templates/usuario/ver_perfil.html:151
 msgid "Ver publicaciones"
-msgstr "See publications"
+msgstr "See posts"
 
 #: app/templates/usuario/mi_perfil.html:63
 msgid "Ocultar publicaciones"
-msgstr "Hide publications"
+msgstr "Hide posts"
 
 #: app/templates/usuario/mi_perfil.html:84
 msgid "Publicado"
@@ -468,6 +506,20 @@ msgstr "Log In"
 msgid "Registrate con tu cuenta de Twitter o Facebook"
 msgstr "Register with your Twitter of Facebook account"
 
+#: app/templates/usuario/reset_password.html:8
+#, fuzzy
+msgid "Reestablecer contraseña"
+msgstr "Recover password"
+
+#: app/templates/usuario/reset_password.html:22
+#, fuzzy
+msgid "Cambiar contraseña"
+msgstr "Change password"
+
+#: app/templates/usuario/reset_password.html:28
+msgid "Volver al login"
+msgstr "Back to login"
+
 #: app/templates/usuario/usuario.html:3
 msgid "Mi cuenta"
 msgstr "My Account"
@@ -475,43 +527,47 @@ msgstr "My Account"
 #: app/templates/usuario/ver_perfil.html:35
 #, fuzzy
 msgid "Crear Publicacion"
-msgstr "See publication"
+msgstr "See post"
 
 #: app/templates/usuario/ver_perfil.html:43
 msgid "Soys amigos"
 msgstr "You're friends"
 
 #: app/templates/usuario/ver_perfil.html:45
+msgid "Este perfil es privado"
+msgstr "This profile is private"
+
+#: app/templates/usuario/ver_perfil.html:47
 msgid "No soys amigos"
 msgstr "You're not friends"
 
-#: app/templates/usuario/ver_perfil.html:65
+#: app/templates/usuario/ver_perfil.html:69
 msgid "Eliminar Amistad"
 msgstr "Delete friendship"
 
-#: app/templates/usuario/ver_perfil.html:84
+#: app/templates/usuario/ver_perfil.html:88
 msgid "Solicitud de amistad enviada, esperando por aceptacion"
 msgstr "Friendship request sended, waiting for accept"
 
-#: app/templates/usuario/ver_perfil.html:93
+#: app/templates/usuario/ver_perfil.html:97
 #, fuzzy
 msgid "Solicitar Amistad"
 msgstr "Delete friendship"
 
-#: app/templates/usuario/ver_perfil.html:124
+#: app/templates/usuario/ver_perfil.html:130
 #, fuzzy
 msgid "Sin descripcion"
 msgstr "Personal description"
 
-#: app/templates/usuario/ver_perfil.html:128
+#: app/templates/usuario/ver_perfil.html:134
 msgid "Sin color"
 msgstr "No color"
 
-#: app/templates/usuario/ver_perfil.html:132
+#: app/templates/usuario/ver_perfil.html:138
 msgid "Sin video juegos"
 msgstr "No video games"
 
-#: app/templates/usuario/ver_perfil.html:136
+#: app/templates/usuario/ver_perfil.html:142
 #, fuzzy
 msgid "Sin lenguajes de programación"
 msgstr "Known programming languages"
@@ -519,7 +575,7 @@ msgstr "Known programming languages"
 #: app/templates/usuario/ver_publicaciones.html:16
 #, fuzzy
 msgid "Publicaciones de"
-msgstr "See publications"
+msgstr "See posts"
 
 #: app/usuario/forms.py:46 app/usuario/forms.py:84
 msgid "Nombre"
@@ -606,19 +662,19 @@ msgid ""
 "de nuevo"
 msgstr "Error: we couldn't obtain facebook data, try again"
 
-#: app/usuario/vistas.py:71
+#: app/usuario/vistas.py:82
 msgid "Solicitud amistad enviada"
 msgstr "Friendship request sended"
 
-#: app/usuario/vistas.py:83
+#: app/usuario/vistas.py:94
 msgid "Amistad borrada"
 msgstr "Friendship deleted"
 
-#: app/usuario/vistas.py:128
+#: app/usuario/vistas.py:150
 msgid "Config privacidad guardada"
 msgstr "Privacity config saved"
 
-#: app/usuario/vistas.py:146
+#: app/usuario/vistas.py:168
 msgid "Config Guardada"
 msgstr "Config saved"
 
@@ -687,4 +743,7 @@ msgstr "Config saved"
 
 #~ msgid "Se envio un token para recuperar tu cuenta a la dirección de email"
 #~ msgstr "A token has been sent to your Email to recover your account"
+
+#~ msgid "Hoy"
+#~ msgstr "Today"
 

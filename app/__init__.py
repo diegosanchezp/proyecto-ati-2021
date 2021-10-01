@@ -6,14 +6,20 @@ from app.utils import (
     check_upload_folder,
     register_signals,
     register_context_procesor,
+    load_fixtures,
 )
 from flask_babel import Babel
 from flask_login.mixins import AnonymousUserMixin
+from flask_socketio import SocketIO
+from flask_mail import Mail
+
 # Instanciar extensiones de flask
 db = MongoEngine()
 babel = Babel()
+socketio = SocketIO()
+mail = Mail()
 
-def create_app(config_class="Config"):
+def create_app(config_class="Config") -> flask.Flask:
     """ Flask application factory """
 
     # Instanciar aplicacion de flask
@@ -23,6 +29,12 @@ def create_app(config_class="Config"):
     app.jinja_env.add_extension('jinja2.ext.do')
     # Setup Flask-MongoEngine
     db.init_app(app)
+    
+    # Setup flask socketio
+    socketio.init_app(app)
+
+    # Setup Flask-Mail
+    mail.init_app(app)
 
     # Verificar si la conexion a base de datos esta funcionando
     if not app.testing:
@@ -50,6 +62,10 @@ def create_app(config_class="Config"):
     # Verificar que las carpetas de imagenes de modelos
     # existan, si no crearlas
     check_upload_folder(app)
+
+    # Cargar fixtures requeridas para los tests de selenium
+    if app.config["DEBUG"]:
+        load_fixtures(app, user_manager)
 
     # Registar todos los blueprints
     register_blueprints(app)

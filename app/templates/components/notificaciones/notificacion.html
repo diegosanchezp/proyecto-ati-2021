@@ -61,7 +61,7 @@
 
       {% if notificacion.tipo == TipoNotificaciones.MENSAJE_CHAT %}
       
-        {{ action_anchor(url_for("chat_blueprint.index"), _("Ver chat")) }}
+        {{ action_anchor(url_for("chat_blueprint.index", username=notificacion.emisor.username), _("Ver chat")) }}
       {% endif %}
       {# Boton marcar notificacion como leida #}
       <form action="" method="POST" class="d-flex flex-column justify-content-center">

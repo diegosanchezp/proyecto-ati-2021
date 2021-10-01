@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 
+{% block extrahead %}
+  <script defer src={{ url_for('static', filename="js/base.js") }}></script>
+{% endblock extrahead %}
 {% block base_body %}
   <main class="d-flex flex-row gap-3">
     {% include "components/sidebar.html" %}
