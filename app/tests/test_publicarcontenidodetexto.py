@@ -17,24 +17,23 @@ class TestPublicarcontenidocontexto(BaseSeleniumUnitTest):
     # Test name: publicarcontenidocontexto
     # Step # | name | target | value | comment
     # 1 | open | http://localhost:5000/ |  | 
-    self.driver.get("http://localhost:5000/")
-    # 2 | setWindowSize | 1278x727 |  | 
-    self.driver.set_window_size(1278, 727)
-    # 3 | click | id=email |  | 
-    self.driver.find_element(By.ID, "email").click()
-    # 4 | type | id=email | cesar@cesar.com | 
-    self.driver.find_element(By.ID, "email").send_keys("cesar@cesar.com")
-    # 5 | click | id=password |  | 
-    self.driver.find_element(By.ID, "password").click()
-    # 6 | type | id=password | 123Qwe | 
-    self.driver.find_element(By.ID, "password").send_keys("123Qwe")
-    # 7 | click | css=.btn-primary |  | 
-    self.driver.find_element(By.CSS_SELECTOR, ".btn-primary").click()
+    self.login_user()
+    
+    # Verificar usuario este logueado
+    self.assertEqual(self.driver.current_url, "http://localhost:5000/mural/1")
+
+    
     # 8 | click | linkText=See my profile |  | 
-    self.driver.find_element(By.LINK_TEXT, "See my profile").click()
+
+    self.driver.find_element(By.ID, "sidebar-ver-mi-perfil").click()
     # 9 | click | linkText=Crear Publicacion |  | 
-    self.driver.find_element(By.LINK_TEXT, "Crear Publicacion").click()
+    self.driver.find_element(By.ID, "ver-perfil-crear-publicacion").click()
+
     # 10 | click | id=contenido |  | 
+
+    # verificar usuario esta en vista de crear publicacion
+    self.assertEqual(self.driver.current_url, "http://localhost:5000/mural/crear-publicacion")
+
     self.driver.find_element(By.ID, "contenido").click()
     # 11 | type | id=contenido | Publicacion automatizada | 
     self.driver.find_element(By.ID, "contenido").send_keys("Publicacion automatizada")
@@ -43,9 +42,12 @@ class TestPublicarcontenidocontexto(BaseSeleniumUnitTest):
     # 13 | click | id=publicar |  | 
     self.driver.find_element(By.ID, "publicar").click()
     # 14 | click | css=.container:nth-child(3) > .row > p |  |
+    
+    # Despues de haber publicado debe de haberse redirijido hacia el mural
+    self.assertEqual(self.driver.current_url, "http://localhost:5000/mural/1")
+
     text_last = self.driver.find_element(By.CSS_SELECTOR, ".container:nth-child(3) > .row > p").text
 
-    self.assertEqual(self.driver.current_url, "http://localhost:5000/mural/1")
     self.assertEqual(text_last, "Publicacion automatizada")
 
 if __name__ == '__main__':
